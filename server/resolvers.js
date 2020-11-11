@@ -1,39 +1,41 @@
-const { catcalls } = require('./mockdata');
+// const { catcalls } = require('./mockdata');
+const Catcall = require('./models/catcall.model')
 
 const catcallResolver = {
   Query: {
-    getCatcalls: () => catcalls,
-
-    getCatcall (_, { id }) {
-      return catcalls.find((catcall) => catcall.id === id)
+    async getCatcalls() {
+      const catcalls = await Catcall.find();
+      return catcalls;
     },
 
-    //mod-view:
-    //getcatcalls list with a condition with :parameter
-    getFilteredCatcalls (_, { condition }) {
-      return catcalls.find((catcall) => {catcall.properties[condition] === false})
+    async getCatcall (_, { id }) {
+      const catcall = await Catcall.findOne({ _id: id});
+      return catcall;
+    },
+
+    async getFilteredCatcalls (_, { condition }) {
+      const conditionString = `properties.${condition}`
+      const result = await Catcall.find({[conditionString]: false});
+      return result;
     }
   },
 
   Mutation: {
-    createCatcall(_, { catcall }) {
-      catcalls.push(catcall);
-      return catcall;
+    async createCatcall(_, { catcall }) {
+      const { type, geometry, properties} = catcall;
+      const createdCatcall = await Catcall.create({ type, geometry, properties });
+      return createdCatcall;
     },
 
-    updateCatcall(_, { newCatcall }) {
+    async updateCatcall(_, { id, catcall }) {
+      const { type, geometry, properties} = catcall;
+      const updatedCatcall = await Catcall.findByIdAndUpdate(id, { type, geometry, properties });
+      return updatedCatcall;
+    },
 
-    //validate catcall
-    //edit quote/context/link
-    //to trash
-    //chalk catcall
-    //unlist catcall
-    //list catcall
-    //give star
+    async emptyTrash() {
+      await Catcall.deleteMany({'properties.trash': true});
     }
-
-    //mutations to group
-    //destroy ones in trash
   }
 
 

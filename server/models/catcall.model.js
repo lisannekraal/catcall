@@ -5,47 +5,22 @@ const catcallSchema = new mongoose.Schema({
   geometry: {
       type: {
           type: String,
-          enum: ['Point'],
-          required: true
+          enum: ['Point']
       },
-      coordinates: {
-          type: [Number], //a list of numbers
-          required: true
-      }
+      coordinates: [Number]
   },
   properties: {
-      quote: {
-        type: String,
-        required: true
-      },
+      quote: String,
       context: String,
-      dateCatcall: Date,
-      dateAdded: {
-        type: Date,
-        required: true
-      },
+      dateCatcall: String,
+      dateAdded: String,
       url: String,
-      verified: {
-          type: Boolean,
-          default: false
-      },
-      chalked: {
-          type: Boolean,
-          default: false
-      },
-      listedForChalk: {
-          type: Boolean,
-          default: false
-      },
-      starred: {
-          type: Boolean,
-          default: false
-      },
-      trash: {
-          type: Boolean,
-          default: false
-      }
+      verified: Boolean,
+      chalked: Boolean,
+      listedForChalk: Boolean,
+      starred: Boolean,
+      trash: Boolean
   }
 })
 
-module.exports = mongoose.model('Catcall', catcallSchema);
+module.exports = mongoose.model('Mockcatcall', catcallSchema);

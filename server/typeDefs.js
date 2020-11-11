@@ -4,7 +4,7 @@ const typeDefs = gql`
 
   type Query {
     getCatcalls:[Catcall]
-    getCatcall(id:Int!):Catcall
+    getCatcall(id:ID):Catcall
     getFilteredCatcalls(
       condition:String!
     ):[Catcall]
@@ -15,8 +15,10 @@ const typeDefs = gql`
       catcall:CatcallInput!
     ):Catcall!
     updateCatcall(
+      id: ID
       catcall:CatcallUpdateInput!
     ):Catcall!
+    emptyTrash:[Catcall]
   }
 
   type Catcall {
@@ -44,7 +46,7 @@ const typeDefs = gql`
   }
 
   input GeometryInput {
-    type: String
+    type: String!
     coordinates: [Float!]!
   }
 
