@@ -1,0 +1,37 @@
+{ 
+  "catcalls": [{
+    "id": 50348,
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [6.7, 8.2]
+    },
+    "properties": {
+      "quote": "Hey schatje",
+      "dateAdded": "2012-04-23T18:25:43.511Z",
+      "verified": false,
+      "chalked": false,
+      "listedForChalk": false,
+      "starred": false,
+      "trash": false
+      }
+    },
+    {
+    "id": 1235,
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [6.78, 8.1]
+      },
+    "properties": {
+      "quote": "Very bad catcall",
+      "dateAdded": "2012-05-23T18:25:43.511Z",
+      "verified": false,
+      "chalked": false,
+      "listedForChalk": false,
+      "starred": false,
+      "trash": false
+      }
+    }
+  ]
+}
