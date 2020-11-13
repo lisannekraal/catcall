@@ -15,7 +15,7 @@ const catcallResolver = {
 
     async getFilteredCatcalls (_, { condition }) {
       const conditionString = `properties.${condition}`
-      const result = await Catcall.find({[conditionString]: false});
+      const result = await Catcall.find({[conditionString]: true});
       return result;
     }
   },

@@ -1,6 +1,26 @@
 import { gql } from '@apollo/client';
 
-const GET_CATCALLS = gql`
+export const GET_MAP_CATCALLS = gql`
+  {
+    getFilteredCatcalls(condition: "verified") {
+      _id
+      type
+      geometry {
+        type
+        coordinates
+      }
+      properties {
+        quote
+        context
+        dateCatcall
+        url
+        chalked
+      }
+    }
+  }
+`;
+
+export const GET_CATCALLS = gql`
   {
     getCatcalls {
       _id
@@ -25,5 +45,28 @@ const GET_CATCALLS = gql`
   }
 `;
 
+export const CREATE_CATCALL = gql`
+  mutation createCatcall($catcall: CatcallInput!) {
+    createCatcall(catcall: $catcall) {
+        type
+      geometry {
+        type
+        coordinates
+      }
+      properties {
+        quote
+        context
+        dateCatcall
+        dateAdded
+        url
+        verified
+        chalked
+        listedForChalk
+        starred
+        trash
+      }
+    }
+  }
+`;
 
 

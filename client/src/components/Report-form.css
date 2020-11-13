@@ -1,0 +1,9 @@
+
+.form-segment {
+  display: flex;
+  flex-direction: column;
+}
+
+.error-message {
+  color: red;
+}
