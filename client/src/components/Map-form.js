@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import MapGL, { Source, Layer, Image, NavigationControl, GeolocateControl } from '@urbica/react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import './Map-main.css';
-import Icon from '../assets/bullhorn.png';
 
+import 'mapbox-gl/dist/mapbox-gl.css';
+import Icon from '../assets/bullhorn.png';
 
 function MapForm (props) {
   const [viewport, setViewport] = useState({

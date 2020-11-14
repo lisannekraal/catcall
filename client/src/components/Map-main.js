@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from '@apollo/client';
-import MapGL, { Source, Layer, Image, NavigationControl, GeolocateControl, ScaleControl, FullscreenControl } from '@urbica/react-map-gl';
+import MapGL, { Source, Layer, Image, Popup, NavigationControl, GeolocateControl, ScaleControl, FullscreenControl } from '@urbica/react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './Map-main.css';
+
 import Icon from '../assets/bullhorn.png';
 import { GET_MAP_CATCALLS } from '../api/queries'
 
 
 function MapMain () {
+  const [ popup, setPopup ] = useState("");
+  const [ date, setDate ] = useState("");
   const { loading, error, data } = useQuery(GET_MAP_CATCALLS);
+  console.log(data);
   if(error) console.log(error);
-  data && console.log(JSON.stringify(data.getFilteredCatcalls));
 
   const [viewport, setViewport] = useState({
     latitude: 52.366249,
@@ -37,7 +40,6 @@ function MapMain () {
       }} />
 
       <Image id="catcall-icon" image={Icon} />
-
       <Layer
         id='catcall-layer'
         type='symbol'
@@ -46,7 +48,25 @@ function MapMain () {
           'icon-image': 'catcall-icon',
           'icon-size': 0.06
         }}
+        onClick={e => {
+          console.log(e.features[0].properties); 
+          setPopup(<Popup longitude={e.lngLat.lng} latitude={e.lngLat.lat} closeButton={true} closeOnClick={true} onClick={setPopup("")}>
+          <div className="popup-content">
+            <div className="popup-title">
+              <div>CATCALL</div>
+              <div>{ e.features[0].properties.dateCatcall !== "null" ? (new Date(Number(e.features[0].properties.dateCatcall))).toDateString() : "" }</div>
+            </div>
+            <div className="popup-quote">{ e.features[0].properties.quote.length > 50 ? '"'+ e.features[0].properties.quote.slice(0,10) + '..."' : '"' + e.features[0].properties.quote + '"' }</div>
+            <div className="popup-info">
+              <div>{ e.features[0].properties.context.length > 100 ? e.features[0].properties.context.slice(0,10) + '...' : e.features[0].properties.context !== "null" ? e.features[0].properties.context : "" }</div>
+              <div className="popup-img">FOTO</div>
+            </div>
+          </div>
+        </Popup>)}}
       />
+
+      { popup && popup }
+
 
       <NavigationControl showCompass showZoom position='top-right' />
       <GeolocateControl position='top-right' />

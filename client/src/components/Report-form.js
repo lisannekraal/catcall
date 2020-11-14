@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useQuery, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import MapForm from './Map-form';
 import "flatpickr/dist/themes/material_green.css";
@@ -14,7 +14,6 @@ function ReportForm () {
   const [ createCatcall ] = useMutation(CREATE_CATCALL);
 
   const onSubmit = (data) => {
-
     const queryVariable = {
       "catcall": {
         "type": "Feature",
@@ -37,8 +36,6 @@ function ReportForm () {
       }
     }
     createCatcall({ variables: queryVariable });
-
-    //clear the form?
   }
 
   function setLocation(e) {
@@ -134,7 +131,6 @@ function ReportForm () {
       {/* to do:
       - check CAPTCHA before submission
       - validate form (make sure location is submitted)
-      - mutation create query
       - empty the form */}
     </div>
 
