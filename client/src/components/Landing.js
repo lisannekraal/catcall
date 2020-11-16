@@ -14,7 +14,8 @@ function Landing () {
   return (
     <>
       <div className="landing-cover">
-        <Navbar />
+        {/* <Navbar /> */}
+        
 
         <div className="header">
           <div className="header-title">Chalk back.</div>
