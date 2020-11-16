@@ -1,0 +1,150 @@
+.landing-cover {
+  height: 95vh;
+  background: url('../assets/sam-haddad-StgZKNLVeJg-unsplash-crop.jpg') center center fixed no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.header {
+  margin: 0 200px;
+  padding: 22% 9%;
+  color: white;
+}
+
+.header-title {
+  font-size: 7rem;
+  text-shadow: 3px 3px black;
+}
+
+.header-buttons button {
+  border-radius: 8px;
+  background-color: rgb(245, 37, 89);
+  color: white;
+  padding: 10px 15px;
+  margin-right: 10px;
+}
+.header-buttons button p {
+  margin: 0 0;
+  font-size: 1.2rem;
+}
+
+.header-disclaimer {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.landing-cities {
+  margin: 50px 200px;
+  height: 210px;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.city {
+  width: 30%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.city-logo {
+  height: 80px;
+  width: 80px;
+}
+
+.city-logo img {
+  height: 100%;
+  width: 100%;
+}
+
+.city-name {
+  font-weight: 700;
+}
+
+.city-description {
+  font-style: italic;
+  margin-left: 15px;
+}
+
+.landing-why {
+  margin: 80px 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.why-title {
+  font-size: 7rem;
+  color: rgb(29, 113, 183);
+}
+
+.why-content {
+  padding-top: 50px;
+  max-width: 50%;
+  padding-left: 50px;
+}
+
+.landing-community {
+  background-color: rgb(245, 37, 89);
+  height: 280px;
+}
+
+.community-content {
+  padding: 40px 300px;
+  text-align: center;
+}
+
+.community-title {
+  font-size: 4rem;
+  color: white;
+}
+
+.community-content button {
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 20px;
+}
+
+.community-content button p {
+  margin: 0 0;
+  font-size: 1.2rem;
+}
+
+.landing-about {
+  margin: 80px 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.about-title {
+  font-size: 5rem;
+  color: rgb(29, 113, 183);
+  padding-right: 80px;
+}
+
+.about-content {
+  padding-top: 80px;
+  max-width: 50%;
+  padding-right: 50px;
+}
+
+.footer {
+  background-color: rgb(29, 113, 183);
+}
+
+.footer-content {
+  padding: 30px 200px;
+  display: flex;
+  color: white;
+}
+
+.credits {
+  max-width: 70%;
+  padding-right: 80px
+}

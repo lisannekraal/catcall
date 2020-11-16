@@ -1,6 +1,7 @@
 import './App.css';
-
+import Navbar from './components/Navbar';
 import MapMain from './components/Map-main';
+import Landing from './components/Landing';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import ReportForm from './components/Report-form';
 
@@ -15,8 +16,10 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <MapMain />
-        <ReportForm />
+
+        <Landing />
+        {/* <MapMain /> */}
+        {/* <ReportForm /> */}
       </div>
     </ApolloProvider>
 

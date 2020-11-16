@@ -83,7 +83,7 @@ function ReportForm () {
               }
             })} 
           ></input>
-          <small id="context-help">Not required. Share what you'd like, but make sture it does not contain any recognizable features, personal details or words of racism/hate. Moderators can edit this part of your report if necessary. For more details, see our house rules.</small>
+          <small id="context-help">Not required. Share what you'd like, but make sure it does not contain any recognizable features, personal details or words of racism/hate. Moderators can edit this part of your report if necessary. For more details, see our house rules.</small>
           <p className="error-message">{errors.context && errors.context.message}</p>
 
         </div>

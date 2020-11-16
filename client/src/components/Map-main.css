@@ -12,6 +12,11 @@
   border-bottom: 1px solid rgba(29, 113, 183);
 }
 
+.popup-date {
+  min-width: 100px;
+  text-align: end;
+}
+
 .popup-quote {
   font-size: 1rem;
   padding-top: 3px;
@@ -21,8 +26,13 @@
   display: flex;
   justify-content: space-between;
   font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+.popup-context {
+  font-style: italic;
 }
 
 .popup-img {
-  width: 50%;
+  width: 50px;
 }
