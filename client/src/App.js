@@ -33,8 +33,9 @@ function App() {
 
           <div className="navbar-content-right">
             <div classname="navbar-about">
-              <Link style={{ textDecoration: 'none', color: 'white' }} to="/"><i class="fas fa-info-circle"></i> ABOUT</Link>
+              <Link style={{ textDecoration: 'none', color: 'white' }} to="/#about"><i class="fas fa-info-circle"></i> ABOUT</Link>
             </div>
+
             <div classname="navbar-map">
               <Link style={{ textDecoration: 'none', color: 'white' }} to="/catcalls"><i class="fas fa-map-marked-alt"></i> MAP</Link>
             </div>

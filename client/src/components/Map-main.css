@@ -1,3 +1,10 @@
+.map-container {
+  width: 100%;
+  height: calc(100vh - 80px);
+  padding-top: 80px;
+  background-color: rgba(29, 113, 183);
+}
+
 .popup-content {
   max-width: 200px;
   max-height: 250px;

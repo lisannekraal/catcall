@@ -5,8 +5,9 @@ body {
 }
 
 .navbar {
-  position: fixed;
+  position: absolute;
   width: 100vw;
+  z-index: 99;
 }
 
 .navbar-content {

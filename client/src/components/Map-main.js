@@ -25,56 +25,59 @@ function MapMain () {
   if (error) return <p>Error</p>;
   return (
     <>
-    <MapGL
-      style={{ width: '500px', height: '700px' }}
-      mapStyle='mapbox://styles/mapbox/streets-v11'
-      accessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-      latitude={viewport.latitude}
-      longitude={viewport.longitude}
-      zoom={viewport.zoom}
-      onViewportChange={setViewport}
-    >
+    <div className="map-container">
+      <MapGL
+        style={{ width: '100vw', height: '100%' }}
+        mapStyle='mapbox://styles/mapbox/streets-v11'
+        accessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+        latitude={viewport.latitude}
+        longitude={viewport.longitude}
+        zoom={viewport.zoom}
+        onViewportChange={setViewport}
+      >
 
-      <Source id='catcalls' type='geojson' data={{
-              type: 'FeatureCollection',
-              features: data.getFilteredCatcalls
-      }} />
+        <Source id='catcalls' type='geojson' data={{
+                type: 'FeatureCollection',
+                features: data.getFilteredCatcalls
+        }} />
 
-      <Image id="catcall-icon" image={Icon} />
-      <Layer
-        id='catcall-layer'
-        type='symbol'
-        source='catcalls'
-        layout={{
-          'icon-image': 'catcall-icon',
-          'icon-size': 0.06
-        }}
-        onClick={e => {
-          console.log(e.features[0].properties); 
-          setPopup(<Popup longitude={e.lngLat.lng} latitude={e.lngLat.lat} closeButton={true} closeOnClick={true} onClick={setPopup("")}>
-          <div className="popup-content">
-            <div className="popup-title">
-              <div>CATCALL</div>
-              <div className="popup-date">{ (e.features[0].properties.dateCatcall && e.features[0].properties.dateCatcall !== "null") ? (new Date(Number(e.features[0].properties.dateCatcall))).toDateString() : "" }</div>
+        <Image id="catcall-icon" image={Icon} />
+        <Layer
+          id='catcall-layer'
+          type='symbol'
+          source='catcalls'
+          layout={{
+            'icon-image': 'catcall-icon',
+            'icon-size': 0.06
+          }}
+          onClick={e => {
+            console.log(e.features[0].properties); 
+            setPopup(<Popup longitude={e.lngLat.lng} latitude={e.lngLat.lat} closeButton={true} closeOnClick={true} onClick={setPopup("")}>
+            <div className="popup-content">
+              <div className="popup-title">
+                <div>CATCALL</div>
+                <div className="popup-date">{ (e.features[0].properties.dateCatcall && e.features[0].properties.dateCatcall !== "null") ? (new Date(Number(e.features[0].properties.dateCatcall))).toDateString() : "" }</div>
+              </div>
+              <div className="popup-quote">{ e.features[0].properties.quote.length > 50 ? '"'+ e.features[0].properties.quote.slice(0,10) + '..."' : '"' + e.features[0].properties.quote + '"' }</div>
+              <div className="popup-info">
+                <div className="popup-context">{ e.features[0].properties.context.length > 100 ? e.features[0].properties.context.slice(0,10) + '...' : e.features[0].properties.context !== "null" ? e.features[0].properties.context : "" }</div>
+                <div className="popup-img">{ e.features[0].properties.url ? <a href={e.features[0].properties.url} target="_blank" referrerPolicy="no-referrer" ></a> : "Not chalked yet" }</div>
+              </div>
             </div>
-            <div className="popup-quote">{ e.features[0].properties.quote.length > 50 ? '"'+ e.features[0].properties.quote.slice(0,10) + '..."' : '"' + e.features[0].properties.quote + '"' }</div>
-            <div className="popup-info">
-              <div className="popup-context">{ e.features[0].properties.context.length > 100 ? e.features[0].properties.context.slice(0,10) + '...' : e.features[0].properties.context !== "null" ? e.features[0].properties.context : "" }</div>
-              <div className="popup-img">{ e.features[0].properties.url ? <a href={e.features[0].properties.url} target="_blank" referrerPolicy="no-referrer" ></a> : "Not chalked yet" }</div>
-            </div>
-          </div>
-        </Popup>)}}
-      />
+          </Popup>)}}
+        />
 
-      { popup && popup }
+        { popup && popup }
 
 
-      <NavigationControl showCompass showZoom position='top-right' />
-      <GeolocateControl position='top-right' />
-      <FullscreenControl position='top-right' />
-      <ScaleControl unit='metric' maxWidth="100" position='bottom-right' />
+        <NavigationControl showCompass showZoom position='top-right' />
+        <GeolocateControl position='top-right' />
+        <FullscreenControl position='top-right' />
+        <ScaleControl unit='metric' maxWidth="100" position='bottom-right' />
 
-    </MapGL>
+      </MapGL>
+    </div>
+    
 
     </>
   );

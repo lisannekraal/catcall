@@ -105,7 +105,7 @@ function Landing () {
         
       </div>
 
-      <div className="landing-why">
+      <div className="landing-why" id="about">
         <div className="why-title">Why.</div>
         <div className="why-content">
           <p>A catcall is basically everything sexist, insulting, queerphobic, racist or else shouted after and at you in the streets. This also includes wolf whistling, being followed, not accepting a “no” and encompasses a host of other behaviours.  It is a form of gender-based violence.</p>

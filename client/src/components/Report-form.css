@@ -1,9 +1,41 @@
+.header-footer {
+  background-color: rgba(29, 113, 183);
+  height: 80px;
+}
+
+.report-form {
+  margin: 0 300px;
+  padding: 50px 0;
+}
 
 .form-segment {
   display: flex;
   flex-direction: column;
 }
 
+.location-title {
+  margin-top: 15px;
+}
+
+.checkbox {
+  margin-top: 15px;
+  display: flex;
+}
+
 .error-message {
   color: red;
+}
+
+.cancel-button {
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  margin-right: 5px;
+}
+
+.submit-button {
+  background-color: rgb(245, 37, 89);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
 }

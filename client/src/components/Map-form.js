@@ -34,7 +34,7 @@ function MapForm (props) {
 
   return (
     <MapGL
-      style={{ width: '500px', height: '200px' }}
+      style={{ width: '500px', height: '300px' }}
       mapStyle='mapbox://styles/mapbox/streets-v11'
       accessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
       latitude={viewport.latitude}
