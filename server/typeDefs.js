@@ -8,6 +8,9 @@ const typeDefs = gql`
     getFilteredCatcalls(
       condition:String!
     ):[Catcall]
+    getUnfilteredCatcalls(
+      condition:String!
+    ):[Catcall]
   }
 
   type Mutation {

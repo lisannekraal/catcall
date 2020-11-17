@@ -43,3 +43,8 @@
 .popup-img {
   width: 50px;
 }
+
+.popup-icon {
+  margin-right: 2px;
+  color: rgb(245, 37, 89);
+}

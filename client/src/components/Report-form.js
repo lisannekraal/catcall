@@ -129,7 +129,10 @@ function ReportForm () {
             <div name="captcha" className="g-recaptcha" data-sitekey={process.env.REACT_APP_RECAPTCHA_KEY}></div>
           </div>
           
-          <button href="/catcalls" className="cancel-button">Cancel</button>
+          <a href="/catcalls">
+            <button type="button" className="cancel-button">Cancel</button>
+          </a>
+          
           <input className="submit-button" type="submit" value="Submit new catcall"/>
           
         </form>

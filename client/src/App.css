@@ -4,6 +4,10 @@ body {
   /* font-family: 'Noto Sans', sans-serif; */
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 .navbar {
   position: absolute;
   width: 100vw;

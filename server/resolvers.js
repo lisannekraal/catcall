@@ -18,6 +18,12 @@ const catcallResolver = {
       const conditionString = `properties.${condition}`
       const result = await Catcall.find({[conditionString]: true});
       return result;
+    },
+
+    async getUnfilteredCatcalls (_, { condition }) {
+      const conditionString = `properties.${condition}`
+      const result = await Catcall.find({[conditionString]: false});
+      return result;
     }
   },
 

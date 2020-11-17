@@ -1,8 +1,6 @@
 import React from "react";
 import './Landing.css';
 
-import Navbar from './Navbar';
-
 import LogoRot from '../assets/catcallsofrot.png';
 import LogoUtr from '../assets/catcallsofutr.png';
 import LogoNyc from '../assets/catcallsofnyc.png';
@@ -14,17 +12,19 @@ function Landing () {
   return (
     <>
       <div className="landing-cover">
-        {/* <Navbar /> */}
-        
 
         <div className="header">
           <div className="header-title">Chalk back.</div>
           <div className="header-buttons">
-            <button><p>View Catcalls of Amsterdam</p></button>
-            <button><p>Report a new catcall</p></button>
+            <a href="/catcalls">
+              <button><p>View Catcalls of Amsterdam</p></button>
+            </a>
+            <a href="/catcalls/new">
+              <button><p>Report a new catcall</p></button>
+            </a>
           </div>
           <div className="header-disclaimer">
-            Disclaimer: this application contains violent language and words of racism, sexual harassment and hate speach. Are you younger than 18 years old? Ask your guardian. 
+            Disclaimer: this application contains violent language and words of racism, sexual harassment and hate speach. Are you younger than 18 years old? Ask your guardian.
           </div>
         </div>
 
@@ -117,8 +117,10 @@ function Landing () {
       <div className="landing-community">
         <div className="community-content">
           <div className="community-title">Get involved</div>
-          <div className="community-text">See the social media channel for actions of Catcalls of Amsterdam: the stories of catcalls being reported to the organization and pictures of the chalk back actions. Join the discussion and share the chalked catcalls so we can create awareness.</div>
-          <button><p>Join the community on Instagram</p></button>
+          <div className="community-text">See the social media channel for actions of Catcalls of Amsterdam: the stories of catcalls being reported to the organization and pictures of thse chalk back actions. Join the discussion and share the chalked catcalls so we can create awareness.</div>
+          <a href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow">
+            <button><p>Join the community on Instagram</p></button>
+          </a>
         </div>
       </div>
 
@@ -141,8 +143,18 @@ function Landing () {
           <div className="contact">
             <div>CONTACT</div>
             <div>Catcalls of Amsterdam</div>
-            <div><i class="fab fa-instagram"></i> PM on Instagram</div>
-            <div><i class="far fa-envelope"></i> Send an email</div>
+
+            <div>
+              <a style={{ textDecoration: 'none', color: 'white' }} href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow">
+                <i class="fab fa-instagram"></i> PM on Instagram
+              </a>
+            </div>
+
+            <div>
+              <a style={{ textDecoration: 'none', color: 'white' }} href="mailto:catcallsofams@gmail.com">
+                <i class="far fa-envelope"></i> Send an email
+              </a>
+            </div>
           </div>
         </div>
       </div>

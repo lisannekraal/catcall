@@ -51,18 +51,44 @@ function MapMain () {
             'icon-size': 0.06
           }}
           onClick={e => {
-            console.log(e.features[0].properties); 
             setPopup(<Popup longitude={e.lngLat.lng} latitude={e.lngLat.lat} closeButton={true} closeOnClick={true} onClick={setPopup("")}>
             <div className="popup-content">
+
               <div className="popup-title">
                 <div>CATCALL</div>
-                <div className="popup-date">{ (e.features[0].properties.dateCatcall && e.features[0].properties.dateCatcall !== "null") ? (new Date(Number(e.features[0].properties.dateCatcall))).toDateString() : "" }</div>
+                <div className="popup-date">
+                  { (e.features[0].properties.dateCatcall && e.features[0].properties.dateCatcall !== "null") ? 
+                  (new Date(Number(e.features[0].properties.dateCatcall))).toDateString() : 
+                  "" }
+                </div>
               </div>
-              <div className="popup-quote">{ e.features[0].properties.quote.length > 50 ? '"'+ e.features[0].properties.quote.slice(0,10) + '..."' : '"' + e.features[0].properties.quote + '"' }</div>
+
+              <div className="popup-quote">
+                <i class="popup-icon fas fa-bullhorn"></i>
+                { e.features[0].properties.quote.length > 50 ? 
+                '"'+ e.features[0].properties.quote.slice(0,10) + '..."' : 
+                '"' + e.features[0].properties.quote + '"' }
+              </div>
+
               <div className="popup-info">
-                <div className="popup-context">{ e.features[0].properties.context.length > 100 ? e.features[0].properties.context.slice(0,10) + '...' : e.features[0].properties.context !== "null" ? e.features[0].properties.context : "" }</div>
-                <div className="popup-img">{ e.features[0].properties.url ? <a href={e.features[0].properties.url} target="_blank" referrerPolicy="no-referrer" ></a> : "Not chalked yet" }</div>
+
+                <div className="popup-context">
+                  <i class="popup-icon fas fa-comment-dots"></i>
+                  { e.features[0].properties.context.length > 100 ? 
+                  e.features[0].properties.context.slice(0,10) + '...' : 
+                  e.features[0].properties.context !== "null" ? 
+                  e.features[0].properties.context : 
+                  "" }
+                </div>
+                <div className="popup-img">
+                  <i class="popup-icon fas fa-pen"></i>
+                  { e.features[0].properties.url && e.features[0].properties.url !== "null" ? 
+                  <a href={e.features[0].properties.url} target="_blank" referrerPolicy="no-referrer">See chalk on Insta</a> : 
+                  "Not chalked yet" }
+                </div>
+
               </div>
+
             </div>
           </Popup>)}}
         />

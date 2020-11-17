@@ -20,6 +20,25 @@ export const GET_MAP_CATCALLS = gql`
   }
 `;
 
+export const GET_UNVERIFIED_CATCALLS = gql`
+  {
+    getUnfilteredCatcalls(condition: "verified") {
+      _id
+      type
+      geometry {
+        type
+        coordinates
+      }
+      properties {
+        quote
+        context
+        dateCatcall
+        dateAdded
+      }
+    }
+  }
+`;
+
 export const GET_CATCALLS = gql`
   {
     getCatcalls {
@@ -48,6 +67,30 @@ export const GET_CATCALLS = gql`
 export const CREATE_CATCALL = gql`
   mutation createCatcall($catcall: CatcallInput!) {
     createCatcall(catcall: $catcall) {
+        type
+      geometry {
+        type
+        coordinates
+      }
+      properties {
+        quote
+        context
+        dateCatcall
+        dateAdded
+        url
+        verified
+        chalked
+        listedForChalk
+        starred
+        trash
+      }
+    }
+  }
+`;
+
+export const UPDATE_CATCALL = gql`
+  mutation updateCatcall($id: String!, $catcall: CatcallInput!) {
+    updateCatcall(id: $id, catcall: $catcall) {
         type
       geometry {
         type
