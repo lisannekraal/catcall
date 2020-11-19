@@ -11,6 +11,8 @@ import ReportForm from './components/Report-form';
 import LoginModal from './components/Login-Modal';
 import Dashboard from './components/Dashboard';
 
+// import Navbar from './components/Navbar';
+
 const client = new ApolloClient({
   uri: process.env.REACT_APP_APOLLO_SERVER,
   cache: new InMemoryCache({
@@ -57,6 +59,7 @@ function App() {
           </div>
         </div>
       </div>
+      {/* <Navbar/> */}
 
         <Switch>
           <Route exact path="/">
