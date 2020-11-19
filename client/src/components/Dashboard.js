@@ -58,21 +58,21 @@ function Dashboard () {
             {
               data.getUnfilteredCatcalls.map((row) => (
                 <div className="table-row" id={row._id}>
-                  
+
                     <div className="star"></div>
                     <div className="quote">
                       { row.properties.quote }
                     </div>
                     <div className="context">
-                      { 
-                        row.properties.context ? 
+                      {
+                        row.properties.context ?
                         row.properties.context : ""
                       }
                     </div>
                     <div className="date">
-                      { 
-                        row.properties.dateCatcall ? 
-                        (new Date(Number(row.properties.dateCatcall))).toDateString() : 
+                      {
+                        row.properties.dateCatcall ?
+                        (new Date(Number(row.properties.dateCatcall))).toDateString() :
                         "no date"
                       }
                     </div>
@@ -80,16 +80,16 @@ function Dashboard () {
                       { (new Date(Number(row.properties.dateAdded))).toDateString() }
                     </div>
                     <div className="location">
-                      { 
+                      {
                         row.geometry.coordinates[0] + ',' +
-                        row.geometry.coordinates[1] 
+                        row.geometry.coordinates[1]
                       }
                     </div>
                     <div className="buttons">
                       <button className="verify-button"
                         onClick={() =>
-                          updateCatcall({ variables: { 
-                            id: row._id, 
+                          updateCatcall({ variables: {
+                            id: row._id,
                             catcall: { propertes: {
                               verified: true
                             } } } })
