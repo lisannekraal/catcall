@@ -16,7 +16,7 @@ button:hover {
 
 .navbar-content {
   display: flex;
-  margin: 0 200px;
+  margin: 0 10vh;
   justify-content: space-between;
   align-items: center;
   color: white;
