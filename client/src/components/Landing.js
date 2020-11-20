@@ -38,7 +38,7 @@ function Landing () {
             </div>
           </div>
           <div>
-            <div className="city-name"><i class="fas fa-map-marker-alt"></i> ROTTERDAM</div>
+            <div className="city-name"><i className="fas fa-map-marker-alt"></i> ROTTERDAM</div>
             <div className="city-description">coming soon</div>
           </div>
         </div>
@@ -50,7 +50,7 @@ function Landing () {
             </div>
           </div>
           <div>
-            <div className="city-name"><i class="fas fa-map-marker-alt"></i> UTRECHT</div>
+            <div className="city-name"><i className="fas fa-map-marker-alt"></i> UTRECHT</div>
             <div className="city-description">coming soon</div>
           </div>
         </div>
@@ -62,7 +62,7 @@ function Landing () {
             </div>
           </div>
           <div>
-            <div className="city-name"><i class="fas fa-map-marker-alt"></i> NEW YORK</div>
+            <div className="city-name"><i className="fas fa-map-marker-alt"></i> NEW YORK</div>
             <div className="city-description">coming soon</div>
           </div>
         </div>
@@ -74,7 +74,7 @@ function Landing () {
             </div>
           </div>
           <div>
-            <div className="city-name"><i class="fas fa-map-marker-alt"></i> ANTWERP</div>
+            <div className="city-name"><i className="fas fa-map-marker-alt"></i> ANTWERP</div>
             <div className="city-description">coming soon</div>
           </div>
         </div>
@@ -86,7 +86,7 @@ function Landing () {
             </div>
           </div>
           <div>
-            <div className="city-name"><i class="fas fa-map-marker-alt"></i> BERLIN</div>
+            <div className="city-name"><i className="fas fa-map-marker-alt"></i> BERLIN</div>
             <div className="city-description">coming soon</div>
           </div>
         </div>
@@ -98,11 +98,11 @@ function Landing () {
             </div>
           </div>
           <div>
-            <div className="city-name"><i class="fas fa-map-marker-alt"></i> GRONINGEN</div>
+            <div className="city-name"><i className="fas fa-map-marker-alt"></i> GRONINGEN</div>
             <div className="city-description">coming soon</div>
           </div>
         </div>
-        
+
       </div>
 
       <div className="landing-why" id="about">
@@ -125,7 +125,7 @@ function Landing () {
       </div>
 
       <div className="landing-about">
-        
+
         <div className="about-content">
           <p>Catcalls of Amsterdam is founded in December 2017, after Ambrien found the account Catcalls of New York on Instagram. After talking with Sophie Sandberg, its founder, she decided to join the movement and start chalking in Amsterdam.</p>
           <p>In the meantime our team grew and is organised by four people: Ambrien, Margriet, Paula and Zessiah. Together with 150 other initiatives worldwide, we 'chalk back'. Our goal is to provide a place to share experiences on street harassment and use people's stories to create awereness around catcalling and denormalize it.</p>
@@ -146,13 +146,13 @@ function Landing () {
 
             <div>
               <a style={{ textDecoration: 'none', color: 'white' }} href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow">
-                <i class="fab fa-instagram"></i> PM on Instagram
+                <i className="fab fa-instagram"></i> PM on Instagram
               </a>
             </div>
 
             <div>
               <a style={{ textDecoration: 'none', color: 'white' }} href="mailto:catcallsofams@gmail.com">
-                <i class="far fa-envelope"></i> Send an email
+                <i className="far fa-envelope"></i> Send an email
               </a>
             </div>
           </div>

@@ -32,29 +32,29 @@ function LoginModal (){
   return(
       <>
         <div className="moderator-button" onClick={setModalIsOpenToTrue}>
-          <i class="fas fa-user-cog"></i> {nav}
+          <i className="fas fa-user-cog"></i> {nav}
         </div>
 
         <Modal isOpen={modalIsOpen} style={customStyles} onRequestClose={()=> setModalIsOpen(false)}>
           <div className="modal-content">
             <button onClick={setModalIsOpenToFalse}>x</button>
-            
+
             <div>
               <form onSubmit={handleSubmit(changeNav)}>
 
                 <div className="form-segment">
                   <label for="email">E-mail:</label>
-                  <input 
-                    id="email" 
-                    name="email" 
+                  <input
+                    id="email"
+                    name="email"
                   ></input>
                 </div>
                 <div className="form-segment">
                   <label for="password">Password:</label>
-                  <input 
+                  <input
                     type="password"
-                    id="password" 
-                    name="password" 
+                    id="password"
+                    name="password"
                   ></input>
                 </div>
                 <div className="form-segment">
@@ -62,7 +62,7 @@ function LoginModal (){
                 </div>
               </form>
             </div>
-            
+
           </div>
         </Modal>
       </>
@@ -78,7 +78,7 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     color                 : 'white',
-    backgroundColor       : 'rgb(29, 113, 183)'      
+    backgroundColor       : 'rgb(29, 113, 183)'
   }
 };
 

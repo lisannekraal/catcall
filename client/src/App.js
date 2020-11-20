@@ -36,20 +36,20 @@ function App() {
           </Link>
 
           <div className="navbar-content-right">
-            <div classname="navbar-about">
-              <Link style={{ textDecoration: 'none', color: 'white' }} to="/#about"><i class="fas fa-info-circle"></i> ABOUT</Link>
+            <div className="navbar-about">
+              <Link style={{ textDecoration: 'none', color: 'white' }} to="/#about"><i className="fas fa-info-circle"></i> ABOUT</Link>
             </div>
 
-            <div classname="navbar-map">
-              <Link style={{ textDecoration: 'none', color: 'white' }} to="/catcalls"><i class="fas fa-map-marked-alt"></i> MAP</Link>
+            <div className="navbar-map">
+              <Link style={{ textDecoration: 'none', color: 'white' }} to="/catcalls"><i className="fas fa-map-marked-alt"></i> MAP</Link>
             </div>
-            <div classname="navbar-community">
-              <a style={{ textDecoration: 'none', color: 'white' }} href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow"><i class="fab fa-instagram"></i> COMMUNITY</a>
+            <div className="navbar-community">
+              <a style={{ textDecoration: 'none', color: 'white' }} href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow"><i className="fab fa-instagram"></i> COMMUNITY</a>
             </div>
             <div className="navbar-login">
               <LoginModal />
-              {/* <i class="fas fa-user-cog"></i> MODERATORS */}
-              {/* <Link style={{ textDecoration: 'none', color: 'white' }} to="/"><i class="fas fa-user-cog"></i> MODERATORS</Link> */}
+              {/* <i className="fas fa-user-cog"></i> MODERATORS */}
+              {/* <Link style={{ textDecoration: 'none', color: 'white' }} to="/"><i className="fas fa-user-cog"></i> MODERATORS</Link> */}
             </div>
             <div className="navbar-report">
               <Link to="/catcalls/new"><button><p>Report a new datcall</p></button></Link>
