@@ -4,7 +4,6 @@ import Logo from './assets/logowhite.png';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-// import Navbar from './components/Navbar';
 import MapMain from './components/Map-main';
 import Landing from './components/Landing';
 import ReportForm from './components/Report-form';
