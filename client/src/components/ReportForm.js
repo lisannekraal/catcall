@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import MapForm from './Map-form';
 import "flatpickr/dist/themes/material_green.css";
-import './Report-form.css';
+import './ReportForm.css';
 import Flatpickr from "react-flatpickr";
 import { CREATE_CATCALL } from '../api/queries';
 
@@ -47,7 +47,7 @@ function ReportForm () {
   }
 
   return (
-    <>
+    <div data-testid="report-form">
       <div className="header-footer"></div>
       <div className="report-form">
         <h1>Report a catcall</h1>
@@ -55,35 +55,35 @@ function ReportForm () {
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className="form-segment">
-            <label for="quote">Catcall quote*:</label>
-            <input 
-              id="quote" 
-              name="quote" 
-              aria-describedby="quote-help" 
+            <label htmlFor="quote">Catcall quote*:</label>
+            <input
+              id="quote"
+              name="quote"
+              aria-describedby="quote-help"
               ref={register({
                 required: "Required",
                 pattern: {
                   value: /[^\x22]+/,
                   message: "Do not use double quotes"
                 }
-              })} 
+              })}
             ></input>
             <small id="quote-help">Only Catcall quote (what has been catcalled)</small>
             <p className="error-message">{errors.quote && errors.quote.message}</p>
           </div>
 
           <div className="form-segment">
-            <label for="context">Your story:</label>
-            <input 
-              id="context" 
-              name="context" 
-              aria-describedby="context-help" 
+            <label htmlFor="context">Your story:</label>
+            <input
+              id="context"
+              name="context"
+              aria-describedby="context-help"
               ref={register({
                 pattern: {
                   value: /[^\x22]+/,
                   message: "Do not use double quotes"
                 }
-              })} 
+              })}
             ></input>
             <small id="context-help">Not required. Share what you'd like, but make sure it does not contain any recognizable features, personal details or words of racism/hate. Moderators can edit this part of your report if necessary. For more details, see our house rules.</small>
             <p className="error-message">{errors.context && errors.context.message}</p>
@@ -91,7 +91,7 @@ function ReportForm () {
           </div>
 
           <div className="form-segment">
-            <label for="context">Date of Catcall:</label>
+            <label htmlFor="context">Date of Catcall:</label>
             <Flatpickr
               value={date}
               onChange={newDate => setDateCatcall(newDate)}
@@ -102,39 +102,39 @@ function ReportForm () {
           </div>
 
           <div className="form-segment">
-            <label for="context" className="location-title">Location*:</label>
+            <label htmlFor="context" className="location-title">Location*:</label>
             <MapForm setLocation={setLocation} />
             <small id="context-help">Click on the map to add the location of the catcall.</small>
           </div>
 
           <div className="form-segment checkbox">
             <div className="checkbox">
-              <input 
-                id="check" 
+              <input
+                id="check"
                 name="check"
-                type="checkbox" 
+                type="checkbox"
                 ref={register({
                   required: "Required",
                   pattern: {
                     message: "Please agree on these conditions"
                   }
-                })} 
+                })}
               ></input>
-              <label for="check">I understand that is catcall report is anonymous and account for it to be true and in accordance with the house rules. More information <a href="#">here</a>.</label>
+              <label htmlFor="check">I understand that is catcall report is anonymous and account for it to be true and in accordance with the house rules. More information <a href="#">here</a>.</label>
             </div>
             <p className="error-message">{errors.check && errors.check.message}</p>
           </div>
-          
+
           <div className="form-segment">
             <div name="captcha" className="g-recaptcha" data-sitekey={process.env.REACT_APP_RECAPTCHA_KEY}></div>
           </div>
-          
+
           <a href="/catcalls">
             <button type="button" className="cancel-button">Cancel</button>
           </a>
-          
+
           <input className="submit-button" type="submit" value="Submit new catcall"/>
-          
+
         </form>
 
         {/* to do:
@@ -143,7 +143,7 @@ function ReportForm () {
         - empty the form */}
       </div>
       <div className="header-footer"></div>
-    </>
+    </div>
   );
 }
 export default ReportForm;
