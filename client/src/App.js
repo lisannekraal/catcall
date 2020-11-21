@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-ro
 
 import MapMain from './components/Map-main';
 import Landing from './components/Landing';
-import ReportForm from './components/Report-form';
+import ReportForm from './components/ReportForm';
 import LoginModal from './components/Login-Modal';
 import Dashboard from './components/Dashboard';
 import NotFound from './components/Not-found'
