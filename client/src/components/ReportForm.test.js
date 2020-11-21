@@ -1,4 +1,5 @@
-import { act, cleanup, fireEvent, render, screen, waitFor, userEvent } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event'
 import ReactDOM from 'react-dom';
 import ReportForm from './ReportForm';
 import { MockedProvider } from '@apollo/client/testing';
@@ -11,14 +12,16 @@ import { get } from 'react-hook-form';
 //   })
 // });
 
-jest.mock('../components/Map-form.js', ()=>()=><div id='mockMap'>HelloMap</div>)
+jest.mock('../components/Map-form.js', () => () => <div id='mockMap'>HelloMap</div>);
+const mockSubmit = jest.fn()
 
 describe('form tests', () => {
 
   beforeEach(() => {
+
     render(
-      <MockedProvider >
-        <ReportForm />
+      <MockedProvider>
+        <ReportForm onSubmit={mockSubmit} />
       </MockedProvider>
     );
   })
@@ -44,82 +47,66 @@ describe('form tests', () => {
     expect(screen.getByText('Submit new catcall')).toBeInTheDocument();
   });
 
-   it('Outputs Required if any essential fields are missing', async () => {
+  it('Outputs Required if any essential fields are missing', async () => {
 
-    //screen.debug()
-     const input = screen.getByTestId('catcall-quote');
-     const checkbox = screen.getByTestId('catcall-checkbox');
-     const submitButton = screen.getByDisplayValue('Submit new catcall');
-     let required;
+    const input = screen.getByTestId('catcall-quote');
+    const checkbox = screen.getByTestId('catcall-checkbox');
+    const submitButton = screen.getByDisplayValue('Submit new catcall');
+    let required;
 
-     userEvent.click(submitButton)
+    await act(async () => {
+      userEvent.click(submitButton)
+    })
 
-     await waitFor(()=> {
-       required = screen.getAllByText('Required')
-       expect(required.length).toBeGreaterThanOrEqual(2);
-     })
-     console.log('Required:',required.length)
+    required = screen.getAllByText('Required')
+    expect(required.length).toBeGreaterThanOrEqual(2);
 
-     userEvent.click(checkbox)
-     userEvent.click(submitButton)
+    await act(async () => {
+      userEvent.click(checkbox);
+      expect(checkbox).toBeChecked();
+    })
 
+    required = screen.getAllByText('Required')
+    expect(required.length).toBeLessThan(2);
 
-     await waitFor(()=> {
-       required = screen.getAllByText('Required')
-       expect(required.length).toBeLessThan(2);
-     })
-     console.log('Required:',required.length)
+    await act(async () => {
+      userEvent.click(checkbox);
+      userEvent.type(input, '0000');
+      expect(screen.getByDisplayValue('0000')).toBeInTheDocument();
+      userEvent.click(submitButton)
+    })
 
-     fireEvent.type(input,'0000')
-     userEvent.click(submitButton)
+    await waitFor(() => {
+      let errorRequired = screen.queryByText('Required')
+      expect(errorRequired).toBeInTheDocument();
+    })
 
-      // await waitFor(()=> {
-      //    required = screen.getAllByText('Required')
-      //    expect(required.length).toBeLessThan(1);
-      //  })
-      // console.log('Required:',required.length)
+  });
 
+  it("When essential fields are not missing, required doesn't appear", async () => {
 
-     screen.debug()
+    const input = screen.getByTestId('catcall-quote');
+    const checkbox = screen.getByTestId('catcall-checkbox');
+    //const submitButton = screen.getByDisplayValue('Submit new catcall');
 
-   });
+    await act(async () => {
+      userEvent.click(checkbox);
+      expect(checkbox).toBeChecked();
+      userEvent.type(input, '0000');
+      expect(screen.getByDisplayValue('0000')).toBeInTheDocument();
+    })
 
-  //fireEvent.change(input, { target: { value: '2020-05-12' } })
+    //  await act(async () => {
+    //    userEvent.click(submitButton);
+    //  })
 
+    // expect(mockSubmit).toHaveBeenCalled()
 
-  // it('Throws error if catcall-quote is missing', async () => {
-  //   const {debug,getByText,getByTestId,getByDisplayValue} = render(
-  //     <MockedProvider >
-  //       <ReportForm />
-  //     </MockedProvider>
-  //   );
-  //   const input = getByTestId('catcall-quote');
-  //   const checkbox = getByTestId('catcall-checkbox');
-  //   const submitButton = getByDisplayValue('Submit new catcall');
-  //   //fireEvent.click(submitButton)
-  //   await waitFor()
-
-  //   debug();
-  // });
-
-  // test('renders', () => {
-  //   const { container } = render(<App/>);
-  //   expect(container.textContent)
-  //     .toMatch('Hello World');
-  // });
-
-
-  // it('renders without error', async () => {
-  //     const {container} = await render(<ReportForm />);
-  //   const div = document.createElement('div')
-  //   ReactDOM.render(<ReportForm />,div)
-  // });
-
-  // it('renders report a cat call', () => {
-  //   <ApolloProvider client={client}>
-  //     render(<ReportForm />);
-  //     expect(screen.getByText(/Alex/i)).toBeInTheDocument();
-  // </ApolloProvider>
-  // });
-
+    await waitFor(() => {
+      let errorRequired = screen.queryByText('Required')
+      expect(errorRequired).toBeNull();
+    })
+  });
 })
+
+
