@@ -57,6 +57,7 @@ function ReportForm () {
           <div className="form-segment">
             <label htmlFor="quote">Catcall quote*:</label>
             <input
+              data-testid="catcall-quote"
               id="quote"
               name="quote"
               aria-describedby="quote-help"
@@ -108,8 +109,9 @@ function ReportForm () {
           </div>
 
           <div className="form-segment checkbox">
-            <div className="checkbox">
+            <div className="checkbox" data-testid="check-box">
               <input
+                data-testid="catcall-checkbox"
                 id="check"
                 name="check"
                 type="checkbox"
