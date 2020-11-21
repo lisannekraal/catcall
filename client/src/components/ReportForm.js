@@ -56,18 +56,11 @@ function ReportForm () {
 
           <div className="form-segment">
             <label htmlFor="quote">Catcall quote*:</label>
-<<<<<<< HEAD:client/src/components/ReportForm.js
             <input
               data-testid="catcall-quote"
               id="quote"
               name="quote"
               aria-describedby="quote-help"
-=======
-            <input 
-              id="quote" 
-              name="quote" 
-              aria-describedby="quote-help" 
->>>>>>> master:client/src/components/Report-form.js
               ref={register({
                 required: "Required",
                 pattern: {
@@ -82,17 +75,10 @@ function ReportForm () {
 
           <div className="form-segment">
             <label htmlFor="context">Your story:</label>
-<<<<<<< HEAD:client/src/components/ReportForm.js
             <input
               id="context"
               name="context"
               aria-describedby="context-help"
-=======
-            <input 
-              id="context" 
-              name="context" 
-              aria-describedby="context-help" 
->>>>>>> master:client/src/components/Report-form.js
               ref={register({
                 pattern: {
                   value: /[^\x22]+/,

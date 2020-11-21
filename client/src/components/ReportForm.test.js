@@ -46,13 +46,13 @@ describe('form tests', () => {
 
    it('Outputs Required if any essential fields are missing', async () => {
 
-    screen.debug()
+    //screen.debug()
      const input = screen.getByTestId('catcall-quote');
      const checkbox = screen.getByTestId('catcall-checkbox');
      const submitButton = screen.getByDisplayValue('Submit new catcall');
      let required;
 
-     fireEvent.click(submitButton)
+     userEvent.click(submitButton)
 
      await waitFor(()=> {
        required = screen.getAllByText('Required')
@@ -60,8 +60,8 @@ describe('form tests', () => {
      })
      console.log('Required:',required.length)
 
-     fireEvent.change(checkbox,{target:{value:true}})
-     fireEvent.click(submitButton)
+     userEvent.click(checkbox)
+     userEvent.click(submitButton)
 
 
      await waitFor(()=> {
@@ -70,8 +70,8 @@ describe('form tests', () => {
      })
      console.log('Required:',required.length)
 
-     fireEvent.change(input,{target:{value:'0000'}})
-     fireEvent.click(submitButton)
+     fireEvent.type(input,'0000')
+     userEvent.click(submitButton)
 
       // await waitFor(()=> {
       //    required = screen.getAllByText('Required')
