@@ -26,7 +26,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-      <div className="navbar">
+      <div className="navbar" data-testid="navbar">
         <div className="navbar-content">
           <Link style={{ textDecoration: 'none', color: 'white' }} to="/">
             <div className="navbar-brand">
@@ -52,7 +52,7 @@ function App() {
               {/* <Link style={{ textDecoration: 'none', color: 'white' }} to="/"><i className="fas fa-user-cog"></i> MODERATORS</Link> */}
             </div>
             <div className="navbar-report">
-              <Link to="/catcalls/new"><button><p>Report a new datcall</p></button></Link>
+              <Link to="/catcalls/new"><button><p>Report a new catcall</p></button></Link>
             </div>
 
           </div>

@@ -16,7 +16,7 @@ function Dashboard () {
   return (
     <>
       <div className="header-footer"></div>
-      <div className="moderator-container">
+      <div className="moderator-container" data-testid="dashboard">
         <div className="moderator-navbar">
 
           <a style={{ textDecoration: 'none', color: 'black' }} href="#">

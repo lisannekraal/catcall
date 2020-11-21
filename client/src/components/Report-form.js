@@ -49,13 +49,13 @@ function ReportForm () {
   return (
     <>
       <div className="header-footer"></div>
-      <div className="report-form">
+      <div className="report-form" data-testid="report-form">
         <h1>Report a catcall</h1>
 
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className="form-segment">
-            <label for="quote">Catcall quote*:</label>
+            <label htmlFor="quote">Catcall quote*:</label>
             <input 
               id="quote" 
               name="quote" 
@@ -73,7 +73,7 @@ function ReportForm () {
           </div>
 
           <div className="form-segment">
-            <label for="context">Your story:</label>
+            <label htmlFor="context">Your story:</label>
             <input 
               id="context" 
               name="context" 
@@ -91,7 +91,7 @@ function ReportForm () {
           </div>
 
           <div className="form-segment">
-            <label for="context">Date of Catcall:</label>
+            <label htmlFor="context">Date of Catcall:</label>
             <Flatpickr
               value={date}
               onChange={newDate => setDateCatcall(newDate)}
@@ -102,7 +102,7 @@ function ReportForm () {
           </div>
 
           <div className="form-segment">
-            <label for="context" className="location-title">Location*:</label>
+            <label htmlFor="context" className="location-title">Location*:</label>
             <MapForm setLocation={setLocation} />
             <small id="context-help">Click on the map to add the location of the catcall.</small>
           </div>
@@ -120,7 +120,7 @@ function ReportForm () {
                   }
                 })} 
               ></input>
-              <label for="check">I understand that is catcall report is anonymous and account for it to be true and in accordance with the house rules. More information <a href="#">here</a>.</label>
+              <label htmlFor="check">I understand that is catcall report is anonymous and account for it to be true and in accordance with the house rules. More information <a href="#">here</a>.</label>
             </div>
             <p className="error-message">{errors.check && errors.check.message}</p>
           </div>

@@ -24,8 +24,7 @@ function MapMain () {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
   return (
-    <>
-    <div className="map-container">
+    <div className="map-container" data-testid="map-main">
       <MapGL
         style={{ width: '100vw', height: '100%' }}
         mapStyle='mapbox://styles/mapbox/streets-v11'
@@ -103,9 +102,6 @@ function MapMain () {
 
       </MapGL>
     </div>
-
-
-    </>
   );
 }
 export default MapMain;
