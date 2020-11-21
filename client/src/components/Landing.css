@@ -1,3 +1,8 @@
+.landing {
+  display: flex;
+  flex-direction: column;
+}
+
 .landing-cover {
   height: 95vh;
   background: url('../assets/sam-haddad-StgZKNLVeJg-unsplash-crop.jpg') center center fixed no-repeat;
@@ -5,12 +10,19 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  display: flex;
+  justify-content: center;
 }
 
 .header {
-  margin: 0 200px;
-  padding: 22% 9%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   color: white;
+  height: 100%;
+  padding: 20px;
 }
 
 .header-title {
@@ -18,16 +30,41 @@
   text-shadow: 3px 3px black;
 }
 
-.header-buttons button {
+@media screen and (max-width: 400px) {
+  .header-title {
+    font-size: 6rem;
+  }
+}
+
+.header-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header-buttons a {
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.header-buttons a p{
   border-radius: 8px;
+  border-width: 2px;
+  border-color: black;
+  border-top-color: rgb(118,118,118);
+  border-left-color: rgb(118,118,118);
+  border-style: outset;
   background-color: rgb(245, 37, 89);
   color: white;
   padding: 10px 15px;
-  margin-right: 10px;
-}
-.header-buttons button p {
-  margin: 0 0;
   font-size: 1.2rem;
+}
+
+@media screen and (max-width: 350px) {
+.header-buttons a {
+  width: 100%;
+    text-align: center;
+  }
 }
 
 .header-disclaimer {
@@ -37,16 +74,16 @@
 }
 
 .landing-cities {
-  margin: 50px 200px;
-  height: 210px;
+  max-width: 800px;
+  margin: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: stretch;
   flex-wrap: wrap;
 }
 
 .city {
-  width: 30%;
+  margin: 20px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -72,9 +109,11 @@
 }
 
 .landing-why {
-  margin: 80px 200px;
+  padding: 20px;
+  margin: 0 auto 50px auto;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .why-title {
@@ -83,24 +122,38 @@
 }
 
 .why-content {
-  padding-top: 50px;
-  max-width: 50%;
-  padding-left: 50px;
+  padding: 50px 0 0 50px;
+  max-width: 500px;
+}
+
+@media screen and (max-width: 800px) {
+  .landing-why {
+    max-width: 500px;
+  }
+  .why-content {
+    padding: 0;
+  }
 }
 
 .landing-community {
   background-color: rgb(245, 37, 89);
-  height: 280px;
 }
 
 .community-content {
-  padding: 40px 300px;
+  padding: 20px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .community-title {
   font-size: 4rem;
   color: white;
+}
+
+.community-text {
+  max-width: 800px;
 }
 
 .community-content button {
@@ -117,34 +170,67 @@
 }
 
 .landing-about {
-  margin: 80px 200px;
+  padding: 20px;
+  margin: 0 auto 50px auto;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap-reverse;
+  justify-content: flex-start;
 }
 
 .about-title {
   font-size: 5rem;
   color: rgb(29, 113, 183);
-  padding-right: 80px;
+  max-width:  500px;
 }
 
 .about-content {
-  padding-top: 80px;
-  max-width: 50%;
-  padding-right: 50px;
+  padding: 50px 50px 0 0;
+  max-width: 500px;
+}
+
+@media screen and (max-width: 1100px) {
+  .landing-about {
+    max-width: 500px;
+  }
+  .about-title {
+    font-size: 4.5rem;
+  }
+  .about-content {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .about-title {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .about-title {
+    font-size: 2.5rem;
+  }
 }
 
 .footer {
   background-color: rgb(29, 113, 183);
+  display: flex;
 }
 
 .footer-content {
-  padding: 30px 200px;
+  margin: auto;
   display: flex;
+  flex-wrap: wrap;
   color: white;
+  justify-content: flex-start;
 }
 
-.credits {
-  max-width: 70%;
-  padding-right: 80px
+.footer-div {
+  max-width: 500px;
+  margin: 20px;
+  font-size: 16px;
+}
+
+.footer-title {
+  font-weight: 600;
 }
