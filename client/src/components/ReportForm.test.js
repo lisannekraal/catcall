@@ -30,7 +30,7 @@ describe('form tests', () => {
   it('renders all elements without error', async () => {
 
 
-    //expect(screen.getByTestId('report-form')).toBeInTheDocument();
+    expect(screen.getByTestId('report-form')).toBeInTheDocument();
     expect(screen.getByText('Catcall quote*:')).toBeInTheDocument();
     expect(screen.getByText('Report a catcall')).toBeInTheDocument();
     expect(screen.getByText('Your story:')).toBeInTheDocument();
@@ -44,45 +44,45 @@ describe('form tests', () => {
     expect(screen.getByText('Submit new catcall')).toBeInTheDocument();
   });
 
-  //  it('Outputs Required if any essential fields are missing', async () => {
+   it('Outputs Required if any essential fields are missing', async () => {
 
-  //   //screen.debug()
-  //    const input = screen.getByTestId('catcall-quote');
-  //    const checkbox = screen.getByTestId('catcall-checkbox');
-  //    const submitButton = screen.getByDisplayValue('Submit new catcall');
-  //    let required;
+    //screen.debug()
+     const input = screen.getByTestId('catcall-quote');
+     const checkbox = screen.getByTestId('catcall-checkbox');
+     const submitButton = screen.getByDisplayValue('Submit new catcall');
+     let required;
 
-  //    userEvent.click(submitButton)
+     userEvent.click(submitButton)
 
-  //    await waitFor(()=> {
-  //      required = screen.getAllByText('Required')
-  //      expect(required.length).toBeGreaterThanOrEqual(2);
-  //    })
-  //    console.log('Required:',required.length)
+     await waitFor(()=> {
+       required = screen.getAllByText('Required')
+       expect(required.length).toBeGreaterThanOrEqual(2);
+     })
+     console.log('Required:',required.length)
 
-  //    userEvent.click(checkbox)
-  //    userEvent.click(submitButton)
-
-
-  //    await waitFor(()=> {
-  //      required = screen.getAllByText('Required')
-  //      expect(required.length).toBeLessThan(2);
-  //    })
-  //    console.log('Required:',required.length)
-
-  //    fireEvent.type(input,'0000')
-  //    userEvent.click(submitButton)
-
-  //     // await waitFor(()=> {
-  //     //    required = screen.getAllByText('Required')
-  //     //    expect(required.length).toBeLessThan(1);
-  //     //  })
-  //     // console.log('Required:',required.length)
+     userEvent.click(checkbox)
+     userEvent.click(submitButton)
 
 
-  //    screen.debug()
+     await waitFor(()=> {
+       required = screen.getAllByText('Required')
+       expect(required.length).toBeLessThan(2);
+     })
+     console.log('Required:',required.length)
 
-  //  });
+     fireEvent.type(input,'0000')
+     userEvent.click(submitButton)
+
+      // await waitFor(()=> {
+      //    required = screen.getAllByText('Required')
+      //    expect(required.length).toBeLessThan(1);
+      //  })
+      // console.log('Required:',required.length)
+
+
+     screen.debug()
+
+   });
 
   //fireEvent.change(input, { target: { value: '2020-05-12' } })
 

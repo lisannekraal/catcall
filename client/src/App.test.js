@@ -44,7 +44,7 @@ describe ('Routing tests:', () => {
 
     await waitFor(()=>{
       expect(screen.getByTestId("map-main")).toBeInTheDocument();
-    }, {timeout:5000});
+    });
   });
 
   test('report new catcall button (landing) redirects to report-form', async () => {
