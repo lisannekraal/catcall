@@ -2,13 +2,14 @@ import './App.css';
 import Logo from './assets/logowhite.png';
 
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 
 import MapMain from './components/Map-main';
 import Landing from './components/Landing';
 import ReportForm from './components/ReportForm';
 import LoginModal from './components/Login-Modal';
 import Dashboard from './components/Dashboard';
+import NotFound from './components/Not-found'
 
 // import Navbar from './components/Navbar';
 
@@ -26,7 +27,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-      <div className="navbar">
+      <div className="navbar" data-testid="navbar" >
         <div className="navbar-content">
           <Link style={{ textDecoration: 'none', color: 'white' }} to="/">
             <div className="navbar-brand">
@@ -73,6 +74,10 @@ function App() {
           <Route exact path="/dashboard">
             <Dashboard />
           </Route>
+          <Route path="/404">
+            <NotFound />
+          </Route>
+          <Redirect to="/404"/>
         </Switch>
       </Router>
 

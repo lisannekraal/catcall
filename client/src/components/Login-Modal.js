@@ -35,7 +35,7 @@ function LoginModal (){
           <i className="fas fa-user-cog"></i> {nav}
         </div>
 
-        <Modal isOpen={modalIsOpen} style={customStyles} onRequestClose={()=> setModalIsOpen(false)}>
+        <Modal data-testid="login-modal" isOpen={modalIsOpen} style={customStyles} onRequestClose={()=> setModalIsOpen(false)}>
           <div className="modal-content">
             <button onClick={setModalIsOpenToFalse}>x</button>
 

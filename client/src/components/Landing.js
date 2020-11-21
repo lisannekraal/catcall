@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 import './Landing.css';
 
 import LogoRot from '../assets/catcallsofrot.png';
@@ -10,18 +11,18 @@ function Landing () {
 
 
   return (
-    <>
+    <div data-testid="landing">
       <div className="landing-cover">
 
         <div className="header">
           <div className="header-title">Chalk back.</div>
           <div className="header-buttons">
-            <a href="/catcalls">
-              <button><p>View Catcalls of Amsterdam</p></button>
-            </a>
-            <a href="/catcalls/new">
-              <button><p>Report a new catcall</p></button>
-            </a>
+            <Link to="/catcalls">
+              <p>View Catcalls of Amsterdam</p>
+            </Link>
+            <Link to="/catcalls/new">
+              <p>Report a new catcall</p>
+            </Link>
           </div>
           <div className="header-disclaimer">
             Disclaimer: this application contains violent language and words of racism, sexual harassment and hate speach. Are you younger than 18 years old? Ask your guardian.
@@ -158,7 +159,7 @@ function Landing () {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
