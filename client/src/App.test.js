@@ -1,6 +1,18 @@
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, BrowserRouter } from 'react-router-dom';
 import App from './App';
+
+test('incorrect url redirects to 404 page', async () => {
+  const renderWithRouter = (ui, { route = '/' } = {}) => {
+    window.history.pushState({}, 'Test page', route)
+  
+    return render(ui, { wrapper: BrowserRouter })
+  }
+
+  renderWithRouter(<App />, { route: '/something-that-does-not-match' })
+
+  expect(screen.getByText(/404/i)).toBeInTheDocument()
+});
 
 describe ('Routing tests:', () => {
 
@@ -9,6 +21,18 @@ describe ('Routing tests:', () => {
     fireEvent.click(screen.getByAltText('logo'));
     const landing = screen.getByTestId("landing");
     expect(landing).toBeInTheDocument();
+  });
+
+  test('incorrect url redirects to 404 page', async () => {
+    const renderWithRouter = (ui, { route = '/' } = {}) => {
+      window.history.pushState({}, 'Test page', route)
+    
+      return render(ui, { wrapper: BrowserRouter })
+    }
+  
+    renderWithRouter(<App />, { route: '/something-that-does-not-match' })
+  
+    expect(screen.getByText(/404/i)).toBeInTheDocument()
   });
 
   test('view catcalls button redirects to map-main', async () => {
