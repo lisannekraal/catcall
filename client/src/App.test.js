@@ -5,7 +5,7 @@ import App from './App';
 test('incorrect url redirects to 404 page', async () => {
   const renderWithRouter = (ui, { route = '/' } = {}) => {
     window.history.pushState({}, 'Test page', route)
-  
+
     return render(ui, { wrapper: BrowserRouter })
   }
 
@@ -26,12 +26,12 @@ describe ('Routing tests:', () => {
   test('incorrect url redirects to 404 page', async () => {
     const renderWithRouter = (ui, { route = '/' } = {}) => {
       window.history.pushState({}, 'Test page', route)
-    
+
       return render(ui, { wrapper: BrowserRouter })
     }
-  
+
     renderWithRouter(<App />, { route: '/something-that-does-not-match' })
-  
+
     expect(screen.getByText(/404/i)).toBeInTheDocument()
   });
 
@@ -44,7 +44,7 @@ describe ('Routing tests:', () => {
 
     await waitFor(()=>{
       expect(screen.getByTestId("map-main")).toBeInTheDocument();
-    });
+    }, {timeout:5000});
   });
 
   test('report new catcall button (landing) redirects to report-form', async () => {
@@ -106,5 +106,5 @@ describe ('Routing tests:', () => {
   //     expect(screen.getByTestId("report-form")).toBeInTheDocument();
   //   });
   // });
-  
+
 });

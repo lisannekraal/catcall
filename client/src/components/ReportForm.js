@@ -47,7 +47,7 @@ function ReportForm () {
   }
 
   return (
-    <div data-testid="report-form">
+    <>
       <div className="header-footer"></div>
       <div className="report-form" data-testid="report-form">
         <h1>Report a catcall</h1>
@@ -145,7 +145,7 @@ function ReportForm () {
         - empty the form */}
       </div>
       <div className="header-footer"></div>
-    </div>
+    </>
   );
 }
 export default ReportForm;
