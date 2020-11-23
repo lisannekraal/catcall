@@ -14,7 +14,7 @@ export default function DataTable({ data }) {
     { field: 'dateAdded', headerName: 'Date added', flex: 1 },
     { field: 'location', headerName: 'Location', flex: 1 },
     {
-      field: "",
+      field: "verify",
       headerName: "Verify",
       sortable: false,
       width: 100,
