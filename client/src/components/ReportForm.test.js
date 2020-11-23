@@ -1,16 +1,9 @@
-import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
-import ReactDOM from 'react-dom';
 import ReportForm from './ReportForm';
 import { MockedProvider } from '@apollo/client/testing';
-import { get } from 'react-hook-form';
 
-// const client = new ApolloClient({
-//   uri: process.env.REACT_APP_APOLLO_SERVER,
-//   cache: new InMemoryCache({
-//     addTypename: false
-//   })
-// });
+
 
 jest.mock('../components/Map-form.js', () => () => <div id='mockMap'>HelloMap</div>);
 const mockSubmit = jest.fn()
@@ -25,10 +18,6 @@ describe('form tests', () => {
       </MockedProvider>
     );
   })
-
-  // afterAll(()=> {
-  //   unmount(<ReportForm/>)
-  // })
 
   it('renders all elements without error', async () => {
 
