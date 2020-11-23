@@ -1,5 +1,8 @@
 // const { catcalls } = require('./mockdata');
-const Catcall = require('./models/catcall.model')
+const Catcall = require('./models/catcall.model');
+const Moderator = require('./models/moderator.model');
+const bcrypt = require('bcrypt');
+const merge = require('lodash.merge');
 
 const catcallResolver = {
   Query: {
@@ -49,10 +52,38 @@ const catcallResolver = {
 }
 
 const moderatorResolver = {
-  //create new moderator
-  //get moderator by id
-  //update settings moderator
-  //destroy mod
+  Query: {
+    async getModeratorById(_, { id }) {
+      const mod = await Moderator.findOne({ _id: id });
+      return mod;
+    },
+
+    async validateModerator(_, { email, password }) {
+      const mod = await Moderator.findOne({ email: email });
+      const validatedPass = await bcrypt.compare(password, mod.password);
+      if (!validatedPass) throw new Error();
+    }
+  },
+
+  Mutation: {
+    async createModerator(_, { moderator }) {
+      const { email, password, canAdd } = moderator;
+      let hashPassword = await bcrypt.hash(password, 10);
+      const mod = await Moderator.create({ email, hashPassword, canAdd });
+      return mod;
+    },
+
+    async updateModerator(_, { id, moderator }) {
+      const { email, password, canAdd } = moderator;
+      const updatedModerator = await Moderator.findByIdAndUpdate(id, { email, password, canAdd });
+      return updatedModerator;
+    },
+
+    async removeModerator(_, { id }) {
+      const mod = await Moderator.deleteOne({ _id: id });
+      return mod;
+    }
+  }
 }
 
-module.exports = catcallResolver
+module.exports = merge(catcallResolver, moderatorResolver)
