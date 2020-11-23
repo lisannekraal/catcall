@@ -1,5 +1,4 @@
 import './App.css';
-import Logo from './assets/logowhite.png';
 
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
@@ -12,10 +11,6 @@ import Dashboard from './components/Dashboard';
 import NotFound from './components/Not-found';
 
 import Header from './components/Header';
-
-
-import Navbar from './components/Navbar';
-import SideDrawer from './components/SideDrawer';
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_APOLLO_SERVER,
