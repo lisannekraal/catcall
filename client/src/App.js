@@ -1,7 +1,7 @@
 import './App.css';
 
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
 import MapMain from './components/Map-main';
 import Landing from './components/Landing';
