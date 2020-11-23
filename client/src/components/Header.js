@@ -54,7 +54,7 @@ function Header() {
   ]
 
   return (
-    <AppBar color='transparent' position="absolute" elevation={0}>
+    <AppBar color='transparent' position="absolute" elevation={0} data-testid="navbar">
       <Toolbar style={{ color: 'white' }}>
         <Hidden mdUp>
           <SideDrawer navLinks={navLinks} />
