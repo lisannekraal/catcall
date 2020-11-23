@@ -1,11 +1,8 @@
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_UNVERIFIED_CATCALLS, UPDATE_CATCALL } from '../api/queries'
 import './Dashboard.css';
-<<<<<<< HEAD
 import DataTable from './DataTable';
-=======
 import { v4 as uuidv4 } from 'uuid';
->>>>>>> master
 
 
 function Dashboard () {
