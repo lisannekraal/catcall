@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 
 function LoginModal() {
   let history = useHistory();
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit } = useForm();
   const [nav, setNav] = useState('moderator');
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -41,7 +41,7 @@ function LoginModal() {
       >{nav}
       </Button>
 
-      <Modal data-testid="login-modal" isOpen={modalIsOpen} style={customStyles} onRequestClose={() => setModalIsOpen(false)}>
+      <Modal data-testid="login-modal" ariaHideApp={false} isOpen={modalIsOpen} style={customStyles} onRequestClose={() => setModalIsOpen(false)}>
         <div className="modal-content">
           <button onClick={setModalIsOpenToFalse}>x</button>
 
@@ -49,15 +49,17 @@ function LoginModal() {
             <form onSubmit={handleSubmit(changeNav)}>
 
               <div className="form-segment">
-                <label for="email">E-mail:</label>
+                <label htmlFor="email">E-mail:</label>
                 <input
+                  ref={register}
                   id="email"
                   name="email"
                 ></input>
               </div>
               <div className="form-segment">
-                <label for="password">Password:</label>
+                <label htmlFor="password">Password:</label>
                 <input
+                  ref={register}
                   type="password"
                   id="password"
                   name="password"
