@@ -1,23 +1,13 @@
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { MemoryRouter, BrowserRouter } from 'react-router-dom';
 import App from './App';
 
-test('incorrect url redirects to 404 page', async () => {
-  const renderWithRouter = (ui, { route = '/' } = {}) => {
-    window.history.pushState({}, 'Test page', route)
-
-    return render(ui, { wrapper: BrowserRouter })
-  }
-
-  renderWithRouter(<App />, { route: '/something-that-does-not-match' })
-
-  expect(screen.getByText(/404/i)).toBeInTheDocument()
-});
-
 describe ('Routing tests:', () => {
 
   beforeEach(() => {
-    render(<App />, { wrapper: MemoryRouter })
+    const theme = createMuiTheme({ props: {MuiWithWidth: {initialWidth: 'md'}}});
+    render( <MuiThemeProvider theme={theme}><App/></MuiThemeProvider>, { wrapper: MemoryRouter });
     fireEvent.click(screen.getByAltText('logo'));
     const landing = screen.getByTestId("landing");
     expect(landing).toBeInTheDocument();
@@ -85,6 +75,7 @@ describe ('Routing tests:', () => {
   });
 
   test('navbar moderator redirects to dashboard', async () => {
+    console.log(global.innerWidth);
 
     const { getByText } = within(screen.getByTestId('navbar'))
 
