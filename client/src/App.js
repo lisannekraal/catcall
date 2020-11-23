@@ -9,9 +9,13 @@ import Landing from './components/Landing';
 import ReportForm from './components/ReportForm';
 import LoginModal from './components/Login-Modal';
 import Dashboard from './components/Dashboard';
-import NotFound from './components/Not-found'
+import NotFound from './components/Not-found';
 
-// import Navbar from './components/Navbar';
+import Header from './components/Header';
+
+
+import Navbar from './components/Navbar';
+import SideDrawer from './components/SideDrawer';
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_APOLLO_SERVER,
@@ -27,7 +31,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-      <div className="navbar" data-testid="navbar" >
+      {/* <div className="navbar" data-testid="navbar" >
         <div className="navbar-content">
           <Link style={{ textDecoration: 'none', color: 'white' }} to="/">
             <div className="navbar-brand">
@@ -49,8 +53,6 @@ function App() {
             </div>
             <div className="navbar-login">
               <LoginModal />
-              {/* <i className="fas fa-user-cog"></i> MODERATORS */}
-              {/* <Link style={{ textDecoration: 'none', color: 'white' }} to="/"><i className="fas fa-user-cog"></i> MODERATORS</Link> */}
             </div>
             <div className="navbar-report">
               <Link to="/catcalls/new"><button><p>Report a new datcall</p></button></Link>
@@ -58,8 +60,9 @@ function App() {
 
           </div>
         </div>
-      </div>
-      {/* <Navbar/> */}
+      </div> */}
+      <Header/>
+
 
         <Switch>
           <Route exact path="/">
