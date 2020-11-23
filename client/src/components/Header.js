@@ -4,6 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { List, Container, Hidden } from "@material-ui/core"
 import SideDrawer from './SideDrawer';
 import LoginModal from './Login-Modal';
+import { v4 as uuidv4 } from 'uuid';
 
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -67,7 +68,7 @@ function Header() {
             <List component="nav" className={classes.navDisplayLinks}>
               {navLinks.map(({ title, classN, path }) => (
                 <Button
-                  key={title}
+                  key={uuidv4()}
                   onClick={path}
                   color='inherit'
                   startIcon={<Icon className={classN} fontSize="small" style={{ marginRight: 7 }} />}
@@ -78,7 +79,7 @@ function Header() {
             </List>
           </Hidden>
           <Hidden smDown>
-            <Button color="inherit" className={classes.navButton} onClick={() => history.push("/catcalls/new")}>Report a new CatCall</Button>
+            <Button  key={uuidv4()} color="inherit" className={classes.navButton} onClick={() => history.push("/catcalls/new")}>Report a new CatCall</Button>
           </Hidden>
         </Container>
         <Hidden mdUp>

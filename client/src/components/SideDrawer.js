@@ -4,6 +4,7 @@ import { Menu } from "@material-ui/icons"
 
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import { v4 as uuidv4 } from 'uuid';
 
 import LoginModal from './Login-Modal';
 
@@ -43,12 +44,12 @@ function SideDrawer({ navLinks }) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List component="nav">
-      <ListItem button onClick={() => history.push("/catcalls/new")} style={{background: 'rgb(245, 37, 89)'}}>
+      <ListItem button key={uuidv4()} onClick={() => history.push("/catcalls/new")} style={{background: 'rgb(245, 37, 89)'}}>
       <ListItemIcon className="fas fa-cat"/>
       <ListItemText  primary={<Typography variant="button">Report a new CatCall</Typography>}/>
       </ListItem>
         {navLinks.map(({ title, path, classN }) => (
-          <ListItem button onClick={path}>
+          <ListItem button onClick={path} key={uuidv4()}>
             <ListItemIcon className={classN}/>
             <ListItemText primary={<Typography variant="button">{title}</Typography>}/>
       </ListItem>
@@ -67,7 +68,6 @@ function SideDrawer({ navLinks }) {
       <Drawer
         anchor="right"
         open={drawerState.right}
-        onOpen={toggleDrawer("right", true)}
         onClose={toggleDrawer("right", false)}
       >
         {sideDrawerList("right")}

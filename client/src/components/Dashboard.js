@@ -1,7 +1,11 @@
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_UNVERIFIED_CATCALLS, UPDATE_CATCALL } from '../api/queries'
 import './Dashboard.css';
+<<<<<<< HEAD
 import DataTable from './DataTable';
+=======
+import { v4 as uuidv4 } from 'uuid';
+>>>>>>> master
 
 
 function Dashboard () {
@@ -21,31 +25,22 @@ function Dashboard () {
       <div className="moderator-container" data-testid="dashboard">
         <div className="moderator-navbar">
 
-          <a style={{ textDecoration: 'none', color: 'black' }} href="#">
             <div className="moderator-navbar-item mod-nav-active">
               VALIDATE PENDING
             </div>
-          </a>
-          <a style={{ textDecoration: 'none', color: 'black' }} href="#">
+
             <div className="moderator-navbar-item">
               TO CHALK
             </div>
-          </a>
-          <a style={{ textDecoration: 'none', color: 'black' }} href="#">
             <div className="moderator-navbar-item">
               DATABASE
             </div>
-          </a>
-          <a style={{ textDecoration: 'none', color: 'black' }} href="#">
             <div className="moderator-navbar-item">
               TRASH
             </div>
-          </a>
-          <a style={{ textDecoration: 'none', color: 'black' }} href="#">
             <div className="moderator-navbar-item">
               MOD SETTINGS
             </div>
-          </a>
         </div>
 
         {data ? (<DataTable data={data.getUnfilteredCatcalls}/>) : ''}
@@ -61,7 +56,7 @@ function Dashboard () {
             <div className="table-title buttons-title">Verification</div>
             {
               data.getUnfilteredCatcalls.map((row) => (
-                <div className="table-row" id={row._id}>
+                <div className="table-row" id={row._id} key={uuidv4()}>
 
                     <div className="star"></div>
                     <div className="quote">

@@ -6,12 +6,15 @@ import "flatpickr/dist/themes/material_green.css";
 import './ReportForm.css';
 import Flatpickr from "react-flatpickr";
 import { CREATE_CATCALL } from '../api/queries';
+import { useHistory } from "react-router-dom";
 
-function ReportForm () {
+
+function ReportForm() {
+  let history = useHistory();
   const { register, handleSubmit, errors } = useForm();
-  const [ date, setDate ] = useState("");
-  const [ lngLat, setLngLat ] = useState([]);
-  const [ createCatcall ] = useMutation(CREATE_CATCALL);
+  const [date, setDate] = useState("");
+  const [lngLat, setLngLat] = useState([]);
+  const [createCatcall] = useMutation(CREATE_CATCALL);
 
   const onSubmit = (data) => {
     const queryVariable = {
@@ -24,8 +27,8 @@ function ReportForm () {
         "properties": {
           "quote": data.quote,
           "context": data.context ? data.context : "",
-          "dateCatcall": date ? ""+Date.parse(date) : "",
-          "dateAdded": ""+Date.now(),
+          "dateCatcall": date ? "" + Date.parse(date) : "",
+          "dateAdded": "" + Date.now(),
           "url": "",
           "verified": false,
           "chalked": false,
@@ -122,7 +125,7 @@ function ReportForm () {
                   }
                 })}
               ></input>
-              <label htmlFor="check">I understand that is catcall report is anonymous and account for it to be true and in accordance with the house rules. More information <a href="#">here</a>.</label>
+              <label htmlFor="check">I understand that is catcall report is anonymous and account for it to be true and in accordance with the house rules. More information here.</label>
             </div>
             <p className="error-message">{errors.check && errors.check.message}</p>
           </div>
@@ -131,11 +134,11 @@ function ReportForm () {
             <div name="captcha" className="g-recaptcha" data-sitekey={process.env.REACT_APP_RECAPTCHA_KEY}></div>
           </div>
 
-          <a href="/catcalls">
-            <button type="button" className="cancel-button">Cancel</button>
-          </a>
 
-          <input className="submit-button" type="submit" value="Submit new catcall"/>
+          <button type="button" className="cancel-button" onClick={()=> history.push('/')}>Cancel</button>
+
+
+          <input className="submit-button" type="submit" value="Submit new catcall" />
 
         </form>
 
