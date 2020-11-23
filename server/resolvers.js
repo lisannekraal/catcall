@@ -41,7 +41,12 @@ const catcallResolver = {
     },
 
     async emptyTrash() {
-      await Catcall.deleteMany({'properties.trash': true});
+      try {
+        await Catcall.deleteMany({'properties.trash': true});
+        return true;
+      } catch (err) {
+        return err;
+      }
     }
   }
 
