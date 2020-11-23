@@ -66,7 +66,6 @@ function SideDrawer({ navLinks }) {
       <Drawer
         anchor="right"
         open={drawerState.right}
-        onOpen={toggleDrawer("right", true)}
         onClose={toggleDrawer("right", false)}
       >
         {sideDrawerList("right")}
