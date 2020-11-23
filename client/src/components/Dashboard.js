@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_UNVERIFIED_CATCALLS, UPDATE_CATCALL } from '../api/queries'
 import './Dashboard.css';
+import DataTable from './DataTable';
 
 
 function Dashboard () {
@@ -9,6 +10,7 @@ function Dashboard () {
   if(error) console.log(error);
   data && console.log(data.getUnfilteredCatcalls);
   const [updateCatcall] = useMutation(UPDATE_CATCALL);
+  console.log('Obtained Data >>>>>',data);
 
 
   if (loading) return <p>Loading...</p>;
@@ -45,6 +47,8 @@ function Dashboard () {
             </div>
           </a>
         </div>
+
+        {data ? (<DataTable data={data.getUnfilteredCatcalls}/>) : ''}
 
         <div className="table-container">
           <div className="validation-table">

@@ -5,6 +5,8 @@ import { Menu } from "@material-ui/icons"
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
+import LoginModal from './Login-Modal';
+
 
 const useStyles = makeStyles({
   list: {
@@ -49,7 +51,7 @@ function SideDrawer({ navLinks }) {
           <ListItem button onClick={path}>
             <ListItemIcon className={classN}/>
             <ListItemText primary={<Typography variant="button">{title}</Typography>}/>
-          </ListItem>
+      </ListItem>
         ))}
       </List>
     </div>
