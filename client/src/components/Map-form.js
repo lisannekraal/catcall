@@ -4,6 +4,8 @@ import MapGL, { Source, Layer, Image, NavigationControl, GeolocateControl } from
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Icon from '../assets/bullhorn.png';
 
+console.log(process.env.REACT_APP_MAPBOX_ACCESS_TOKEN);
+
 function MapForm (props) {
   const [viewport, setViewport] = useState({
     latitude: 52.366249,
@@ -33,6 +35,8 @@ function MapForm (props) {
   }
 
   return (
+    process.env.REACT_APP_MAPBOX_ACCESS_TOKEN
+    ?
     <MapGL
       style={{ width: '500px', height: '300px' }}
       mapStyle='mapbox://styles/mapbox/streets-v11'
@@ -48,8 +52,9 @@ function MapForm (props) {
       {layer}  
       <NavigationControl showZoom position='top-right' />
       <GeolocateControl position='top-right' />
-
     </MapGL>
+    :
+    <p>No Mapbox access token provided</p>
   );
 }
 export default MapForm;
