@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import MapMain from './components/MapMain';
 import Landing from './components/Landing';
 import ReportForm from './components/ReportForm';
+import Login from './components/Login'
 import Dashboard from './components/Dashboard';
 import NotFound from './components/NotFound';
 
@@ -21,7 +22,7 @@ const client = new ApolloClient({
 
 
 function App() {
-
+  
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route exact path="/catcalls/new">
             <ReportForm />
+          </Route>
+          <Route exact path="/login">
+            <Login/>
           </Route>
           <Route exact path="/dashboard">
             <Dashboard />
