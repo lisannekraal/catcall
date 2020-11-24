@@ -4,7 +4,6 @@ const Catcall = require('./models/catcall.model')
 const catcallResolver = {
   Query: {
     async getCatcalls() {
-      console.log("in getcatcalls")
       const catcalls = await Catcall.find();
       return catcalls;
     },
