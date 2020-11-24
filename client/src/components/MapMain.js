@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import MapGL, { Source, Layer, Image, Popup, NavigationControl, GeolocateControl, ScaleControl, FullscreenControl } from '@urbica/react-map-gl';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
-import './Map-main.css';
+import './MapMain.css';
 
 import Icon from '../assets/bullhorn.png';
 import { GET_MAP_CATCALLS } from '../api/queries'

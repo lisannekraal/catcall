@@ -4,7 +4,6 @@ const Catcall = require('./models/catcall.model')
 const catcallResolver = {
   Query: {
     async getCatcalls() {
-      console.log("in getcatcalls")
       const catcalls = await Catcall.find();
       return catcalls;
     },
@@ -41,7 +40,12 @@ const catcallResolver = {
     },
 
     async emptyTrash() {
-      await Catcall.deleteMany({'properties.trash': true});
+      try {
+        await Catcall.deleteMany({'properties.trash': true});
+        return true;
+      } catch (err) {
+        return err;
+      }
     }
   }
 

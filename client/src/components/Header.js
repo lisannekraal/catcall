@@ -3,7 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { List, Container, Hidden } from "@material-ui/core"
 import SideDrawer from './SideDrawer';
-import LoginModal from './Login-Modal';
+import LoginModal from './LoginModal';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useHistory } from 'react-router-dom';
