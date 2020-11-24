@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import {Button} from '@material-ui/core'
 import {Icon} from '@material-ui/core'
 
-import './Login-Modal.css';
+import './LoginModal.css';
 
 import { useForm } from 'react-hook-form';
 

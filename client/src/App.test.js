@@ -25,7 +25,7 @@ describe ('Routing tests:', () => {
     expect(screen.getByText(/404/i)).toBeInTheDocument()
   });
 
-  test('view catcalls button redirects to map-main', async () => {
+  test('view catcalls button redirects to MapMain', async () => {
     const viewCatcalls = screen.getByText('View Catcalls of Amsterdam');
     expect(viewCatcalls).toBeInTheDocument();
     fireEvent.click(viewCatcalls);
@@ -61,7 +61,7 @@ describe ('Routing tests:', () => {
     });
   });
 
-  test('navbar map redirects to map-main', async () => {
+  test('navbar map redirects to MapMain', async () => {
 
     const { getByText } = within(screen.getByTestId('navbar'))
 

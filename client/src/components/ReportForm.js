@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
-import MapForm from './Map-form';
+import MapForm from './MapForm';
 import "flatpickr/dist/themes/material_green.css";
 import './ReportForm.css';
 import Flatpickr from "react-flatpickr";

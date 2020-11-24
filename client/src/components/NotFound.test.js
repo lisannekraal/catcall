@@ -1,7 +1,7 @@
-import NotFound from './Not-found';
+import NotFound from './NotFound';
 import renderer from 'react-test-renderer';
 
-describe ('Not-Found Tests:', ()=>{
+describe ('NotFound Tests:', ()=>{
 
   it('renders correctly', () => {
     const tree = renderer.create(<NotFound />).toJSON();
