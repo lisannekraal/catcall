@@ -5,7 +5,7 @@ import { MockedProvider } from '@apollo/client/testing';
 
 
 
-jest.mock('../components/Map-form.js', () => () => <div id='mockMap'>HelloMap</div>);
+jest.mock('../components/MapForm.js', () => () => <div id='mockMap'>HelloMap</div>);
 const mockSubmit = jest.fn()
 
 describe('form tests', () => {

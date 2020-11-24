@@ -1,7 +1,7 @@
-import MapForm from './Map-form';
+import MapForm from './MapForm';
 import { render, screen } from '@testing-library/react';
 
-describe ('Map-Form tests:', ()=>{
+describe ('MapForm tests:', ()=>{
 
   test('displays error if api key is not provided', async ()=>{
     delete process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;

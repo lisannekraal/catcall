@@ -1,4 +1,4 @@
-import MapMain from './Map-main';
+import MapMain from './MapMain';
 import renderer from 'react-test-renderer';
 import { MockedProvider } from '@apollo/client/testing';
 

@@ -3,11 +3,11 @@ import './App.css';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
-import MapMain from './components/Map-main';
+import MapMain from './components/MapMain';
 import Landing from './components/Landing';
 import ReportForm from './components/ReportForm';
 import Dashboard from './components/Dashboard';
-import NotFound from './components/Not-found';
+import NotFound from './components/NotFound';
 
 import Header from './components/Header';
 
