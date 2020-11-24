@@ -3,7 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { List, Container, Hidden } from "@material-ui/core"
 import SideDrawer from './SideDrawer';
-import LoginModal from './Login-Modal';
+import { v4 as uuidv4 } from 'uuid';
 
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -51,6 +51,7 @@ function Header() {
     { title: 'about', classN: 'fas fa-info-circle', path: () => history.push("/#about") },
     { title: 'map', classN: 'fas fa-map-marked-alt', path: () => history.push("/catcalls") },
     { title: 'community', classN: 'fab fa-instagram', path: () => window.open("https://www.instagram.com/catcallsofams/", "_blank") },
+    { title: 'moderator', classN: 'fas fa-cog', path: () => history.push("/login")}
   ]
 
   return (
@@ -63,25 +64,24 @@ function Header() {
             <img src={logo} alt="logo" className={classes.logo} />
             <div> Catcalls of Amsterdam</div>
           </div>
-          <Hidden smDown>
+          <Hidden mdDown>
             <List component="nav" className={classes.navDisplayLinks}>
               {navLinks.map(({ title, classN, path }) => (
                 <Button
-                  key={title}
+                  key={uuidv4()}
                   onClick={path}
                   color='inherit'
                   startIcon={<Icon className={classN} fontSize="small" style={{ marginRight: 7 }} />}
                 >{title}
                 </Button>
               ))}
-              <LoginModal />
             </List>
           </Hidden>
-          <Hidden smDown>
-            <Button color="inherit" className={classes.navButton} onClick={() => history.push("/catcalls/new")}>Report a new CatCall</Button>
+          <Hidden mdDown>
+            <Button  key={uuidv4()} color="inherit" className={classes.navButton} onClick={() => history.push("/catcalls/new")}>Report a new CatCall</Button>
           </Hidden>
         </Container>
-        <Hidden mdUp>
+        <Hidden lgUp>
           <SideDrawer navLinks={navLinks} />
         </Hidden>
       </Toolbar>

@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import MapGL, { Source, Layer, Image, Popup, NavigationControl, GeolocateControl, ScaleControl, FullscreenControl } from '@urbica/react-map-gl';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
-import './Map-main.css';
+import './MapMain.css';
 
 import Icon from '../assets/bullhorn.png';
 import { GET_MAP_CATCALLS } from '../api/queries'
@@ -82,7 +82,7 @@ function MapMain () {
                 <div className="popup-img">
                   <i className="popup-icon fas fa-pen"></i>
                   { e.features[0].properties.url && e.features[0].properties.url !== "null" ?
-                  <a href={e.features[0].properties.url} target="_blank" referrerPolicy="no-referrer">See chalk on Insta</a> :
+                  <a href={e.features[0].properties.url} target="_blank" rel="noreferrer" referrerPolicy="no-referrer">See chalk on Insta</a> :
                   "Not chalked yet" }
                 </div>
 

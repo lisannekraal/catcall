@@ -3,12 +3,12 @@ import './App.css';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
-import MapMain from './components/Map-main';
+import MapMain from './components/MapMain';
 import Landing from './components/Landing';
 import ReportForm from './components/ReportForm';
-import LoginModal from './components/Login-Modal';
+import Login from './components/Login'
 import Dashboard from './components/Dashboard';
-import NotFound from './components/Not-found';
+import NotFound from './components/NotFound';
 
 import Header from './components/Header';
 
@@ -22,42 +22,12 @@ const client = new ApolloClient({
 
 
 function App() {
-
+  
   return (
     <ApolloProvider client={client}>
       <Router>
-      {/* <div className="navbar" data-testid="navbar" >
-        <div className="navbar-content">
-          <Link style={{ textDecoration: 'none', color: 'white' }} to="/">
-            <div className="navbar-brand">
-              <div className="navbar-logo"><img src={Logo} alt="logo"></img></div>
-              <div> Catcalls of Amsterdam</div>
-            </div>
-          </Link>
 
-          <div className="navbar-content-right">
-            <div className="navbar-about">
-              <Link style={{ textDecoration: 'none', color: 'white' }} to="/#about"><i className="fas fa-info-circle"></i> ABOUT</Link>
-            </div>
-
-            <div className="navbar-map">
-              <Link style={{ textDecoration: 'none', color: 'white' }} to="/catcalls"><i className="fas fa-map-marked-alt"></i> MAP</Link>
-            </div>
-            <div className="navbar-community">
-              <a style={{ textDecoration: 'none', color: 'white' }} href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow"><i className="fab fa-instagram"></i> COMMUNITY</a>
-            </div>
-            <div className="navbar-login">
-              <LoginModal />
-            </div>
-            <div className="navbar-report">
-              <Link to="/catcalls/new"><button><p>Report a new datcall</p></button></Link>
-            </div>
-
-          </div>
-        </div>
-      </div> */}
       <Header/>
-
 
         <Switch>
           <Route exact path="/">
@@ -68,6 +38,9 @@ function App() {
           </Route>
           <Route exact path="/catcalls/new">
             <ReportForm />
+          </Route>
+          <Route exact path="/login">
+            <Login/>
           </Route>
           <Route exact path="/dashboard">
             <Dashboard />

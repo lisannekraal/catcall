@@ -1,0 +1,365 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Landing tests: displays landing page correctly 1`] = `
+<div
+  className="landing"
+  data-testid="landing"
+>
+  <div
+    className="landing-cover"
+  >
+    <div
+      className="header"
+    >
+      <div
+        className="header-title"
+      >
+        Chalk back.
+      </div>
+      <div
+        className="header-buttons"
+      >
+        <a
+          href="/catcalls"
+          onClick={[Function]}
+        >
+          <p>
+            View Catcalls of Amsterdam
+          </p>
+        </a>
+        <a
+          href="/catcalls/new"
+          onClick={[Function]}
+        >
+          <p>
+            Report a new catcall
+          </p>
+        </a>
+      </div>
+      <div
+        className="header-disclaimer"
+      >
+        Disclaimer: this application contains violent language and words of racism, sexual harassment and hate speach. Are you younger than 18 years old? Ask your guardian.
+      </div>
+    </div>
+  </div>
+  <div
+    className="landing-cities"
+  >
+    <div
+      className="city"
+    >
+      <div>
+        <div
+          className="city-logo"
+        >
+          <img
+            alt="logo-rot"
+            src="catcallsofrot.png"
+          />
+        </div>
+      </div>
+      <div>
+        <div
+          className="city-name"
+        >
+          <i
+            className="fas fa-map-marker-alt"
+          />
+           ROTTERDAM
+        </div>
+        <div
+          className="city-description"
+        >
+          coming soon
+        </div>
+      </div>
+    </div>
+    <div
+      className="city"
+    >
+      <div>
+        <div
+          className="city-logo"
+        >
+          <img
+            alt="logo-utr"
+            src="catcallsofutr.png"
+          />
+        </div>
+      </div>
+      <div>
+        <div
+          className="city-name"
+        >
+          <i
+            className="fas fa-map-marker-alt"
+          />
+           UTRECHT
+        </div>
+        <div
+          className="city-description"
+        >
+          coming soon
+        </div>
+      </div>
+    </div>
+    <div
+      className="city"
+    >
+      <div>
+        <div
+          className="city-logo"
+        >
+          <img
+            alt="logo-nyc"
+            src="catcallsofnyc.png"
+          />
+        </div>
+      </div>
+      <div>
+        <div
+          className="city-name"
+        >
+          <i
+            className="fas fa-map-marker-alt"
+          />
+           NEW YORK
+        </div>
+        <div
+          className="city-description"
+        >
+          coming soon
+        </div>
+      </div>
+    </div>
+    <div
+      className="city"
+    >
+      <div>
+        <div
+          className="city-logo"
+        >
+          <img
+            alt="logo-ant"
+            src="catcallsofnyc.png"
+          />
+        </div>
+      </div>
+      <div>
+        <div
+          className="city-name"
+        >
+          <i
+            className="fas fa-map-marker-alt"
+          />
+           ANTWERP
+        </div>
+        <div
+          className="city-description"
+        >
+          coming soon
+        </div>
+      </div>
+    </div>
+    <div
+      className="city"
+    >
+      <div>
+        <div
+          className="city-logo"
+        >
+          <img
+            alt="logo-ber"
+            src="catcallsofnyc.png"
+          />
+        </div>
+      </div>
+      <div>
+        <div
+          className="city-name"
+        >
+          <i
+            className="fas fa-map-marker-alt"
+          />
+           BERLIN
+        </div>
+        <div
+          className="city-description"
+        >
+          coming soon
+        </div>
+      </div>
+    </div>
+    <div
+      className="city"
+    >
+      <div>
+        <div
+          className="city-logo"
+        >
+          <img
+            alt="logo-grunn"
+            src="catcallsofgrunn.png"
+          />
+        </div>
+      </div>
+      <div>
+        <div
+          className="city-name"
+        >
+          <i
+            className="fas fa-map-marker-alt"
+          />
+           GRONINGEN
+        </div>
+        <div
+          className="city-description"
+        >
+          coming soon
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="landing-why"
+    id="about"
+  >
+    <div
+      className="why-title"
+    >
+      Why.
+    </div>
+    <div
+      className="why-content"
+    >
+      <p>
+        A catcall is basically everything sexist, insulting, queerphobic, racist or else shouted after and at you in the streets. This also includes wolf whistling, being followed, not accepting a “no” and encompasses a host of other behaviours.  It is a form of gender-based violence.
+      </p>
+      <p>
+        Worldwide, youth-led movements - like Catcalls of Amsterdam - are committed to ending gender-based street harassment with public chalk art, digital media and education. We write stories of harassment word-for-word in the spots where they happened alongside the hashtag #stopstreetharassment using sidewalk chalk and then post on social media to spur dialogue and story sharing
+      </p>
+      <p>
+        Why do we do this? On the one hand, we want to claim back the space of the harassment for the victim and give them a voice. On the other hand we want to show those passing our chalk art that catcalling happens everywhere and engage them in a discussion about it. Catcalling is still too normal in our society and we want to change that, together with you. 
+      </p>
+    </div>
+  </div>
+  <div
+    className="landing-community"
+  >
+    <div
+      className="community-content"
+    >
+      <div
+        className="community-title"
+      >
+        Get involved
+      </div>
+      <div
+        className="community-text"
+      >
+        See the social media channel for actions of Catcalls of Amsterdam: the stories of catcalls being reported to the organization and pictures of thse chalk back actions. Join the discussion and share the chalked catcalls so we can create awareness.
+      </div>
+      <a
+        href="https://www.instagram.com/catcallsofams/"
+        rel="noreferrer nofollow"
+        target="_blank"
+      >
+        <button>
+          <p>
+            Join the community on Instagram
+          </p>
+        </button>
+      </a>
+    </div>
+  </div>
+  <div
+    className="landing-about"
+  >
+    <div
+      className="about-content"
+    >
+      <p>
+        Catcalls of Amsterdam is founded in December 2017, after Ambrien found the account Catcalls of New York on Instagram. After talking with Sophie Sandberg, its founder, she decided to join the movement and start chalking in Amsterdam.
+      </p>
+      <p>
+        In the meantime our team grew and is organised by four people: Ambrien, Margriet, Paula and Zessiah. Together with 150 other initiatives worldwide, we 'chalk back'. Our goal is to provide a place to share experiences on street harassment and use people's stories to create awereness around catcalling and denormalize it.
+      </p>
+      <p>
+        With this application outside of Instagram, we show our catcalling database on the map and make it easier for any victim to report their experience. Check it out and contact us if you have any questions.
+      </p>
+    </div>
+    <div
+      className="about-title"
+    >
+      About Catcalls of Amsterdam.
+    </div>
+  </div>
+  <div
+    className="footer"
+  >
+    <div
+      className="footer-content"
+    >
+      <div
+        className="footer-div"
+      >
+        <div
+          className="footer-title"
+        >
+          ABOUT THIS MAP APPLICATION
+        </div>
+        <div>
+          This is a project for Catcalls of Amsterdam by Lisanne Kraal. Inspired by the young activists, she contacted the organization to help them mapping their enormous database in an interactive way. This is a first version of a project under construction. Any feedback or want to contribute? Contact us.
+        </div>
+      </div>
+      <div
+        className="footer-div"
+      >
+        <div
+          className="footer-title"
+        >
+          CONTACT
+        </div>
+        <div>
+          Catcalls of Amsterdam
+        </div>
+        <div>
+          <a
+            href="https://www.instagram.com/catcallsofams/"
+            rel="noreferrer nofollow"
+            style={
+              Object {
+                "color": "white",
+                "textDecoration": "none",
+              }
+            }
+            target="_blank"
+          >
+            <i
+              className="fab fa-instagram"
+            />
+             PM on Instagram
+          </a>
+        </div>
+        <div>
+          <a
+            href="mailto:catcallsofams@gmail.com"
+            style={
+              Object {
+                "color": "white",
+                "textDecoration": "none",
+              }
+            }
+          >
+            <i
+              className="far fa-envelope"
+            />
+             Send an email
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
