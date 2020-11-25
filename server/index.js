@@ -5,7 +5,20 @@ const resolvers         = require('./resolvers')
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  context: async ({req}) => {
+    // Get the user token from the headers.
+    const token = req.headers.authorization || '';
+
+    // try to retrieve a user with the token
+    let mod = {};
+    if (token !== '') {
+      mod = await resolvers.Query.getModeratorById(null, {id: token});
+    }
+
+    // add the user to the context
+    return { mod };
+  }
 });
 
 

@@ -1,5 +1,10 @@
-// const { catcalls } = require('./mockdata');
-const Catcall = require('./models/catcall.model')
+const Catcall = require('./models/catcall.model');
+const Moderator = require('./models/moderator.model');
+const bcrypt = require('bcrypt');
+const merge = require('lodash.merge');
+const { Error } = require('mongoose');
+
+// TODO: implement moderator check where needed as in getUnfilteredCatcalls
 
 const catcallResolver = {
   Query: {
@@ -19,10 +24,17 @@ const catcallResolver = {
       return result;
     },
 
-    async getUnfilteredCatcalls (_, { condition }) {
-      const conditionString = `properties.${condition}`
-      const result = await Catcall.find({[conditionString]: false});
-      return result;
+    async getUnfilteredCatcalls (_, { condition }, context) {
+      if (context.mod._id) {
+        if (await Moderator.findOne({ _id: context.mod._id })) {
+          const conditionString = `properties.${condition}`
+          const result = await Catcall.find({[conditionString]: false});
+          return result;
+        }
+      }
+      let err = new Error;
+      err.message = 'You must be logged in as a moderator to see this content';
+      return err;
     }
   },
 
@@ -48,15 +60,44 @@ const catcallResolver = {
       }
     }
   }
-
-
 }
 
 const moderatorResolver = {
-  //create new moderator
-  //get moderator by id
-  //update settings moderator
-  //destroy mod
+  Query: {
+    async getModeratorById(_, { id }) {
+      const mod = await Moderator.findOne({ _id: id });
+      return mod;
+    },
+
+    async validateModerator(_, { email, password }) {
+      const mod = await Moderator.findOne({ email: email });
+      // TODO: change to bcrypt once implemented correctly
+      // const validatedPass = await bcrypt.compare(password, mod.password);
+      const validatedPass = (password === mod.password)
+      if (!validatedPass) throw new Error();
+      return mod;
+    }
+  },
+
+  Mutation: {
+    async createModerator(_, { moderator }) {
+      const { email, password, canAdd } = moderator;
+      let hashPassword = await bcrypt.hash(password, 10);
+      const mod = await Moderator.create({ email, hashPassword, canAdd });
+      return mod;
+    },
+
+    async updateModerator(_, { id, moderator }) {
+      const { email, password, canAdd } = moderator;
+      const updatedModerator = await Moderator.findByIdAndUpdate(id, { email, password, canAdd });
+      return updatedModerator;
+    },
+
+    async removeModerator(_, { id }) {
+      const mod = await Moderator.deleteOne({ _id: id });
+      return mod;
+    }
+  }
 }
 
-module.exports = catcallResolver
+module.exports = merge(catcallResolver, moderatorResolver)

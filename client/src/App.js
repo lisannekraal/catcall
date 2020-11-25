@@ -1,7 +1,9 @@
 import './App.css';
 
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloProvider, createHttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 import MapMain from './components/MapMain';
 import Landing from './components/Landing';
@@ -12,16 +14,40 @@ import NotFound from './components/NotFound';
 
 import Header from './components/Header';
 
-const client = new ApolloClient({
-  uri: process.env.REACT_APP_APOLLO_SERVER,
-  cache: new InMemoryCache({
-    addTypename: false
-  })
-});
+
+
+
 
 
 
 function App() {
+  
+  const [cookies, setCookie] = useCookies(['token']);
+
+  const httpLink = createHttpLink({
+    uri: process.env.REACT_APP_APOLLO_SERVER,
+  });
+
+  const authLink = setContext((_, { headers }) => {
+    // get the authentication token from cookies if it exists
+    const token = cookies.token;
+    // return the headers to the context so httpLink can read them
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `${token}` : "",
+      }
+    }
+  });
+
+  const client = new ApolloClient({
+  
+    link: authLink.concat(httpLink),
+    
+    cache: new InMemoryCache({
+      addTypename: false
+    })
+  });
   
   return (
     <ApolloProvider client={client}>
@@ -40,7 +66,7 @@ function App() {
             <ReportForm />
           </Route>
           <Route exact path="/login">
-            <Login/>
+            <Login setCookie={setCookie} />
           </Route>
           <Route exact path="/dashboard">
             <Dashboard />

@@ -1,24 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
+import { useLazyQuery } from '@apollo/client';
+import { VALIDATE_MODERATOR } from '../api/queries';
 
 import './Login.css';
 
 import { useForm } from 'react-hook-form';
 
-function Login() {
+function Login(props) {
   let history = useHistory();
   const { register, handleSubmit } = useForm();
-  const [nav, setNav] = useState('moderator');
+  const [validateModerator, { loading, data, error }] = useLazyQuery(VALIDATE_MODERATOR);
 
-
-  const changeNav = () => {
-    setNav('dashboard');
+  const onSubmit = (data) => {
+    console.log(data);
+    const queryVariable = {
+     email: data.email,
+     password: data.password
+    }
+    validateModerator({ variables: queryVariable });
   }
+
+  useEffect(()=>{
+    console.log('data: ',data);
+    console.log('error: ', error);
+
+    if (data) {
+      console.log('token set');
+      props.setCookie('token', data.validateModerator._id, { path: '/' });
+    }
+  }, [data, error]);
+
+  
 
   return (
     <div className="login">
       <div className="header-footer"></div>
-      <form className="login-form" onSubmit={handleSubmit(changeNav)}>
+      <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+        {loading ? <p>Loading...</p> : ''}
+        {error ? <p>Incorrect E-mail or Password</p> : ''}
         <div className="form-segment">
           <label htmlFor="email">E-mail:</label>
           <input

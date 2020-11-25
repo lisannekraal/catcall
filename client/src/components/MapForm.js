@@ -4,8 +4,6 @@ import MapGL, { Source, Layer, Image, NavigationControl, GeolocateControl } from
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Icon from '../assets/bullhorn.png';
 
-console.log(process.env.REACT_APP_MAPBOX_ACCESS_TOKEN);
-
 function MapForm (props) {
   const [viewport, setViewport] = useState({
     latitude: 52.366249,
