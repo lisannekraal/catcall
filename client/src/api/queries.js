@@ -89,7 +89,7 @@ export const CREATE_CATCALL = gql`
 `;
 
 export const UPDATE_CATCALL = gql`
-  mutation updateCatcall($id: String!, $catcall: CatcallInput!) {
+  mutation updateCatcall($id: String!, $catcall: CatcallUpdateInput!) {
     updateCatcall(id: $id, catcall: $catcall) {
         type
       geometry {

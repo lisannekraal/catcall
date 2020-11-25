@@ -116,7 +116,7 @@ function Row(props) {
               variables: {
                 id: row.id,
                 catcall: {
-                  propertes: {
+                  properties: {
                     verified: true
                   }
                 }

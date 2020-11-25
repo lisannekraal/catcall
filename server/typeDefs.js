@@ -18,7 +18,7 @@ const typeDefs = gql`
       catcall:CatcallInput!
     ):Catcall!
     updateCatcall(
-      id: ID
+      id: String!
       catcall:CatcallUpdateInput!
     ):Catcall!
     emptyTrash:[Catcall]
