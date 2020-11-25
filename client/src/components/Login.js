@@ -28,6 +28,7 @@ function Login(props) {
     if (data) {
       console.log('token set');
       props.setCookie('token', data.validateModerator._id, { path: '/' });
+      history.push('/dashboard')
     }
   }, [data, error]);
 
