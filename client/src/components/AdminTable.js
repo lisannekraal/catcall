@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -59,9 +59,26 @@ function unfilteredCatCallsData({ geometry, properties, _id }) {
 }
 
 export default function CollapsibleTable({ data , updateCatcall}) {
-  console.log(arguments);
-  const rows = data.map(catcall => unfilteredCatCallsData(catcall));
+  //console.log(arguments);
+  //const rows = data.map(catcall => unfilteredCatCallsData(catcall));
+
+
+  const [rows, setRows] = useState(data.map(catcall => unfilteredCatCallsData(catcall)))
   console.log('catRows!!', rows);
+
+  const verifyCatcall = ({variables}) => {
+    console.log(variables);
+    updateCatcall({variables})
+    let newRows = rows.filter(row => {
+      console.log('checking:',row.id,variables.id);
+      return row.id !== variables.id
+    })
+    setRows(newRows)
+  }
+
+  // useEffect(() => {
+  //   console.log('Rows rendered!',rows)
+  // }, [rows])
 
   return (
 
@@ -71,12 +88,12 @@ export default function CollapsibleTable({ data , updateCatcall}) {
           <TableRow>
             <TableCell />
             <TableCell>Quote</TableCell>
-            <TableCell align="right">Date Added</TableCell>
+            <TableCell align="center">Date Added</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={uuidv4()} row={row} updateCatcall={updateCatcall} />
+            <Row key={uuidv4()} row={row} verifyCatcall={verifyCatcall} />
           ))}
         </TableBody>
       </Table>
@@ -90,8 +107,8 @@ export default function CollapsibleTable({ data , updateCatcall}) {
  */
 
 function Row(props) {
-  console.log(props)
-  const { row, updateCatcall } = props;
+  //console.log(props)
+  const { row, verifyCatcall } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
@@ -106,13 +123,13 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.catCallQuote}
         </TableCell>
-        <TableCell align="right">{row.dateAdded}</TableCell>
+        <TableCell align="center">{row.dateAdded}</TableCell>
         <TableCell>
           <Button
             variant="contained"
             color="inherit"
             size="small"
-            onClick={() => updateCatcall({
+            onClick={() => verifyCatcall({
               variables: {
                 id: row.id,
                 catcall: {

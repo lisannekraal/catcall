@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_UNVERIFIED_CATCALLS, UPDATE_CATCALL } from '../api/queries'
@@ -28,22 +28,37 @@ function Dashboard() {
 
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [queryData, setQueryData] = useState('')
+  const [selectedTab, setSelectedTab] = useState('unverified')
 
   /*What to do in case tab changes */
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    console.log(event.target,value);
   };
 
+  useEffect(() => {
 
-  const { loading, error, data } = useQuery(GET_UNVERIFIED_CATCALLS);
+  }, [selectedTab])
+
+  let { loading, error, data } = useQuery(GET_UNVERIFIED_CATCALLS);
+
+  // const getData = () => {
+  //   if(selectedTab === 'unverified') return useQuery(GET_UNVERIFIED_CATCALLS)
+  // }
+
+
   if (error) console.log(error);
   data && console.log(data.getUnfilteredCatcalls);
+
+
+
   const [updateCatcall] = useMutation(UPDATE_CATCALL);
   console.log('Obtained Data >>>>>', data);
 
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
+  if (error) return <p>Error at Fetching Data</p>;
   return (
     <>
       <div className="header-footer"></div>
