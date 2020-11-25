@@ -37,7 +37,7 @@ function MapMain () {
 
         <Source id='catcalls' type='geojson' data={{
                 type: 'FeatureCollection',
-                features: data.getFilteredCatcalls
+                features: data.getVerifiedCatcalls
         }} />
 
         <Image id="catcall-icon" image={Icon} />

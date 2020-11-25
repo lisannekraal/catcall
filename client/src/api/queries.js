@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const GET_MAP_CATCALLS = gql`
   {
-    getFilteredCatcalls(condition: "verified") {
+    getVerifiedCatcalls {
       _id
       type
       geometry {

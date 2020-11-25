@@ -13,16 +13,13 @@ import Dashboard from './components/Dashboard';
 import NotFound from './components/NotFound';
 
 import Header from './components/Header';
-
-
-
-
-
+import { useEffect, useRef, useState } from 'react';
 
 
 function App() {
-  
   const [cookies, setCookie] = useCookies(['token']);
+  const [modButton, setModButton] = useState({text: 'moderator', to: '/login'});
+  // const modButton = useRef({text: 'moderator', to: '/login'});
 
   const httpLink = createHttpLink({
     uri: process.env.REACT_APP_APOLLO_SERVER,
@@ -48,12 +45,26 @@ function App() {
       addTypename: false
     })
   });
+
+  useEffect(()=>{
+    if (cookies.token) {
+      setModButton({text: 'dashboard', to: '/dashboard'});
+      // modButton.current.text = 'dashboard';
+      // modButton.current.to = '/dashboard';
+    } else {
+      setModButton({text: 'moderator', to: '/login'});
+      // modButton.current.text = 'moderator';
+      // modButton.current.to = '/login';
+    }
+
+    console.log(modButton.current);
+  }, [cookies])
   
   return (
     <ApolloProvider client={client}>
       <Router>
 
-      <Header/>
+      <Header modButton={modButton} />
 
         <Switch>
           <Route exact path="/">
@@ -66,7 +77,7 @@ function App() {
             <ReportForm />
           </Route>
           <Route exact path="/login">
-            <Login setCookie={setCookie} />
+            <Login setCookie={setCookie}/>
           </Route>
           <Route exact path="/dashboard">
             <Dashboard />
