@@ -1,4 +1,3 @@
-// const { catcalls } = require('./mockdata');
 const Catcall = require('./models/catcall.model');
 const Moderator = require('./models/moderator.model');
 const bcrypt = require('bcrypt');
@@ -51,8 +50,6 @@ const catcallResolver = {
       }
     }
   }
-
-
 }
 
 const moderatorResolver = {
@@ -64,8 +61,11 @@ const moderatorResolver = {
 
     async validateModerator(_, { email, password }) {
       const mod = await Moderator.findOne({ email: email });
-      const validatedPass = await bcrypt.compare(password, mod.password);
+      // const validatedPass = await bcrypt.compare(password, mod.password);
+      // change to bcrypt once implemented correctly
+      const validatedPass = (password === mod.password)
       if (!validatedPass) throw new Error();
+      return mod;
     }
   },
 

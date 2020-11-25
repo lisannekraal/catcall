@@ -11,7 +11,7 @@ const typeDefs = gql`
     getUnfilteredCatcalls(
       condition:String!
     ):[Catcall]
-    getModeratorById(id:ID):Moderator
+    getModeratorById(id:String):Moderator
     validateModerator(email:String, password:String):Moderator
   }
 
@@ -24,10 +24,10 @@ const typeDefs = gql`
       catcall:CatcallUpdateInput!
     ):Catcall!
     emptyTrash:[Catcall]
-    createModerator(moderator:Moderator):Moderator
+    createModerator(moderator:ModeratorInput):Moderator
     updateModerator(
       id:ID
-      moderator:Moderator
+      moderator:ModeratorInput
     ):Moderator
     removeModerator(id:ID):Moderator
   }
@@ -106,6 +106,13 @@ const typeDefs = gql`
   }
 
   type Moderator {
+    _id: ID!
+    email: String!
+    password: String!
+    canAdd: Boolean
+  }
+
+  input ModeratorInput {
     email: String!
     password: String!
     canAdd: Boolean
