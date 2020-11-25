@@ -34,8 +34,8 @@ function unfilteredCatCallsData({ geometry, properties, _id }) {
     id: _id,
     catCallQuote: properties.quote,
     context: properties.context,
-    dateAdded: properties.dateAdded,
-    dateCatcall: properties.dateCatcall,
+    dateAdded: (new Date(Number(properties.dateAdded))).toDateString(),
+    dateCatcall: properties.dateCatcall ? (new Date(Number(properties.dateCatcall))).toDateString() : "no date",
     type: geometry.type,
     coordinates: geometry.coordinates,
   };
@@ -101,7 +101,7 @@ function Row(props) {
                     <TableCell component="th" scope="row">
                       Date CatCall
                     </TableCell>
-                    <TableCell>{row.date}</TableCell>
+                    <TableCell>{row.dateCatcall}</TableCell>
                   </TableRow>
 
                   <TableRow key={uuidv4()}>
