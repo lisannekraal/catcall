@@ -32,20 +32,30 @@ function Dashboard() {
   /*What to do in case tab changes */
   const handleChange = (event, newValue) => {
     setValue(newValue);
-
   };
 
   const queryDictionary = {
     'unverified': GET_UNVERIFIED_CATCALLS,
-    'chalk':
+    'chalk': GET_CATCALLS,
+    'database':GET_UNVERIFIED_CATCALLS,
+    'trash': GET_CATCALLS,
+    'settings':'',
+  }
+
+  const arrayDictionary = {
+    'unverified': 'getUnfilteredCatcalls',
+    'chalk': 'getCatcalls',
+    'database':'getUnfilteredCatcalls',
+    'trash': 'getCatcalls',
+    'settings':''
   }
 
   useEffect(() => {
     console.log(value);
-
   }, [value])
 
-  let { loading, error, data } = useQuery(GET_UNVERIFIED_CATCALLS);
+  console.log('making a query with',value,queryDictionary[value]);
+  let { loading, error, data } = useQuery(queryDictionary[value]);
 
   // const getData = () => {
   //   if(selectedTab === 'unverified') return useQuery(GET_UNVERIFIED_CATCALLS)
@@ -84,7 +94,7 @@ function Dashboard() {
           </Tabs>
         </Paper>
 
-        {data ? (<AdminTable data={data.getUnfilteredCatcalls} updateCatcall={updateCatcall} />) : (<h2>Loading...</h2>)}
+        {data ? (<AdminTable data={data[arrayDictionary[value]]} updateCatcall={updateCatcall} />) : (<h2>Loading...</h2>)}
 
       <div className="header-footer"></div>
     </>
