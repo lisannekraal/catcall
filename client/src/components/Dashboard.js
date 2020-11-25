@@ -20,7 +20,6 @@ import Settings from '@material-ui/icons/Settings';
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
-    width: '100%',
   },
 });
 
@@ -51,16 +50,17 @@ function Dashboard() {
           <Tabs
             value={value}
             onChange={handleChange}
-            variant="fullWidth"
+            variant="scrollable"
+            scrollButtons="on"
             indicatorColor="secondary"
             textColor="secondary"
-            aria-label="Admin Menu"
+            aria-label="admin navigation"
           >
-            <Tab icon={<VerifiedUser />} label="Verify Pending" />
-            <Tab icon={<Gesture />} label="To Chalk" />
-            <Tab icon={<Storage />} label="Databse" />
-            <Tab icon={<Delete />} label="Trash" />
-            <Tab icon={<Settings />} label="Mod Settings" />
+            <Tab icon={<VerifiedUser />} label="Verify Pending" wrapped />
+            <Tab icon={<Gesture />} label="To Chalk" wrapped/>
+            <Tab icon={<Storage />} label="Databse" wrapped/>
+            <Tab icon={<Delete />} label="Trash" wrapped/>
+            <Tab icon={<Settings />} label="Mod Settings" wrapped/>
           </Tabs>
         </Paper>
 

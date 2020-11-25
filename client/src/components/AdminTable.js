@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
@@ -16,11 +17,27 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { v4 as uuidv4 } from 'uuid';
 
+
 const useRowStyles = makeStyles({
   root: {
     '& > *': {
       borderBottom: 'unset',
     },
+  },
+  verifyButton: {
+    background: 'rgb(90, 124, 56)',
+    margin: 2,
+    width:70,
+  },
+  editButton: {
+    background: 'rgb(196, 130, 31)',
+    margin: 2,
+    width:70,
+  },
+  deleteButton: {
+    background: 'rgb(161, 54, 81)',
+    margin: 2,
+    width:70,
   },
 });
 
@@ -47,6 +64,7 @@ export default function CollapsibleTable({ data }) {
   console.log('catRows!!', rows);
 
   return (
+
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
@@ -63,6 +81,7 @@ export default function CollapsibleTable({ data }) {
         </TableBody>
       </Table>
     </TableContainer>
+
   )
 }
 
@@ -77,9 +96,9 @@ function Row(props) {
 
   return (
     <React.Fragment>
-      <TableRow className={classes.root}>
+      <TableRow className={classes.root} onClick={() => setOpen(!open)}>
         <TableCell>
-          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+          <IconButton aria-label="expand row" size="small">
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
@@ -87,6 +106,35 @@ function Row(props) {
           {row.catCallQuote}
         </TableCell>
         <TableCell align="right">{row.dateAdded}</TableCell>
+        <TableCell>
+          <Button
+            variant="contained"
+            color="inherit"
+            size="small"
+            onClick={() => {}}
+            className={classes.verifyButton}
+            >
+            Verify
+        </Button>
+        <Button
+            variant="contained"
+            color="inherit"
+            size="small"
+            onClick={() => {}}
+            className={classes.editButton}
+            >
+            Edit
+        </Button>
+        <Button
+            variant="contained"
+            color="inherit"
+            size="small"
+            onClick={() => {}}
+            className={classes.deleteButton}
+            >
+            Delete
+        </Button>
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -101,14 +149,14 @@ function Row(props) {
                     <TableCell component="th" scope="row">
                       Date CatCall
                     </TableCell>
-                    <TableCell>{row.dateCatcall}</TableCell>
+                    <TableCell >{row.dateCatcall}</TableCell>
                   </TableRow>
 
                   <TableRow key={uuidv4()}>
                     <TableCell component="th" scope="row">
                       Position
                     </TableCell>
-                    <TableCell>{row.coordinates}</TableCell>
+                    <TableCell>{`${row.coordinates[0].toFixed(3)}.. ${row.coordinates[1].toFixed(3)}..`}</TableCell>
                   </TableRow>
 
                   <TableRow key={uuidv4()}>
