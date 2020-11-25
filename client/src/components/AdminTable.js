@@ -46,7 +46,7 @@ const useRowStyles = makeStyles({
  */
 
 function unfilteredCatCallsData({ geometry, properties, _id }) {
-  console.log(arguments)
+  //console.log(arguments)
   return {
     id: _id,
     catCallQuote: properties.quote,
@@ -58,8 +58,8 @@ function unfilteredCatCallsData({ geometry, properties, _id }) {
   };
 }
 
-export default function CollapsibleTable({ data }) {
-  console.log(data);
+export default function CollapsibleTable({ data , updateCatcall}) {
+  console.log(arguments);
   const rows = data.map(catcall => unfilteredCatCallsData(catcall));
   console.log('catRows!!', rows);
 
@@ -76,7 +76,7 @@ export default function CollapsibleTable({ data }) {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={uuidv4()} row={row} />
+            <Row key={uuidv4()} row={row} updateCatcall={updateCatcall} />
           ))}
         </TableBody>
       </Table>
@@ -90,7 +90,8 @@ export default function CollapsibleTable({ data }) {
  */
 
 function Row(props) {
-  const { row } = props;
+  console.log(props)
+  const { row, updateCatcall } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
@@ -111,7 +112,16 @@ function Row(props) {
             variant="contained"
             color="inherit"
             size="small"
-            onClick={() => {}}
+            onClick={() => updateCatcall({
+              variables: {
+                id: row.id,
+                catcall: {
+                  propertes: {
+                    verified: true
+                  }
+                }
+              }
+            })}
             className={classes.verifyButton}
             >
             Verify

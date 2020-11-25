@@ -64,7 +64,7 @@ function Dashboard() {
           </Tabs>
         </Paper>
 
-        {data ? (<AdminTable data={data.getUnfilteredCatcalls} />) : ''}
+        {data ? (<AdminTable data={data.getUnfilteredCatcalls} updateCatcall={updateCatcall} />) : ''}
 
       <div className="header-footer"></div>
     </>
