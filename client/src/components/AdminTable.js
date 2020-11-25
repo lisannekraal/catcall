@@ -157,7 +157,16 @@ function Row(props) {
             variant="contained"
             color="inherit"
             size="small"
-            onClick={() => {}}
+            onClick={() => verifyCatcall({
+              variables: {
+                id: row.id,
+                catcall: {
+                  properties: {
+                    trash: true
+                  }
+                }
+              }
+            })}
             className={classes.deleteButton}
             >
             Delete
