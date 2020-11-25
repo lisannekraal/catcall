@@ -1,7 +1,7 @@
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_UNVERIFIED_CATCALLS, UPDATE_CATCALL } from '../api/queries'
 import './Dashboard.css';
-import DataTable from './DataTable';
+import AdminTable from './AdminTable';
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -40,7 +40,7 @@ function Dashboard () {
             </div>
         </div>
 
-        {data ? (<DataTable data={data.getUnfilteredCatcalls}/>) : ''}
+        {data ? (<AdminTable data={data}/>) : ''}
 
         <div className="table-container">
           <div className="validation-table">

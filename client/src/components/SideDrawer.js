@@ -6,9 +6,6 @@ import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { v4 as uuidv4 } from 'uuid';
 
-import LoginModal from './Login-Modal';
-
-
 const useStyles = makeStyles({
   list: {
     width: 250,
