@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header tests: displays header correctly (medium size screen) 1`] = `
+exports[`Header tests: displays header correctly (large size screen) 1`] = `
 <header
   className="MuiPaper-root MuiAppBar-root MuiAppBar-positionAbsolute MuiAppBar-colorTransparent MuiPaper-elevation0"
   data-testid="navbar"
@@ -178,7 +178,7 @@ exports[`Header tests: displays header correctly (medium size screen) 1`] = `
             >
               <span
                 aria-hidden={true}
-                className="material-icons MuiIcon-root fas fa-user-cog MuiIcon-fontSizeSmall"
+                className="material-icons MuiIcon-root fas fa-cog MuiIcon-fontSizeSmall"
                 style={
                   Object {
                     "marginRight": 7,
