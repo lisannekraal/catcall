@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_UNVERIFIED_CATCALLS, UPDATE_CATCALL, GET_CATCALLS } from '../api/queries'
+import { GET_UNVERIFIED_CATCALLS, UPDATE_CATCALL, GET_CATCALLS,GET_TO_CHALK_CATCALLS,GET_TRASHED_CATCALLS } from '../api/queries'
 import './Dashboard.css';
 import AdminTable from './AdminTable';
 import { v4 as uuidv4 } from 'uuid';
@@ -36,17 +36,17 @@ function Dashboard() {
 
   const queryDictionary = {
     'unverified': GET_UNVERIFIED_CATCALLS,
-    'chalk': GET_CATCALLS,
-    'database':GET_UNVERIFIED_CATCALLS,
-    'trash': GET_CATCALLS,
+    'chalk': GET_TO_CHALK_CATCALLS,
+    'database':GET_CATCALLS,
+    'trash': GET_TRASHED_CATCALLS,
     'settings':'',
   }
 
   const arrayDictionary = {
-    'unverified': 'getUnfilteredCatcalls',
-    'chalk': 'getCatcalls',
-    'database':'getUnfilteredCatcalls',
-    'trash': 'getCatcalls',
+    'unverified': 'getUnverifiedCatcalls',
+    'chalk': 'getToChalkedCatcalls',
+    'database':'getCatcalls',
+    'trash': 'getTrashedCatcalls',
     'settings':''
   }
 
