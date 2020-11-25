@@ -27,17 +27,17 @@ const useRowStyles = makeStyles({
   verifyButton: {
     background: 'rgb(90, 124, 56)',
     margin: 2,
-    width:70,
+    width:68,
   },
   editButton: {
     background: 'rgb(196, 130, 31)',
     margin: 2,
-    width:70,
+    width:68,
   },
   deleteButton: {
     background: 'rgb(161, 54, 81)',
     margin: 2,
-    width:70,
+    width:68,
   },
 });
 
@@ -96,9 +96,9 @@ function Row(props) {
 
   return (
     <React.Fragment>
-      <TableRow className={classes.root} onClick={() => setOpen(!open)}>
+      <TableRow className={classes.root} >
         <TableCell>
-          <IconButton aria-label="expand row" size="small">
+          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
