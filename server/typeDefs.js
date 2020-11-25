@@ -5,6 +5,7 @@ const typeDefs = gql`
   type Query {
     getCatcalls:[Catcall]
     getCatcall(id:ID):Catcall
+    getVerifiedCatcalls:[Catcall]
     getFilteredCatcalls(
       condition:String!
     ):[Catcall]

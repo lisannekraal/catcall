@@ -4,24 +4,50 @@ const bcrypt = require('bcrypt');
 const merge = require('lodash.merge');
 const { Error } = require('mongoose');
 
-// TODO: implement moderator check where needed as in getUnfilteredCatcalls
-
 const catcallResolver = {
   Query: {
-    async getCatcalls() {
-      const catcalls = await Catcall.find();
-      return catcalls;
+    async getCatcalls(_, __, context) {
+      if (context.mod._id) {
+        if (await Moderator.findOne({ _id: context.mod._id })) {
+          const catcalls = await Catcall.find();
+          return catcalls;
+        }
+      }
+      let err = new Error;
+      err.message = 'You must be logged in as a moderator to see this content';
+      return err;
     },
 
-    async getCatcall (_, { id }) {
-      const catcall = await Catcall.findOne({ _id: id});
-      return catcall;
+    async getCatcall (_, { id }, context) {
+      if (context.mod._id) {
+        if (await Moderator.findOne({ _id: context.mod._id })) {
+          const catcall = await Catcall.findOne({ _id: id});
+          return catcall;
+        }
+      }
+      let err = new Error;
+      err.message = 'You must be logged in as a moderator to see this content';
+      return err;
     },
 
-    async getFilteredCatcalls (_, { condition }) {
-      const conditionString = `properties.${condition}`
-      const result = await Catcall.find({[conditionString]: true});
+    async getVerifiedCatcalls () {
+      const result = await Catcall.find({'properties.verified': true});
       return result;
+    },
+
+    async getFilteredCatcalls (_, { condition }, context) {
+      if (context.mod._id) {
+        if (await Moderator.findOne({ _id: context.mod._id })) {
+          const conditionString = `properties.${condition}`
+          const result = await Catcall.find({[conditionString]: true});
+          return result;
+        }
+      }
+      let err = new Error;
+      err.message = 'You must be logged in as a moderator to see this content';
+      return err;
+
+      
     },
 
     async getUnfilteredCatcalls (_, { condition }, context) {
@@ -39,25 +65,50 @@ const catcallResolver = {
   },
 
   Mutation: {
-    async createCatcall(_, { catcall }) {
-      const { type, geometry, properties} = catcall;
-      const createdCatcall = await Catcall.create({ type, geometry, properties });
-      return createdCatcall;
-    },
+    async createCatcall(_, { catcall }, context) {
 
-    async updateCatcall(_, { id, catcall }) {
-      const { type, geometry, properties} = catcall;
-      const updatedCatcall = await Catcall.findByIdAndUpdate(id, { type, geometry, properties });
-      return updatedCatcall;
-    },
-
-    async emptyTrash() {
-      try {
-        await Catcall.deleteMany({'properties.trash': true});
-        return true;
-      } catch (err) {
-        return err;
+      if (context.mod._id) {
+        if (await Moderator.findOne({ _id: context.mod._id })) {
+          const { type, geometry, properties} = catcall;
+          const createdCatcall = await Catcall.create({ type, geometry, properties });
+          return createdCatcall;
+        }
       }
+      let err = new Error;
+      err.message = 'You must be logged in as a moderator to see this content';
+      return err;
+    },
+
+    async updateCatcall(_, { id, catcall }, context) {
+      if (context.mod._id) {
+        if (await Moderator.findOne({ _id: context.mod._id })) {
+          const { type, geometry, properties} = catcall;
+          const updatedCatcall = await Catcall.findByIdAndUpdate(id, { type, geometry, properties });
+          return updatedCatcall;
+        }
+      }
+      let err = new Error;
+      err.message = 'You must be logged in as a moderator to see this content';
+      return err;
+
+      
+    },
+
+    async emptyTrash(_, __, context) {
+
+      if (context.mod._id) {
+        if (await Moderator.findOne({ _id: context.mod._id })) {
+          try {
+            await Catcall.deleteMany({'properties.trash': true});
+            return true;
+          } catch (err) {
+            return err;
+          }
+        }
+      }
+      let err = new Error;
+      err.message = 'You must be logged in as a moderator to see this content';
+      return err;
     }
   }
 }
@@ -71,31 +122,54 @@ const moderatorResolver = {
 
     async validateModerator(_, { email, password }) {
       const mod = await Moderator.findOne({ email: email });
-      // TODO: change to bcrypt once implemented correctly
-      // const validatedPass = await bcrypt.compare(password, mod.password);
-      const validatedPass = (password === mod.password)
+      const validatedPass = await bcrypt.compare(password, mod.password);
       if (!validatedPass) throw new Error();
+      console.log('heey');
       return mod;
     }
   },
 
   Mutation: {
-    async createModerator(_, { moderator }) {
-      const { email, password, canAdd } = moderator;
-      let hashPassword = await bcrypt.hash(password, 10);
-      const mod = await Moderator.create({ email, hashPassword, canAdd });
-      return mod;
+    async createModerator(_, { moderator }, context) {
+      if (context.mod._id) {
+        let mod = await Moderator.findOne({ _id: context.mod._id })
+        if (mod && mod.canAdd === true) {
+          const { email, password, canAdd } = moderator;
+          let hashPassword = await bcrypt.hash(password, 10);
+          const mod = await Moderator.create({ email, password: hashPassword, canAdd });
+          return mod;
+        }
+      }
+      let err = new Error;
+      err.message = 'You must be logged in as a moderator with the necessary authorization to perform this action';
+      return err;
     },
 
-    async updateModerator(_, { id, moderator }) {
-      const { email, password, canAdd } = moderator;
-      const updatedModerator = await Moderator.findByIdAndUpdate(id, { email, password, canAdd });
-      return updatedModerator;
+    async updateModerator(_, { id, moderator }, context) {
+      if (context.mod._id) {
+        let mod = await Moderator.findOne({ _id: context.mod._id })
+        if (mod && mod.canAdd === true) {
+          const { email, password, canAdd } = moderator;
+          const updatedModerator = await Moderator.findByIdAndUpdate(id, { email, password, canAdd });
+          return updatedModerator;
+        }
+      }
+      let err = new Error;
+      err.message = 'You must be logged in as a moderator with the necessary authorization to perform this action';
+      return err;
     },
 
-    async removeModerator(_, { id }) {
-      const mod = await Moderator.deleteOne({ _id: id });
-      return mod;
+    async removeModerator(_, { id }, context) {
+      if (context.mod._id) {
+        let mod = await Moderator.findOne({ _id: context.mod._id })
+        if (mod && mod.canAdd === true) {
+          const mod = await Moderator.deleteOne({ _id: id });
+          return mod;
+        }
+      }
+      let err = new Error;
+      err.message = 'You must be logged in as a moderator with the necessary authorization to perform this action';
+      return err;
     }
   }
 }

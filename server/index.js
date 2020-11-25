@@ -24,7 +24,7 @@ const server = new ApolloServer({
   resolvers,
   plugins: [
     loggerPlugin,
-  ]
+  ],
   context: async ({req}) => {
     // Get the user token from the headers.
     const token = req.headers.authorization || '';
