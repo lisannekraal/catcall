@@ -29,6 +29,7 @@ function Dashboard() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
+  /*What to do in case tab changes */
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -64,7 +65,7 @@ function Dashboard() {
           </Tabs>
         </Paper>
 
-        {data ? (<AdminTable data={data.getUnfilteredCatcalls} updateCatcall={updateCatcall} />) : ''}
+        {data ? (<AdminTable data={data.getUnfilteredCatcalls} updateCatcall={updateCatcall} />) : (<h2>Loading...</h2>)}
 
       <div className="header-footer"></div>
     </>
