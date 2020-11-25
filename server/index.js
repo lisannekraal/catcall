@@ -7,18 +7,14 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: async ({req}) => {
-    console.log(req.headers);
-    console.log();
-    console.log(req.headers.authorization);
-
     // Get the user token from the headers.
     const token = req.headers.authorization || '';
 
     // try to retrieve a user with the token
-    const mod = await resolvers.Query.getModeratorById(null, {id: token});
-    console.log(mod);
-
-    // if (!mod) throw new AuthenticationError('you must be logged in');
+    let mod = {};
+    if (token !== '') {
+      mod = await resolvers.Query.getModeratorById(null, {id: token});
+    }
 
     // add the user to the context
     return { mod };

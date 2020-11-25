@@ -2,6 +2,9 @@ const Catcall = require('./models/catcall.model');
 const Moderator = require('./models/moderator.model');
 const bcrypt = require('bcrypt');
 const merge = require('lodash.merge');
+const { Error } = require('mongoose');
+
+// TODO: implement moderator check where needed as in getUnfilteredCatcalls
 
 const catcallResolver = {
   Query: {
@@ -21,10 +24,17 @@ const catcallResolver = {
       return result;
     },
 
-    async getUnfilteredCatcalls (_, { condition }) {
-      const conditionString = `properties.${condition}`
-      const result = await Catcall.find({[conditionString]: false});
-      return result;
+    async getUnfilteredCatcalls (_, { condition }, context) {
+      if (context.mod._id) {
+        if (await Moderator.findOne({ _id: context.mod._id })) {
+          const conditionString = `properties.${condition}`
+          const result = await Catcall.find({[conditionString]: false});
+          return result;
+        }
+      }
+      let err = new Error;
+      err.message = 'You must be logged in as a moderator to see this content';
+      return err;
     }
   },
 
@@ -61,8 +71,8 @@ const moderatorResolver = {
 
     async validateModerator(_, { email, password }) {
       const mod = await Moderator.findOne({ email: email });
+      // TODO: change to bcrypt once implemented correctly
       // const validatedPass = await bcrypt.compare(password, mod.password);
-      // change to bcrypt once implemented correctly
       const validatedPass = (password === mod.password)
       if (!validatedPass) throw new Error();
       return mod;

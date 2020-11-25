@@ -14,36 +14,40 @@ import NotFound from './components/NotFound';
 
 import Header from './components/Header';
 
-const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_APOLLO_SERVER,
-});
 
-const authLink = setContext((_, { headers }) => {
-  // get the authentication token from cookies if it exists
-  const token = '5fbbaa2251817d304219d025';
-  // return the headers to the context so httpLink can read them
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `${token}` : "",
-    }
-  }
-});
 
-const client = new ApolloClient({
-  
-  link: authLink.concat(httpLink),
-  
-  cache: new InMemoryCache({
-    addTypename: false
-  })
-});
+
 
 
 
 function App() {
-
+  
   const [cookies, setCookie] = useCookies(['token']);
+
+  const httpLink = createHttpLink({
+    uri: process.env.REACT_APP_APOLLO_SERVER,
+  });
+
+  const authLink = setContext((_, { headers }) => {
+    // get the authentication token from cookies if it exists
+    const token = cookies.token;
+    // return the headers to the context so httpLink can read them
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `${token}` : "",
+      }
+    }
+  });
+
+  const client = new ApolloClient({
+  
+    link: authLink.concat(httpLink),
+    
+    cache: new InMemoryCache({
+      addTypename: false
+    })
+  });
   
   return (
     <ApolloProvider client={client}>
