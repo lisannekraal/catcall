@@ -60,7 +60,7 @@ export const GET_TRASHED_CATCALLS = gql`
 
 export const GET_TO_CHALK_CATCALLS = gql`
   {
-    getToChalkedCatcalls {
+    getToChalkCatcalls {
       _id
       type
       geometry {

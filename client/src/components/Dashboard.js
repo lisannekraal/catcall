@@ -44,7 +44,7 @@ function Dashboard() {
 
   const arrayDictionary = {
     'unverified': 'getUnverifiedCatcalls',
-    'chalk': 'getToChalkedCatcalls',
+    'chalk': 'getToChalkCatcalls',
     'database':'getCatcalls',
     'trash': 'getTrashedCatcalls',
     'settings':''

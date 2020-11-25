@@ -44,22 +44,22 @@ const catcallResolver = {
       }
       let err = new Error;
       err.message = 'You must be logged in as a moderator to see this content';
-      return err;      
+      return err;
     },
 
     async getTrashedCatcalls (_, __, context) {
       if (context.mod._id) {
         if (await Moderator.findOne({ _id: context.mod._id })) {
-          const result = await Catcall.find({['properties.trashed']: true});
+          const result = await Catcall.find({['properties.trash']: true});
           return result;
         }
       }
       let err = new Error;
       err.message = 'You must be logged in as a moderator to see this content';
-      return err;      
+      return err;
     },
 
-    async getToChalckCatcalls (_, __, context) {
+    async getToChalkCatcalls (_, __, context) {
       if (context.mod._id) {
         if (await Moderator.findOne({ _id: context.mod._id })) {
           const result = await Catcall.find({['properties.verified']: true, ['properties.chalked']: false});
@@ -68,7 +68,7 @@ const catcallResolver = {
       }
       let err = new Error;
       err.message = 'You must be logged in as a moderator to see this content';
-      return err;      
+      return err;
     },
 
     // async getUnfilteredCatcalls (_, { condition }, context) {
@@ -112,7 +112,7 @@ const catcallResolver = {
       err.message = 'You must be logged in as a moderator to see this content';
       return err;
 
-      
+
     },
 
     async emptyTrash(_, __, context) {
