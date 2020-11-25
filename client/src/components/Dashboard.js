@@ -40,7 +40,7 @@ function Dashboard () {
             </div>
         </div>
 
-        {data ? (<AdminTable data={data}/>) : ''}
+        {data ? (<AdminTable data={data.getUnfilteredCatcalls}/>) : ''}
 
         <div className="table-container">
           <div className="validation-table">
