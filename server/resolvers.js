@@ -35,33 +35,54 @@ const catcallResolver = {
       return result;
     },
 
-    async getFilteredCatcalls (_, { condition }, context) {
+    async getUnverifiedCatcalls (_, __, context) {
       if (context.mod._id) {
         if (await Moderator.findOne({ _id: context.mod._id })) {
-          const conditionString = `properties.${condition}`
-          const result = await Catcall.find({[conditionString]: true});
+          const result = await Catcall.find({['properties.verified']: false});
           return result;
         }
       }
       let err = new Error;
       err.message = 'You must be logged in as a moderator to see this content';
-      return err;
-
-      
+      return err;      
     },
 
-    async getUnfilteredCatcalls (_, { condition }, context) {
+    async getTrashedCatcalls (_, __, context) {
       if (context.mod._id) {
         if (await Moderator.findOne({ _id: context.mod._id })) {
-          const conditionString = `properties.${condition}`
-          const result = await Catcall.find({[conditionString]: false});
+          const result = await Catcall.find({['properties.trashed']: true});
           return result;
         }
       }
       let err = new Error;
       err.message = 'You must be logged in as a moderator to see this content';
-      return err;
-    }
+      return err;      
+    },
+
+    async getToChalckCatcalls (_, __, context) {
+      if (context.mod._id) {
+        if (await Moderator.findOne({ _id: context.mod._id })) {
+          const result = await Catcall.find({['properties.verified']: true, ['properties.chalked']: false});
+          return result;
+        }
+      }
+      let err = new Error;
+      err.message = 'You must be logged in as a moderator to see this content';
+      return err;      
+    },
+
+    // async getUnfilteredCatcalls (_, { condition }, context) {
+    //   if (context.mod._id) {
+    //     if (await Moderator.findOne({ _id: context.mod._id })) {
+    //       const conditionString = `properties.${condition}`
+    //       const result = await Catcall.find({[conditionString]: false});
+    //       return result;
+    //     }
+    //   }
+    //   let err = new Error;
+    //   err.message = 'You must be logged in as a moderator to see this content';
+    //   return err;
+    // }
   },
 
   Mutation: {
