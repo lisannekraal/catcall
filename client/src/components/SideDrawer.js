@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { v4 as uuidv4 } from 'uuid';
 
-
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -50,7 +49,7 @@ function SideDrawer({ navLinks }) {
           <ListItem button onClick={path} key={uuidv4()}>
             <ListItemIcon className={classN}/>
             <ListItemText primary={<Typography variant="button">{title}</Typography>}/>
-          </ListItem>
+      </ListItem>
         ))}
       </List>
     </div>

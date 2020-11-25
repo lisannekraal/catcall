@@ -30,7 +30,7 @@ function ReportForm() {
           "dateCatcall": date ? "" + Date.parse(date) : "",
           "dateAdded": "" + Date.now(),
           "url": "",
-          "verified": true,
+          "verified": false,
           "chalked": false,
           "listedForChalk": false,
           "starred": false,
