@@ -69,3 +69,8 @@ button:hover {
 
   /* font-size: 0.9rem; */
 }
+
+.header-footer {
+  background-color: rgba(29, 113, 183);
+  height: 65px;
+}
