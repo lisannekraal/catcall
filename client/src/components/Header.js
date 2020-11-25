@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Header() {
+function Header(props) {
 
   let history = useHistory();
 
@@ -51,7 +51,7 @@ function Header() {
     { title: 'about', classN: 'fas fa-info-circle', path: () => history.push("/#about") },
     { title: 'map', classN: 'fas fa-map-marked-alt', path: () => history.push("/catcalls") },
     { title: 'community', classN: 'fab fa-instagram', path: () => window.open("https://www.instagram.com/catcallsofams/", "_blank") },
-    { title: 'moderator', classN: 'fas fa-cog', path: () => history.push("/login")}
+    { title: props.modButton.text, classN: 'fas fa-cog', path: () => history.push(props.modButton.to)}
   ]
 
   return (
