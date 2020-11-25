@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_UNVERIFIED_CATCALLS, UPDATE_CATCALL } from '../api/queries'
+import { GET_UNVERIFIED_CATCALLS, UPDATE_CATCALL, GET_CATCALLS } from '../api/queries'
 import './Dashboard.css';
 import AdminTable from './AdminTable';
 import { v4 as uuidv4 } from 'uuid';
@@ -27,19 +27,23 @@ const useStyles = makeStyles({
 function Dashboard() {
 
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState('unverified'); //selected tab
   const [queryData, setQueryData] = useState('')
-  const [selectedTab, setSelectedTab] = useState('unverified')
-
   /*What to do in case tab changes */
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    console.log(event.target,value);
+
   };
 
-  useEffect(() => {
+  const queryDictionary = {
+    'unverified': GET_UNVERIFIED_CATCALLS,
+    'chalk':
+  }
 
-  }, [selectedTab])
+  useEffect(() => {
+    console.log(value);
+
+  }, [value])
 
   let { loading, error, data } = useQuery(GET_UNVERIFIED_CATCALLS);
 
@@ -72,11 +76,11 @@ function Dashboard() {
             textColor="secondary"
             aria-label="admin navigation"
           >
-            <Tab icon={<VerifiedUser />} label="Verify Pending" wrapped />
-            <Tab icon={<Gesture />} label="To Chalk" wrapped/>
-            <Tab icon={<Storage />} label="Databse" wrapped/>
-            <Tab icon={<Delete />} label="Trash" wrapped/>
-            <Tab icon={<Settings />} label="Mod Settings" wrapped/>
+            <Tab icon={<VerifiedUser />} label="Verify Pending" value='unverified' wrapped />
+            <Tab icon={<Gesture />} label="To Chalk" value='chalk' wrapped/>
+            <Tab icon={<Storage />} label="Databse" value='database' wrapped/>
+            <Tab icon={<Delete />} label="Trash" value='trash' wrapped/>
+            <Tab icon={<Settings />} label="Mod Settings" value='settings' wrapped/>
           </Tabs>
         </Paper>
 
