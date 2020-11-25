@@ -6,7 +6,7 @@ import App from './App';
 describe ('Routing tests:', () => {
 
   beforeEach(() => {
-    const theme = createMuiTheme({ props: {MuiWithWidth: {initialWidth: 'md'}}});
+    const theme = createMuiTheme({ props: {MuiWithWidth: {initialWidth: 'lg'}}});
     render( <MuiThemeProvider theme={theme}><App/></MuiThemeProvider>, { wrapper: MemoryRouter });
     fireEvent.click(screen.getByAltText('logo'));
     const landing = screen.getByTestId("landing");
@@ -83,7 +83,10 @@ describe ('Routing tests:', () => {
     expect(dashboard).toBeInTheDocument();
     fireEvent.click(dashboard);
 
-    expect(screen.getByDisplayValue(/Log In/i)).toBeInTheDocument();
+    await waitFor(()=>{
+      expect(screen.getByDisplayValue(/Log In/i)).toBeInTheDocument();
+    });
+   
   });
 
   // test('navbar report new catcall redirects to report-form', async () => {
