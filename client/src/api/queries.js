@@ -112,4 +112,13 @@ export const UPDATE_CATCALL = gql`
   }
 `;
 
+export const VALIDATE_MODERATOR = gql`
+query validateModerator($email: String!, $password: String!) {
+  validateModerator(email: $email, password: $password) {
+    _id
+    email
+    canAdd
+  }
+}
+`;
 

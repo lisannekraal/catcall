@@ -25,6 +25,19 @@ const server = new ApolloServer({
   plugins: [
     loggerPlugin,
   ]
+  context: async ({req}) => {
+    // Get the user token from the headers.
+    const token = req.headers.authorization || '';
+
+    // try to retrieve a user with the token
+    let mod = {};
+    if (token !== '') {
+      mod = await resolvers.Query.getModeratorById(null, {id: token});
+    }
+
+    // add the user to the context
+    return { mod };
+  }
 });
 
 

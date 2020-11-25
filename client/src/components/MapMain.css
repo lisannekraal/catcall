@@ -1,7 +1,7 @@
 .map-container {
   width: 100%;
-  height: calc(100vh - 80px);
-  padding-top: 80px;
+  height: 100vh;
+  padding-top: 65px;
   background-color: rgba(29, 113, 183);
 }
 
