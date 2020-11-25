@@ -6,8 +6,8 @@ import Header from './Header';
 
 describe('Header tests:', ()=>{
 
-  test('displays header correctly (medium size screen)', ()=>{
-    const theme = createMuiTheme({ props: {MuiWithWidth: {initialWidth: 'md'}}});
+  test('displays header correctly (large size screen)', ()=>{
+    const theme = createMuiTheme({ props: {MuiWithWidth: {initialWidth: 'lg'}}});
     render( );
 
     const header = TestRenderer
