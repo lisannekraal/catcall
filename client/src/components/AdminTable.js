@@ -59,7 +59,7 @@ function processCatCallsData({ geometry, properties, _id, type }) {
     verified: properties.verified,
     chalked: properties.chalked,
     listedForChalk: properties.listedForChalk,
-    trash: properties.trashed,
+    trash: properties.trash,
     url: properties.url,
   };
 }
@@ -148,7 +148,7 @@ function Row(props) {
             })}
             className={classes.verifyButton}
             >
-            Verify
+            {row.verified ? 'Unverify' : 'Verify'}
         </Button>
         <Button
             variant="contained"
@@ -175,7 +175,7 @@ function Row(props) {
             })}
             className={classes.deleteButton}
             >
-            Delete
+            {row.trash ? 'Recover' :  'Delete'}
         </Button>
         </TableCell>
       </TableRow>

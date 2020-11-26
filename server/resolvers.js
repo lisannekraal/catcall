@@ -38,7 +38,7 @@ const catcallResolver = {
     async getUnverifiedCatcalls (_, __, context) {
       if (context.mod._id) {
         if (await Moderator.findOne({ _id: context.mod._id })) {
-          const result = await Catcall.find({['properties.verified']: false});
+          const result = await Catcall.find({['properties.verified']: false,['properties.trash']: false});
           return result;
         }
       }
@@ -62,7 +62,7 @@ const catcallResolver = {
     async getToChalkCatcalls (_, __, context) {
       if (context.mod._id) {
         if (await Moderator.findOne({ _id: context.mod._id })) {
-          const result = await Catcall.find({['properties.verified']: true, ['properties.chalked']: false});
+          const result = await Catcall.find({['properties.verified']: true, ['properties.chalked']: false,['properties.trash']: false});
           return result;
         }
       }
