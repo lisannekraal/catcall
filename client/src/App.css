@@ -70,6 +70,15 @@ button:hover {
   /* font-size: 0.9rem; */
 }
 
+.about-link {
+  text-decoration: none;
+  color: white;
+}
+
+.about-link button {
+  height: 100%;
+}
+
 .header-footer {
   background-color: rgba(29, 113, 183);
   height: 65px;
