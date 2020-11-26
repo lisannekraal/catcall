@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { IconButton, List, ListItem, ListItemText, Drawer, ListItemIcon,Typography } from "@material-ui/core"
 import { Menu } from "@material-ui/icons"
+import { HashLink as Link } from 'react-router-hash-link';
 
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -45,11 +46,17 @@ function SideDrawer({ navLinks }) {
       <ListItemIcon className="fas fa-cat"/>
       <ListItemText  primary={<Typography variant="button">Report a new CatCall</Typography>}/>
       </ListItem>
+        <Link to="/#about" style={{textDecoration: 'none', color:'#000000DE'}} >
+          <ListItem button key={uuidv4()}>
+            <ListItemIcon className='fas fa-info-circle'/>
+            <ListItemText primary={<Typography variant="button">about</Typography>}/>
+          </ListItem>
+        </Link>
         {navLinks.map(({ title, path, classN }) => (
           <ListItem button onClick={path} key={uuidv4()}>
             <ListItemIcon className={classN}/>
             <ListItemText primary={<Typography variant="button">{title}</Typography>}/>
-      </ListItem>
+          </ListItem>
         ))}
       </List>
     </div>
