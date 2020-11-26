@@ -46,7 +46,7 @@ function ReportForm() {
       }
       createCatcall({ variables: queryVariable });
     }
-    
+
   }
 
   function setLocation(e) {
@@ -146,8 +146,9 @@ function ReportForm() {
 
           <button type="button" className="cancel-button" onClick={()=> history.push('/')}>Cancel</button>
 
+          {/* disabled={!checkRecaptcha} */}
 
-          <input className="submit-button" disabled={!checkRecaptcha} type="submit" value="Submit new catcall" onClick={()=>{if (lngLat.length === 0) setMapError('Required')}}/>
+          <input className="submit-button"  type="submit" value="Submit new catcall" onClick={()=>{if (lngLat.length === 0) setMapError('Required')}}/>
 
         </form>
 
