@@ -7,38 +7,46 @@ import './ReportForm.css';
 import Flatpickr from "react-flatpickr";
 import { CREATE_CATCALL } from '../api/queries';
 import { useHistory } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 
 
 function ReportForm() {
   let history = useHistory();
   const { register, handleSubmit, errors } = useForm();
   const [date, setDate] = useState("");
+  const [mapError, setMapError] = useState("");
+  const [checkRecaptcha, setCheckRecaptcha] = useState(false);
   const [lngLat, setLngLat] = useState([]);
   const [createCatcall] = useMutation(CREATE_CATCALL);
 
   const onSubmit = (data) => {
-    const queryVariable = {
-      "catcall": {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": lngLat
-        },
-        "properties": {
-          "quote": data.quote,
-          "context": data.context ? data.context : "",
-          "dateCatcall": date ? "" + Date.parse(date) : "",
-          "dateAdded": "" + Date.now(),
-          "url": "",
-          "verified": false,
-          "chalked": false,
-          "listedForChalk": false,
-          "starred": false,
-          "trash": false
+
+    if (lngLat.length > 0 && checkRecaptcha) {
+      console.log('submitted');
+      const queryVariable = {
+        "catcall": {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": lngLat
+          },
+          "properties": {
+            "quote": data.quote,
+            "context": data.context ? data.context : "",
+            "dateCatcall": date ? "" + Date.parse(date) : "",
+            "dateAdded": "" + Date.now(),
+            "url": "",
+            "verified": false,
+            "chalked": false,
+            "listedForChalk": false,
+            "starred": false,
+            "trash": false
+          }
         }
       }
+      createCatcall({ variables: queryVariable });
     }
-    createCatcall({ variables: queryVariable });
+    
   }
 
   function setLocation(e) {
@@ -109,6 +117,7 @@ function ReportForm() {
             <label htmlFor="context" className="location-title">Location*:</label>
             <MapForm setLocation={setLocation} />
             <small id="context-help">Click on the map to add the location of the catcall.</small>
+            {mapError!=='' ? <p className="error-message">{mapError}</p> : ''}
           </div>
 
           <div className="form-segment checkbox">
@@ -131,14 +140,14 @@ function ReportForm() {
           </div>
 
           <div className="form-segment">
-            <div name="captcha" className="g-recaptcha" data-sitekey={process.env.REACT_APP_RECAPTCHA_KEY}></div>
+            <ReCAPTCHA sitekey={process.env.REACT_APP_RECAPTCHA_KEY} onChange={()=>{setCheckRecaptcha(true)}} />
           </div>
 
 
           <button type="button" className="cancel-button" onClick={()=> history.push('/')}>Cancel</button>
 
 
-          <input className="submit-button" type="submit" value="Submit new catcall" />
+          <input className="submit-button" disabled={!checkRecaptcha} type="submit" value="Submit new catcall" onClick={()=>{if (lngLat.length === 0) setMapError('Required')}}/>
 
         </form>
 
