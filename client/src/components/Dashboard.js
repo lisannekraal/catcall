@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 
-import { useQuery, useMutation, useLazyQuery, useApolloClient } from '@apollo/client';
-import { GET_UNVERIFIED_CATCALLS, UPDATE_CATCALL, GET_CATCALLS,GET_TO_CHALK_CATCALLS,GET_TRASHED_CATCALLS } from '../api/queries'
+import { useQuery, useMutation } from '@apollo/client';
+import { UPDATE_CATCALL, GET_CATCALLS} from '../api/queries'
 import './Dashboard.css';
 import AdminTable from './AdminTable';
-import { v4 as uuidv4 } from 'uuid';
 
 /**Material UI Imports */
 import Paper from '@material-ui/core/Paper';
@@ -23,59 +22,25 @@ const useStyles = makeStyles({
   },
 });
 
-
 function Dashboard() {
-
-  // const client = useApolloClient();
-  // console.log(client);
 
   const classes = useStyles();
   const [value, setValue] = React.useState('unverified'); //keeps track of selected tab
-  //const [queryData, setQueryData] = useState('')
-  /*What to do in case tab changes */
-  const handleChange = (event, newValue) => {
+  const [updateCatcall] = useMutation(UPDATE_CATCALL,);
+  let { loading, error, data } = useQuery(GET_CATCALLS);
+
+  const handleChange = (event, newValue) => { /*What to do in case tab changes */
     if(newValue !== 'settings') setValue(newValue); //condition deactivates settings tab temporarily
   };
 
   useEffect(() => {
-    //activateQuery();
 
     console.log('Query has been called',value);
   }, [value])
 
-  const queryDictionary = {
-    'unverified': GET_UNVERIFIED_CATCALLS,
-    'chalk': GET_TO_CHALK_CATCALLS,
-    'database':GET_CATCALLS,
-    'trash': GET_TRASHED_CATCALLS,
-    'settings':'',
-  }
-
-  const arrayDictionary = {
-    'unverified': 'getUnverifiedCatcalls',
-    'chalk': 'getToChalkCatcalls',
-    'database':'getCatcalls',
-    'trash': 'getTrashedCatcalls',
-    'settings':''
-  }
-
-  console.log('making a query with',value,queryDictionary[value]);
-  //let [activateQuery,{ loading, error, data }] = useLazyQuery(queryDictionary[value]);
-  let { loading, error, data } = useQuery(GET_CATCALLS);
-
-
-  // const getData = () => {
-  //   if(selectedTab === 'unverified') return useQuery(GET_UNVERIFIED_CATCALLS)
-  // }
-
 
   if (error) console.log(error);
   data && console.log('REFETCHED RESULTS:',data);
-
-
-
-  const [updateCatcall,{data:mutationResult}] = useMutation(UPDATE_CATCALL,{refetchQueries:['getUnverifiedCatcalls','getToChalkCatcalls','getCatcalls','getTrashedCatcalls']});
-  mutationResult && console.log('Obtained Data >>>>>', mutationResult);
 
 
   if (loading) return <p>Loading...</p>;

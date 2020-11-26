@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -27,17 +26,17 @@ const useRowStyles = makeStyles({
   verifyButton: {
     background: 'rgb(90, 124, 56)',
     margin: 2,
-    width:68,
+    width: 68,
   },
   editButton: {
     background: 'rgb(196, 130, 31)',
     margin: 2,
-    width:68,
+    width: 68,
   },
   deleteButton: {
     background: 'rgb(161, 54, 81)',
     margin: 2,
-    width:68,
+    width: 68,
   },
 });
 
@@ -54,7 +53,7 @@ function processCatCallsData({ geometry, properties, _id, type }) {
     dateAdded: (new Date(Number(properties.dateAdded))).toDateString(),
     dateCatcall: properties.dateCatcall ? (new Date(Number(properties.dateCatcall))).toDateString() : "no date",
     geometryType: geometry.type,
-    type : type,
+    type: type,
     coordinates: geometry.coordinates,
     verified: properties.verified,
     chalked: properties.chalked,
@@ -64,10 +63,7 @@ function processCatCallsData({ geometry, properties, _id, type }) {
   };
 }
 
-export default function CollapsibleTable({ data , updateCatcall, value}) {
-  //const rows = data.map(catcall => unfilteredCatCallsData(catcall));
-
-
+export default function CollapsibleTable({ data, updateCatcall, value }) {
 
   const [rows, setRows] = useState(data.map(catcall => processCatCallsData(catcall)))
   console.log('catRows!!', rows);
@@ -76,18 +72,21 @@ export default function CollapsibleTable({ data , updateCatcall, value}) {
     let switchedRows;
 
     switch (value) {
-    case 'unverified':
-      switchedRows = data.filter( el => el.properties.trash === false && el.properties.verified === false );
-      break;
-    case 'chalk':
-      switchedRows = data.filter( el => el.properties.trash === false && el.properties.verified === true && el.properties.chalked === false );
-      break;
-    case 'database':
-      switchedRows = data.filter( el => el.properties.trash === false);
-      break;
-    case 'trash':
-      switchedRows = data.filter( el => el.properties.trash === true);
-      break;
+      case 'unverified':
+        switchedRows = data.filter(el => el.properties.trash === false && el.properties.verified === false);
+        break;
+      case 'chalk':
+        switchedRows = data.filter(el => el.properties.trash === false && el.properties.verified === true && el.properties.chalked === false);
+        break;
+      case 'database':
+        switchedRows = data.filter(el => el.properties.trash === false);
+        break;
+      case 'trash':
+        switchedRows = data.filter(el => el.properties.trash === true);
+        break;
+      default: //unverified
+        switchedRows = data.filter(el => el.properties.trash === false && el.properties.verified === false);
+        break;
     }
 
     setRows(switchedRows.map(catcall => processCatCallsData(catcall)));
@@ -95,11 +94,11 @@ export default function CollapsibleTable({ data , updateCatcall, value}) {
 
 
 
-  const verifyCatcall = ({variables}) => {
+  const verifyCatcall = ({ variables }) => {
     console.log(variables);
-    updateCatcall({variables})
+    updateCatcall({ variables })
     let newRows = rows.filter(row => {
-      console.log('checking:',row.id,variables.id);
+      console.log('checking:', row.id, variables.id);
       return row.id !== variables.id
     })
     setRows(newRows)
@@ -167,19 +166,19 @@ function Row(props) {
               }
             })}
             className={classes.verifyButton}
-            >
+          >
             {row.verified ? 'Unverify' : 'Verify'}
-        </Button>
-        <Button
+          </Button>
+          <Button
             variant="contained"
             color="inherit"
             size="small"
-            onClick={() => {}}
+            onClick={() => { }}
             className={classes.editButton}
-            >
+          >
             Edit
         </Button>
-        <Button
+          <Button
             variant="contained"
             color="inherit"
             size="small"
@@ -194,9 +193,9 @@ function Row(props) {
               }
             })}
             className={classes.deleteButton}
-            >
-            {row.trash ? 'Recover' :  'Delete'}
-        </Button>
+          >
+            {row.trash ? 'Recover' : 'Delete'}
+          </Button>
         </TableCell>
       </TableRow>
       <TableRow>

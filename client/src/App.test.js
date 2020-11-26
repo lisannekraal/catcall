@@ -86,19 +86,7 @@ describe ('Routing tests:', () => {
     await waitFor(()=>{
       expect(screen.getByDisplayValue(/Log In/i)).toBeInTheDocument();
     });
-   
+
   });
-
-  // test('navbar report new catcall redirects to report-form', async () => {
-
-  //   const { getByText } = within(screen.getByTestId('navbar'))
-  //   const reportCatcall = getByText('Report a new catcall');
-  //   expect(reportCatcall).toBeInTheDocument();
-  //   fireEvent.click(reportCatcall);
-
-  //   await waitFor(()=>{
-  //     expect(screen.getByTestId("report-form")).toBeInTheDocument();
-  //   });
-  // });
 
 });

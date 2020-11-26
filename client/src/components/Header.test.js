@@ -1,5 +1,5 @@
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
-import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import {render} from '@testing-library/react';
 import TestRenderer from 'react-test-renderer';
 import { BrowserRouter } from 'react-router-dom';
 import Header from './Header';
