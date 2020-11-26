@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
 import { GET_UNVERIFIED_CATCALLS, UPDATE_CATCALL, GET_CATCALLS,GET_TO_CHALK_CATCALLS,GET_TRASHED_CATCALLS } from '../api/queries'
 import './Dashboard.css';
 import AdminTable from './AdminTable';
@@ -27,12 +27,17 @@ const useStyles = makeStyles({
 function Dashboard() {
 
   const classes = useStyles();
-  const [value, setValue] = React.useState('unverified'); //selected tab
-  const [queryData, setQueryData] = useState('')
+  const [value, setValue] = React.useState('unverified'); //keeps track of selected tab
+  //const [queryData, setQueryData] = useState('')
   /*What to do in case tab changes */
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    if(newValue !== 'settings') setValue(newValue); //condition deactivates settings tab temporarily
   };
+
+  useEffect(() => {
+    activateQuery();
+    console.log(value);
+  }, [value])
 
   const queryDictionary = {
     'unverified': GET_UNVERIFIED_CATCALLS,
@@ -50,12 +55,11 @@ function Dashboard() {
     'settings':''
   }
 
-  useEffect(() => {
-    console.log(value);
-  }, [value])
-
   console.log('making a query with',value,queryDictionary[value]);
-  let { loading, error, data } = useQuery(queryDictionary[value]);
+  let [activateQuery,{ loading, error, data }] = useLazyQuery(queryDictionary[value]);
+
+  //let { loading, error, data } = useQuery(queryDictionary[value]);
+
 
   // const getData = () => {
   //   if(selectedTab === 'unverified') return useQuery(GET_UNVERIFIED_CATCALLS)
@@ -63,7 +67,7 @@ function Dashboard() {
 
 
   if (error) console.log(error);
-  data && console.log(data.getUnfilteredCatcalls);
+  data && console.log(data);
 
 
 
