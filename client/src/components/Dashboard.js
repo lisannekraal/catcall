@@ -94,7 +94,7 @@ function Dashboard() {
           </Tabs>
         </Paper>
 
-        {data ? (<AdminTable data={data[arrayDictionary[value]]} updateCatcall={updateCatcall} />) : (<h2>Loading...</h2>)}
+        {data[arrayDictionary[value]] ? (<AdminTable data={data[arrayDictionary[value]]} updateCatcall={updateCatcall} />) : (<h2>Loading...</h2>)}
 
       <div className="header-footer"></div>
     </>
