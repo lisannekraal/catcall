@@ -34,6 +34,8 @@ export const GET_UNVERIFIED_CATCALLS = gql`
         context
         dateCatcall
         dateAdded
+        trash
+        verified
       }
     }
   }
@@ -53,6 +55,8 @@ export const GET_TRASHED_CATCALLS = gql`
         context
         dateCatcall
         dateAdded
+        trash
+        verified
       }
     }
   }
@@ -74,6 +78,8 @@ export const GET_TO_CHALK_CATCALLS = gql`
         listedForChalk
         dateCatcall
         dateAdded
+        trash
+        verified
       }
     }
   }
