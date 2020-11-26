@@ -6,12 +6,12 @@ const typeDefs = gql`
     getCatcalls:[Catcall]
     getCatcall(id:ID):Catcall
     getVerifiedCatcalls:[Catcall]
-    getFilteredCatcalls(
-      condition:String!
-    ):[Catcall]
-    getUnfilteredCatcalls(
-      condition:String!
-    ):[Catcall]
+    # getFilteredCatcalls(
+    #   condition:String!
+    # ):[Catcall]
+    getUnverifiedCatcalls:[Catcall]
+    getTrashedCatcalls:[Catcall]
+    getToChalkCatcalls:[Catcall]
     getModeratorById(id:String):Moderator
     validateModerator(email:String, password:String):Moderator
   }

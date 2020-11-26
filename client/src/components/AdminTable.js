@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -45,7 +45,7 @@ const useRowStyles = makeStyles({
  * Function labels data in the table
  */
 
-function unfilteredCatCallsData({ geometry, properties, _id }) {
+function processCatCallsData({ geometry, properties, _id, type }) {
   //console.log(arguments)
   return {
     id: _id,
@@ -53,15 +53,59 @@ function unfilteredCatCallsData({ geometry, properties, _id }) {
     context: properties.context,
     dateAdded: (new Date(Number(properties.dateAdded))).toDateString(),
     dateCatcall: properties.dateCatcall ? (new Date(Number(properties.dateCatcall))).toDateString() : "no date",
-    type: geometry.type,
+    geometryType: geometry.type,
+    type : type,
     coordinates: geometry.coordinates,
+    verified: properties.verified,
+    chalked: properties.chalked,
+    listedForChalk: properties.listedForChalk,
+    trash: properties.trash,
+    url: properties.url,
   };
 }
 
-export default function CollapsibleTable({ data , updateCatcall}) {
-  console.log(arguments);
-  const rows = data.map(catcall => unfilteredCatCallsData(catcall));
+export default function CollapsibleTable({ data , updateCatcall, value}) {
+  //const rows = data.map(catcall => unfilteredCatCallsData(catcall));
+
+
+
+  const [rows, setRows] = useState(data.map(catcall => processCatCallsData(catcall)))
   console.log('catRows!!', rows);
+  useEffect(() => {
+
+    let switchedRows;
+
+    switch (value) {
+    case 'unverified':
+      switchedRows = data.filter( el => el.properties.trash === false && el.properties.verified === false );
+      break;
+    case 'chalk':
+      switchedRows = data.filter( el => el.properties.trash === false && el.properties.verified === true && el.properties.chalked === false );
+      break;
+    case 'database':
+      switchedRows = data.filter( el => el.properties.trash === false);
+      break;
+    case 'trash':
+      switchedRows = data.filter( el => el.properties.trash === true);
+      break;
+    }
+
+    setRows(switchedRows.map(catcall => processCatCallsData(catcall)));
+  }, [value])
+
+
+
+  const verifyCatcall = ({variables}) => {
+    console.log(variables);
+    updateCatcall({variables})
+    let newRows = rows.filter(row => {
+      console.log('checking:',row.id,variables.id);
+      return row.id !== variables.id
+    })
+    setRows(newRows)
+  }
+
+
 
   return (
 
@@ -71,12 +115,12 @@ export default function CollapsibleTable({ data , updateCatcall}) {
           <TableRow>
             <TableCell />
             <TableCell>Quote</TableCell>
-            <TableCell align="right">Date Added</TableCell>
+            <TableCell align="center">Date Added</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={uuidv4()} row={row} updateCatcall={updateCatcall} />
+            <Row key={uuidv4()} row={row} verifyCatcall={verifyCatcall} />
           ))}
         </TableBody>
       </Table>
@@ -90,8 +134,8 @@ export default function CollapsibleTable({ data , updateCatcall}) {
  */
 
 function Row(props) {
-  console.log(props)
-  const { row, updateCatcall } = props;
+  //console.log(props)
+  const { row, verifyCatcall } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
@@ -106,25 +150,25 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.catCallQuote}
         </TableCell>
-        <TableCell align="right">{row.dateAdded}</TableCell>
+        <TableCell align="center">{row.dateAdded}</TableCell>
         <TableCell>
           <Button
             variant="contained"
             color="inherit"
             size="small"
-            onClick={() => updateCatcall({
+            onClick={() => verifyCatcall({
               variables: {
                 id: row.id,
                 catcall: {
                   properties: {
-                    verified: true
+                    verified: !row.verified
                   }
                 }
               }
             })}
             className={classes.verifyButton}
             >
-            Verify
+            {row.verified ? 'Unverify' : 'Verify'}
         </Button>
         <Button
             variant="contained"
@@ -139,10 +183,19 @@ function Row(props) {
             variant="contained"
             color="inherit"
             size="small"
-            onClick={() => {}}
+            onClick={() => verifyCatcall({
+              variables: {
+                id: row.id,
+                catcall: {
+                  properties: {
+                    trash: !row.trash
+                  }
+                }
+              }
+            })}
             className={classes.deleteButton}
             >
-            Delete
+            {row.trash ? 'Recover' :  'Delete'}
         </Button>
         </TableCell>
       </TableRow>
@@ -184,22 +237,3 @@ function Row(props) {
     </React.Fragment>
   );
 }
-/*
- Row.propTypes = {
-   row: PropTypes.shape({
-     calories: PropTypes.number.isRequired,
-     carbs: PropTypes.number.isRequired,
-     fat: PropTypes.number.isRequired,
-     history: PropTypes.arrayOf(
-       PropTypes.shape({
-         amount: PropTypes.number.isRequired,
-         customerId: PropTypes.string.isRequired,
-         date: PropTypes.string.isRequired,
-       }),
-     ).isRequired,
-     name: PropTypes.string.isRequired,
-     price: PropTypes.number.isRequired,
-     protein: PropTypes.number.isRequired,
-   }).isRequired,
- };
-*/
