@@ -65,12 +65,17 @@ function processCatCallsData({ geometry, properties, _id, type }) {
 }
 
 export default function CollapsibleTable({ data , updateCatcall}) {
-  console.log('receivedData:',arguments);
   //const rows = data.map(catcall => unfilteredCatCallsData(catcall));
 
 
   const [rows, setRows] = useState(data.map(catcall => processCatCallsData(catcall)))
   console.log('catRows!!', rows);
+  useEffect(() => {
+    console.log('New Data received!',data,rows)
+    setRows(data.map(catcall => processCatCallsData(catcall)));
+  }, [data])
+
+
 
   const verifyCatcall = ({variables}) => {
     console.log(variables);
@@ -82,10 +87,7 @@ export default function CollapsibleTable({ data , updateCatcall}) {
     setRows(newRows)
   }
 
-   useEffect(() => {
-     console.log('New Data received!',data,rows)
-     setRows(data.map(catcall => processCatCallsData(catcall)));
-   }, [data])
+
 
   return (
 
@@ -217,22 +219,3 @@ function Row(props) {
     </React.Fragment>
   );
 }
-/*
- Row.propTypes = {
-   row: PropTypes.shape({
-     calories: PropTypes.number.isRequired,
-     carbs: PropTypes.number.isRequired,
-     fat: PropTypes.number.isRequired,
-     history: PropTypes.arrayOf(
-       PropTypes.shape({
-         amount: PropTypes.number.isRequired,
-         customerId: PropTypes.string.isRequired,
-         date: PropTypes.string.isRequired,
-       }),
-     ).isRequired,
-     name: PropTypes.string.isRequired,
-     price: PropTypes.number.isRequired,
-     protein: PropTypes.number.isRequired,
-   }).isRequired,
- };
-*/

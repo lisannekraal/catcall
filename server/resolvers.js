@@ -104,12 +104,18 @@ const catcallResolver = {
       if (context.mod._id) {
 
         if (await Moderator.findOne({ _id: context.mod._id })) {
+
           let entry = await Catcall.findOne({ _id: id });
           const {properties} = catcall;
           let newEntry = Object.assign(entry.properties,properties);
           console.log('NEW ENTRY BEING COPIED IN DATABASE:', newEntry);
-          const updatedCatcall = await Catcall.findByIdAndUpdate(id, { properties:newEntry });
-          return updatedCatcall;
+          entry.properties = newEntry;
+          await entry.save();
+          console.log('RETURNING FROM DATABASE',entry);
+          return entry
+          // const updatedCatcall = await Catcall.findByIdAndUpdate(id, { properties: newEntry });
+          // console.log('RETURNING DATABASE:', updatedCatcall);
+          // return updatedCatcall;
         }
       }
       let err = new Error;

@@ -37,12 +37,23 @@ function App() {
     }
   });
 
+  const defaultOptions = {
+    watchQuery: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'ignore',
+    },
+    query: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'all',
+    },
+  }
+
   const client = new ApolloClient({
-  
+
     link: authLink.concat(httpLink),
-    
+
     cache: new InMemoryCache({
-      addTypename: false
+      addTypename: false,
     })
   });
 
@@ -59,7 +70,7 @@ function App() {
 
     console.log(modButton.current);
   }, [cookies])
-  
+
   return (
     <ApolloProvider client={client}>
       <Router>

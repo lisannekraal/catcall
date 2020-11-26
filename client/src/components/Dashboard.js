@@ -35,8 +35,9 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    activateQuery();
-    console.log(value);
+    //activateQuery();
+
+    console.log('Query has been called',value);
   }, [value])
 
   const queryDictionary = {
@@ -56,9 +57,8 @@ function Dashboard() {
   }
 
   console.log('making a query with',value,queryDictionary[value]);
-  let [activateQuery,{ loading, error, data }] = useLazyQuery(queryDictionary[value]);
-
-  //let { loading, error, data } = useQuery(queryDictionary[value]);
+  //let [activateQuery,{ loading, error, data }] = useLazyQuery(queryDictionary[value]);
+  let { loading, error, data, refetch } = useQuery(queryDictionary[value]);
 
 
   // const getData = () => {
@@ -67,12 +67,12 @@ function Dashboard() {
 
 
   if (error) console.log(error);
-  data && console.log(data);
+  data && console.log('REFETCHED RESULTS:',data);
 
 
 
-  const [updateCatcall] = useMutation(UPDATE_CATCALL);
-  console.log('Obtained Data >>>>>', data);
+  const [updateCatcall,{data:mutationResult}] = useMutation(UPDATE_CATCALL,{refetchQueries:['getUnverifiedCatcalls','getToChalkCatcalls','getCatcalls','getTrashedCatcalls']});
+  mutationResult && console.log('Obtained Data >>>>>', mutationResult);
 
 
   if (loading) return <p>Loading...</p>;
@@ -98,7 +98,7 @@ function Dashboard() {
           </Tabs>
         </Paper>
 
-        {data[arrayDictionary[value]] ? (<AdminTable data={data[arrayDictionary[value]]} updateCatcall={updateCatcall} />) : (<h2>Loading...</h2>)}
+        {data && data[arrayDictionary[value]] ? (<AdminTable data={data[arrayDictionary[value]]} updateCatcall={updateCatcall} />) : (<h2>Loading...</h2>)}
 
       <div className="header-footer"></div>
     </>
