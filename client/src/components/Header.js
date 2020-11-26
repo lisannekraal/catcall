@@ -4,6 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { List, Container, Hidden } from "@material-ui/core"
 import SideDrawer from './SideDrawer';
 import { v4 as uuidv4 } from 'uuid';
+import { HashLink as Link } from 'react-router-hash-link';
 
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -48,7 +49,6 @@ function Header(props) {
   const classes = useStyles();
 
   const navLinks = [
-    { title: 'about', classN: 'fas fa-info-circle', path: () => history.push("/#about") },
     { title: 'map', classN: 'fas fa-map-marked-alt', path: () => history.push("/catcalls") },
     { title: 'community', classN: 'fab fa-instagram', path: () => window.open("https://www.instagram.com/catcallsofams/", "_blank") },
     { title: props.modButton.text, classN: 'fas fa-cog', path: () => history.push(props.modButton.to)}
@@ -66,6 +66,9 @@ function Header(props) {
           </div>
           <Hidden mdDown>
             <List component="nav" className={classes.navDisplayLinks}>
+              <Link to="/#about" className="about-link" >
+                <Button color='inherit' startIcon={<Icon className='fas fa-info-circle' fontSize="small" style={{ marginRight: 7 }} />}>About</Button>
+              </Link>
               {navLinks.map(({ title, classN, path }) => (
                 <Button
                   key={uuidv4()}
