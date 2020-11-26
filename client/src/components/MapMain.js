@@ -12,8 +12,6 @@ import { GET_MAP_CATCALLS } from '../api/queries'
 function MapMain () {
   const [ popup, setPopup ] = useState("");
   const { loading, error, data } = useQuery(GET_MAP_CATCALLS);
-  if(error) console.log(error);
-  data && console.log(data);
 
   const [viewport, setViewport] = useState({
     latitude: 52.366249,

@@ -5,15 +5,10 @@ import { List, Container, Hidden } from "@material-ui/core"
 import SideDrawer from './SideDrawer';
 import { v4 as uuidv4 } from 'uuid';
 import { HashLink as Link } from 'react-router-hash-link';
-
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-
 import logo from '../assets/logowhite.png'
-
 import Icon from '@material-ui/core/Icon';
-
-
 import Button from '@material-ui/core/Button';
 
 

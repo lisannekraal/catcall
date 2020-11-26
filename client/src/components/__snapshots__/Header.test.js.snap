@@ -32,46 +32,51 @@ exports[`Header tests: displays header correctly (large size screen) 1`] = `
       <nav
         className="MuiList-root makeStyles-navDisplayLinks-4 MuiList-padding"
       >
-        <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit"
-          disabled={false}
-          onBlur={[Function]}
+        <a
+          className="about-link"
+          href="/#about"
           onClick={[Function]}
-          onDragLeave={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseLeave={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          onTouchMove={[Function]}
-          onTouchStart={[Function]}
-          tabIndex={0}
-          type="button"
         >
-          <span
-            className="MuiButton-label"
+          <button
+            className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit"
+            disabled={false}
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="button"
           >
             <span
-              className="MuiButton-startIcon MuiButton-iconSizeMedium"
+              className="MuiButton-label"
             >
               <span
-                aria-hidden={true}
-                className="material-icons MuiIcon-root fas fa-info-circle MuiIcon-fontSizeSmall"
-                style={
-                  Object {
-                    "marginRight": 7,
+                className="MuiButton-startIcon MuiButton-iconSizeMedium"
+              >
+                <span
+                  aria-hidden={true}
+                  className="material-icons MuiIcon-root fas fa-info-circle MuiIcon-fontSizeSmall"
+                  style={
+                    Object {
+                      "marginRight": 7,
+                    }
                   }
-                }
-              />
+                />
+              </span>
+              About
             </span>
-            about
-          </span>
-          <span
-            className="MuiTouchRipple-root"
-          />
-        </button>
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </button>
+        </a>
         <button
           className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit"
           disabled={false}

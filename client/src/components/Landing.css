@@ -4,14 +4,22 @@
 }
 
 .landing-cover {
-  height: 95vh;
+  min-height: 450px;
   background: url('../assets/sam-haddad-StgZKNLVeJg-unsplash-crop.jpg') center center fixed no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-height: 650px) {
+  .landing-cover {
+    height: 95vh;
+  }
 }
 
 .header {
@@ -22,7 +30,7 @@
   align-items: flex-start;
   color: white;
   height: 100%;
-  padding: 20px;
+  padding: 65px 20px 20px 20px;
 }
 
 .header-title {

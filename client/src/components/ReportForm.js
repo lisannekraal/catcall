@@ -22,7 +22,6 @@ function ReportForm() {
   const onSubmit = (data) => {
 
     if (lngLat.length > 0 && checkRecaptcha) {
-      console.log('submitted');
       const queryVariable = {
         "catcall": {
           "type": "Feature",
@@ -144,11 +143,10 @@ function ReportForm() {
           </div>
 
 
-          <button type="button" className="cancel-button" onClick={()=> history.push('/')}>Cancel</button>
+          <button type="button" className="cancel-button" onClick={()=> history.push('/') }>Cancel</button>
 
-          {/* disabled={!checkRecaptcha} */}
-
-          <input className="submit-button"  type="submit" value="Submit new catcall" onClick={()=>{if (lngLat.length === 0) setMapError('Required')}}/>
+          {/* remove disabled to run test correctly */}
+          <input className="submit-button"  type="submit" disabled={!checkRecaptcha} value="Submit new catcall" onClick={()=>{if (lngLat.length === 0) setMapError('Required')}}/>
 
         </form>
 

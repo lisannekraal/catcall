@@ -33,16 +33,6 @@ function Dashboard() {
     if(newValue !== 'settings') setValue(newValue); //condition deactivates settings tab temporarily
   };
 
-  useEffect(() => {
-
-    console.log('Query has been called',value);
-  }, [value])
-
-
-  if (error) console.log(error);
-  data && console.log('REFETCHED RESULTS:',data);
-
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error at Fetching Data</p>;
   return (

@@ -40,12 +40,9 @@ const useRowStyles = makeStyles({
   },
 });
 
-/**
- * Function labels data in the table
- */
+// Function labels data in the table
 
 function processCatCallsData({ geometry, properties, _id, type }) {
-  //console.log(arguments)
   return {
     id: _id,
     catCallQuote: properties.quote,
@@ -66,7 +63,7 @@ function processCatCallsData({ geometry, properties, _id, type }) {
 export default function CollapsibleTable({ data, updateCatcall, value }) {
 
   const [rows, setRows] = useState(data.map(catcall => processCatCallsData(catcall)))
-  console.log('catRows!!', rows);
+
   useEffect(() => {
 
     let switchedRows;
@@ -95,10 +92,8 @@ export default function CollapsibleTable({ data, updateCatcall, value }) {
 
 
   const verifyCatcall = ({ variables }) => {
-    console.log(variables);
     updateCatcall({ variables })
     let newRows = rows.filter(row => {
-      console.log('checking:', row.id, variables.id);
       return row.id !== variables.id
     })
     setRows(newRows)
@@ -133,7 +128,6 @@ export default function CollapsibleTable({ data, updateCatcall, value }) {
  */
 
 function Row(props) {
-  //console.log(props)
   const { row, verifyCatcall } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();

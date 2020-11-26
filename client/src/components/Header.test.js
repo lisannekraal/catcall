@@ -11,7 +11,7 @@ describe('Header tests:', ()=>{
     render( );
 
     const header = TestRenderer
-      .create(<BrowserRouter><MuiThemeProvider theme={theme}><Header/></MuiThemeProvider></BrowserRouter>)
+      .create(<BrowserRouter><MuiThemeProvider theme={theme}><Header modButton={{text: 'moderator', to: '/login'}} /></MuiThemeProvider></BrowserRouter>)
       .toJSON();
     expect(header).toMatchSnapshot();
   });
@@ -21,7 +21,7 @@ describe('Header tests:', ()=>{
     render( );
 
     const header = TestRenderer
-      .create(<BrowserRouter><MuiThemeProvider theme={theme}><Header/></MuiThemeProvider></BrowserRouter>)
+      .create(<BrowserRouter><MuiThemeProvider theme={theme}><Header modButton={{text: 'moderator', to: '/login'}} /></MuiThemeProvider></BrowserRouter>)
       .toJSON();
     expect(header).toMatchSnapshot();
   });

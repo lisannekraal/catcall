@@ -13,7 +13,6 @@ function Login(props) {
   const [validateModerator, { loading, data, error }] = useLazyQuery(VALIDATE_MODERATOR);
 
   const onSubmit = (data) => {
-    console.log(data);
     const queryVariable = {
      email: data.email,
      password: data.password
@@ -22,11 +21,7 @@ function Login(props) {
   }
 
   useEffect(()=>{
-    console.log('data: ',data);
-    console.log('error: ', error);
-
     if (data) {
-      console.log('token set');
       props.setCookie('token', data.validateModerator._id, { path: '/' });
       history.push('/dashboard')
     }
