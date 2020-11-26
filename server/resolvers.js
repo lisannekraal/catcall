@@ -33,71 +33,14 @@ const catcallResolver = {
     async getVerifiedCatcalls () {
       const result = await Catcall.find({'properties.verified': true});
       return result;
-    },
-
-    async getUnverifiedCatcalls (_, __, context) {
-      if (context.mod._id) {
-        if (await Moderator.findOne({ _id: context.mod._id })) {
-          const result = await Catcall.find({['properties.verified']: false,['properties.trash']: false});
-          return result;
-        }
-      }
-      let err = new Error;
-      err.message = 'You must be logged in as a moderator to see this content';
-      return err;
-    },
-
-    async getTrashedCatcalls (_, __, context) {
-      if (context.mod._id) {
-        if (await Moderator.findOne({ _id: context.mod._id })) {
-          const result = await Catcall.find({['properties.trash']: true});
-          return result;
-        }
-      }
-      let err = new Error;
-      err.message = 'You must be logged in as a moderator to see this content';
-      return err;
-    },
-
-    async getToChalkCatcalls (_, __, context) {
-      if (context.mod._id) {
-        if (await Moderator.findOne({ _id: context.mod._id })) {
-          const result = await Catcall.find({['properties.verified']: true, ['properties.chalked']: false,['properties.trash']: false});
-          return result;
-        }
-      }
-      let err = new Error;
-      err.message = 'You must be logged in as a moderator to see this content';
-      return err;
-    },
-
-    // async getUnfilteredCatcalls (_, { condition }, context) {
-    //   if (context.mod._id) {
-    //     if (await Moderator.findOne({ _id: context.mod._id })) {
-    //       const conditionString = `properties.${condition}`
-    //       const result = await Catcall.find({[conditionString]: false});
-    //       return result;
-    //     }
-    //   }
-    //   let err = new Error;
-    //   err.message = 'You must be logged in as a moderator to see this content';
-    //   return err;
-    // }
+    }
   },
 
   Mutation: {
-    async createCatcall(_, { catcall }, context) {
-
-      if (context.mod._id) {
-        if (await Moderator.findOne({ _id: context.mod._id })) {
-          const { type, geometry, properties} = catcall;
-          const createdCatcall = await Catcall.create({ type, geometry, properties });
-          return createdCatcall;
-        }
-      }
-      let err = new Error;
-      err.message = 'You must be logged in as a moderator to see this content';
-      return err;
+    async createCatcall(_, { catcall }) {
+      const { type, geometry, properties} = catcall;
+      const createdCatcall = await Catcall.create({ type, geometry, properties });
+      return createdCatcall;
     },
 
     async updateCatcall(_, { id, catcall }, context) {
@@ -108,14 +51,9 @@ const catcallResolver = {
           let entry = await Catcall.findOne({ _id: id });
           const {properties} = catcall;
           let newEntry = Object.assign(entry.properties,properties);
-          console.log('NEW ENTRY BEING COPIED IN DATABASE:', newEntry);
           entry.properties = newEntry;
           await entry.save();
-          console.log('RETURNING FROM DATABASE',entry);
           return entry
-          // const updatedCatcall = await Catcall.findByIdAndUpdate(id, { properties: newEntry });
-          // console.log('RETURNING DATABASE:', updatedCatcall);
-          // return updatedCatcall;
         }
       }
       let err = new Error;
@@ -153,7 +91,6 @@ const moderatorResolver = {
       const mod = await Moderator.findOne({ email: email });
       const validatedPass = await bcrypt.compare(password, mod.password);
       if (!validatedPass) throw new Error();
-      console.log('heey');
       return mod;
     }
   },

@@ -2,7 +2,6 @@ const dotenv = require('dotenv').config();
 const { ApolloServer } = require('apollo-server');
 const typeDefs = require('./typeDefs');
 const resolvers = require('./resolvers');
-const { request } = require('http');
 
 const loggerPlugin = {
 

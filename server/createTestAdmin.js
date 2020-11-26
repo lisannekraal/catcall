@@ -26,5 +26,4 @@ const Moderator = mongoose.model('Moderator', modSchema);
 (async () => {
   let hashPassword = await bcrypt.hash('test', 10);
   const mod = await Moderator.create({ email: 'admin', password: hashPassword, canAdd: true });
-  console.log(mod);
 })();
