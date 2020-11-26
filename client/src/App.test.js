@@ -3,22 +3,23 @@ import { fireEvent, render, screen, waitFor, within } from '@testing-library/rea
 import { MemoryRouter, BrowserRouter } from 'react-router-dom';
 import App from './App';
 
+window.HTMLElement.prototype.scrollIntoView = jest.fn();
+
 describe ('Routing tests:', () => {
 
-  beforeEach(() => {
+  const renderWithRouter = (ui, { route = '/' } = {}) => {
+    window.history.pushState({}, 'Home', route)
+    return render(ui, { wrapper: BrowserRouter })
+  }
+
+  beforeEach(() => {    
     const theme = createMuiTheme({ props: {MuiWithWidth: {initialWidth: 'lg'}}});
-    render( <MuiThemeProvider theme={theme}><App/></MuiThemeProvider>, { wrapper: MemoryRouter });
-    fireEvent.click(screen.getByAltText('logo'));
+    renderWithRouter(<MuiThemeProvider theme={theme}><App/></MuiThemeProvider>, { route: '/' })
     const landing = screen.getByTestId("landing");
     expect(landing).toBeInTheDocument();
   });
 
   test('incorrect url redirects to 404 page', async () => {
-    const renderWithRouter = (ui, { route = '/' } = {}) => {
-      window.history.pushState({}, 'Test page', route)
-
-      return render(ui, { wrapper: BrowserRouter })
-    }
 
     renderWithRouter(<App />, { route: '/something-that-does-not-match' })
 
