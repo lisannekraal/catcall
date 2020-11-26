@@ -50,10 +50,11 @@ function App() {
 
   const client = new ApolloClient({
 
+    connectToDevTools: true,
+
     link: authLink.concat(httpLink),
 
     cache: new InMemoryCache({
-      addTypename: false,
     })
   });
 

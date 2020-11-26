@@ -64,16 +64,34 @@ function processCatCallsData({ geometry, properties, _id, type }) {
   };
 }
 
-export default function CollapsibleTable({ data , updateCatcall}) {
+export default function CollapsibleTable({ data , updateCatcall, value}) {
   //const rows = data.map(catcall => unfilteredCatCallsData(catcall));
+
 
 
   const [rows, setRows] = useState(data.map(catcall => processCatCallsData(catcall)))
   console.log('catRows!!', rows);
   useEffect(() => {
-    console.log('New Data received!',data,rows)
-    setRows(data.map(catcall => processCatCallsData(catcall)));
-  }, [data])
+
+    let switchedRows;
+
+    switch (value) {
+    case 'unverified':
+      switchedRows = data.filter( el => el.properties.trash === false && el.properties.verified === false );
+      break;
+    case 'chalk':
+      switchedRows = data.filter( el => el.properties.trash === false && el.properties.verified === true && el.properties.chalked === false );
+      break;
+    case 'database':
+      switchedRows = data.filter( el => el.properties.trash === false);
+      break;
+    case 'trash':
+      switchedRows = data.filter( el => el.properties.trash === true);
+      break;
+    }
+
+    setRows(switchedRows.map(catcall => processCatCallsData(catcall)));
+  }, [value])
 
 
 

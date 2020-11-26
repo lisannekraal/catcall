@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
+import { useQuery, useMutation, useLazyQuery, useApolloClient } from '@apollo/client';
 import { GET_UNVERIFIED_CATCALLS, UPDATE_CATCALL, GET_CATCALLS,GET_TO_CHALK_CATCALLS,GET_TRASHED_CATCALLS } from '../api/queries'
 import './Dashboard.css';
 import AdminTable from './AdminTable';
@@ -25,6 +25,9 @@ const useStyles = makeStyles({
 
 
 function Dashboard() {
+
+  // const client = useApolloClient();
+  // console.log(client);
 
   const classes = useStyles();
   const [value, setValue] = React.useState('unverified'); //keeps track of selected tab
@@ -58,7 +61,7 @@ function Dashboard() {
 
   console.log('making a query with',value,queryDictionary[value]);
   //let [activateQuery,{ loading, error, data }] = useLazyQuery(queryDictionary[value]);
-  let { loading, error, data, refetch } = useQuery(queryDictionary[value]);
+  let { loading, error, data } = useQuery(GET_CATCALLS);
 
 
   // const getData = () => {
@@ -98,7 +101,7 @@ function Dashboard() {
           </Tabs>
         </Paper>
 
-        {data && data[arrayDictionary[value]] ? (<AdminTable data={data[arrayDictionary[value]]} updateCatcall={updateCatcall} />) : (<h2>Loading...</h2>)}
+        {data ? (<AdminTable data={data.getCatcalls} value={value} updateCatcall={updateCatcall} />) : (<h2>Loading...</h2>)}
 
       <div className="header-footer"></div>
     </>
