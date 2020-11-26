@@ -45,7 +45,7 @@ const useRowStyles = makeStyles({
  * Function labels data in the table
  */
 
-function processCatCallsData({ geometry, properties, _id }) {
+function processCatCallsData({ geometry, properties, _id, type }) {
   //console.log(arguments)
   return {
     id: _id,
@@ -53,8 +53,14 @@ function processCatCallsData({ geometry, properties, _id }) {
     context: properties.context,
     dateAdded: (new Date(Number(properties.dateAdded))).toDateString(),
     dateCatcall: properties.dateCatcall ? (new Date(Number(properties.dateCatcall))).toDateString() : "no date",
-    type: geometry.type,
+    geometryType: geometry.type,
+    type : type,
     coordinates: geometry.coordinates,
+    verified: properties.verified,
+    chalked: properties.chalked,
+    listedForChalk: properties.listedForChalk,
+    trash: properties.trashed,
+    url: properties.url,
   };
 }
 
@@ -135,7 +141,7 @@ function Row(props) {
                 id: row.id,
                 catcall: {
                   properties: {
-                    verified: true
+                    verified: !row.verified
                   }
                 }
               }
@@ -162,7 +168,7 @@ function Row(props) {
                 id: row.id,
                 catcall: {
                   properties: {
-                    trash: true
+                    trash: !row.trash
                   }
                 }
               }
