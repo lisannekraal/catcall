@@ -2,10 +2,25 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import ReportForm from './ReportForm';
 import { MockedProvider } from '@apollo/client/testing';
+import recaptcha from 'react-google-recaptcha/lib/recaptcha';
 
 
 
 jest.mock('../components/MapForm.js', () => () => <div id='mockMap'>HelloMap</div>);
+
+jest.mock("react-google-recaptcha/lib/recaptcha", () => {
+  const ReCAPTCHA = () => {
+    return (
+      <input
+      type="checkbox"
+      data-testid="recaptcha-sign-in"
+      value={true}
+      />
+    );
+  };
+  return ReCAPTCHA;
+})
+
 const mockSubmit = jest.fn()
 
 describe('form tests', () => {
@@ -56,7 +71,7 @@ describe('form tests', () => {
     })
 
     required = screen.getAllByText('Required')
-    expect(required.length).toBeLessThan(2);
+    expect(required.length).toBeLessThan(3);
 
     await act(async () => {
       userEvent.click(checkbox);
@@ -66,30 +81,13 @@ describe('form tests', () => {
     })
 
     await waitFor(() => {
-      let errorRequired = screen.queryByText('Required')
-      expect(errorRequired).toBeInTheDocument();
+      required = screen.getAllByText('Required')
+      expect(required.length).toBeLessThan(3)
     })
 
   });
 
-  it("When essential fields are not missing, required doesn't appear", async () => {
-
-    const input = screen.getByTestId('catcall-quote');
-    const checkbox = screen.getByTestId('catcall-checkbox');
-    //const submitButton = screen.getByDisplayValue('Submit new catcall');
-
-    await act(async () => {
-      userEvent.click(checkbox);
-      expect(checkbox).toBeChecked();
-      userEvent.type(input, '0000');
-      expect(screen.getByDisplayValue('0000')).toBeInTheDocument();
-    })
-
-    //  await act(async () => {
-    //    userEvent.click(submitButton);
-    //  })
-
-    // expect(mockSubmit).toHaveBeenCalled()
+  it("On render, required doesn't appear", async () => {
 
     await waitFor(() => {
       let errorRequired = screen.queryByText('Required')
