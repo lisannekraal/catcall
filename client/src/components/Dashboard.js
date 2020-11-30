@@ -1,129 +1,62 @@
-import React, { useState } from "react";
+import React, {useState, useEffect} from 'react';
+
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_UNVERIFIED_CATCALLS, UPDATE_CATCALL } from '../api/queries'
+import { UPDATE_CATCALL, GET_CATCALLS} from '../api/queries'
 import './Dashboard.css';
-import { useEffect } from 'react';
+import AdminTable from './AdminTable';
 
+/**Material UI Imports */
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import VerifiedUser from '@material-ui/icons/VerifiedUser';
+import Gesture from '@material-ui/icons/Gesture';
+import Storage from '@material-ui/icons/Storage';
+import Delete from '@material-ui/icons/Delete';
+import Settings from '@material-ui/icons/Settings';
 
-function Dashboard () {
-  const [ catcallList, setCatcallList ] = useState([]);
-  const [updateCatcall] = useMutation(UPDATE_CATCALL);
-  
-  //this only happens on refresh
-  const { loading, error, data } = useQuery(GET_UNVERIFIED_CATCALLS);
-  if(error) console.log(error);
-  data && console.log(data.getUnfilteredCatcalls);
+const useStyles = makeStyles({
+  root: {
+    flexGrow: 1,
+  },
+});
 
-  useEffect(() => {
-    data && setCatcallList(JSON.parse(JSON.stringify(data.getUnfilteredCatcalls)));
-  }, [data])
+function Dashboard() {
 
+  const classes = useStyles();
+  const [value, setValue] = React.useState('unverified'); //keeps track of selected tab
+  const [updateCatcall] = useMutation(UPDATE_CATCALL,);
+  let { loading, error, data } = useQuery(GET_CATCALLS);
 
-  function handleVerify(catcall) {
-    catcall.properties.verified = true;
-
-    //send new object to database
-    updateCatcall({ variables: { 
-      id: catcall._id, 
-      catcall: catcall }}).then(res => {
-        const newCatcallList = catcallList.filter(el => el._id === catcall._id);
-        setCatcallList(newCatcallList);
-      }).catch(error => console.log(error));
-    
-  }
-
-
+  const handleChange = (event, newValue) => { /*What to do in case tab changes */
+    if(newValue !== 'settings') setValue(newValue); //condition deactivates settings tab temporarily
+  };
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
+  if (error) return <p>Error at Fetching Data</p>;
   return (
     <>
       <div className="header-footer"></div>
-      <div className="moderator-container">
-        <div className="moderator-navbar">
+        <Paper square className={classes.root}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons="on"
+            indicatorColor="secondary"
+            textColor="secondary"
+            aria-label="admin navigation"
+          >
+            <Tab icon={<VerifiedUser />} label="Verify Pending" value='unverified' wrapped />
+            <Tab icon={<Gesture />} label="To Chalk" value='chalk' wrapped/>
+            <Tab icon={<Storage />} label="Databse" value='database' wrapped/>
+            <Tab icon={<Delete />} label="Trash" value='trash' wrapped/>
+            <Tab icon={<Settings />} label="Mod Settings" value='settings' wrapped/>
+          </Tabs>
+        </Paper>
 
-          <a style={{ textDecoration: 'none', color: 'black' }} href="#">
-            <div className="moderator-navbar-item mod-nav-active">
-              PENDING
-            </div>
-          </a>
-          <a style={{ textDecoration: 'none', color: 'black' }} href="#">
-            <div className="moderator-navbar-item">
-              TO CHALK
-            </div>
-          </a>
-          <a style={{ textDecoration: 'none', color: 'black' }} href="#">
-            <div className="moderator-navbar-item">
-              DATABASE
-            </div>
-          </a>
-          <a style={{ textDecoration: 'none', color: 'black' }} href="#">
-            <div className="moderator-navbar-item">
-              TRASH
-            </div>
-          </a>
-          <a style={{ textDecoration: 'none', color: 'black' }} href="#">
-            <div className="moderator-navbar-item">
-              SETTINGS
-            </div>
-          </a>
-        </div>
-
-        <div className="table-container">
-          <div className="validation-table">
-            <div className="table-title star-title">Starred</div>
-            <div className="table-title quote-title">Catcall quote</div>
-            <div className="table-title context-title">Context text</div>
-            <div className="table-title date-title">Date catcall</div>
-            <div className="table-title added-title">Date added</div>
-            <div className="table-title location-title">Location</div>
-            <div className="table-title buttons-title">Verification</div>
-            {
-              catcallList.map((row) => (
-                <div className="table-row" id={row._id}>
-                  
-                    <div className="star"></div>
-                    <div className="quote">
-                      { row.properties.quote }
-                    </div>
-                    <div className="context">
-                      { 
-                        row.properties.context ? 
-                        row.properties.context : ""
-                      }
-                    </div>
-                    <div className="date">
-                      { 
-                        row.properties.dateCatcall ? 
-                        (new Date(Number(row.properties.dateCatcall))).toDateString() : 
-                        "no date"
-                      }
-                    </div>
-                    <div className="added">
-                      { (new Date(Number(row.properties.dateAdded))).toDateString() }
-                    </div>
-                    <div className="location">
-                      { 
-                        row.geometry.coordinates[0].toString().slice(0,4) + ',' +
-                        row.geometry.coordinates[1].toString().slice(0,5) 
-                      }
-                    </div>
-                    <div className="buttons">
-                      <button className="verify-button"
-                        onClick={() => handleVerify(row)}
-                      >VERIFY</button>
-                      <button className="edit-button">EDIT</button>
-                      <button className="delete-button">DELETE</button>
-                    </div>
-
-                </div>
-              ))
-            }
-          </div>
-        </div>
-
-      </div>
-
+        {data ? (<AdminTable data={data.getCatcalls} value={value} updateCatcall={updateCatcall} />) : (<h2>Loading...</h2>)}
 
       <div className="header-footer"></div>
     </>

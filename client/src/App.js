@@ -1,58 +1,64 @@
 import './App.css';
-import Logo from './assets/logowhite.png';
 
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { ApolloProvider, createHttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
-// import Navbar from './components/Navbar';
-import MapMain from './components/Map-main';
+import MapMain from './components/MapMain';
 import Landing from './components/Landing';
-import ReportForm from './components/Report-form';
-import LoginModal from './components/Login-Modal';
+import ReportForm from './components/ReportForm';
+import Login from './components/Login'
 import Dashboard from './components/Dashboard';
+import NotFound from './components/NotFound';
 
-const client = new ApolloClient({
-  uri: process.env.REACT_APP_APOLLO_SERVER,
-  cache: new InMemoryCache({
-    addTypename: false
-  })
-});
+import Header from './components/Header';
+import { useEffect, useRef, useState } from 'react';
+
 
 function App() {
+  const [cookies, setCookie] = useCookies(['token']);
+  const [modButton, setModButton] = useState({text: 'moderator', to: '/login'});
+
+  const httpLink = createHttpLink({
+    uri: process.env.REACT_APP_APOLLO_SERVER,
+  });
+
+  const authLink = setContext((_, { headers }) => {
+    // get the authentication token from cookies if it exists
+    const token = cookies.token;
+    // return the headers to the context so httpLink can read them
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `${token}` : "",
+      }
+    }
+  });
+
+  const client = new ApolloClient({
+
+    connectToDevTools: true,
+
+    link: authLink.concat(httpLink),
+
+    cache: new InMemoryCache({
+    })
+  });
+
+  useEffect(()=>{
+    if (cookies.token) {
+      setModButton({text: 'dashboard', to: '/dashboard'});
+    } else {
+      setModButton({text: 'moderator', to: '/login'});
+    }
+  }, [cookies])
 
   return (
     <ApolloProvider client={client}>
       <Router>
-      <div className="navbar">
-        <div className="navbar-content">
-          <Link style={{ textDecoration: 'none', color: 'white' }} to="/">
-            <div className="navbar-brand">
-              <div className="navbar-logo"><img src={Logo} alt="logo"></img></div>
-              <div> Catcalls of Amsterdam</div>
-            </div>
-          </Link>
 
-          <div className="navbar-content-right">
-            <div classname="navbar-about">
-              <Link style={{ textDecoration: 'none', color: 'white' }} to="/#about"><i class="fas fa-info-circle"></i> ABOUT</Link>
-            </div>
-
-            <div classname="navbar-map">
-              <Link style={{ textDecoration: 'none', color: 'white' }} to="/catcalls"><i class="fas fa-map-marked-alt"></i> MAP</Link>
-            </div>
-            <div classname="navbar-community">
-              <a style={{ textDecoration: 'none', color: 'white' }} href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow"><i class="fab fa-instagram"></i> COMMUNITY</a>
-            </div>
-            <div className="navbar-login">
-              <LoginModal />
-            </div>
-            <div className="navbar-report">
-              <Link to="/catcalls/new"><button><p>Report a new catcall</p></button></Link>
-            </div>
-
-          </div>
-        </div>
-      </div>
+      <Header modButton={modButton} />
 
         <Switch>
           <Route exact path="/">
@@ -64,9 +70,16 @@ function App() {
           <Route exact path="/catcalls/new">
             <ReportForm />
           </Route>
+          <Route exact path="/login">
+            <Login setCookie={setCookie}/>
+          </Route>
           <Route exact path="/dashboard">
             <Dashboard />
           </Route>
+          <Route path="/404">
+            <NotFound />
+          </Route>
+          <Redirect to="/404"/>
         </Switch>
       </Router>
 

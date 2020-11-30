@@ -1,11 +1,7 @@
-.header-footer {
-  background-color: rgba(29, 113, 183);
-  height: 80px;
-}
-
 .report-form {
-  margin: 0 300px;
-  padding: 50px 0;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 800px;
 }
 
 .form-segment {
@@ -17,9 +13,18 @@
   margin-top: 15px;
 }
 
+.mapboxgl-map {
+  width: 100% !important;
+}
+
 .checkbox {
   margin-top: 15px;
-  display: flex;
+}
+
+.form-segment input[type=checkbox] {
+  width:20px;
+  height:20px;
+  margin: 0 5px;
 }
 
 .error-message {
@@ -27,17 +32,19 @@
 }
 
 .cancel-button {
+  font-size: 18px;
   padding: 10px 15px;
   border-radius: 8px;
-  margin-top: 15px;
-  margin-right: 5px;
+  margin: 5px;
 }
 
 .submit-button {
+  font-size: 18px;
   background-color: rgb(245, 37, 89);
   color: white;
   padding: 10px 15px;
   border-radius: 8px;
+  margin: 5px;
 }
 
 .submit-button:hover {

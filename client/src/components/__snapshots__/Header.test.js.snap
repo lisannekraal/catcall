@@ -1,0 +1,307 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header tests: displays header correctly (large size screen) 1`] = `
+<header
+  className="MuiPaper-root MuiAppBar-root MuiAppBar-positionAbsolute MuiAppBar-colorTransparent MuiPaper-elevation0"
+  data-testid="navbar"
+>
+  <div
+    className="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
+    style={
+      Object {
+        "color": "white",
+      }
+    }
+  >
+    <div
+      className="MuiContainer-root makeStyles-navDisplayFlex-3 MuiContainer-maxWidthXl"
+    >
+      <div
+        className="navbar-brand"
+        onClick={[Function]}
+      >
+        <img
+          alt="logo"
+          className="makeStyles-logo-1"
+          src="logowhite.png"
+        />
+        <div>
+           Catcalls of Amsterdam
+        </div>
+      </div>
+      <nav
+        className="MuiList-root makeStyles-navDisplayLinks-4 MuiList-padding"
+      >
+        <a
+          className="about-link"
+          href="/#about"
+          onClick={[Function]}
+        >
+          <button
+            className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit"
+            disabled={false}
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="button"
+          >
+            <span
+              className="MuiButton-label"
+            >
+              <span
+                className="MuiButton-startIcon MuiButton-iconSizeMedium"
+              >
+                <span
+                  aria-hidden={true}
+                  className="material-icons MuiIcon-root fas fa-info-circle MuiIcon-fontSizeSmall"
+                  style={
+                    Object {
+                      "marginRight": 7,
+                    }
+                  }
+                />
+              </span>
+              About
+            </span>
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </button>
+        </a>
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            <span
+              className="MuiButton-startIcon MuiButton-iconSizeMedium"
+            >
+              <span
+                aria-hidden={true}
+                className="material-icons MuiIcon-root fas fa-map-marked-alt MuiIcon-fontSizeSmall"
+                style={
+                  Object {
+                    "marginRight": 7,
+                  }
+                }
+              />
+            </span>
+            map
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            <span
+              className="MuiButton-startIcon MuiButton-iconSizeMedium"
+            >
+              <span
+                aria-hidden={true}
+                className="material-icons MuiIcon-root fab fa-instagram MuiIcon-fontSizeSmall"
+                style={
+                  Object {
+                    "marginRight": 7,
+                  }
+                }
+              />
+            </span>
+            community
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            <span
+              className="MuiButton-startIcon MuiButton-iconSizeMedium"
+            >
+              <span
+                aria-hidden={true}
+                className="material-icons MuiIcon-root fas fa-cog MuiIcon-fontSizeSmall"
+                style={
+                  Object {
+                    "marginRight": 7,
+                  }
+                }
+              />
+            </span>
+            moderator
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+      </nav>
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-navButton-2 MuiButton-colorInherit"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          Report a new CatCall
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</header>
+`;
+
+exports[`Header tests: displays header correctly (small size screen) 1`] = `
+<header
+  className="MuiPaper-root MuiAppBar-root MuiAppBar-positionAbsolute MuiAppBar-colorTransparent MuiPaper-elevation0"
+  data-testid="navbar"
+>
+  <div
+    className="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
+    style={
+      Object {
+        "color": "white",
+      }
+    }
+  >
+    <div
+      className="MuiContainer-root makeStyles-navDisplayFlex-7 MuiContainer-maxWidthXl"
+    >
+      <div
+        className="navbar-brand"
+        onClick={[Function]}
+      >
+        <img
+          alt="logo"
+          className="makeStyles-logo-5"
+          src="logowhite.png"
+        />
+        <div>
+           Catcalls of Amsterdam
+        </div>
+      </div>
+    </div>
+    <button
+      aria-label="menu"
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeStart"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <span
+        className="MuiIconButton-label"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge"
+          focusable="false"
+          style={
+            Object {
+              "color": "white",
+            }
+          }
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+          />
+        </svg>
+      </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</header>
+`;
