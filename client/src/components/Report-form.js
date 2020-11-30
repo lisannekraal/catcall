@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
+import { useHistory } from "react-router-dom";
 import MapForm from './Map-form';
 import "flatpickr/dist/themes/material_green.css";
 import './Report-form.css';
@@ -8,6 +9,7 @@ import Flatpickr from "react-flatpickr";
 import { CREATE_CATCALL } from '../api/queries';
 
 function ReportForm () {
+  let history = useHistory();
   const { register, handleSubmit, errors } = useForm();
   const [ date, setDate ] = useState("");
   const [ lngLat, setLngLat ] = useState([]);
@@ -27,7 +29,7 @@ function ReportForm () {
           "dateCatcall": date ? ""+Date.parse(date) : "",
           "dateAdded": ""+Date.now(),
           "url": "",
-          "verified": true,
+          "verified": false,
           "chalked": false,
           "listedForChalk": false,
           "starred": false,
@@ -36,6 +38,7 @@ function ReportForm () {
       }
     }
     createCatcall({ variables: queryVariable });
+    history.push('/catcalls');
   }
 
   function setLocation(e) {

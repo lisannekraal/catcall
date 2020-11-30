@@ -35,7 +35,7 @@ const catcallResolver = {
     },
 
     async updateCatcall(_, { id, catcall }) {
-      const { type, geometry, properties} = catcall;
+      const { _id, type, geometry, properties} = catcall;
       const updatedCatcall = await Catcall.findByIdAndUpdate(id, { type, geometry, properties });
       return updatedCatcall;
     },

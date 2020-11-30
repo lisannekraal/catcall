@@ -38,6 +38,7 @@ const typeDefs = gql`
   }
 
   input CatcallUpdateInput {
+    _id: ID
     type: String
     geometry: GeometryUpdateInput
     properties: PropertiesUpdateInput

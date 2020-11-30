@@ -1,14 +1,37 @@
+import React, { useState } from "react";
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_UNVERIFIED_CATCALLS, UPDATE_CATCALL } from '../api/queries'
 import './Dashboard.css';
+import { useEffect } from 'react';
 
 
 function Dashboard () {
-
+  const [ catcallList, setCatcallList ] = useState([]);
+  const [updateCatcall] = useMutation(UPDATE_CATCALL);
+  
+  //this only happens on refresh
   const { loading, error, data } = useQuery(GET_UNVERIFIED_CATCALLS);
   if(error) console.log(error);
   data && console.log(data.getUnfilteredCatcalls);
-  const [updateCatcall] = useMutation(UPDATE_CATCALL);
+
+  useEffect(() => {
+    data && setCatcallList(JSON.parse(JSON.stringify(data.getUnfilteredCatcalls)));
+  }, [data])
+
+
+  function handleVerify(catcall) {
+    catcall.properties.verified = true;
+
+    //send new object to database
+    updateCatcall({ variables: { 
+      id: catcall._id, 
+      catcall: catcall }}).then(res => {
+        const newCatcallList = catcallList.filter(el => el._id === catcall._id);
+        setCatcallList(newCatcallList);
+      }).catch(error => console.log(error));
+    
+  }
+
 
 
   if (loading) return <p>Loading...</p>;
@@ -21,7 +44,7 @@ function Dashboard () {
 
           <a style={{ textDecoration: 'none', color: 'black' }} href="#">
             <div className="moderator-navbar-item mod-nav-active">
-              VALIDATE PENDING
+              PENDING
             </div>
           </a>
           <a style={{ textDecoration: 'none', color: 'black' }} href="#">
@@ -41,7 +64,7 @@ function Dashboard () {
           </a>
           <a style={{ textDecoration: 'none', color: 'black' }} href="#">
             <div className="moderator-navbar-item">
-              MOD SETTINGS
+              SETTINGS
             </div>
           </a>
         </div>
@@ -56,7 +79,7 @@ function Dashboard () {
             <div className="table-title location-title">Location</div>
             <div className="table-title buttons-title">Verification</div>
             {
-              data.getUnfilteredCatcalls.map((row) => (
+              catcallList.map((row) => (
                 <div className="table-row" id={row._id}>
                   
                     <div className="star"></div>
@@ -81,19 +104,13 @@ function Dashboard () {
                     </div>
                     <div className="location">
                       { 
-                        row.geometry.coordinates[0] + ',' +
-                        row.geometry.coordinates[1] 
+                        row.geometry.coordinates[0].toString().slice(0,4) + ',' +
+                        row.geometry.coordinates[1].toString().slice(0,5) 
                       }
                     </div>
                     <div className="buttons">
                       <button className="verify-button"
-                        onClick={() =>
-                          updateCatcall({ variables: { 
-                            id: row._id, 
-                            catcall: { propertes: {
-                              verified: true
-                            } } } })
-                        }
+                        onClick={() => handleVerify(row)}
                       >VERIFY</button>
                       <button className="edit-button">EDIT</button>
                       <button className="delete-button">DELETE</button>

@@ -13,7 +13,7 @@ function LoginModal (){
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const setModalIsOpenToTrue =()=>{
-    if (nav === 'MOD DASHBOARD') {
+    if (nav === 'DASHBOARD') {
       history.push('/dashboard');
     } else {
       setModalIsOpen(true);
@@ -25,7 +25,7 @@ function LoginModal (){
   }
 
   const changeNav =()=>{
-    setNav('MOD DASHBOARD');
+    setNav('DASHBOARD');
     setModalIsOpen(false);
   }
 

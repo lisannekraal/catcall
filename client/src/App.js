@@ -18,8 +18,6 @@ const client = new ApolloClient({
   })
 });
 
-
-
 function App() {
 
   return (
@@ -47,11 +45,9 @@ function App() {
             </div>
             <div className="navbar-login">
               <LoginModal />
-              {/* <i class="fas fa-user-cog"></i> MODERATORS */}
-              {/* <Link style={{ textDecoration: 'none', color: 'white' }} to="/"><i class="fas fa-user-cog"></i> MODERATORS</Link> */}
             </div>
             <div className="navbar-report">
-              <Link to="/catcalls/new"><button><p>Report a new datcall</p></button></Link>
+              <Link to="/catcalls/new"><button><p>Report a new catcall</p></button></Link>
             </div>
 
           </div>
