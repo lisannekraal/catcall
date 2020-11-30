@@ -5,12 +5,9 @@ const typeDefs = gql`
   type Query {
     getCatcalls:[Catcall]
     getCatcall(id:ID):Catcall
-    getFilteredCatcalls(
-      condition:String!
-    ):[Catcall]
-    getUnfilteredCatcalls(
-      condition:String!
-    ):[Catcall]
+    getVerifiedCatcalls:[Catcall]
+    getModeratorById(id:String):Moderator
+    validateModerator(email:String, password:String):Moderator
   }
 
   type Mutation {
@@ -18,10 +15,16 @@ const typeDefs = gql`
       catcall:CatcallInput!
     ):Catcall!
     updateCatcall(
-      id: ID
+      id: String!
       catcall:CatcallUpdateInput!
     ):Catcall!
     emptyTrash:[Catcall]
+    createModerator(moderator:ModeratorInput):Moderator
+    updateModerator(
+      id:ID
+      moderator:ModeratorInput
+    ):Moderator
+    removeModerator(id:ID):Moderator
   }
 
   type Catcall {
@@ -96,6 +99,19 @@ const typeDefs = gql`
     listedForChalk: Boolean
     starred: Boolean
     trash: Boolean
+  }
+
+  type Moderator {
+    _id: ID!
+    email: String!
+    password: String!
+    canAdd: Boolean
+  }
+
+  input ModeratorInput {
+    email: String!
+    password: String!
+    canAdd: Boolean
   }
 `
 

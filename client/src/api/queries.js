@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const GET_MAP_CATCALLS = gql`
   {
-    getFilteredCatcalls(condition: "verified") {
+    getVerifiedCatcalls {
       _id
       type
       geometry {
@@ -15,31 +15,6 @@ export const GET_MAP_CATCALLS = gql`
         dateCatcall
         url
         chalked
-      }
-    }
-  }
-`;
-
-export const GET_UNVERIFIED_CATCALLS = gql`
-  {
-    getUnfilteredCatcalls(condition: "verified") {
-      _id
-      type
-      geometry {
-        type
-        coordinates
-      }
-      properties {
-        quote
-        context
-        dateCatcall
-        dateAdded
-        url
-        verified
-        chalked
-        listedForChalk
-        starred
-        trash
       }
     }
   }
@@ -95,8 +70,9 @@ export const CREATE_CATCALL = gql`
 `;
 
 export const UPDATE_CATCALL = gql`
-  mutation updateCatcall($id: ID, $catcall: CatcallUpdateInput!) {
+  mutation updateCatcall($id: String!, $catcall: CatcallUpdateInput!) {
     updateCatcall(id: $id, catcall: $catcall) {
+        _id
         type
       geometry {
         type
@@ -118,4 +94,13 @@ export const UPDATE_CATCALL = gql`
   }
 `;
 
+export const VALIDATE_MODERATOR = gql`
+query validateModerator($email: String!, $password: String!) {
+  validateModerator(email: $email, password: $password) {
+    _id
+    email
+    canAdd
+  }
+}
+`;
 

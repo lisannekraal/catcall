@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   /* font-family: 'Montserrat', sans-serif; */
@@ -16,7 +20,7 @@ button:hover {
 
 .navbar-content {
   display: flex;
-  margin: 0 200px;
+  margin: 0 10vh;
   justify-content: space-between;
   align-items: center;
   color: white;
@@ -28,6 +32,7 @@ button:hover {
   font-weight: 300;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .navbar-logo {
@@ -62,6 +67,20 @@ button:hover {
   margin: 0 0;
   font-size: 0.8rem;
   font-weight: 500;
-  
+
   /* font-size: 0.9rem; */
+}
+
+.about-link {
+  text-decoration: none;
+  color: white;
+}
+
+.about-link button {
+  height: 100%;
+}
+
+.header-footer {
+  background-color: rgba(29, 113, 183);
+  height: 65px;
 }
