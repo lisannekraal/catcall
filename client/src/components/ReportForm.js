@@ -16,6 +16,7 @@ function ReportForm() {
   const [date, setDate] = useState("");
   const [mapError, setMapError] = useState("");
   const [checkRecaptcha, setCheckRecaptcha] = useState(false);
+  const [captchaError, setCaptchaError] = useState("");
   const [lngLat, setLngLat] = useState([]);
   const [createCatcall] = useMutation(CREATE_CATCALL);
 
@@ -132,27 +133,27 @@ function ReportForm() {
                   }
                 })}
               ></input>
-              <label htmlFor="check">I understand that is catcall report is anonymous and account for it to be true and in accordance with the house rules. More information here.</label>
+              <label htmlFor="check">I understand that is catcall report is anonymous and account for it to be true and in accordance with the house rules. More information here.*</label>
             </div>
             <p className="error-message">{errors.check && errors.check.message}</p>
           </div>
 
           <div className="form-segment">
             <ReCAPTCHA sitekey={process.env.REACT_APP_RECAPTCHA_KEY} onChange={()=>{setCheckRecaptcha(true)}} />
+            {captchaError!=='' ? <p className="error-message">{captchaError}</p> : ''}
           </div>
 
 
           <button type="button" className="cancel-button" onClick={()=> history.push('/') }>Cancel</button>
 
+
           {/* remove disabled to run test correctly */}
-          <input className="submit-button"  type="submit" disabled={!checkRecaptcha} value="Submit new catcall" onClick={()=>{if (lngLat.length === 0) setMapError('Required')}}/>
+          <input className="submit-button"  type="submit" value="Submit new catcall" onClick={()=>{
+            if (lngLat.length === 0) setMapError('Required');
+            if (!checkRecaptcha) setCaptchaError('Please indicate you\'re not a robot');
+          }}/>
 
         </form>
-
-        {/* to do:
-        - check CAPTCHA before submission
-        - validate form (make sure location is submitted)
-        - empty the form */}
       </div>
       <div className="header-footer"></div>
     </>

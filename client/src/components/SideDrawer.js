@@ -42,22 +42,26 @@ function SideDrawer({ navLinks }) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List component="nav">
-      <ListItem button key={uuidv4()} onClick={() => history.push("/catcalls/new")} style={{background: 'rgb(245, 37, 89)'}}>
-      <ListItemIcon className="fas fa-cat"/>
-      <ListItemText  primary={<Typography variant="button">Report a new CatCall</Typography>}/>
-      </ListItem>
+
         <Link to="/#about" style={{textDecoration: 'none', color:'#000000DE'}} >
           <ListItem button key={uuidv4()}>
             <ListItemIcon className='fas fa-info-circle'/>
             <ListItemText primary={<Typography variant="button">about</Typography>}/>
           </ListItem>
         </Link>
+
         {navLinks.map(({ title, path, classN }) => (
-          <ListItem button onClick={path} key={uuidv4()}>
-            <ListItemIcon className={classN}/>
-            <ListItemText primary={<Typography variant="button">{title}</Typography>}/>
-          </ListItem>
+        <ListItem button onClick={path} key={uuidv4()}>
+          <ListItemIcon className={classN}/>
+          <ListItemText primary={<Typography variant="button">{title}</Typography>}/>
+        </ListItem>
         ))}
+
+        <ListItem button key={uuidv4()} onClick={() => history.push("/catcalls/new")} style={{background: 'rgb(245, 37, 89)'}}>
+          <ListItemIcon className="fas fa-cat"/>
+          <ListItemText  primary={<Typography variant="button">Report a new CatCall</Typography>}/>
+        </ListItem>
+
       </List>
     </div>
   );
