@@ -1,0 +1,22 @@
+.footer {
+  background-color: rgb(29, 113, 183);
+  display: flex;
+}
+
+.footer-content {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  color: white;
+  justify-content: flex-start;
+}
+
+.footer-div {
+  max-width: 500px;
+  margin: 20px;
+  font-size: 16px;
+}
+
+.footer-title {
+  font-weight: 600;
+}
