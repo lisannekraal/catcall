@@ -7,6 +7,7 @@ import './MapMain.css';
 
 import Icon from '../assets/bullhorn.png';
 import { GET_MAP_CATCALLS } from '../api/queries'
+import MapDrawer from "./MapDrawer";
 
 
 function MapMain () {
@@ -96,6 +97,11 @@ function MapMain () {
         />
 
         { popup && popup }
+        
+        <div className="map-info">
+          <MapDrawer  />
+        </div>
+
 
 
         <NavigationControl showCompass showZoom position='top-right' />
@@ -104,6 +110,8 @@ function MapMain () {
         <ScaleControl unit='metric' maxWidth="100" position='bottom-right' />
 
       </MapGL>
+
+
     </div>
   );
 }

@@ -48,3 +48,11 @@
   margin-right: 2px;
   color: rgb(245, 37, 89);
 }
+
+.map-info {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 40%;
+  padding-right: 6px;
+}

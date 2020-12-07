@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import MapForm from './MapForm';
-import "flatpickr/dist/themes/material_green.css";
+import 'flatpickr/dist/themes/material_green.css';
 import './ReportForm.css';
 import Flatpickr from "react-flatpickr";
 import { CREATE_CATCALL } from '../api/queries';
@@ -147,7 +147,7 @@ function ReportForm() {
           <button type="button" className="cancel-button" onClick={()=> history.push('/') }>Cancel</button>
 
 
-          {/* remove disabled to run test correctly */}
+          {/* diable recaptcha to run test correctly */}
           <input className="submit-button"  type="submit" value="Submit new catcall" onClick={()=>{
             if (lngLat.length === 0) setMapError('Required');
             if (!checkRecaptcha) setCaptchaError('Please indicate you\'re not a robot');

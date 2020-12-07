@@ -46,7 +46,7 @@
 
 .header-buttons {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: flex-start;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .header-disclaimer {
-  margin-top: 10px;
+  margin-top: 5px;
   font-size: 0.9rem;
   font-weight: 300;
 }

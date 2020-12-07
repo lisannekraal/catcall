@@ -1,4 +1,7 @@
 import React from 'react';
+
+import './Header.css';
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { List, Container, Hidden } from "@material-ui/core"
@@ -44,26 +47,44 @@ function Header(props) {
   const classes = useStyles();
 
   const navLinks = [
-    { title: 'map', classN: 'fas fa-map-marked-alt', path: () => history.push("/catcalls") },
-    { title: 'community', classN: 'fab fa-instagram', path: () => window.open("https://www.instagram.com/catcallsofams/", "_blank") },
-    { title: props.modButton.text, classN: 'fas fa-cog', path: () => history.push(props.modButton.to)}
-  ]
+    { 
+      title: 'map', 
+      classN: 'fas fa-map-marked-alt', 
+      path: () => history.push("/catcalls") 
+    },
+    { 
+      title: 'community', 
+      classN: 'fab fa-instagram', 
+      path: () => window.open("https://www.instagram.com/catcallsofams/", "_blank") 
+    },
+    { 
+      title: props.modButton.text, 
+      classN: 'fas fa-cog', 
+      path: () => history.push(props.modButton.to)
+    }
+  ];
 
   return (
     <AppBar color='transparent' position="absolute" elevation={0} data-testid="navbar">
       <Toolbar style={{ color: 'white' }}>
 
-
         <Container className={classes.navDisplayFlex} maxWidth="xl">
+          
           <div className="navbar-brand" onClick={() => history.push("/")}>
             <img src={logo} alt="logo" className={classes.logo} />
             <div> Catcalls of Amsterdam</div>
           </div>
+
           <Hidden mdDown>
             <List component="nav" className={classes.navDisplayLinks}>
-              <Link to="/#about" className="about-link" >
+
+              {/* About nav component is seperate from loop as we use hash link package */}
+              <Link 
+                to="/#about" 
+                className="about-link" >
                 <Button color='inherit' startIcon={<Icon className='fas fa-info-circle' fontSize="small" style={{ marginRight: 7 }} />}>About</Button>
               </Link>
+
               {navLinks.map(({ title, classN, path }) => (
                 <Button
                   key={uuidv4()}
@@ -75,13 +96,18 @@ function Header(props) {
               ))}
             </List>
           </Hidden>
+
           <Hidden mdDown>
             <Button  key={uuidv4()} color="inherit" className={classes.navButton} onClick={() => history.push("/catcalls/new")}>Report a new CatCall</Button>
           </Hidden>
+
         </Container>
+
+        {/* Side drawer component for smaller screens */}
         <Hidden lgUp>
           <SideDrawer navLinks={navLinks} />
         </Hidden>
+
       </Toolbar>
     </AppBar>
   )

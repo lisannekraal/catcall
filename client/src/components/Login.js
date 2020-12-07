@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useLazyQuery } from '@apollo/client';
 import { VALIDATE_MODERATOR } from '../api/queries';
@@ -27,14 +27,13 @@ function Login(props) {
     }
   }, [data, error]);
 
-  
-
   return (
     <div className="login">
       <div className="header-footer"></div>
       <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
         {loading ? <p>Loading...</p> : ''}
         {error ? <p>Incorrect E-mail or Password</p> : ''}
+
         <div className="form-segment">
           <label htmlFor="email">E-mail:</label>
           <input
@@ -43,6 +42,7 @@ function Login(props) {
             name="email"
           ></input>
         </div>
+
         <div className="form-segment">
           <label htmlFor="password">Password:</label>
           <input
@@ -52,9 +52,11 @@ function Login(props) {
             name="password"
           ></input>
         </div>
+
         <div className="form-segment">
           <input className="submit-button" type="submit" value="Log in" />
         </div>
+
       </form>
       <div className="header-footer"></div>
     </div>

@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react';
 
 import { useQuery, useMutation } from '@apollo/client';
 import { UPDATE_CATCALL, GET_CATCALLS} from '../api/queries'
-import './Dashboard.css';
 import AdminTable from './AdminTable';
 
 /**Material UI Imports */
+import { Container } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
@@ -38,25 +38,35 @@ function Dashboard() {
   return (
     <>
       <div className="header-footer"></div>
+      <div >
         <Paper square className={classes.root}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            variant="scrollable"
-            scrollButtons="on"
-            indicatorColor="secondary"
-            textColor="secondary"
-            aria-label="admin navigation"
-          >
-            <Tab icon={<VerifiedUser />} label="Verify Pending" value='unverified' wrapped />
-            <Tab icon={<Gesture />} label="To Chalk" value='chalk' wrapped/>
-            <Tab icon={<Storage />} label="Databse" value='database' wrapped/>
-            <Tab icon={<Delete />} label="Trash" value='trash' wrapped/>
-            <Tab icon={<Settings />} label="Mod Settings" value='settings' wrapped/>
-          </Tabs>
-        </Paper>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              variant="scrollable"
+              scrollButtons="on"
+              indicatorColor="secondary"
+              textColor="secondary"
+              aria-label="admin navigation"
+            >
+              <Tab icon={<VerifiedUser />} label="Verify Pending" value='unverified' wrapped />
+              <Tab icon={<Gesture />} label="To Chalk" value='chalk' wrapped/>
+              <Tab icon={<Storage />} label="Databse" value='database' wrapped/>
+              <Tab icon={<Delete />} label="Trash" value='trash' wrapped/>
+              <Tab icon={<Settings />} label="Mod Settings" value='settings' wrapped/>
+            </Tabs>
+          </Paper>
 
-        {data ? (<AdminTable data={data.getCatcalls} value={value} updateCatcall={updateCatcall} />) : (<h2>Loading...</h2>)}
+          {data ? (<AdminTable data={data.getCatcalls} value={value} updateCatcall={updateCatcall} />) : (<h2>Loading...</h2>)}
+
+      </div>
+        <Container >
+          
+
+          
+        </Container>
+
+
 
       <div className="header-footer"></div>
     </>

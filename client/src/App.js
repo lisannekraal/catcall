@@ -37,11 +37,8 @@ function App() {
   });
 
   const client = new ApolloClient({
-
     connectToDevTools: true,
-
     link: authLink.concat(httpLink),
-
     cache: new InMemoryCache({
     })
   });
@@ -58,7 +55,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
 
-      <Header modButton={modButton} />
+        <Header modButton={modButton} />
 
         <Switch>
           <Route exact path="/">
