@@ -20,9 +20,9 @@ function ReportForm() {
   const [lngLat, setLngLat] = useState([]);
   const [createCatcall] = useMutation(CREATE_CATCALL);
 
-  const onSubmit = (data) => {
-
+  const onSubmit = async (data) => {
     if (lngLat.length > 0 && checkRecaptcha) {
+      
       const queryVariable = {
         "catcall": {
           "type": "Feature",
@@ -44,7 +44,8 @@ function ReportForm() {
           }
         }
       }
-      createCatcall({ variables: queryVariable });
+      await createCatcall({ variables: queryVariable });
+      history.push("/catcalls");
     }
   }
 
