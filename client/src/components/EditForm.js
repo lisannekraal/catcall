@@ -151,9 +151,10 @@ function EditForm() {
 
           <button type="button" className="cancel-button" onClick={()=> history.push('/dashboard') }>Cancel</button>
 
-          <input className="submit-button"  type="submit" value="Submit update" onClick={()=>{
+          <input className="submit-button"  type="submit" value="Submit update" />
+          {/* onClick={()=>{
             console.log('submit executed');
-          }}/>
+          }} */}
 
         </form>
       </div>
