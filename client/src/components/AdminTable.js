@@ -12,10 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import { v4 as uuidv4 } from 'uuid';
 
 
-
-
 // Function labels data in the table
-
 function processCatCallsData({ geometry, properties, _id, type }) {
   return {
     id: _id,

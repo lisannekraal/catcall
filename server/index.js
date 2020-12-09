@@ -7,8 +7,8 @@ const loggerPlugin = {
 
   // Fires whenever a GraphQL request is received from a client.
   requestDidStart(requestContext) {
-    console.log('Request started! Query:\n');
-    console.log(requestContext.request)
+    // console.log('Request started! Query:\n');
+    // console.log(requestContext.request)
     return {
       didEncounterErrors(rc) {
         console.log(rc.errors)

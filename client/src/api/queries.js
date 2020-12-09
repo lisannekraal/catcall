@@ -45,6 +45,32 @@ export const GET_CATCALLS = gql`
   }
 `;
 
+export const GET_CATCALL = gql`
+  query getCatcall($id: String!) {
+    getCatcall(id: $id) {
+      _id
+      type
+      geometry {
+        type
+        coordinates
+      }
+      properties {
+        quote
+        context
+        dateCatcall
+        dateAdded
+        url
+        verified
+        chalked
+        listedForChalk
+        starred
+        trash
+      }
+    }
+  }
+
+`;
+
 export const CREATE_CATCALL = gql`
   mutation createCatcall($catcall: CatcallInput!) {
     createCatcall(catcall: $catcall) {

@@ -51,7 +51,7 @@ function Dashboard() {
             >
               <Tab icon={<VerifiedUser />} label="Verify Pending" value='unverified' wrapped />
               <Tab icon={<Gesture />} label="To Chalk" value='chalk' wrapped/>
-              <Tab icon={<Storage />} label="Databse" value='database' wrapped/>
+              <Tab icon={<Storage />} label="Database" value='database' wrapped/>
               <Tab icon={<Delete />} label="Trash" value='trash' wrapped/>
               <Tab icon={<Settings />} label="Mod Settings" value='settings' wrapped/>
             </Tabs>

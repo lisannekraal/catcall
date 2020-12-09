@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
+import { useLazyQuery } from "@apollo/client";
+import { GET_CATCALL, UPDATE_CATCALL } from '../api/queries';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -37,17 +40,25 @@ const useRowStyles = makeStyles({
   },
 });
 
-/**
- * Each Row component takes a row of data
- */
-
 function Row(props) {
-  const { tab, row, verifyCatcall, unstageToChalk, deleteCatcall, clickButtonUpdate } = props;
+  let history = useHistory();
+  const { tab, row, clickButtonUpdate } = props;
   const [open, setOpen] = useState(false);
   const [buttonstoShow, setButtons] = useState([]);
+  const [ getCatcall, { loading, data } ] = useLazyQuery(GET_CATCALL);
   const classes = useRowStyles();
 
   useEffect(() => {
+    //listen for a data change: when catcall queried, send to edit form, rendered for either url editing or text editing
+    if (data) {
+      history.push({
+        pathname: '/catcalls/edit',
+        search: tab === 'chalk' ? '?edit=url' : '?edit=text',
+        state: { catcall: data.getCatcall }
+      });
+    }
+
+    //listen for a tab change and re-set buttons
     switch (tab) {
       case 'unverified':
         setButtons([{name: 'verify', class: 'greenButton'}, {name: 'edit', class: 'yellowButton'}, {name: 'delete', class: 'redButton'}]);
@@ -65,10 +76,9 @@ function Row(props) {
         setButtons([{name: 'verify', class: 'greenButton'}, {name: 'edit', class: 'yellowButton'}, {name: 'delete', class: 'redButton'}]);
         break;
     }
-  }, [tab]) //listens for a tab change
+  }, [tab, data])
 
   function handleClick(button) {
-    console.log(button);
     if (button.name === 'verify') {
       clickButtonUpdate({
         variables: {
@@ -82,11 +92,11 @@ function Row(props) {
         }
       });
     } else if (button.name === 'edit') {
-      //redirect to edit page and send along id?
+      getCatcall({variables: {id: row.id}});
     } else if (button.name === 'email') {
       alert('you will be notified');
     } else if (button.name === 'chalk') {
-      //redirect to chalk edit form
+      getCatcall({variables: {id: row.id}});
     } else if (button.name === 'unstage') {
       clickButtonUpdate({
         variables: {
@@ -123,6 +133,7 @@ function Row(props) {
     }
   }
 
+  if (loading) return <p>Loading ...</p>;
   return (
     <React.Fragment>
 
@@ -176,6 +187,15 @@ function Row(props) {
                       Context
                     </TableCell>
                     <TableCell>{row.context}</TableCell>
+                  </TableRow>
+
+                  <TableRow key={uuidv4()}>
+                    <TableCell component="th" scope="row">
+                      Chalk url
+                    </TableCell>
+                    <TableCell>
+                        <a href={row.url} target="_blank">{row.url}</a>
+                      </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

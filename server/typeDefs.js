@@ -4,7 +4,7 @@ const typeDefs = gql`
 
   type Query {
     getCatcalls:[Catcall]
-    getCatcall(id:ID):Catcall
+    getCatcall(id:String):Catcall
     getVerifiedCatcalls:[Catcall]
     getModeratorById(id:String):Moderator
     validateModerator(email:String, password:String):Moderator
