@@ -1,20 +1,18 @@
 import React from 'react';
+import { HashLink as Link } from 'react-router-hash-link';
+import { useHistory } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
+import SideDrawer from './SideDrawer';
 import './Header.css';
+import logo from '../assets/logowhite.png'
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { List, Container, Hidden } from "@material-ui/core"
-import SideDrawer from './SideDrawer';
-import { v4 as uuidv4 } from 'uuid';
-import { HashLink as Link } from 'react-router-hash-link';
-import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import logo from '../assets/logowhite.png'
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
-
-
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -43,14 +41,16 @@ const useStyles = makeStyles((theme) => ({
 function Header(props) {
 
   let history = useHistory();
-
   const classes = useStyles();
 
   const navLinks = [
     { 
       title: 'map', 
       classN: 'fas fa-map-marked-alt', 
-      path: () => history.push("/catcalls") 
+      path: () => history.push({
+        pathname: '/catcalls',
+        state: { dialog: 'This is an overview of all catcalls reported. For more information, see the info-button on the left'}
+      }) 
     },
     { 
       title: 'community', 

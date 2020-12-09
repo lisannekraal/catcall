@@ -45,7 +45,10 @@ function ReportForm() {
         }
       }
       await createCatcall({ variables: queryVariable });
-      history.push("/catcalls");
+      history.push({
+        pathname: '/catcalls',
+        state: { dialog: 'Your catcall has been reported. Thanks for that. You won\'t see it on the map yet. When a moderator has reviewed your submission it will be added to the map automatically.'}
+      });
     }
   }
 

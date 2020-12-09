@@ -1,18 +1,23 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useQuery } from '@apollo/client';
 import MapGL, { Source, Layer, Image, Popup, NavigationControl, GeolocateControl, ScaleControl, FullscreenControl } from '@urbica/react-map-gl';
 
+import DialogMap from './DialogMap';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './MapMain.css';
 
 import Icon from '../assets/bullhorn.png';
 import { GET_MAP_CATCALLS } from '../api/queries'
 import MapDrawer from "./MapDrawer";
+// import { Dialog } from "@material-ui/core";
 
 
 function MapMain () {
   const [ popup, setPopup ] = useState("");
   const { loading, error, data } = useQuery(GET_MAP_CATCALLS);
+  const location = useLocation();
+  const [ dialog ] = useState(location.state ? location.state.dialog : "");
 
   const [viewport, setViewport] = useState({
     latitude: 52.366249,
@@ -109,9 +114,10 @@ function MapMain () {
         <FullscreenControl position='top-right' />
         <ScaleControl unit='metric' maxWidth="100" position='bottom-right' />
 
+
       </MapGL>
 
-
+    <DialogMap text={dialog} />
     </div>
   );
 }
