@@ -11,6 +11,7 @@ import ReportForm from './components/ReportForm';
 import Login from './components/Login'
 import Dashboard from './components/Dashboard';
 import EditForm from './components/EditForm';
+import Help from './components/Help';
 import NotFound from './components/NotFound';
 
 import Header from './components/Header';
@@ -76,6 +77,9 @@ function App() {
           </Route>
           <Route exact path="/catcalls/edit">
             <EditForm />
+          </Route>
+          <Route exact path="/help">
+            <Help />
           </Route>
           <Route path="/404">
             <NotFound />

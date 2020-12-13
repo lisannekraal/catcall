@@ -100,7 +100,7 @@ function ReportForm() {
                 }
               })}
             ></input>
-            <small id="context-help">Not required. Share what you'd like, but make sure it does not contain any recognizable features, personal details or words of racism/hate. Moderators can edit this part of your report if necessary. For more details, see our house rules.</small>
+            <small id="context-help">Not required. Moderators can edit this part of your report if necessary. For more details, see <a style={{color: "black"}} href="/help" target="_blank">our house rules</a>.</small>
             <p className="error-message">{errors.context && errors.context.message}</p>
 
           </div>
@@ -137,7 +137,7 @@ function ReportForm() {
                   }
                 })}
               ></input>
-              <label htmlFor="check">I understand that is catcall report is anonymous and account for it to be true and in accordance with the house rules. More information here.*</label>
+              <label htmlFor="check">I understand that is catcall report is anonymous and account for it to be true and <a className="help-button" href="/help" target="_blank">in accordance with the house rules</a>*.</label>
             </div>
             <p className="error-message">{errors.check && errors.check.message}</p>
           </div>

@@ -31,6 +31,10 @@
   color: red;
 }
 
+.help-button {
+  color: black;
+}
+
 .cancel-button {
   font-size: 18px;
   padding: 10px 15px;

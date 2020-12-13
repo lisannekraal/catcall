@@ -30,7 +30,8 @@ function Dashboard() {
   let { loading, error, data } = useQuery(GET_CATCALLS);
 
   const handleChange = (event, newValue) => { /*What to do in case tab changes */
-    if(newValue !== 'settings') setValue(newValue); //condition deactivates settings tab temporarily
+    // if(newValue !== 'settings') setValue(newValue); //condition deactivates settings tab temporarily
+    setValue(newValue);
   };
 
   if (loading) return <p>Loading...</p>;

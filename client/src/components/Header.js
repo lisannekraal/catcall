@@ -49,7 +49,7 @@ function Header(props) {
       classN: 'fas fa-map-marked-alt', 
       path: () => history.push({
         pathname: '/catcalls',
-        state: { dialog: 'This is an overview of all catcalls reported. For more information, see the info-button on the left'}
+        state: { dialog: 'This is an overview of all catcalls reported. For more information, see the info-button on the left.'}
       }) 
     },
     { 
