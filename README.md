@@ -5,8 +5,8 @@ An application to visualize, report and manage data on catcalling. Made for @Cat
 Launch test version: January 2021
 
 <p>
-  <img src="readme-images/catcallsDesktop.gif" width="auto" height="300px"></img>
-  <img src="readme-images/1.jpg" width="auto" height="300px"></img>
+  <img src="readme-images/catcallsDesktop.gif" width="auto" height="320px"></img>
+  <img src="readme-images/1.jpg" width="auto" height="320px"></img>
 </p>
 
 # Main features
