@@ -82,7 +82,9 @@ export default function AdminTable({ catcallData, updateCatcall, value }) {
         switchedRows = catcallData.filter(el => el.properties.trash === true);
         break;
       case 'settings':
-        setModerators(data.getModerators);
+        if (moderators.length < 1) {
+          setModerators(data.getModerators);
+        } 
         setShowSettings(true);
         break;
       default: //unverified
@@ -110,20 +112,16 @@ export default function AdminTable({ catcallData, updateCatcall, value }) {
   }
 
   const onSubmit = async (data) => {
-
     const variables = {
       email: email,
       password: password
     }
     document.getElementById('addModeratorForm').reset();
-    console.log(variables);
     await createModerator({variables: {moderator: variables}});
-    console.log('after await');
 
     let newModerators = [...moderators];
     newModerators.push(variables);
     setModerators(newModerators);
-    console.log(moderators);
   }
 
   return (
