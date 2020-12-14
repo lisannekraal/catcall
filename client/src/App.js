@@ -73,7 +73,7 @@ function App() {
             <Login setCookie={setCookie}/>
           </Route>
           <Route exact path="/dashboard">
-            <Dashboard />
+            <Dashboard token={cookies.token} />
           </Route>
           <Route exact path="/catcalls/edit">
             <EditForm />

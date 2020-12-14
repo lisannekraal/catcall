@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { useQuery, useMutation } from '@apollo/client';
-import { UPDATE_CATCALL, GET_CATCALLS} from '../api/queries'
+import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
+import { UPDATE_CATCALL, GET_CATCALLS, GET_MODERATOR_BY_ID} from '../api/queries'
 import AdminTable from './AdminTable';
+
+import { Player } from '@lottiefiles/react-lottie-player';
 
 /**Material UI Imports */
 import { Container } from '@material-ui/core';
@@ -22,20 +24,50 @@ const useStyles = makeStyles({
   },
 });
 
-function Dashboard() {
+function Dashboard({ token }) {
 
   const classes = useStyles();
+  const [ authorization, setAuthorization ] = useState(false);
+  const [getModeratorById] = useLazyQuery(GET_MODERATOR_BY_ID, {onCompleted: (data) => {setAuthorization(data.getModeratorById.canAdd)}});
+
   const [value, setValue] = React.useState('unverified'); //keeps track of selected tab
   const [updateCatcall] = useMutation(UPDATE_CATCALL);
   let { loading, error, data } = useQuery(GET_CATCALLS);
 
-  const handleChange = (event, newValue) => { /*What to do in case tab changes */
-    // if(newValue !== 'settings') setValue(newValue); //condition deactivates settings tab temporarily
+  useEffect(() => {
+    getModeratorById({variables: {id: token} });
+  }, []);
+
+  const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error at Fetching Data</p>;
+  if (error) return (
+    <div data-testid="page-not-found" className="not-found-container">
+      <div className="header-footer"></div>
+      <div data-testid="page-not-found" className="not-found">
+        <h1>401</h1>
+        <h2>You are not authorized to visit this page.</h2>
+      </div>
+      <div className="header-footer"></div>
+    </div>
+  );
+  if (loading) return (
+    <div data-testid="page-not-found" className="not-found-container">
+      <div className="header-footer"></div>
+      <div data-testid="page-not-found" className="not-found">
+        <h1>Loading</h1>
+        <Player
+          autoplay
+          loop
+          src="https://assets8.lottiefiles.com/packages/lf20_vndsLD.json"
+          style={{ height: '300px', width: '300px' }}
+        >
+        </Player>
+      </div>
+      <div className="header-footer"></div>
+    </div>
+  );
   return (
     <>
       <div className="header-footer"></div>
@@ -54,11 +86,13 @@ function Dashboard() {
               <Tab icon={<Gesture />} label="To Chalk" value='chalk' wrapped/>
               <Tab icon={<Storage />} label="Database" value='database' wrapped/>
               <Tab icon={<Delete />} label="Trash" value='trash' wrapped/>
-              <Tab icon={<Settings />} label="Mod Settings" value='settings' wrapped/>
+              {authorization &&
+                <Tab icon={<Settings />} label="Mod Settings" value='settings' wrapped/>              
+              }
             </Tabs>
           </Paper>
 
-          {data ? (<AdminTable catcallData={data.getCatcalls} value={value} updateCatcall={updateCatcall} />) : (<h2>Loading...</h2>)}
+          {data ? (<AdminTable catcallData={data.getCatcalls} value={value} updateCatcall={updateCatcall} authorized={authorization} />) : (<h2>Loading...</h2>)}
 
       </div>
         <Container >

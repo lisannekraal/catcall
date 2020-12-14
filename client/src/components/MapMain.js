@@ -11,7 +11,7 @@ import Icon from '../assets/bullhorn.png';
 import { GET_MAP_CATCALLS } from '../api/queries'
 import MapDrawer from "./MapDrawer";
 // import { Dialog } from "@material-ui/core";
-
+import { Player } from '@lottiefiles/react-lottie-player';
 
 function MapMain () {
   const [ popup, setPopup ] = useState("");
@@ -25,8 +25,30 @@ function MapMain () {
     zoom: 12
   });
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
+  if (loading) return (
+    <div data-testid="page-not-found" className="not-found-container">
+      <div className="header-footer"></div>
+      <div data-testid="page-not-found" className="not-found">
+        <h1>Loading</h1>
+        <Player
+          autoplay
+          loop
+          src="https://assets8.lottiefiles.com/packages/lf20_vndsLD.json"
+          style={{ height: '300px', width: '300px' }}
+        >
+        </Player>
+      </div>
+    </div>
+  );
+  if (error) return (
+    <div data-testid="page-not-found" className="not-found-container">
+      <div className="header-footer"></div>
+      <div data-testid="page-not-found" className="not-found">
+        <h1>501</h1>
+        <h2>Oops! Something went wrong.</h2>
+      </div>
+    </div>
+  );
   return (
     <div className="map-container" data-testid="map-main">
       <MapGL

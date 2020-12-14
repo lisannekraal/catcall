@@ -44,7 +44,7 @@ function processCatCallsData({ geometry, properties, _id, type }) {
   };
 }
 
-export default function AdminTable({ catcallData, updateCatcall, value }) {
+export default function AdminTable({ catcallData, updateCatcall, value, authorized }) {
 
   //table contains 
   //  - all the getCetcalls from database; 
@@ -155,23 +155,26 @@ export default function AdminTable({ catcallData, updateCatcall, value }) {
               </TableBody>
             </Table>
         </TableContainer>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-            style={{color: 'rgb(245, 37, 89'}}
-          >
-            <Typography><GroupAddIcon /> Add a new moderator</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <form id="addModeratorForm" onSubmit={handleSubmit(onSubmit)}>
-                <input name="email" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="Email address" onChange={handleEmailInput}></input>
-                <input name="password" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="password" onChange={handlePasswordInput}></input>
-                <input className="submit-button"  type="submit" value="Add" />
-            </form>
-          </AccordionDetails>
-        </Accordion>
+        { authorized && 
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2a-content"
+              id="panel2a-header"
+              style={{color: 'rgb(245, 37, 89'}}
+            >
+              <Typography><GroupAddIcon /> Add a new moderator</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <form id="addModeratorForm" onSubmit={handleSubmit(onSubmit)}>
+                  <input name="email" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="Email address" onChange={handleEmailInput}></input>
+                  <input name="password" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="password" onChange={handlePasswordInput}></input>
+                  <input className="submit-button"  type="submit" value="Add" />
+              </form>
+            </AccordionDetails>
+          </Accordion>
+        }
+
       </>
     : 
     

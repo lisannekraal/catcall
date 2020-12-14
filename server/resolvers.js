@@ -84,12 +84,9 @@ const moderatorResolver = {
   Query: {
     
     async getModerators(_, __, context) {
-      
       if (context.mod._id && context.mod.canAdd) {
         if (await Moderator.findOne({ _id: context.mod._id })) {
-          console.log('mod exists in db');
           const moderators = await Moderator.find();
-          console.log(moderators);
           return moderators;
         }
       }

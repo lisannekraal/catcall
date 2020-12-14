@@ -68,7 +68,6 @@ export const GET_CATCALL = gql`
       }
     }
   }
-
 `;
 
 export const CREATE_CATCALL = gql`
@@ -138,6 +137,16 @@ query validateModerator($email: String!, $password: String!) {
     canAdd
   }
 }
+`;
+
+export const GET_MODERATOR_BY_ID = gql`
+  query getModeratorById($id: String!) {
+    getModeratorById(id: $id) {
+      _id
+      email
+      canAdd
+    }
+  }
 `;
 
 export const CREATE_MODERATOR = gql`
