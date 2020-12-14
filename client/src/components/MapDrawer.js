@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
-import { IconButton, List, ListItem, ListItemText, Drawer, ListItemIcon,Typography } from "@material-ui/core"
+import { IconButton, Drawer } from "@material-ui/core"
 import HelpIcon from '@material-ui/icons/Help';
-import { HashLink as Link } from 'react-router-hash-link';
 
-import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { v4 as uuidv4 } from 'uuid';
 
 const useStyles = makeStyles({
   list: {
@@ -20,7 +17,6 @@ const useStyles = makeStyles({
 
 function MapDrawer({ navLinks }) {
 
-  let history = useHistory();
   const classes = useStyles();
 
   const [drawerState, setDrawerState] = useState({ right: false })

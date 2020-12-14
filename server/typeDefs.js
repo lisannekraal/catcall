@@ -6,6 +6,7 @@ const typeDefs = gql`
     getCatcalls:[Catcall]
     getCatcall(id:String):Catcall
     getVerifiedCatcalls:[Catcall]
+    getModerators:[Moderator]
     getModeratorById(id:String):Moderator
     validateModerator(email:String, password:String):Moderator
   }
@@ -111,7 +112,6 @@ const typeDefs = gql`
   input ModeratorInput {
     email: String!
     password: String!
-    canAdd: Boolean
   }
 `
 

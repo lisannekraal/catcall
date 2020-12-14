@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 import { useQuery, useMutation } from '@apollo/client';
 import { UPDATE_CATCALL, GET_CATCALLS} from '../api/queries'
@@ -26,7 +26,7 @@ function Dashboard() {
 
   const classes = useStyles();
   const [value, setValue] = React.useState('unverified'); //keeps track of selected tab
-  const [updateCatcall] = useMutation(UPDATE_CATCALL,);
+  const [updateCatcall] = useMutation(UPDATE_CATCALL);
   let { loading, error, data } = useQuery(GET_CATCALLS);
 
   const handleChange = (event, newValue) => { /*What to do in case tab changes */
@@ -58,7 +58,7 @@ function Dashboard() {
             </Tabs>
           </Paper>
 
-          {data ? (<AdminTable data={data.getCatcalls} value={value} updateCatcall={updateCatcall} />) : (<h2>Loading...</h2>)}
+          {data ? (<AdminTable catcallData={data.getCatcalls} value={value} updateCatcall={updateCatcall} />) : (<h2>Loading...</h2>)}
 
       </div>
         <Container >

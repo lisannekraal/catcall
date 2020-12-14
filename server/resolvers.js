@@ -82,6 +82,22 @@ const catcallResolver = {
 
 const moderatorResolver = {
   Query: {
+    
+    async getModerators(_, __, context) {
+      
+      if (context.mod._id && context.mod.canAdd) {
+        if (await Moderator.findOne({ _id: context.mod._id })) {
+          console.log('mod exists in db');
+          const moderators = await Moderator.find();
+          console.log(moderators);
+          return moderators;
+        }
+      }
+      let err = new Error;
+      err.message = 'You must be logged in as a moderator to see this content';
+      return err;
+    },
+
     async getModeratorById(_, { id }) {
       const mod = await Moderator.findOne({ _id: id });
       return mod;
@@ -100,9 +116,9 @@ const moderatorResolver = {
       if (context.mod._id) {
         let mod = await Moderator.findOne({ _id: context.mod._id })
         if (mod && mod.canAdd === true) {
-          const { email, password, canAdd } = moderator;
+          const { email, password } = moderator;
           let hashPassword = await bcrypt.hash(password, 10);
-          const mod = await Moderator.create({ email, password: hashPassword, canAdd });
+          const mod = await Moderator.create({ email, password: hashPassword, canAdd: false });
           return mod;
         }
       }

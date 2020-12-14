@@ -74,7 +74,7 @@ export const GET_CATCALL = gql`
 export const CREATE_CATCALL = gql`
   mutation createCatcall($catcall: CatcallInput!) {
     createCatcall(catcall: $catcall) {
-        type
+      type
       geometry {
         type
         coordinates
@@ -120,6 +120,16 @@ export const UPDATE_CATCALL = gql`
   }
 `;
 
+export const GET_MODERATORS = gql`
+  {
+    getModerators {
+      _id
+      email
+      canAdd
+    }
+  }
+`;
+
 export const VALIDATE_MODERATOR = gql`
 query validateModerator($email: String!, $password: String!) {
   validateModerator(email: $email, password: $password) {
@@ -128,5 +138,14 @@ query validateModerator($email: String!, $password: String!) {
     canAdd
   }
 }
+`;
+
+export const CREATE_MODERATOR = gql`
+  mutation createModerator($moderator: ModeratorInput!) {
+    createModerator(moderator: $moderator) {
+      email
+      password
+    }
+  }
 `;
 
