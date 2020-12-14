@@ -22,21 +22,40 @@ Moderators are defined by each verified local 'Catcalls of...' organisor, as wel
 - see a list of catcalls that are staged to be chalked by the organisation
 - update catcalls with the chalked image of Instagram
 
-# How to run locally for development purposes
+# How to 
 
+## ..run locally for development purposes
+
+- clone the repo
 - `yarn install` from main repo, client folder and server folder
-- create a `.env` in server folder and save local MongoDB url as DB_URL or MongoDB Atlas url as
-DB_ATLAS_URL
-- create a `.env` in client folder and define localhost url as REACT_APP_APOLLO_SERVER, add Mapbox access token as REACT_APP_MAPBOX_ACCESS_TOKEN, add personal recaptcha key as REACT_APP_RECAPTCHA_KEY and add `SKIP_PREFLIGHT_CHECK=true`
-- In development of client, run `yarn test` to test correct routing, incurrent url and redirects
-- In development of server, run `yarn test` to test server resolvers
+- create a .env through `touch .env` in server folder
+- save local MongoDB url as `DB_URL={your url}` or MongoDB Atlas url as `DB_ATLAS_URL={your url}`
+- create a .env through `touch .env` in client folder
+- define localhost url as `REACT_APP_APOLLO_SERVER={your localhost}`
+- add Mapbox access token as `REACT_APP_MAPBOX_ACCESS_TOKEN={your token}`
+- add personal recaptcha key as `REACT_APP_RECAPTCHA_KEY={your key}
+- add `SKIP_PREFLIGHT_CHECK=true`
 - `yarn start` in server to start server listening
 - `yarn start` in client folder to start React app
 
-# A special thanks to
+## ..run tests
 
+While developing client, run `yarn test` to test correct routing, incurrent url and redirects. While developing server, run `yarn test` to test server resolvers.
+
+# About
+
+## Team
+
+This app has been developed by [Lisanne Kraal](https://github.com/lisannekraal) as a personal project. She is a new full-stack developer with a love for anything geospatial.
+
+Inspired by Ambrien Moeniralam of [CatcallsofAms](https://www.instagram.com/catcallsofams/), she believes local initiatives like these should be supported with technological solutions. This is a start in that process of supporting management and visualization of spatial data for 'catcalls of...' initiatives worldwide.
+
+## A special thanks to
+
+- Ambrien Moeniralam by being patient in the process of creation and a perfect end-user
 - [Nikos Cocci](https://github.com/Nik439) and [Alejandro Rene Valdivia](https://github.com/serendatapy) for reviewing and improving the code at an early stage
 - [Camille Desoubrie](https://github.com/Kmyll) for help with the logo
+- Aafke Smal and Jochem Gugelot for advice
 
 # Contribute
 
