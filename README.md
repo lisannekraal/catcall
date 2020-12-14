@@ -4,17 +4,22 @@ An application to visualize, report and manage data on catcalling. Made for @Cat
 
 Launch test version: January 2021
 
+<img src="readme-images/catcallsDesktop.gif"></img>
+<br>
 <img src="readme-images/1.jpg" width="30%" height="auto"></img>
-<img src="readme-images/2.jpg" width="30%" height="auto"></img>
-<img src="readme-images/3.jpg" width="30%" height="auto"></img>
-<img src="readme-images/4.jpg" width="30%" height="auto"></img>
-<img src="readme-images/5.jpg" width="30%" height="auto"></img>
 
 # Main features
 
 ## Data visualization on a map
 
-Using Mapbox' open source API, a interactive map display the catcalls of the database and allows users to zoom, pan and interact with the catcalls layer on the map. They can find information for their own neighborhood or favorite parts of the city, read the catcalls and the stories from the victims, and find the related images on Instagram.
+<p>Using Mapbox' open source API, a interactive map display the catcalls of the database and allows users to zoom, pan and interact with the catcalls layer on the map. They can find information for their own neighborhood or favorite parts of the city, read the catcalls and the stories from the victims, and find the related images on Instagram.</p>
+
+<p>
+  <img src="readme-images/2.jpg" width="30%" height="auto"></img>
+  <img src="readme-images/3.jpg" width="30%" height="auto"></img>
+</p>
+
+
 
 ## Easy report of new catcalls
 
@@ -27,6 +32,11 @@ Moderators are defined by each verified local 'Catcalls of...' organisor, as wel
 - search through and manage the entire database of catcalls
 - see a list of catcalls that are staged to be chalked by the organisation
 - update catcalls with the chalked image of Instagram
+
+<p>
+  <img src="readme-images/4.jpg" width="30%" height="auto"></img>
+  <img src="readme-images/5.jpg" width="30%" height="auto"></img>
+</p>
 
 # How to 
 
