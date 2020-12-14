@@ -4,6 +4,12 @@ An application to visualize, report and manage data on catcalling. Made for @Cat
 
 Launch test version: January 2021
 
+<img src="readme-images/1.jpg" width="30%" height="auto"></img>
+<img src="readme-images/2.jpg" width="30%" height="auto"></img>
+<img src="readme-images/3.jpg" width="30%" height="auto"></img>
+<img src="readme-images/4.jpg" width="30%" height="auto"></img>
+<img src="readme-images/5.jpg" width="30%" height="auto"></img>
+
 # Main features
 
 ## Data visualization on a map
