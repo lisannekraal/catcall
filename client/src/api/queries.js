@@ -158,3 +158,10 @@ export const CREATE_MODERATOR = gql`
   }
 `;
 
+export const REMOVE_MODERATOR = gql`
+  mutation removeModerator($id: String!) {
+    removeModerator(id: $id) {
+      email
+    }
+  }
+`;

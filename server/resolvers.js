@@ -143,7 +143,7 @@ const moderatorResolver = {
         let mod = await Moderator.findOne({ _id: context.mod._id })
         if (mod && mod.canAdd === true) {
           const mod = await Moderator.deleteOne({ _id: id });
-          return mod;
+          return;
         }
       }
       let err = new Error;

@@ -25,7 +25,7 @@ const typeDefs = gql`
       id:ID
       moderator:ModeratorInput
     ):Moderator
-    removeModerator(id:ID):Moderator
+    removeModerator(id:String):Moderator
   }
 
   type Catcall {
