@@ -19,7 +19,7 @@ const typeDefs = gql`
       id: String!
       catcall:CatcallUpdateInput!
     ):Catcall!
-    emptyTrash:[Catcall]
+    emptyTrash:String
     createModerator(moderator:ModeratorInput):Moderator
     updateModerator(
       id:ID

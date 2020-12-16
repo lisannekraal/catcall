@@ -119,6 +119,12 @@ export const UPDATE_CATCALL = gql`
   }
 `;
 
+export const EMPTY_TRASH = gql`
+  mutation emptyTrash {
+    emptyTrash
+  }
+`;
+
 export const GET_MODERATORS = gql`
   {
     getModerators {

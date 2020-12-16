@@ -22,6 +22,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import { useForm } from 'react-hook-form';
 
+import './ModeratorSettings.css';
+
 
 
 export default function ModeratorSettings({authorized}) {
@@ -104,23 +106,26 @@ export default function ModeratorSettings({authorized}) {
           </Table>
       </TableContainer>
       { authorized && 
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-            style={{color: 'rgb(245, 37, 89'}}
-          >
-            <Typography><GroupAddIcon /> Add a new moderator</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <form id="addModeratorForm" onSubmit={handleSubmit(onSubmit)}>
-                <input name="email" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="Email address" onChange={handleEmailInput}></input>
-                <input name="password" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="password" onChange={handlePasswordInput}></input>
-                <input className="submit-button"  type="submit" value="Add" />
-            </form>
-          </AccordionDetails>
-        </Accordion>
+        <>
+          <h2 className="mod-settings-header">More</h2>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2a-content"
+              id="panel2a-header"
+              style={{color: 'rgb(245, 37, 89'}}
+            >
+              <Typography><GroupAddIcon /> Add new moderator</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <form id="addModeratorForm" onSubmit={handleSubmit(onSubmit)}>
+                  <input name="email" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="Email address" onChange={handleEmailInput}></input>
+                  <input name="password" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="password" onChange={handlePasswordInput}></input>
+                  <input className="submit-button"  type="submit" value="Add" />
+              </form>
+            </AccordionDetails>
+          </Accordion>
+        </>
       }
     </>
   )

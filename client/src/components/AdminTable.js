@@ -11,6 +11,14 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { v4 as uuidv4 } from 'uuid';
 
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import WarningIcon from '@material-ui/icons/Warning';
+import { useForm } from 'react-hook-form';
+
 
 // Function labels data in the table
 function processCatCallsData({ geometry, properties, _id, type }) {
@@ -31,9 +39,12 @@ function processCatCallsData({ geometry, properties, _id, type }) {
   };
 }
 
-export default function AdminTable({ catcallData, updateCatcall, value, authorized }) {
+export default function AdminTable({ catcallData, updateCatcall, value, authorized, emptyTrash }) {
 
   const [showSettings, setShowSettings] = useState(false);
+  const [showTrash, setShowTrash] = useState(false);
+  const { register, handleSubmit, errors } = useForm();
+
   const [rows, setRows] = useState(catcallData.map(catcall => processCatCallsData(catcall)))
   //rows is a list of all data in above format ----> might not be needed as it is taken care of by useEffect?
 
@@ -42,22 +53,27 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
     switch (value) {
       case 'unverified':
         setShowSettings(false);
+        setShowTrash(false);
         switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === false);
         break;
       case 'chalk':
         setShowSettings(false);
+        setShowTrash(false);
         switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === true && el.properties.chalked === false && el.properties.listedForChalk === true);
         break;
       case 'database':
         setShowSettings(false);
+        setShowTrash(false);
         switchedRows = catcallData.filter(el => el.properties.trash === false);
         break;
       case 'trash':
         setShowSettings(false);
+        setShowTrash(true);
         switchedRows = catcallData.filter(el => el.properties.trash === true);
         break;
       case 'settings':
         setShowSettings(true);
+        setShowTrash(false);
         break;
       default: //unverified
         switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === false);
@@ -73,6 +89,11 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
       return row.id !== variables.id
     })
     setRows(newRows);
+  }
+
+  const onSubmit = async (data) => {
+    await emptyTrash();
+    setRows([]);
   }
 
   return (
@@ -98,6 +119,28 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
         </Table>
       </TableContainer>
     }
+    { showTrash ? 
+        <>
+          <h2 className="mod-settings-header">More</h2>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2a-content"
+              id="panel2a-header"
+              style={{color: 'rgb(245, 37, 89'}}
+            >
+              <Typography><WarningIcon /> Empty Trash</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                  <input className="submit-button"  type="submit" value="Permanently empty trash" />
+              </form>
+            </AccordionDetails>
+          </Accordion>
+        </>
+        :
+        <></>
+      }
     </>
   )
 }

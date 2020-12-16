@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
-import { UPDATE_CATCALL, GET_CATCALLS, GET_MODERATOR_BY_ID} from '../api/queries'
+import { UPDATE_CATCALL, GET_CATCALLS, GET_MODERATOR_BY_ID, EMPTY_TRASH } from '../api/queries'
 import AdminTable from './AdminTable';
 
 import { Player } from '@lottiefiles/react-lottie-player';
 
-/**Material UI Imports */
 import { Container } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -31,8 +30,12 @@ function Dashboard({ token }) {
   const [getModeratorById] = useLazyQuery(GET_MODERATOR_BY_ID, {onCompleted: (data) => {setAuthorization(data.getModeratorById.canAdd)}});
 
   const [value, setValue] = React.useState('unverified'); //keeps track of selected tab
-  const [updateCatcall] = useMutation(UPDATE_CATCALL);
+
   let { loading, error, data } = useQuery(GET_CATCALLS);
+  const [updateCatcall] = useMutation(UPDATE_CATCALL);
+  const [ emptyTrash ] = useMutation(EMPTY_TRASH, {
+    refetchQueries: [  {query: GET_CATCALLS} ]
+  });
 
   useEffect(() => {
     getModeratorById({variables: {id: token} });
@@ -92,7 +95,10 @@ function Dashboard({ token }) {
             </Tabs>
           </Paper>
 
-          {data ? (<AdminTable catcallData={data.getCatcalls} value={value} updateCatcall={updateCatcall} authorized={authorization} />) : (<h2>Loading...</h2>)}
+          {data ? 
+          (<AdminTable catcallData={data.getCatcalls} value={value} updateCatcall={updateCatcall} authorized={authorization} emptyTrash={emptyTrash} />) 
+          : 
+          (<h2>Loading...</h2>)}
 
       </div>
         <Container >

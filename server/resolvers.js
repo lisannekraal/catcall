@@ -67,7 +67,7 @@ const catcallResolver = {
         if (await Moderator.findOne({ _id: context.mod._id })) {
           try {
             await Catcall.deleteMany({'properties.trash': true});
-            return true;
+            return 'deleted';
           } catch (err) {
             return err;
           }
