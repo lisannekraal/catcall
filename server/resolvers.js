@@ -31,7 +31,7 @@ const catcallResolver = {
     },
 
     async getVerifiedCatcalls () {
-      const result = await Catcall.find({'properties.verified': true});
+      const result = await Catcall.find({'properties.verified': true, 'properties.trash': false});
       return result;
     }
   },
