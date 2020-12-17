@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
 import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
@@ -42,8 +42,9 @@ function Header(props) {
 
   let history = useHistory();
   const classes = useStyles();
+  const [ navigations, setNavigations ] = useState([]);
 
-  const navLinks = [
+  let navLinksPermanent = [
     { 
       title: 'map', 
       classN: 'fas fa-map-marked-alt', 
@@ -56,13 +57,33 @@ function Header(props) {
       title: 'community', 
       classN: 'fab fa-instagram', 
       path: () => window.open("https://www.instagram.com/catcallsofams/", "_blank") 
-    },
-    { 
-      title: props.modButton.text, 
-      classN: 'fas fa-cog', 
-      path: () => history.push(props.modButton.to)
     }
   ];
+
+  useEffect(() => {
+    if (props.token && props.token !== 'null') {
+      setNavigations([...navLinksPermanent, 
+        {
+          title: 'dashboard', 
+          classN: 'fas fa-cog', 
+          path: () => history.push('/dashboard')
+        },
+        {
+        title: 'logout', 
+        classN: 'fas fa-user', 
+        path: () => {
+          props.removeCookie('token');
+          history.push('/');
+        }
+      }]);
+    } else {
+      setNavigations([...navLinksPermanent, {
+          title: 'moderator', 
+          classN: 'fas fa-cog', 
+          path: () => history.push('/login')
+      }]);
+    }
+  }, [props.token]);
 
   return (
     <AppBar color='transparent' position="absolute" elevation={0} data-testid="navbar">
@@ -85,7 +106,7 @@ function Header(props) {
                 <Button color='inherit' startIcon={<Icon className='fas fa-info-circle' fontSize="small" style={{ marginRight: 7 }} />}>About</Button>
               </Link>
 
-              {navLinks.map(({ title, classN, path }) => (
+              {navigations.map(({ title, classN, path }) => (
                 <Button
                   key={uuidv4()}
                   onClick={path}
@@ -105,7 +126,7 @@ function Header(props) {
 
         {/* Side drawer component for smaller screens */}
         <Hidden lgUp>
-          <SideDrawer navLinks={navLinks} />
+          <SideDrawer navLinks={navigations} />
         </Hidden>
 
       </Toolbar>
