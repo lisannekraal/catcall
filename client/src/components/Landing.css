@@ -172,7 +172,15 @@
   margin-top: 20px;
 }
 
-.community-content button p {
+.about-content button {
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 20px;
+}
+
+button p {
   margin: 0 0;
   font-size: 1.2rem;
 }
@@ -220,3 +228,6 @@
   }
 }
 
+.help-link {
+  color: white;
+}

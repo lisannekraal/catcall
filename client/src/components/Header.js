@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Header(props) {
+function Header({ token, removeCookie, setMod }) {
 
   let history = useHistory();
   const classes = useStyles();
@@ -49,19 +49,19 @@ function Header(props) {
       title: 'map', 
       classN: 'fas fa-map-marked-alt', 
       path: () => history.push({
-        pathname: '/catcalls',
-        state: { dialog: 'This is an overview of all catcalls reported. For more information, see the info-button on the left.'}
+        pathname: '/catcalls'
+        // state: { dialog: 'This is an overview of all catcalls reported. Disclaimer: this application contains violent language and words of racism, sexual harassment and hate speach. Are you younger than 18 years old? Ask your guardian.'}
       }) 
     },
     { 
       title: 'community', 
       classN: 'fab fa-instagram', 
-      path: () => window.open("https://www.instagram.com/catcallsofams/", "_blank") 
+      path: () => window.open('https://www.instagram.com/catcallsofams/', '_blank') 
     }
   ];
 
   useEffect(() => {
-    if (props.token && props.token !== 'null') {
+    if (token && token !== 'null') {
       setNavigations([...navLinksPermanent, 
         {
           title: 'dashboard', 
@@ -72,8 +72,8 @@ function Header(props) {
         title: 'logout', 
         classN: 'fas fa-user', 
         path: () => {
-          props.removeCookie('token');
-          props.setMod(false);
+          removeCookie('token');
+          setMod(false);
           history.push('/');
         }
       }]);
@@ -84,7 +84,7 @@ function Header(props) {
           path: () => history.push('/login')
       }]);
     }
-  }, [props.token]);
+  }, [token]);
 
   return (
     <AppBar color='transparent' position="absolute" elevation={0} data-testid="navbar">

@@ -7,7 +7,7 @@ import './Login.css';
 
 import { useForm } from 'react-hook-form';
 
-function Login(props) {
+function Login({ setCookie, setMod }) {
   let history = useHistory();
   const { register, handleSubmit } = useForm();
   const [validateModerator, { loading, data, error }] = useLazyQuery(VALIDATE_MODERATOR);
@@ -22,10 +22,13 @@ function Login(props) {
 
   useEffect(()=>{
     if (data) {
-      console.log(data);
-      props.setCookie('token', data.validateModerator.token, { path: '/' });
-      props.setMod(data.validateModerator);
-      history.push('/dashboard')
+      setCookie(
+        'token', 
+        data.validateModerator.token, 
+        { path: '/' }
+      );
+      setMod(data.validateModerator);
+      history.push('/dashboard');
     }
   }, [data, error]);
 

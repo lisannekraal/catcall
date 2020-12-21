@@ -37,7 +37,7 @@ export default function ModeratorSettings({authorized}) {
     refetchQueries: [  {query: GET_MODERATORS} ]
   });
 
-  const { register, handleSubmit, errors } = useForm();
+  const { handleSubmit } = useForm();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -77,6 +77,8 @@ export default function ModeratorSettings({authorized}) {
     setModerators(newModerators);
   }
 
+  if (loading) return <p>Loading ...</p>;
+  if (error) return <p>Something went wrong...</p>
   return (
     <>
       <TableContainer component={Paper}>

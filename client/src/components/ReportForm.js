@@ -100,7 +100,7 @@ function ReportForm() {
                 }
               })}
             ></input>
-            <small id="context-help">Not required. Moderators can edit this part of your report if necessary. For more details, see <a style={{color: "black"}} href="/help" target="_blank">our house rules</a>.</small>
+            <small id="context-help">Not required. Moderators can edit this part of your report if necessary. For more details, see <a style={{color: "black"}} href="/help#houserules" target="_blank">our house rules</a>.</small>
             <p className="error-message">{errors.context && errors.context.message}</p>
 
           </div>

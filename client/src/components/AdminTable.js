@@ -43,7 +43,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
 
   const [showSettings, setShowSettings] = useState(false);
   const [showTrash, setShowTrash] = useState(false);
-  const { register, handleSubmit, errors } = useForm();
+  const { handleSubmit } = useForm();
 
   const [rows, setRows] = useState(catcallData.map(catcall => processCatCallsData(catcall)))
   //rows is a list of all data in above format ----> might not be needed as it is taken care of by useEffect?

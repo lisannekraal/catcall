@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
-import { UPDATE_CATCALL, GET_CATCALLS, GET_MODERATOR_BY_ID, EMPTY_TRASH } from '../api/queries'
+import { useQuery, useMutation } from '@apollo/client';
+import { UPDATE_CATCALL, GET_CATCALLS, EMPTY_TRASH } from '../api/queries'
 import AdminTable from './AdminTable';
 
 import { Player } from '@lottiefiles/react-lottie-player';
 
-import { Container } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
@@ -27,7 +26,6 @@ function Dashboard({ token, mod }) {
 
   const classes = useStyles();
   const [ authorization, setAuthorization ] = useState(false);
-  // const [getModeratorById] = useLazyQuery(GET_MODERATOR_BY_ID, {onCompleted: (data) => {setAuthorization(data.getModeratorById.canAdd)}});
 
   const [value, setValue] = React.useState('unverified'); //keeps track of selected tab
 
@@ -39,8 +37,7 @@ function Dashboard({ token, mod }) {
 
   useEffect(() => {
     setAuthorization(mod.canAdd);
-    // getModeratorById({variables: {id: token} });
-  }, []);
+  }, [mod]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -102,14 +99,6 @@ function Dashboard({ token, mod }) {
           (<h2>Loading...</h2>)}
 
       </div>
-        <Container >
-          
-
-          
-        </Container>
-
-
-
       <div className="header-footer"></div>
     </>
   );

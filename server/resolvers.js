@@ -109,6 +109,7 @@ const moderatorResolver = {
       returnObj.token = jwt.sign(
         { email: mod.email, id: mod._id },
         process.env.JWT_SECRET_KEY,
+        { expiresIn: 60 * 60 }
       );
       return returnObj;
     }

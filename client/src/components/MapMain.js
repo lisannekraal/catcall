@@ -3,14 +3,12 @@ import { useLocation } from "react-router-dom";
 import { useQuery } from '@apollo/client';
 import MapGL, { Source, Layer, Image, Popup, NavigationControl, GeolocateControl, ScaleControl, FullscreenControl } from '@urbica/react-map-gl';
 
-import DialogMap from './DialogMap';
+import DialogComp from './DialogComp';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './MapMain.css';
 
 import Icon from '../assets/bullhorn.png';
 import { GET_MAP_CATCALLS } from '../api/queries'
-import MapDrawer from "./MapDrawer";
-// import { Dialog } from "@material-ui/core";
 import { Player } from '@lottiefiles/react-lottie-player';
 
 function MapMain () {
@@ -124,13 +122,6 @@ function MapMain () {
         />
 
         { popup && popup }
-        
-        <div className="map-info">
-          <MapDrawer  />
-        </div>
-
-
-
         <NavigationControl showCompass showZoom position='top-right' />
         <GeolocateControl position='top-right' />
         <FullscreenControl position='top-right' />
@@ -138,8 +129,7 @@ function MapMain () {
 
 
       </MapGL>
-
-    <DialogMap text={dialog} />
+    {dialog && <DialogComp text={dialog} />}
     </div>
   );
 }

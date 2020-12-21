@@ -44,15 +44,6 @@ function App() {
     })
   });
 
-  function setModerator(moderatorObj) {
-    setMod(moderatorObj);
-    console.log('new moderator is set from App.js');
-    console.log(mod);
-  }
-
-  console.log('new moderator is set from App.js');
-  console.log(mod);
-
   return (
     <ApolloProvider client={client}>
       <Router>
