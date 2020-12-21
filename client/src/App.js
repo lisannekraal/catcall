@@ -1,5 +1,5 @@
 import './App.css';
-
+import React, { useState } from 'react';
 import { ApolloProvider, createHttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
@@ -19,6 +19,7 @@ import Header from './components/Header';
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const [mod, setMod] = useState(false);
 
   const httpLink = createHttpLink({
     uri: process.env.REACT_APP_APOLLO_SERVER,
@@ -43,11 +44,20 @@ function App() {
     })
   });
 
+  function setModerator(moderatorObj) {
+    setMod(moderatorObj);
+    console.log('new moderator is set from App.js');
+    console.log(mod);
+  }
+
+  console.log('new moderator is set from App.js');
+  console.log(mod);
+
   return (
     <ApolloProvider client={client}>
       <Router>
 
-        <Header token={cookies.token} removeCookie={removeCookie} />
+        <Header token={cookies.token} removeCookie={removeCookie} setMod={setMod} />
 
         <Switch>
           <Route exact path="/">
@@ -60,10 +70,10 @@ function App() {
             <ReportForm />
           </Route>
           <Route exact path="/login">
-            <Login setCookie={setCookie}/>
+            <Login setCookie={setCookie} setMod={setMod}/>
           </Route>
           <Route exact path="/dashboard">
-            <Dashboard token={cookies.token} />
+            <Dashboard token={cookies.token} mod={mod} />
           </Route>
           <Route exact path="/catcalls/edit">
             <EditForm />

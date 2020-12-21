@@ -23,11 +23,11 @@ const useStyles = makeStyles({
   },
 });
 
-function Dashboard({ token }) {
+function Dashboard({ token, mod }) {
 
   const classes = useStyles();
   const [ authorization, setAuthorization ] = useState(false);
-  const [getModeratorById] = useLazyQuery(GET_MODERATOR_BY_ID, {onCompleted: (data) => {setAuthorization(data.getModeratorById.canAdd)}});
+  // const [getModeratorById] = useLazyQuery(GET_MODERATOR_BY_ID, {onCompleted: (data) => {setAuthorization(data.getModeratorById.canAdd)}});
 
   const [value, setValue] = React.useState('unverified'); //keeps track of selected tab
 
@@ -38,7 +38,8 @@ function Dashboard({ token }) {
   });
 
   useEffect(() => {
-    getModeratorById({variables: {id: token} });
+    setAuthorization(mod.canAdd);
+    // getModeratorById({variables: {id: token} });
   }, []);
 
   const handleChange = (event, newValue) => {

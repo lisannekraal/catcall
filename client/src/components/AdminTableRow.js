@@ -94,7 +94,7 @@ function Row(props) {
     } else if (button.name === 'edit') {
       getCatcall({variables: {id: row.id}});
     } else if (button.name === 'email') {
-      alert('you will be notified');
+      alert('Unfortunately this feature does not work just yet ;)');
     } else if (button.name === 'chalk') {
       getCatcall({variables: {id: row.id}});
     } else if (button.name === 'unstage') {

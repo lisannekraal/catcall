@@ -76,11 +76,11 @@ function MapMain () {
             'icon-size': 0.06
           }}
           onClick={e => {
-            setViewport({
-              latitude: e.features[0].geometry.coordinates[1],
-              longitude: e.features[0].geometry.coordinates[0],
-              zoom: 14
-            });
+            // setViewport({
+            //   latitude: e.features[0].geometry.coordinates[1],
+            //   longitude: e.features[0].geometry.coordinates[0],
+            //   zoom: 14
+            // });
             setPopup(<Popup longitude={e.lngLat.lng} latitude={e.lngLat.lat} closeButton={true} closeOnClick={true} onClick={setPopup("")}>
             <div className="popup-content">
 

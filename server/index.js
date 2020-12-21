@@ -1,4 +1,5 @@
 const dotenv = require('dotenv').config();
+const jwt = require('jsonwebtoken');
 const { ApolloServer } = require('apollo-server');
 const typeDefs = require('./typeDefs');
 const resolvers = require('./resolvers');
@@ -25,13 +26,17 @@ const server = new ApolloServer({
     loggerPlugin,
   ],
   context: async ({req}) => {
-    // Get the user token from the headers.
     const token = req.headers.authorization || '';
-
-    // try to retrieve a user with the token
     let mod = {};
-    if (token !== '') {
-      mod = await resolvers.Query.getModeratorById(null, {id: token});
+
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+      mod = await resolvers.Query.getModeratorById(null, {id: decoded.id});
+    } catch (e) {
+      console.log(e)
+      // throw new AuthenticationError(
+      //   'Authentication token is invalid, please log in',
+      // )
     }
 
     // add the user to the context

@@ -73,6 +73,7 @@ function Header(props) {
         classN: 'fas fa-user', 
         path: () => {
           props.removeCookie('token');
+          props.setMod(false);
           history.push('/');
         }
       }]);

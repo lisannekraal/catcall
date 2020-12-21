@@ -22,7 +22,9 @@ function Login(props) {
 
   useEffect(()=>{
     if (data) {
-      props.setCookie('token', data.validateModerator._id, { path: '/' });
+      console.log(data);
+      props.setCookie('token', data.validateModerator.token, { path: '/' });
+      props.setMod(data.validateModerator);
       history.push('/dashboard')
     }
   }, [data, error]);

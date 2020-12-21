@@ -119,7 +119,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
         </Table>
       </TableContainer>
     }
-    { showTrash ? 
+    { showTrash && authorized ? 
         <>
           <h2 className="mod-settings-header">More</h2>
           <Accordion>

@@ -107,6 +107,7 @@ const typeDefs = gql`
     email: String!
     password: String!
     canAdd: Boolean
+    token: String
   }
 
   input ModeratorInput {

@@ -141,6 +141,7 @@ query validateModerator($email: String!, $password: String!) {
     _id
     email
     canAdd
+    token
   }
 }
 `;

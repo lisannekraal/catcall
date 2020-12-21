@@ -1,6 +1,7 @@
 const Catcall = require('./models/catcall.model');
 const Moderator = require('./models/moderator.model');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 const merge = require('lodash.merge');
 const { Error } = require('mongoose');
 
@@ -104,7 +105,12 @@ const moderatorResolver = {
       const mod = await Moderator.findOne({ email: email });
       const validatedPass = await bcrypt.compare(password, mod.password);
       if (!validatedPass) throw new Error();
-      return mod;
+      const returnObj = JSON.parse(JSON.stringify(mod));
+      returnObj.token = jwt.sign(
+        { email: mod.email, id: mod._id },
+        process.env.JWT_SECRET_KEY,
+      );
+      return returnObj;
     }
   },
 
