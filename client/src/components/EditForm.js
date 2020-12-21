@@ -32,14 +32,17 @@ function EditForm() {
     setUrl(e.target.value);
   }
 
-  const onSubmit = async (newData) => {    
+  const onSubmit = async (newData) => {
+    let chalkedVal = false;
+    if (newData.url) chalkedVal = true;
     const variables = {
       id: location.state.catcall._id,
       catcall: {
         properties: {
           quote: newData.quote,
           context: newData.context ? newData.context : "",
-          url: newData.url ? newData.url : ""
+          url: newData.url ? newData.url : "",
+          chalked: chalkedVal
         }
       }
     };

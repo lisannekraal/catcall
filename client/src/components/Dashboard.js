@@ -72,7 +72,7 @@ function Dashboard({ token, mod }) {
   return (
     <>
       <div className="header-footer"></div>
-      <div >
+      <div class="dashboard-container">
         <Paper square className={classes.root}>
             <Tabs
               value={value}

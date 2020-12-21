@@ -43,6 +43,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
 
   const [showSettings, setShowSettings] = useState(false);
   const [showTrash, setShowTrash] = useState(false);
+  const [emptyTableMessage, setEmptyTableMessage] = useState('No new catcalls to verify');
   const { handleSubmit } = useForm();
 
   const [rows, setRows] = useState(catcallData.map(catcall => processCatCallsData(catcall)))
@@ -54,21 +55,25 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
       case 'unverified':
         setShowSettings(false);
         setShowTrash(false);
+        setEmptyTableMessage('No new catcalls to verify');
         switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === false);
         break;
       case 'chalk':
         setShowSettings(false);
         setShowTrash(false);
+        setEmptyTableMessage('No catcalls on the list to chalk');
         switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === true && el.properties.chalked === false && el.properties.listedForChalk === true);
         break;
       case 'database':
         setShowSettings(false);
         setShowTrash(false);
+        setEmptyTableMessage('Database is empty');
         switchedRows = catcallData.filter(el => el.properties.trash === false);
         break;
       case 'trash':
         setShowSettings(false);
         setShowTrash(true);
+        setEmptyTableMessage('No catcalls currently in trash');
         switchedRows = catcallData.filter(el => el.properties.trash === true);
         break;
       case 'settings':
@@ -103,6 +108,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
     : 
       <TableContainer component={Paper}>
         {/* generic dashboard table for all other functionalities */}
+        { rows.length > 0 ?
         <Table aria-label="collapsible table">
           <TableHead>
             <TableRow>
@@ -116,7 +122,8 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
               <Row key={uuidv4()} tab={value} row={row} clickButtonUpdate={clickButtonUpdate} />
             ))}
           </TableBody>
-        </Table>
+        </Table> :
+        <div style={{textAlign: 'center', padding: '50px'}}>{emptyTableMessage}</div>}
       </TableContainer>
     }
     { showTrash && authorized ? 

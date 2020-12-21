@@ -80,8 +80,7 @@ function Row(props) {
 
   function handleClick(button) {
     if (button.name === 'verify') {
-      clickButtonUpdate({
-        variables: {
+      clickButtonUpdate({ variables: {
           id: row.id,
           catcall: {
             properties: {
@@ -98,8 +97,7 @@ function Row(props) {
     } else if (button.name === 'chalk') {
       getCatcall({variables: {id: row.id}});
     } else if (button.name === 'unstage') {
-      clickButtonUpdate({
-        variables: {
+      clickButtonUpdate({ variables: {
           id: row.id,
           catcall: {
             properties: {
@@ -109,8 +107,7 @@ function Row(props) {
         }
       })
     } else if (button.name === 'delete') {
-      clickButtonUpdate({
-        variables: {
+      clickButtonUpdate({ variables: {
           id: row.id,
           catcall: {
             properties: {
@@ -120,8 +117,7 @@ function Row(props) {
         }
       })
     } else if (button.name === 'undo') {
-      clickButtonUpdate({
-        variables: {
+      clickButtonUpdate({ variables: {
           id: row.id,
           catcall: {
             properties: {
