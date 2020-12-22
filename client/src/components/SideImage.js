@@ -17,7 +17,7 @@ function SideImage({ url }) {
 
   const sideDrawerList = anchor => (
     <div
-      style={{width: '350px'}}
+      style={{width: '330px'}}
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >

@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import './Landing.css';
 
 import Footer from './Footer';
-import InstaTile from './InstaTile';
 
 import Carousel from 'react-material-ui-carousel'
 
@@ -90,7 +89,7 @@ function Landing () {
         </Carousel>
       </div>
 
-      <InstaTile />
+
 
       <div className="landing-why" id="about">
         <div className="why-title">Why</div>
@@ -104,7 +103,9 @@ function Landing () {
       <div className="landing-community">
         <div className="community-content">
           <div className="community-title">Get involved</div>
-          <div className="community-text">See the social media channel for actions of Catcalls of Amsterdam: the stories of catcalls being reported to the organization and pictures of thse chalk back actions. Join the discussion and share the chalked catcalls so we can create awareness.</div>
+          <div style={{margin: '30px auto', width: '550px', height: '550px'}}>
+            <iframe src="https://snapwidget.com/embed/900599" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style={{border: 'none', overflow: 'scroll', height: '100%', width: '100%'}}></iframe>
+          </div>
           <a href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow">
             <button><p>Join the community on Instagram</p></button>
           </a>
