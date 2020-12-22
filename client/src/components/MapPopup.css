@@ -1,0 +1,42 @@
+.popup-content {
+  max-width: 300px;
+}
+
+.popup-title {
+  color: rgba(29, 113, 183);
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(29, 113, 183);
+}
+
+.popup-date {
+  min-width: 100px;
+  text-align: end;
+}
+
+.popup-quote {
+  font-size: 1rem;
+  padding-top: 3px;
+}
+
+.popup-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+.popup-context {
+  font-style: italic;
+}
+
+.popup-img {
+  width: 50px;
+}
+
+.popup-icon {
+  margin-right: 2px;
+  color: rgb(245, 37, 89);
+}

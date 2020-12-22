@@ -3,9 +3,9 @@ import { Link, useHistory } from 'react-router-dom';
 import './Landing.css';
 
 import Footer from './Footer';
+import InstaTile from './InstaTile';
 
 import Carousel from 'react-material-ui-carousel'
-import {Paper} from '@material-ui/core'
 
 import LogoRot from '../assets/catcallsofrot.png';
 import LogoUtr from '../assets/catcallsofutr.png';
@@ -37,7 +37,7 @@ function Landing () {
         logo: LogoGrunn,
         status: 'coming soon'}
     ]
-  ]
+  ];
 
   return (
     <div data-testid="landing" className="landing">
@@ -90,80 +90,7 @@ function Landing () {
         </Carousel>
       </div>
 
-      {/* <div className="landing-cities">
-        <div className="city">
-          <div>
-            <div className="city-logo">
-              <img src={LogoRot} alt="logo-rot"></img>
-            </div>
-          </div>
-          <div>
-            <div className="city-name"><i className="fas fa-map-marker-alt"></i> ROTTERDAM</div>
-            <div className="city-description">coming soon</div>
-          </div>
-        </div>
-
-        <div className="city">
-          <div>
-            <div className="city-logo">
-              <img src={LogoUtr} alt="logo-utr"></img>
-            </div>
-          </div>
-          <div>
-            <div className="city-name"><i className="fas fa-map-marker-alt"></i> UTRECHT</div>
-            <div className="city-description">coming soon</div>
-          </div>
-        </div>
-
-        <div className="city">
-          <div>
-            <div className="city-logo">
-              <img src={LogoNyc} alt="logo-nyc"></img>
-            </div>
-          </div>
-          <div>
-            <div className="city-name"><i className="fas fa-map-marker-alt"></i> NEW YORK</div>
-            <div className="city-description">coming soon</div>
-          </div>
-        </div> */}
-
-        {/* <div className="city">
-          <div>
-            <div className="city-logo">
-              <img src={LogoNyc} alt="logo-ant"></img>
-            </div>
-          </div>
-          <div>
-            <div className="city-name"><i className="fas fa-map-marker-alt"></i> ANTWERP</div>
-            <div className="city-description">coming soon</div>
-          </div>
-        </div>
-
-        <div className="city">
-          <div>
-            <div className="city-logo">
-              <img src={LogoNyc} alt="logo-ber"></img>
-            </div>
-          </div>
-          <div>
-            <div className="city-name"><i className="fas fa-map-marker-alt"></i> BERLIN</div>
-            <div className="city-description">coming soon</div>
-          </div>
-        </div>
-
-        <div className="city">
-          <div>
-            <div className="city-logo">
-              <img src={LogoGrunn} alt="logo-grunn"></img>
-            </div>
-          </div>
-          <div>
-            <div className="city-name"><i className="fas fa-map-marker-alt"></i> GRONINGEN</div>
-            <div className="city-description">coming soon</div>
-          </div>
-        </div>
-
-      </div> */}
+      <InstaTile />
 
       <div className="landing-why" id="about">
         <div className="why-title">Why</div>
@@ -198,9 +125,6 @@ function Landing () {
       </div>
 
       <Footer />
-      {/* <div className="footer">
-
-      </div> */}
     </div>
   );
 }
