@@ -82,24 +82,25 @@
 }
 
 .landing-cities {
-  max-width: 800px;
-  margin: auto;
   display: flex;
   justify-content: center;
-  align-items: stretch;
-  flex-wrap: wrap;
+  margin: 50px auto;
+  max-width: 400px;
+} 
+
+.carousel-content {
+  display: flex;
 }
 
 .city {
-  margin: 20px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  margin: 10px;
+  text-align: center;
 }
 
 .city-logo {
   height: 80px;
   width: 80px;
+  margin-left: 20px;
 }
 
 .city-logo img {

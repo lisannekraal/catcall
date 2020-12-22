@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { v4 as uuidv4 } from 'uuid';
+import { Star, StarOutline } from '@material-ui/icons';
 
 const useRowStyles = makeStyles({
   root: {
@@ -129,23 +130,46 @@ function Row(props) {
     }
   }
 
+  function handleStarClick() {
+    console.log(row);
+    clickButtonUpdate({ variables: {
+      id: row.id,
+      catcall: {
+        properties: {
+          starred: !row.starred
+        }
+      }
+    }});
+    console.log(row);
+  }
+
   if (loading) return <p>Loading ...</p>;
   return (
     <React.Fragment>
 
       {/* 1. generic row of catcall */}
       <TableRow className={classes.root} >
+        {/*1: allowicon*/}
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
+
+        {/*2: star*/}
+        <TableCell>
+          {row.starred ?
+          <Star onClick={() => handleStarClick()} />  :
+          <StarOutline onClick={() => handleStarClick()} />}
+        </TableCell>
+
+        {/*3: quote*/}
         <TableCell component="th" scope="row">
           {row.catCallQuote}
         </TableCell>
-        <TableCell align="center">{row.dateAdded}</TableCell>
+
+        {/*4: action*/}
         <TableCell>
-          {/* buttons to show in this specific tab */}
           {buttonstoShow.map((button) => (
             <Button key={uuidv4()} variant="contained" color="inherit" size="small" onClick={() => handleClick(button)} className={classes[button.class]} >
               {button.name}
@@ -164,16 +188,24 @@ function Row(props) {
               </Typography>
               <Table size="small" aria-label="info">
                 <TableBody>
+
                   <TableRow key={uuidv4()}>
                     <TableCell component="th" scope="row">
-                      Date CatCall
+                      Date added
+                    </TableCell>
+                    <TableCell >{row.dateAdded}</TableCell>
+                  </TableRow>
+
+                  <TableRow key={uuidv4()}>
+                    <TableCell component="th" scope="row">
+                      Date catcall
                     </TableCell>
                     <TableCell >{row.dateCatcall}</TableCell>
                   </TableRow>
 
                   <TableRow key={uuidv4()}>
                     <TableCell component="th" scope="row">
-                      Position
+                      Location
                     </TableCell>
                     <TableCell>{`${row.coordinates[0].toFixed(3)}.. ${row.coordinates[1].toFixed(3)}..`}</TableCell>
                   </TableRow>

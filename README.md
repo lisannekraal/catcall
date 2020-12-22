@@ -33,7 +33,7 @@ Moderators are defined by each verified local 'Catcalls of...' organisor, as wel
 - create a .env through `touch .env` in client folder
 - define localhost url as `REACT_APP_APOLLO_SERVER={your localhost}`
 - add Mapbox access token as `REACT_APP_MAPBOX_ACCESS_TOKEN={your token}`
-- add personal recaptcha key as `REACT_APP_RECAPTCHA_KEY={your key}
+- add personal recaptcha key as `REACT_APP_RECAPTCHA_KEY={your key}`
 - add `SKIP_PREFLIGHT_CHECK=true`
 - `yarn start` in server to start server listening
 - `yarn start` in client folder to start React app

@@ -11,12 +11,14 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { v4 as uuidv4 } from 'uuid';
 
+
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import WarningIcon from '@material-ui/icons/Warning';
+
+import { ExpandMore, Warning } from '@material-ui/icons';
+
 import { useForm } from 'react-hook-form';
 
 
@@ -36,6 +38,7 @@ function processCatCallsData({ geometry, properties, _id, type }) {
     listedForChalk: properties.listedForChalk,
     trash: properties.trash,
     url: properties.url,
+    starred: properties.starred
   };
 }
 
@@ -113,8 +116,11 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
           <TableHead>
             <TableRow>
               <TableCell />
+              <TableCell />
               <TableCell>Quote</TableCell>
-              <TableCell align="center">Date Added</TableCell>
+              <TableCell>Actions </TableCell>
+              {/* <TableCell>Quote</TableCell>
+              <TableCell align="center">Date Added</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -131,12 +137,12 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
           <h2 className="mod-settings-header">More</h2>
           <Accordion>
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ExpandMore />}
               aria-controls="panel2a-content"
               id="panel2a-header"
               style={{color: 'rgb(245, 37, 89'}}
             >
-              <Typography><WarningIcon /> Empty Trash</Typography>
+              <Typography><Warning /> Empty Trash</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <form onSubmit={handleSubmit(onSubmit)}>

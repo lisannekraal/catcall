@@ -4,12 +4,40 @@ import './Landing.css';
 
 import Footer from './Footer';
 
+import Carousel from 'react-material-ui-carousel'
+import {Paper} from '@material-ui/core'
+
 import LogoRot from '../assets/catcallsofrot.png';
 import LogoUtr from '../assets/catcallsofutr.png';
 import LogoNyc from '../assets/catcallsofnyc.png';
 import LogoGrunn from '../assets/catcallsofgrunn.png';
 
 function Landing () {
+
+  const cities = [
+    [
+        { name: 'ROTTERDAM',
+        logo: LogoRot,
+        status: 'coming soon'},
+        { name: 'UTRECHT',
+        logo: LogoUtr,
+        status: 'coming soon'},
+        { name: 'NEW YORK',
+        logo: LogoNyc,
+        status: 'coming soon'}
+    ],
+    [
+        { name: 'ANTWERP',
+        logo: LogoNyc,
+        status: 'coming soon'},
+        { name: 'BERLIN',
+        logo: LogoNyc,
+        status: 'coming soon'},
+        { name: 'GRONINGEN',
+        logo: LogoGrunn,
+        status: 'coming soon'}
+    ]
+  ]
 
   return (
     <div data-testid="landing" className="landing">
@@ -34,8 +62,35 @@ function Landing () {
         </div>
 
       </div>
-      <div className="landing-cities">
 
+
+      <div className="landing-cities">
+        <Carousel>
+          {
+            cities.map( (group, i) => 
+            <div className="carousel-content">
+              {
+                group.map( (item, i) => 
+                <div className="city">
+                  <div>
+                    <div className="city-logo">
+                      <img src={item.logo}></img>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="city-name"><i className="fas fa-map-marker-alt"></i> {item.name}</div>
+                    <div className="city-description">{item.status}</div>
+                  </div>
+                </div>
+                )
+              }
+            </div>
+            )
+          }
+        </Carousel>
+      </div>
+
+      {/* <div className="landing-cities">
         <div className="city">
           <div>
             <div className="city-logo">
@@ -70,9 +125,9 @@ function Landing () {
             <div className="city-name"><i className="fas fa-map-marker-alt"></i> NEW YORK</div>
             <div className="city-description">coming soon</div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="city">
+        {/* <div className="city">
           <div>
             <div className="city-logo">
               <img src={LogoNyc} alt="logo-ant"></img>
@@ -108,7 +163,7 @@ function Landing () {
           </div>
         </div>
 
-      </div>
+      </div> */}
 
       <div className="landing-why" id="about">
         <div className="why-title">Why</div>

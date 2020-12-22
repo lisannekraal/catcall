@@ -74,24 +74,24 @@ function Dashboard({ token, mod }) {
       <div className="header-footer"></div>
       <div class="dashboard-container">
         <Paper square className={classes.root}>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              variant="scrollable"
-              scrollButtons="on"
-              indicatorColor="secondary"
-              textColor="secondary"
-              aria-label="admin navigation"
-            >
-              <Tab icon={<VerifiedUser />} label="Verify Pending" value='unverified' wrapped />
-              <Tab icon={<Gesture />} label="To Chalk" value='chalk' wrapped/>
-              <Tab icon={<Storage />} label="Database" value='database' wrapped/>
-              <Tab icon={<Delete />} label="Trash" value='trash' wrapped/>
-              {authorization &&
-                <Tab icon={<Settings />} label="Mod Settings" value='settings' wrapped/>              
-              }
-            </Tabs>
-          </Paper>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons="on"
+            indicatorColor="secondary"
+            textColor="secondary"
+            aria-label="admin navigation"
+          >
+            <Tab icon={<VerifiedUser />} label="Verify Pending" value='unverified' wrapped />
+            <Tab icon={<Gesture />} label="To Chalk" value='chalk' wrapped/>
+            <Tab icon={<Storage />} label="Database" value='database' wrapped/>
+            <Tab icon={<Delete />} label="Trash" value='trash' wrapped/>
+            {authorization &&
+              <Tab icon={<Settings />} label="Mod Settings" value='settings' wrapped/>              
+            }
+          </Tabs>
+        </Paper>
 
           {data ? 
           (<AdminTable catcallData={data.getCatcalls} value={value} updateCatcall={updateCatcall} authorized={authorization} emptyTrash={emptyTrash} />) 
