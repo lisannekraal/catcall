@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation } from "react-router-dom";
-
 import { useMutation } from '@apollo/client';
 import { UPDATE_CATCALL } from '../api/queries';
-
 import { useForm } from 'react-hook-form';
 import './ReportForm.css';
 
@@ -57,6 +55,8 @@ function EditForm() {
         <h1>Edit Catcall</h1>
 
         <form onSubmit={handleSubmit(onSubmit)}>
+
+          {/*if location is edit url, load 'chalk' functionality, otherwise generic edit catcall/context */}
 
           { location.search === '?edit=url' ? (
 
@@ -147,7 +147,7 @@ function EditForm() {
 
             <div className="form-segment">
               <label htmlFor="context">URL of Instagram chalk image:</label>
-              <p><a href={url} target="_blank">{url}</a></p>
+              <p><a href={url} target="_blank" rel="noreferrer">{url}</a></p>
             </div>
 
           ) }
@@ -155,9 +155,6 @@ function EditForm() {
           <button type="button" className="cancel-button" onClick={()=> history.push('/dashboard') }>Cancel</button>
 
           <input className="submit-button"  type="submit" value="Submit update" />
-          {/* onClick={()=>{
-            console.log('submit executed');
-          }} */}
 
         </form>
       </div>

@@ -13,7 +13,6 @@ import Dashboard from './components/Dashboard';
 import EditForm from './components/EditForm';
 import Help from './components/Help';
 import NotFound from './components/NotFound';
-
 import Header from './components/Header';
 
 
@@ -64,7 +63,7 @@ function App() {
             <Login setCookie={setCookie} setMod={setMod}/>
           </Route>
           <Route exact path="/dashboard">
-            <Dashboard token={cookies.token} mod={mod} />
+            <Dashboard mod={mod} />
           </Route>
           <Route exact path="/catcalls/edit">
             <EditForm />

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { Drawer, Button } from "@material-ui/core"
-import InstaTile from './InstaTile'
+import React, { useState } from 'react';
+import { Drawer, Button } from '@material-ui/core';
+import InstaTile from './InstaTile';
 
 function SideImage({ url }) {
 
@@ -24,7 +24,6 @@ function SideImage({ url }) {
       <InstaTile url={url} />
     </div>
   );
-
 
   return (
     <React.Fragment>

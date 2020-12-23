@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
 import { useQuery, useMutation } from '@apollo/client';
 import { UPDATE_CATCALL, GET_CATCALLS, EMPTY_TRASH } from '../api/queries'
 import AdminTable from './AdminTable';
-
 import { Player } from '@lottiefiles/react-lottie-player';
 
-import Paper from '@material-ui/core/Paper';
+import { Paper, Tabs, Tab } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import VerifiedUser from '@material-ui/icons/VerifiedUser';
 import Gesture from '@material-ui/icons/Gesture';
 import Storage from '@material-ui/icons/Storage';
@@ -22,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Dashboard({ token, mod }) {
+function Dashboard({ mod }) {
 
   const classes = useStyles();
   const [ authorization, setAuthorization ] = useState(false);

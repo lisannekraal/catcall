@@ -33,7 +33,7 @@ const server = new ApolloServer({
       const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
       mod = await resolvers.Query.getModeratorById(null, {id: decoded.id});
     } catch (e) {
-      console.log(e)
+      // console.log(e)
       // throw new AuthenticationError(
       //   'Authentication token is invalid, please log in',
       // )

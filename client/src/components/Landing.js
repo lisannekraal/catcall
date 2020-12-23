@@ -1,9 +1,7 @@
 import React from "react";
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Landing.css';
-
 import Footer from './Footer';
-
 import Carousel from 'react-material-ui-carousel'
 
 import LogoRot from '../assets/catcallsofrot.png';
@@ -73,7 +71,7 @@ function Landing () {
                 <div className="city">
                   <div>
                     <div className="city-logo">
-                      <img src={item.logo}></img>
+                      <img alt="city-logo" src={item.logo}></img>
                     </div>
                   </div>
                   <div>

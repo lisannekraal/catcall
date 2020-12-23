@@ -1,8 +1,5 @@
 import React from 'react';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
+import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import './Help.css';
 
@@ -19,8 +16,8 @@ function Help() {
           <ul>
             <li>Emergency phone number Dutch Police: <a href="tel:112">112</a></li>
             <li>Non-emergency number Dutch Police: <a href="tel:0900-8844">0900-8844</a></li>
-            <li>Non-emergency number for reporting LHBTI+ harassment: <a href="tel:088-1691234">088-1691234</a> and for more info <a href="https://www.politie.nl/themas/roze-in-blauw.html#:~:text=Elke%20politieman%20of%20vrouw%20kan,meldingen%20direct%20met%20112%20belt." target="_blank">click here</a>.</li>
-            <li>Use <a href="https://www.tolkcontact.nl/tolkcontact-app/wat-kun-je-met-de-app/" target="_blank">'tolkcontact-app'</a> for contacting police if you need a interpreter (sign language)</li>
+            <li>Non-emergency number for reporting LHBTI+ harassment: <a href="tel:088-1691234">088-1691234</a> and for more info <a href="https://www.politie.nl/themas/roze-in-blauw.html#:~:text=Elke%20politieman%20of%20vrouw%20kan,meldingen%20direct%20met%20112%20belt." target="_blank" rel="noreferrer">click here</a>.</li>
+            <li>Use <a href="https://www.tolkcontact.nl/tolkcontact-app/wat-kun-je-met-de-app/" target="_blank" rel="noreferrer">'tolkcontact-app'</a> for contacting police if you need a interpreter (sign language)</li>
             <li>National phone number 'alarming behavior' (police): <a href="tel:0800-1205">0800-1205</a></li>
           </ul>
         </div><br></br>
@@ -74,7 +71,7 @@ function Help() {
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-                Local chalk back initiatives exist all over the world, in more than 150 cities. Search on Instagram with your city name or check the complete list on <a href="https://www.chalkback.org/see-all-accounts" target="_blank">Chalkback.org</a>. If you use this form to submit your catcall story outside of Amsterdamn, it will be send to moderators of other cities (if there are any) and not displayed on Amsterdam's map.
+                Local chalk back initiatives exist all over the world, in more than 150 cities. Search on Instagram with your city name or check the complete list on <a href="https://www.chalkback.org/see-all-accounts" target="_blank" rel="noreferrer">Chalkback.org</a>. If you use this form to submit your catcall story outside of Amsterdamn, it will be send to moderators of other cities (if there are any) and not displayed on Amsterdam's map.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -91,7 +88,7 @@ function Help() {
               <Typography>
                 <ul>
                   <li>Spread the word: share this application, tell people about this initiative,share the posts on instagram, like and comment.</li>
-                  <li>Become a local 'Catcalls of...' for your own town/city. Check <a href="https://www.chalkback.org/" target="_blank">Chalkback.org</a> for more information.</li>
+                  <li>Become a local 'Catcalls of...' for your own town/city. Check <a href="https://www.chalkback.org/" target="_blank" rel="noreferrer">Chalkback.org</a> for more information.</li>
                   <li>Act: get in touch with CatcallsofAms or your local initiatives and volunteer on a regular basis to chalk newly reported catcalls.</li>
                 </ul>
               </Typography>

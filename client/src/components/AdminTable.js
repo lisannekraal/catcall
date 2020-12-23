@@ -1,26 +1,10 @@
 import { useState, useEffect } from 'react';
-
 import Row from './AdminTableRow';
 import ModeratorSettings from './ModeratorSettings';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Accordion, AccordionSummary, AccordionDetails, Typography } from '@material-ui/core';
 import { v4 as uuidv4 } from 'uuid';
-
-
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-
 import { ExpandMore, Warning } from '@material-ui/icons';
-
 import { useForm } from 'react-hook-form';
-
 
 // Function labels data in the table
 function processCatCallsData({ geometry, properties, _id, type }) {
@@ -48,9 +32,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
   const [showTrash, setShowTrash] = useState(false);
   const [emptyTableMessage, setEmptyTableMessage] = useState('No new catcalls to verify');
   const { handleSubmit } = useForm();
-
   const [rows, setRows] = useState(catcallData.map(catcall => processCatCallsData(catcall)))
-  //rows is a list of all data in above format ----> might not be needed as it is taken care of by useEffect?
 
   useEffect(() => {
     let switchedRows;
@@ -87,12 +69,11 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
         switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === false);
         break;
     }
-    //filter data for the value(tab) and setRows
     switchedRows && setRows(switchedRows.map(catcall => processCatCallsData(catcall))); 
   }, [value, catcallData]);
 
   const clickButtonUpdate = ({ variables }) => {
-    updateCatcall({ variables }); //update db, remove from list and reset rows
+    updateCatcall({ variables });
     let newRows = rows.filter(row => {
       return row.id !== variables.id
     })
@@ -106,6 +87,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
 
   return (
     <>
+    {/* if settings tab is selected, only load that seperate component */}
     { showSettings ?
       <ModeratorSettings authorized={authorized} />
     : 
@@ -119,8 +101,6 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
               <TableCell />
               <TableCell>Quote</TableCell>
               <TableCell>Actions </TableCell>
-              {/* <TableCell>Quote</TableCell>
-              <TableCell align="center">Date Added</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -132,6 +112,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
         <div style={{textAlign: 'center', padding: '50px'}}>{emptyTableMessage}</div>}
       </TableContainer>
     }
+    {/* if in trashbin and full athority, show this extra section to permanently delete */}
     { showTrash && authorized ? 
         <>
           <h2 className="mod-settings-header">More</h2>

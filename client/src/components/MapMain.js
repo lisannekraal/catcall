@@ -1,17 +1,15 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import { GET_MAP_CATCALLS } from '../api/queries'
 import MapGL, { Source, Layer, Image, Popup, NavigationControl, GeolocateControl, ScaleControl, FullscreenControl } from '@urbica/react-map-gl';
 
 import DialogComp from './DialogComp';
 import MapPopup from './MapPopup';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './MapMain.css';
-
 import Icon from '../assets/bullhorn.png';
-import { GET_MAP_CATCALLS } from '../api/queries'
 import { Player } from '@lottiefiles/react-lottie-player';
-import InstaTile from "./InstaTile";
 
 function MapMain () {
   const [ popup, setPopup ] = useState("");
@@ -76,6 +74,8 @@ function MapMain () {
             'icon-size': 0.06
           }}
           onClick={e => {
+            //setviewport functionality (does not give the satisfying effect of mapbox' fly-to behavior, but it was hard to implement that here)
+
             // setViewport({
             //   latitude: e.features[0].geometry.coordinates[1],
             //   longitude: e.features[0].geometry.coordinates[0],

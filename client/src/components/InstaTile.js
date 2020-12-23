@@ -3,10 +3,15 @@ import { useState, useEffect } from 'react';
 
 export default function InstaTile ({ url }) {
 
-  const [ link, setLink ] = useState('https://www.instagram.com/p/CI1El4MlBA0/?utm_source=ig_embed&amp;utm_campaign=loading')
+  const [ link, setLink ] = useState('https://www.instagram.com/p/CI1El4MlBA0/?utm_source=ig_embed&amp;utm_campaign=loading');
 
   useEffect(() => {
-    setLink(url + '?utm_source=ig_embed&amp;utm_campaign=loading');
+    console.log(url)
+    if (url[url.length-1] === '/') {
+      setLink(url + '?utm_source=ig_embed&amp;utm_campaign=loading');
+    } else {
+      setLink(url + '/?utm_source=ig_embed&amp;utm_campaign=loading');
+    }
   }, [url])
 
   return (
@@ -27,7 +32,7 @@ export default function InstaTile ({ url }) {
 
       <blockquote class="instagram-media" data-instgrm-permalink={link} data-instgrm-version="13" style={{ background: '#FFF', border: 0, borderRadius: '3px', boxShadow: '0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)', margin: '1px', maxWidth: '135px', minWidth: '0px', padding: 0, width: '99.375%', width: '-webkit-calc(100% - 2px)', width: 'calc(100% - 2px)'}}>
         <div style={{ padding: '1px'}}>
-            <a href={link} style={{ background: '#FFFFFF', lineHeight: 0, padding: '0 0', textAlign: 'center', textDecoration: 'none', width: '100%'}} target="_blank">
+            <a href={link} style={{ background: '#FFFFFF', lineHeight: 0, padding: '0 0', textAlign: 'center', textDecoration: 'none', width: '100%'}} target="_blank" rel="noreferrer">
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                   <div style={{ backgroundColor: '#F4F4F4', borderRadius: '50%', flexGrow: 0, height: '40px', marginRight: '14px', width: '40px'}}></div>
                   <div style={{display: 'flex', flexDirection: 'column', flexGrow: 1, justifyContent: 'center'}}>
@@ -74,7 +79,7 @@ export default function InstaTile ({ url }) {
               </div>
             </a>
             <p style={{color: '#c9c8cd', fontFamily: 'Arial,sans-serif', fontSize: '14px', lineHeight: '17px', marginBottom: 0, marginTop: '8px', overflow: 'hidden', padding: '8px 0 7px', textAlign: 'center', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-              <a href="https://www.instagram.com/p/CI1El4MlBA0/?utm_source=ig_embed&amp;utm_campaign=loading" style={{color: '#c9c8cd', fontFamily: 'Arial,sans-serif', fontSize: '14px', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '17px', textDecoration: 'none'}} target="_blank">A post shared by Cat Calls of Amsterdam 🇳🇱 (@catcallsofams)</a>
+              <a href="https://www.instagram.com/p/CI1El4MlBA0/?utm_source=ig_embed&amp;utm_campaign=loading" style={{color: '#c9c8cd', fontFamily: 'Arial,sans-serif', fontSize: '14px', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '17px', textDecoration: 'none'}} target="_blank" rel="noreferrer">A post shared by Cat Calls of Amsterdam 🇳🇱 (@catcallsofams)</a>
             </p>
         </div>
       </blockquote>

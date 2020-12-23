@@ -50,7 +50,6 @@ function Header({ token, removeCookie, setMod }) {
       classN: 'fas fa-map-marked-alt', 
       path: () => history.push({
         pathname: '/catcalls'
-        // state: { dialog: 'This is an overview of all catcalls reported. Disclaimer: this application contains violent language and words of racism, sexual harassment and hate speach. Are you younger than 18 years old? Ask your guardian.'}
       }) 
     },
     { 
@@ -61,6 +60,8 @@ function Header({ token, removeCookie, setMod }) {
   ];
 
   useEffect(() => {
+    //depending on the mod token, show functionalities navbar
+
     if (token && token !== 'null') {
       setNavigations([...navLinksPermanent, 
         {
@@ -100,7 +101,7 @@ function Header({ token, removeCookie, setMod }) {
           <Hidden mdDown>
             <List component="nav" className={classes.navDisplayLinks}>
 
-              {/* About nav component is seperate from loop as we use hash link package */}
+              {/* 'About' nav component is seperate from loop as we use hash link package */}
               <Link 
                 to="/#about" 
                 className="about-link" >

@@ -1,30 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-
 import { GET_MODERATORS, CREATE_MODERATOR, REMOVE_MODERATOR } from '../api/queries';
-
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { Hidden } from "@material-ui/core"
-import Delete from '@material-ui/icons/Delete';
-import TableContainer from '@material-ui/core/TableContainer';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import { useForm } from 'react-hook-form';
-
 import './ModeratorSettings.css';
 
-
+import { Hidden, Table, TableContainer, TableBody, TableCell, TableHead, TableRow, Paper, Accordion, AccordionSummary, AccordionDetails, Typography } from '@material-ui/core';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Delete from '@material-ui/icons/Delete';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
 
 export default function ModeratorSettings({authorized}) {
 

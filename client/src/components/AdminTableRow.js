@@ -4,19 +4,11 @@ import { useLazyQuery } from "@apollo/client";
 import { GET_CATCALL } from '../api/queries';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+import { Table, TableBody, TableCell, TableRow, Box, Button, Collapse, IconButton, Typography } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import { v4 as uuidv4 } from 'uuid';
 import { Star, StarOutline } from '@material-ui/icons';
+import { v4 as uuidv4 } from 'uuid';
 
 const useRowStyles = makeStyles({
   root: {
@@ -147,9 +139,8 @@ function Row(props) {
   return (
     <React.Fragment>
 
-      {/* 1. generic row of catcall */}
       <TableRow className={classes.root} >
-        {/*1: allowicon*/}
+        {/*1: expand functionality */}
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -168,7 +159,7 @@ function Row(props) {
           {row.catCallQuote}
         </TableCell>
 
-        {/*4: action*/}
+        {/*4: actions*/}
         <TableCell>
           {buttonstoShow.map((button) => (
             <Button key={uuidv4()} variant="contained" color="inherit" size="small" onClick={() => handleClick(button)} className={classes[button.class]} >
@@ -222,7 +213,7 @@ function Row(props) {
                       Chalk url
                     </TableCell>
                     <TableCell>
-                        <a href={row.url} target="_blank">{row.url}</a>
+                        <a href={row.url} target="_blank" rel="noreferrer">{row.url}</a>
                       </TableCell>
                   </TableRow>
                 </TableBody>

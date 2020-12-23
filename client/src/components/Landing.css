@@ -46,7 +46,6 @@
 
 .header-buttons {
   display: flex;
-  /* flex-direction: column; */
   align-items: flex-start;
 }
 
@@ -159,10 +158,6 @@
 .community-title {
   font-size: 4rem;
   color: white;
-}
-
-.community-text {
-  max-width: 800px;
 }
 
 .community-content button {
