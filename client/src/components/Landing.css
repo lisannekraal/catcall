@@ -1,16 +1,36 @@
+.landing {
+  display: flex;
+  flex-direction: column;
+}
+
 .landing-cover {
-  height: 95vh;
+  min-height: 450px;
   background: url('../assets/sam-haddad-StgZKNLVeJg-unsplash-crop.jpg') center center fixed no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-height: 650px) {
+  .landing-cover {
+    height: 95vh;
+  }
 }
 
 .header {
-  margin: 0 200px;
-  padding: 22% 9%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   color: white;
+  height: 100%;
+  padding: 65px 20px 20px 20px;
 }
 
 .header-title {
@@ -18,43 +38,68 @@
   text-shadow: 3px 3px black;
 }
 
-.header-buttons button {
+@media screen and (max-width: 400px) {
+  .header-title {
+    font-size: 6rem;
+  }
+}
+
+.header-buttons {
+  display: flex;
+  align-items: flex-start;
+}
+
+.header-buttons a {
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.header-buttons a p{
   border-radius: 8px;
+  border-width: 2px;
+  border-color: black;
+  border-top-color: rgb(118,118,118);
+  border-left-color: rgb(118,118,118);
+  border-style: outset;
   background-color: rgb(245, 37, 89);
   color: white;
   padding: 10px 15px;
-  margin-right: 10px;
-}
-.header-buttons button p {
-  margin: 0 0;
   font-size: 1.2rem;
 }
 
+@media screen and (max-width: 350px) {
+.header-buttons a {
+  width: 100%;
+    text-align: center;
+  }
+}
+
 .header-disclaimer {
-  margin-top: 10px;
+  margin-top: 5px;
   font-size: 0.9rem;
   font-weight: 300;
 }
 
 .landing-cities {
-  margin: 50px 200px;
-  height: 210px;
   display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  flex-wrap: wrap;
+  justify-content: center;
+  margin: 50px auto;
+  max-width: 400px;
+} 
+
+.carousel-content {
+  display: flex;
 }
 
 .city {
-  width: 30%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  margin: 10px;
+  text-align: center;
 }
 
 .city-logo {
   height: 80px;
   width: 80px;
+  margin-left: 20px;
 }
 
 .city-logo img {
@@ -72,9 +117,11 @@
 }
 
 .landing-why {
-  margin: 80px 200px;
+  padding: 20px;
+  margin: 0 auto 50px auto;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .why-title {
@@ -83,19 +130,29 @@
 }
 
 .why-content {
-  padding-top: 50px;
-  max-width: 50%;
-  padding-left: 50px;
+  padding: 50px 0 0 50px;
+  max-width: 500px;
+}
+
+@media screen and (max-width: 800px) {
+  .landing-why {
+    max-width: 500px;
+  }
+  .why-content {
+    padding: 0;
+  }
 }
 
 .landing-community {
   background-color: rgb(245, 37, 89);
-  height: 280px;
 }
 
 .community-content {
-  padding: 40px 300px;
+  padding: 20px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .community-title {
@@ -111,40 +168,62 @@
   margin-top: 20px;
 }
 
-.community-content button p {
+.about-content button {
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 20px;
+}
+
+button p {
   margin: 0 0;
   font-size: 1.2rem;
 }
 
 .landing-about {
-  margin: 80px 200px;
+  padding: 20px;
+  margin: 0 auto 50px auto;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap-reverse;
+  justify-content: flex-start;
 }
 
 .about-title {
   font-size: 5rem;
   color: rgb(29, 113, 183);
-  padding-right: 80px;
+  max-width:  500px;
 }
 
 .about-content {
-  padding-top: 80px;
-  max-width: 50%;
-  padding-right: 50px;
+  padding: 50px 50px 0 0;
+  max-width: 500px;
 }
 
-.footer {
-  background-color: rgb(29, 113, 183);
+@media screen and (max-width: 1100px) {
+  .landing-about {
+    max-width: 500px;
+  }
+  .about-title {
+    font-size: 4.5rem;
+  }
+  .about-content {
+    padding: 0;
+  }
 }
 
-.footer-content {
-  padding: 30px 200px;
-  display: flex;
+@media screen and (max-width: 450px) {
+  .about-title {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .about-title {
+    font-size: 2.5rem;
+  }
+}
+
+.help-link {
   color: white;
-}
-
-.credits {
-  max-width: 70%;
-  padding-right: 80px
 }

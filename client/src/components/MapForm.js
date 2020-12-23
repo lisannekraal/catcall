@@ -4,7 +4,7 @@ import MapGL, { Source, Layer, Image, NavigationControl, GeolocateControl } from
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Icon from '../assets/bullhorn.png';
 
-function MapForm (props) {
+function MapForm ({ setLocation }) {
   const [viewport, setViewport] = useState({
     latitude: 52.366249,
     longitude: 4.908019,
@@ -14,7 +14,7 @@ function MapForm (props) {
   const [ layer, setLayer ] = useState("");
 
   function mapOnClick(e) {
-    props.setLocation(e);
+    setLocation(e);
     const geojsonLayer = {
       type: "FeatureCollection",
       features: [{
@@ -33,6 +33,8 @@ function MapForm (props) {
   }
 
   return (
+    process.env.REACT_APP_MAPBOX_ACCESS_TOKEN
+    ?
     <MapGL
       style={{ width: '500px', height: '300px' }}
       mapStyle='mapbox://styles/mapbox/streets-v11'
@@ -48,8 +50,9 @@ function MapForm (props) {
       {layer}  
       <NavigationControl showZoom position='top-right' />
       <GeolocateControl position='top-right' />
-
     </MapGL>
+    :
+    <p>Map to report a catcall could not load.</p>
   );
 }
 export default MapForm;

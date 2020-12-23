@@ -1,67 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
-  /* font-family: 'Montserrat', sans-serif; */
-  /* font-family: 'Noto Sans', sans-serif; */
 }
 
 button:hover {
   cursor: pointer;
 }
 
-.navbar {
-  position: absolute;
-  width: 100vw;
-  z-index: 99;
+.header-footer {
+  background-color: rgba(29, 113, 183);
+  height: 65px;
 }
 
-.navbar-content {
-  display: flex;
-  margin: 0 200px;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  padding-top: 20px;
-}
+/*for Dashboard component, perhaps seperate css later?*/
 
-.navbar-brand {
-  font-size: 1.5rem;
-  font-weight: 300;
-  display: flex;
-  align-items: center;
-}
-
-.navbar-logo {
-  height: 42px;
-  width: 50px;
-  margin-right: 7px;
-}
-
-.navbar-logo img {
-  height: 100%;
-  width: 100%;
-}
-
-.navbar-content-right {
-  width: 60%;
-  margin-right: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
-.navbar-report button {
-  background-color: rgb(245, 37, 89);
-  color: white;
-  padding: 10px 15px;
-  border-radius: 8px;
-}
-
-.navbar-report button p {
-  margin: 0 0;
-  font-size: 0.8rem;
-  font-weight: 500;
-  
-  /* font-size: 0.9rem; */
+.dashboard-container {
+  min-height: 85vh;
 }

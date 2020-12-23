@@ -1,62 +1,53 @@
 import './App.css';
-import Logo from './assets/logowhite.png';
+import React, { useState } from 'react';
+import { ApolloProvider, createHttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
-// import Navbar from './components/Navbar';
-import MapMain from './components/Map-main';
+import MapMain from './components/MapMain';
 import Landing from './components/Landing';
-import ReportForm from './components/Report-form';
-import LoginModal from './components/Login-Modal';
+import ReportForm from './components/ReportForm';
+import Login from './components/Login'
 import Dashboard from './components/Dashboard';
-
-const client = new ApolloClient({
-  uri: process.env.REACT_APP_APOLLO_SERVER,
-  cache: new InMemoryCache({
-    addTypename: false
-  })
-});
-
+import EditForm from './components/EditForm';
+import Help from './components/Help';
+import NotFound from './components/NotFound';
+import Header from './components/Header';
 
 
 function App() {
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const [mod, setMod] = useState(false);
+
+  const httpLink = createHttpLink({
+    uri: process.env.REACT_APP_APOLLO_SERVER,
+  });
+
+  const authLink = setContext((_, { headers }) => {
+    // get the authentication token from cookies if it exists
+    const token = cookies.token;
+    // return the headers to the context so httpLink can read them
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `${token}` : "",
+      }
+    }
+  });
+
+  const client = new ApolloClient({
+    connectToDevTools: true,
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache({
+    })
+  });
 
   return (
     <ApolloProvider client={client}>
       <Router>
-      <div className="navbar">
-        <div className="navbar-content">
-          <Link style={{ textDecoration: 'none', color: 'white' }} to="/">
-            <div className="navbar-brand">
-              <div className="navbar-logo"><img src={Logo} alt="logo"></img></div>
-              <div> Catcalls of Amsterdam</div>
-            </div>
-          </Link>
 
-          <div className="navbar-content-right">
-            <div classname="navbar-about">
-              <Link style={{ textDecoration: 'none', color: 'white' }} to="/#about"><i class="fas fa-info-circle"></i> ABOUT</Link>
-            </div>
-
-            <div classname="navbar-map">
-              <Link style={{ textDecoration: 'none', color: 'white' }} to="/catcalls"><i class="fas fa-map-marked-alt"></i> MAP</Link>
-            </div>
-            <div classname="navbar-community">
-              <a style={{ textDecoration: 'none', color: 'white' }} href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow"><i class="fab fa-instagram"></i> COMMUNITY</a>
-            </div>
-            <div className="navbar-login">
-              <LoginModal />
-              {/* <i class="fas fa-user-cog"></i> MODERATORS */}
-              {/* <Link style={{ textDecoration: 'none', color: 'white' }} to="/"><i class="fas fa-user-cog"></i> MODERATORS</Link> */}
-            </div>
-            <div className="navbar-report">
-              <Link to="/catcalls/new"><button><p>Report a new datcall</p></button></Link>
-            </div>
-
-          </div>
-        </div>
-      </div>
+        <Header token={cookies.token} removeCookie={removeCookie} setMod={setMod} />
 
         <Switch>
           <Route exact path="/">
@@ -68,9 +59,22 @@ function App() {
           <Route exact path="/catcalls/new">
             <ReportForm />
           </Route>
-          <Route exact path="/dashboard">
-            <Dashboard />
+          <Route exact path="/login">
+            <Login setCookie={setCookie} setMod={setMod}/>
           </Route>
+          <Route exact path="/dashboard">
+            <Dashboard mod={mod} />
+          </Route>
+          <Route exact path="/catcalls/edit">
+            <EditForm />
+          </Route>
+          <Route exact path="/help">
+            <Help />
+          </Route>
+          <Route path="/404">
+            <NotFound />
+          </Route>
+          <Redirect to="/404"/>
         </Switch>
       </Router>
 
