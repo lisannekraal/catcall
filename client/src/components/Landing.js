@@ -8,6 +8,7 @@ import LogoRot from '../assets/catcallsofrot.png';
 import LogoUtr from '../assets/catcallsofutr.png';
 import LogoNyc from '../assets/catcallsofnyc.png';
 import LogoGrunn from '../assets/catcallsofgrunn.png';
+import { v4 as uuidv4 } from 'uuid';
 
 function Landing () {
 
@@ -64,10 +65,10 @@ function Landing () {
       <div className="landing-cities">
         <Carousel>
           {
-            cities.map( (group, i) => 
-            <div className="carousel-content">
+            cities.map( (group, i) =>
+            <div id={{uuidv4()}} className="carousel-content">
               {
-                group.map( (item, i) => 
+                group.map( (item, i) =>
                 <div className="city">
                   <div>
                     <div className="city-logo">
@@ -102,7 +103,7 @@ function Landing () {
         <div className="community-content">
           <div className="community-title">Get involved</div>
           <div style={{margin: '30px auto', width: '550px', height: '550px'}}>
-            <iframe src="https://snapwidget.com/embed/900599" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style={{border: 'none', overflow: 'scroll', height: '100%', width: '100%'}}></iframe>
+            <iframe title="catcall photos" src="https://snapwidget.com/embed/900599" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style={{border: 'none', overflow: 'scroll', height: '100%', width: '100%'}}></iframe>
           </div>
           <a href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow">
             <button><p>Join the community on Instagram</p></button>
