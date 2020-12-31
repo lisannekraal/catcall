@@ -10,30 +10,42 @@ import LogoNyc from '../assets/catcallsofnyc.png';
 import LogoGrunn from '../assets/catcallsofgrunn.png';
 import { v4 as uuidv4 } from 'uuid';
 
-function Landing () {
+function Landing() {
 
   const cities = [
     [
-        { name: 'ROTTERDAM',
+      {
+        name: 'ROTTERDAM',
         logo: LogoRot,
-        status: 'coming soon'},
-        { name: 'UTRECHT',
+        status: 'coming soon'
+      },
+      {
+        name: 'UTRECHT',
         logo: LogoUtr,
-        status: 'coming soon'},
-        { name: 'NEW YORK',
+        status: 'coming soon'
+      },
+      {
+        name: 'NEW YORK',
         logo: LogoNyc,
-        status: 'coming soon'}
+        status: 'coming soon'
+      }
     ],
     [
-        { name: 'ANTWERP',
+      {
+        name: 'ANTWERP',
         logo: LogoNyc,
-        status: 'coming soon'},
-        { name: 'BERLIN',
+        status: 'coming soon'
+      },
+      {
+        name: 'BERLIN',
         logo: LogoNyc,
-        status: 'coming soon'},
-        { name: 'GRONINGEN',
+        status: 'coming soon'
+      },
+      {
+        name: 'GRONINGEN',
         logo: LogoGrunn,
-        status: 'coming soon'}
+        status: 'coming soon'
+      }
     ]
   ];
 
@@ -46,7 +58,7 @@ function Landing () {
           <div className="header-buttons">
             <Link to={{
               pathname: '/catcalls',
-              state: { dialog: 'This is an overview of all catcalls reported. Disclaimer: this application contains violent language and words of racism, sexual harassment and hate speach. Are you younger than 18 years old? Ask your guardian.'}
+              state: { dialog: 'This is an overview of all catcalls reported. Disclaimer: this application contains violent language and words of racism, sexual harassment and hate speach. Are you younger than 18 years old? Ask your guardian.' }
             }}>
               <p>View Catcalls of Amsterdam</p>
             </Link>
@@ -55,7 +67,7 @@ function Landing () {
             </Link>
           </div>
           <div className="header-disclaimer">
-            This initiative is standing up against street harassment and does not replace reporting your issue to the police. Are you currently in danger or need help right away? <a class="help-link" href="/help">Click here</a>.
+            This initiative is standing up against street harassment and does not replace reporting your issue to the police. Are you currently in danger or need help right away? <a className="help-link" href="/help">Click here</a>.
           </div>
         </div>
 
@@ -65,24 +77,8 @@ function Landing () {
       <div className="landing-cities">
         <Carousel>
           {
-            cities.map( (group, i) =>
-            <div id={{uuidv4()}} className="carousel-content">
-              {
-                group.map( (item, i) =>
-                <div className="city">
-                  <div>
-                    <div className="city-logo">
-                      <img alt="city-logo" src={item.logo}></img>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="city-name"><i className="fas fa-map-marker-alt"></i> {item.name}</div>
-                    <div className="city-description">{item.status}</div>
-                  </div>
-                </div>
-                )
-              }
-            </div>
+            cities.map((group, i) =>
+              <Group key={uuidv4()} group={group} />
             )
           }
         </Carousel>
@@ -102,8 +98,8 @@ function Landing () {
       <div className="landing-community">
         <div className="community-content">
           <div className="community-title">Get involved</div>
-          <div style={{margin: '30px auto', width: '550px', height: '550px'}}>
-            <iframe title="catcall photos" src="https://snapwidget.com/embed/900599" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style={{border: 'none', overflow: 'scroll', height: '100%', width: '100%'}}></iframe>
+          <div style={{ margin: '30px auto', width: '550px', height: '550px' }}>
+            <iframe title="catcall photos" src="https://snapwidget.com/embed/900599" className="snapwidget-widget" allowtransparency="true" frameBorder="0" scrolling="no" style={{ border: 'none', overflow: 'scroll', height: '100%', width: '100%' }}></iframe>
           </div>
           <a href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow">
             <button><p>Join the community on Instagram</p></button>
@@ -129,5 +125,32 @@ function Landing () {
   );
 }
 
+function Group({ group }) {
+  return (
+    <div className="carousel-content">
+      {
+        group.map((city, i) =>
+          <City key={uuidv4()} city={city}/>
+        )
+      }
+    </div>
+  )
+}
+
+function City({ city }) {
+  return (
+    < div className="city" >
+      <div>
+        <div className="city-logo">
+          <img alt="city-logo" src={city.logo}></img>
+        </div>
+      </div>
+      <div>
+        <div className="city-name"><i className="fas fa-map-marker-alt"></i> {city.name}</div>
+        <div className="city-description">{city.status}</div>
+      </div>
+    </div >
+  )
+}
 
 export default Landing;
