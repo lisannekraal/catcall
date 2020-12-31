@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useLazyQuery } from "@apollo/client";
-import { GET_CATCALL, UPDATE_CATCALL } from '../api/queries';
+import { GET_CATCALL } from '../api/queries';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+import { Table, TableBody, TableCell, TableRow, Box, Button, Collapse, IconButton, Typography } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { Star, StarOutline } from '@material-ui/icons';
 import { v4 as uuidv4 } from 'uuid';
 
 const useRowStyles = makeStyles({
@@ -80,8 +73,7 @@ function Row(props) {
 
   function handleClick(button) {
     if (button.name === 'verify') {
-      clickButtonUpdate({
-        variables: {
+      clickButtonUpdate({ variables: {
           id: row.id,
           catcall: {
             properties: {
@@ -94,12 +86,11 @@ function Row(props) {
     } else if (button.name === 'edit') {
       getCatcall({variables: {id: row.id}});
     } else if (button.name === 'email') {
-      alert('you will be notified');
+      alert('Unfortunately this feature does not work just yet ;)');
     } else if (button.name === 'chalk') {
       getCatcall({variables: {id: row.id}});
     } else if (button.name === 'unstage') {
-      clickButtonUpdate({
-        variables: {
+      clickButtonUpdate({ variables: {
           id: row.id,
           catcall: {
             properties: {
@@ -109,8 +100,7 @@ function Row(props) {
         }
       })
     } else if (button.name === 'delete') {
-      clickButtonUpdate({
-        variables: {
+      clickButtonUpdate({ variables: {
           id: row.id,
           catcall: {
             properties: {
@@ -120,8 +110,7 @@ function Row(props) {
         }
       })
     } else if (button.name === 'undo') {
-      clickButtonUpdate({
-        variables: {
+      clickButtonUpdate({ variables: {
           id: row.id,
           catcall: {
             properties: {
@@ -133,23 +122,45 @@ function Row(props) {
     }
   }
 
+  function handleStarClick() {
+    console.log(row);
+    clickButtonUpdate({ variables: {
+      id: row.id,
+      catcall: {
+        properties: {
+          starred: !row.starred
+        }
+      }
+    }});
+    console.log(row);
+  }
+
   if (loading) return <p>Loading ...</p>;
   return (
     <React.Fragment>
 
-      {/* 1. generic row of catcall */}
       <TableRow className={classes.root} >
+        {/*1: expand functionality */}
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
+
+        {/*2: star*/}
+        <TableCell>
+          {row.starred ?
+          <Star onClick={() => handleStarClick()} />  :
+          <StarOutline onClick={() => handleStarClick()} />}
+        </TableCell>
+
+        {/*3: quote*/}
         <TableCell component="th" scope="row">
           {row.catCallQuote}
         </TableCell>
-        <TableCell align="center">{row.dateAdded}</TableCell>
+
+        {/*4: actions*/}
         <TableCell>
-          {/* buttons to show in this specific tab */}
           {buttonstoShow.map((button) => (
             <Button key={uuidv4()} variant="contained" color="inherit" size="small" onClick={() => handleClick(button)} className={classes[button.class]} >
               {button.name}
@@ -168,16 +179,24 @@ function Row(props) {
               </Typography>
               <Table size="small" aria-label="info">
                 <TableBody>
+
                   <TableRow key={uuidv4()}>
                     <TableCell component="th" scope="row">
-                      Date CatCall
+                      Date added
+                    </TableCell>
+                    <TableCell >{row.dateAdded}</TableCell>
+                  </TableRow>
+
+                  <TableRow key={uuidv4()}>
+                    <TableCell component="th" scope="row">
+                      Date catcall
                     </TableCell>
                     <TableCell >{row.dateCatcall}</TableCell>
                   </TableRow>
 
                   <TableRow key={uuidv4()}>
                     <TableCell component="th" scope="row">
-                      Position
+                      Location
                     </TableCell>
                     <TableCell>{`${row.coordinates[0].toFixed(3)}.. ${row.coordinates[1].toFixed(3)}..`}</TableCell>
                   </TableRow>
@@ -194,7 +213,7 @@ function Row(props) {
                       Chalk url
                     </TableCell>
                     <TableCell>
-                        <a href={row.url} target="_blank">{row.url}</a>
+                        <a href={row.url} target="_blank" rel="noreferrer">{row.url}</a>
                       </TableCell>
                   </TableRow>
                 </TableBody>

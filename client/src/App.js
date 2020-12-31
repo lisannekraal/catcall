@@ -1,5 +1,5 @@
 import './App.css';
-
+import React, { useState } from 'react';
 import { ApolloProvider, createHttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
@@ -13,14 +13,12 @@ import Dashboard from './components/Dashboard';
 import EditForm from './components/EditForm';
 import Help from './components/Help';
 import NotFound from './components/NotFound';
-
 import Header from './components/Header';
-import { useEffect, useRef, useState } from 'react';
 
 
 function App() {
-  const [cookies, setCookie] = useCookies(['token']);
-  const [modButton, setModButton] = useState({text: 'moderator', to: '/login'});
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const [mod, setMod] = useState(false);
 
   const httpLink = createHttpLink({
     uri: process.env.REACT_APP_APOLLO_SERVER,
@@ -45,19 +43,11 @@ function App() {
     })
   });
 
-  useEffect(()=>{
-    if (cookies.token) {
-      setModButton({text: 'dashboard', to: '/dashboard'});
-    } else {
-      setModButton({text: 'moderator', to: '/login'});
-    }
-  }, [cookies])
-
   return (
     <ApolloProvider client={client}>
       <Router>
 
-        <Header modButton={modButton} />
+        <Header token={cookies.token} removeCookie={removeCookie} setMod={setMod} />
 
         <Switch>
           <Route exact path="/">
@@ -70,10 +60,10 @@ function App() {
             <ReportForm />
           </Route>
           <Route exact path="/login">
-            <Login setCookie={setCookie}/>
+            <Login setCookie={setCookie} setMod={setMod}/>
           </Route>
           <Route exact path="/dashboard">
-            <Dashboard />
+            <Dashboard mod={mod} />
           </Route>
           <Route exact path="/catcalls/edit">
             <EditForm />

@@ -15,4 +15,8 @@ button:hover {
   height: 65px;
 }
 
+/*for Dashboard component, perhaps seperate css later?*/
 
+.dashboard-container {
+  min-height: 85vh;
+}

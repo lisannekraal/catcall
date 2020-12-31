@@ -46,7 +46,6 @@
 
 .header-buttons {
   display: flex;
-  /* flex-direction: column; */
   align-items: flex-start;
 }
 
@@ -82,24 +81,25 @@
 }
 
 .landing-cities {
-  max-width: 800px;
-  margin: auto;
   display: flex;
   justify-content: center;
-  align-items: stretch;
-  flex-wrap: wrap;
+  margin: 50px auto;
+  max-width: 400px;
+} 
+
+.carousel-content {
+  display: flex;
 }
 
 .city {
-  margin: 20px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  margin: 10px;
+  text-align: center;
 }
 
 .city-logo {
   height: 80px;
   width: 80px;
+  margin-left: 20px;
 }
 
 .city-logo img {
@@ -160,10 +160,6 @@
   color: white;
 }
 
-.community-text {
-  max-width: 800px;
-}
-
 .community-content button {
   border-radius: 8px;
   background-color: black;
@@ -172,7 +168,15 @@
   margin-top: 20px;
 }
 
-.community-content button p {
+.about-content button {
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 20px;
+}
+
+button p {
   margin: 0 0;
   font-size: 1.2rem;
 }
@@ -220,3 +224,6 @@
   }
 }
 
+.help-link {
+  color: white;
+}

@@ -1,6 +1,7 @@
 const Catcall = require('./models/catcall.model');
 const Moderator = require('./models/moderator.model');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 const merge = require('lodash.merge');
 const { Error } = require('mongoose');
 
@@ -31,7 +32,7 @@ const catcallResolver = {
     },
 
     async getVerifiedCatcalls () {
-      const result = await Catcall.find({'properties.verified': true});
+      const result = await Catcall.find({'properties.verified': true, 'properties.trash': false});
       return result;
     }
   },
@@ -67,7 +68,7 @@ const catcallResolver = {
         if (await Moderator.findOne({ _id: context.mod._id })) {
           try {
             await Catcall.deleteMany({'properties.trash': true});
-            return true;
+            return 'deleted';
           } catch (err) {
             return err;
           }
@@ -82,6 +83,19 @@ const catcallResolver = {
 
 const moderatorResolver = {
   Query: {
+    
+    async getModerators(_, __, context) {
+      if (context.mod._id && context.mod.canAdd) {
+        if (await Moderator.findOne({ _id: context.mod._id })) {
+          const moderators = await Moderator.find();
+          return moderators;
+        }
+      }
+      let err = new Error;
+      err.message = 'You must be logged in as a moderator to see this content';
+      return err;
+    },
+
     async getModeratorById(_, { id }) {
       const mod = await Moderator.findOne({ _id: id });
       return mod;
@@ -91,7 +105,13 @@ const moderatorResolver = {
       const mod = await Moderator.findOne({ email: email });
       const validatedPass = await bcrypt.compare(password, mod.password);
       if (!validatedPass) throw new Error();
-      return mod;
+      const returnObj = JSON.parse(JSON.stringify(mod));
+      returnObj.token = jwt.sign(
+        { email: mod.email, id: mod._id },
+        process.env.JWT_SECRET_KEY,
+        { expiresIn: 60 * 60 }
+      );
+      return returnObj;
     }
   },
 
@@ -100,9 +120,9 @@ const moderatorResolver = {
       if (context.mod._id) {
         let mod = await Moderator.findOne({ _id: context.mod._id })
         if (mod && mod.canAdd === true) {
-          const { email, password, canAdd } = moderator;
+          const { email, password } = moderator;
           let hashPassword = await bcrypt.hash(password, 10);
-          const mod = await Moderator.create({ email, password: hashPassword, canAdd });
+          const mod = await Moderator.create({ email, password: hashPassword, canAdd: false });
           return mod;
         }
       }
@@ -130,7 +150,7 @@ const moderatorResolver = {
         let mod = await Moderator.findOne({ _id: context.mod._id })
         if (mod && mod.canAdd === true) {
           const mod = await Moderator.deleteOne({ _id: id });
-          return mod;
+          return;
         }
       }
       let err = new Error;

@@ -47,13 +47,19 @@ Moderators are defined by each verified local 'Catcalls of...' organisor, as wel
 - `yarn install` from main repo, client folder and server folder
 - create a .env through `touch .env` in server folder
 - save local MongoDB url as `DB_URL={your url}` or MongoDB Atlas url as `DB_ATLAS_URL={your url}`
+- add your own secret key for jsonwebtoken as `JWT_SECRET_KEY={your key}`
 - create a .env through `touch .env` in client folder
 - define localhost url as `REACT_APP_APOLLO_SERVER={your localhost}`
 - add Mapbox access token as `REACT_APP_MAPBOX_ACCESS_TOKEN={your token}`
-- add personal recaptcha key as `REACT_APP_RECAPTCHA_KEY={your key}
+- add personal recaptcha key as `REACT_APP_RECAPTCHA_KEY={your key}`
+- add instagram API key as `REACT_APP_INSTAGRAM_KEY={your key}`
 - add `SKIP_PREFLIGHT_CHECK=true`
 - `yarn start` in server to start server listening
 - `yarn start` in client folder to start React app
+
+## Create a user
+
+Run `createTestAdmin.js` to create a moderator and log in using the provided credentials. To add catcall data you can use the app's submit functionality. Then log in as a moderator to verify the new submissions.
 
 ## ..run tests
 

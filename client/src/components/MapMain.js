@@ -1,17 +1,15 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import { GET_MAP_CATCALLS } from '../api/queries'
 import MapGL, { Source, Layer, Image, Popup, NavigationControl, GeolocateControl, ScaleControl, FullscreenControl } from '@urbica/react-map-gl';
 
-import DialogMap from './DialogMap';
+import DialogComp from './DialogComp';
+import MapPopup from './MapPopup';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './MapMain.css';
-
 import Icon from '../assets/bullhorn.png';
-import { GET_MAP_CATCALLS } from '../api/queries'
-import MapDrawer from "./MapDrawer";
-// import { Dialog } from "@material-ui/core";
-
+import { Player } from '@lottiefiles/react-lottie-player';
 
 function MapMain () {
   const [ popup, setPopup ] = useState("");
@@ -25,8 +23,30 @@ function MapMain () {
     zoom: 12
   });
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
+  if (loading) return (
+    <div data-testid="page-not-found" className="not-found-container">
+      <div className="header-footer"></div>
+      <div data-testid="page-not-found" className="not-found">
+        <h1>Loading</h1>
+        <Player
+          autoplay
+          loop
+          src="https://assets8.lottiefiles.com/packages/lf20_vndsLD.json"
+          style={{ height: '300px', width: '300px' }}
+        >
+        </Player>
+      </div>
+    </div>
+  );
+  if (error) return (
+    <div data-testid="page-not-found" className="not-found-container">
+      <div className="header-footer"></div>
+      <div data-testid="page-not-found" className="not-found">
+        <h1>501</h1>
+        <h2>Oops! Something went wrong.</h2>
+      </div>
+    </div>
+  );
   return (
     <div className="map-container" data-testid="map-main">
       <MapGL
@@ -54,61 +74,20 @@ function MapMain () {
             'icon-size': 0.06
           }}
           onClick={e => {
-            setViewport({
-              latitude: e.features[0].geometry.coordinates[1],
-              longitude: e.features[0].geometry.coordinates[0],
-              zoom: 14
-            });
+            //setviewport functionality (does not give the satisfying effect of mapbox' fly-to behavior, but it was hard to implement that here)
+
+            // setViewport({
+            //   latitude: e.features[0].geometry.coordinates[1],
+            //   longitude: e.features[0].geometry.coordinates[0],
+            //   zoom: 14
+            // });
             setPopup(<Popup longitude={e.lngLat.lng} latitude={e.lngLat.lat} closeButton={true} closeOnClick={true} onClick={setPopup("")}>
-            <div className="popup-content">
-
-              <div className="popup-title">
-                <div>CATCALL</div>
-                <div className="popup-date">
-                  { (e.features[0].properties.dateCatcall && e.features[0].properties.dateCatcall !== "null") ?
-                  (new Date(Number(e.features[0].properties.dateCatcall))).toDateString() :
-                  "" }
-                </div>
-              </div>
-
-              <div className="popup-quote">
-                <i className="popup-icon fas fa-bullhorn"></i>
-                { e.features[0].properties.quote.length > 50 ?
-                '"'+ e.features[0].properties.quote.slice(0,10) + '..."' :
-                '"' + e.features[0].properties.quote + '"' }
-              </div>
-
-              <div className="popup-info">
-
-                <div className="popup-context">
-                  <i className="popup-icon fas fa-comment-dots"></i>
-                  { e.features[0].properties.context.length > 100 ?
-                  e.features[0].properties.context.slice(0,10) + '...' :
-                  e.features[0].properties.context !== "null" ?
-                  e.features[0].properties.context :
-                  "" }
-                </div>
-                <div className="popup-img">
-                  <i className="popup-icon fas fa-pen"></i>
-                  { e.features[0].properties.url && e.features[0].properties.url !== "null" ?
-                  <a href={e.features[0].properties.url} target="_blank" rel="noreferrer" referrerPolicy="no-referrer">See chalk on Insta</a> :
-                  "Not chalked yet" }
-                </div>
-
-              </div>
-
-            </div>
-          </Popup>)}}
+              <MapPopup catcall={e.features[0].properties} />
+            </Popup>)
+          }}
         />
 
         { popup && popup }
-        
-        <div className="map-info">
-          <MapDrawer  />
-        </div>
-
-
-
         <NavigationControl showCompass showZoom position='top-right' />
         <GeolocateControl position='top-right' />
         <FullscreenControl position='top-right' />
@@ -116,8 +95,7 @@ function MapMain () {
 
 
       </MapGL>
-
-    <DialogMap text={dialog} />
+    {dialog && <DialogComp text={dialog} />}
     </div>
   );
 }

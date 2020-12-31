@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import MapForm from './MapForm';
+import Flatpickr from "react-flatpickr";
 import 'flatpickr/dist/themes/material_green.css';
 import './ReportForm.css';
-import Flatpickr from "react-flatpickr";
 import { CREATE_CATCALL } from '../api/queries';
 import { useHistory } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
-
 
 function ReportForm() {
   let history = useHistory();
@@ -100,7 +99,7 @@ function ReportForm() {
                 }
               })}
             ></input>
-            <small id="context-help">Not required. Moderators can edit this part of your report if necessary. For more details, see <a style={{color: "black"}} href="/help" target="_blank">our house rules</a>.</small>
+            <small id="context-help">Not required. Moderators can edit this part of your report if necessary. For more details, see <a style={{color: "black"}} href="/help#houserules" target="_blank">our house rules</a>.</small>
             <p className="error-message">{errors.context && errors.context.message}</p>
 
           </div>
@@ -149,7 +148,6 @@ function ReportForm() {
 
 
           <button type="button" className="cancel-button" onClick={()=> history.push('/') }>Cancel</button>
-
 
           {/* diable recaptcha to run test correctly */}
           <input className="submit-button"  type="submit" value="Submit new catcall" onClick={()=>{

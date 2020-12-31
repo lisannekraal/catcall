@@ -12,6 +12,9 @@ const modSchema = new mongoose.Schema({
   canAdd: {
     type: Boolean,
     default: false
+  },
+  token: {
+    type: String
   }
 })
 

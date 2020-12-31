@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
-import { IconButton, List, ListItem, ListItemText, Drawer, ListItemIcon,Typography } from "@material-ui/core"
-import { Menu } from "@material-ui/icons"
+import React, { useState } from 'react';
+import { IconButton, List, ListItem, ListItemText, Drawer, ListItemIcon,Typography } from '@material-ui/core';
+import { Menu } from '@material-ui/icons';
 import { HashLink as Link } from 'react-router-hash-link';
-
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { v4 as uuidv4 } from 'uuid';
@@ -43,7 +42,7 @@ function SideDrawer({ navLinks }) {
     >
       <List component="nav">
 
-        {/* Again about section in seperate component because of hash link */}
+        {/* Again 'about' section in seperate component because of hash link */}
         <Link to="/#about" style={{textDecoration: 'none', color:'#000000DE'}} >
           <ListItem button key={uuidv4()}>
             <ListItemIcon className='fas fa-info-circle'/>
