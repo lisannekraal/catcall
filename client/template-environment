@@ -1,0 +1,4 @@
+REACT_APP_APOLLO_SERVER="apolloServerAddress"
+REACT_APP_MAPBOX_ACCESS_TOKEN="yourAccessToken"
+REACT_APP_RECAPTCHA_KEY="yourRecaptchaKey"
+REACT_APP_INSTAGRAM_KEY="yourInstagramKey"

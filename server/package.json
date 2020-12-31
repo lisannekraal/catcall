@@ -15,7 +15,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "initialSetup": "node createTestAdmin.js && nodemon index.js"
   },
   "author": "",
   "license": "ISC",
