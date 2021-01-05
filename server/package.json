@@ -16,7 +16,8 @@
   "scripts": {
     "test": "jest",
     "start": "nodemon index.js",
-    "initialSetup": "node createTestAdmin.js && nodemon index.js"
+    "initialSetup": "node createTestAdmin.js && nodemon index.js",
+    "populate": "node seeder.js && node createTestAdmin.js"
   },
   "author": "",
   "license": "ISC",
