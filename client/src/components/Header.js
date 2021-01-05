@@ -45,17 +45,17 @@ function Header({ token, removeCookie, setMod }) {
   const [ navigations, setNavigations ] = useState([]);
 
   let navLinksPermanent = [
-    { 
-      title: 'map', 
-      classN: 'fas fa-map-marked-alt', 
+    {
+      title: 'map',
+      classN: 'fas fa-map-marked-alt',
       path: () => history.push({
         pathname: '/catcalls'
-      }) 
+      })
     },
-    { 
-      title: 'community', 
-      classN: 'fab fa-instagram', 
-      path: () => window.open('https://www.instagram.com/catcallsofams/', '_blank') 
+    {
+      title: 'community',
+      classN: 'fab fa-instagram',
+      path: () => window.open('https://www.instagram.com/catcallsofams/', '_blank')
     }
   ];
 
@@ -63,15 +63,15 @@ function Header({ token, removeCookie, setMod }) {
     //depending on the mod token, show functionalities navbar
 
     if (token && token !== 'null') {
-      setNavigations([...navLinksPermanent, 
+      setNavigations([...navLinksPermanent,
         {
-          title: 'dashboard', 
-          classN: 'fas fa-cog', 
+          title: 'dashboard',
+          classN: 'fas fa-cog',
           path: () => history.push('/dashboard')
         },
         {
-        title: 'logout', 
-        classN: 'fas fa-user', 
+        title: 'logout',
+        classN: 'fas fa-user',
         path: () => {
           removeCookie('token');
           setMod(false);
@@ -80,11 +80,12 @@ function Header({ token, removeCookie, setMod }) {
       }]);
     } else {
       setNavigations([...navLinksPermanent, {
-          title: 'moderator', 
-          classN: 'fas fa-cog', 
+          title: 'moderator',
+          classN: 'fas fa-cog',
           path: () => history.push('/login')
       }]);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   return (
@@ -92,7 +93,7 @@ function Header({ token, removeCookie, setMod }) {
       <Toolbar style={{ color: 'white' }}>
 
         <Container className={classes.navDisplayFlex} maxWidth="xl">
-          
+
           <div className="navbar-brand" onClick={() => history.push("/")}>
             <img src={logo} alt="logo" className={classes.logo} />
             <div> Catcalls of Amsterdam</div>
@@ -102,8 +103,8 @@ function Header({ token, removeCookie, setMod }) {
             <List component="nav" className={classes.navDisplayLinks}>
 
               {/* 'About' nav component is seperate from loop as we use hash link package */}
-              <Link 
-                to="/#about" 
+              <Link
+                to="/#about"
                 className="about-link" >
                 <Button color='inherit' startIcon={<Icon className='fas fa-info-circle' fontSize="small" style={{ marginRight: 7 }} />}>About</Button>
               </Link>

@@ -23,13 +23,14 @@ function Login({ setCookie, setMod }) {
   useEffect(()=>{
     if (data) {
       setCookie(
-        'token', 
-        data.validateModerator.token, 
+        'token',
+        data.validateModerator.token,
         { path: '/' }
       );
       setMod(data.validateModerator);
       history.push('/dashboard');
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, error]);
 
   return (
