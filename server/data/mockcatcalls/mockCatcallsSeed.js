@@ -11,7 +11,7 @@ let catcalls = [...Array(numCatcalls)].map(() => (
     "type": "Feature",
     "properties": {
       "quote": `${faker.random.number()}`,
-      "context": faker.lorem.sentence(),
+      "context": faker.lorem.paragraph(),
       "dateCatcall": `${Date.parse(faker.date.past())}`,
       "dateAdded": `${Date.parse(faker.date.recent())}`,
       "url": "",
