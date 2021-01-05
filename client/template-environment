@@ -1,0 +1,11 @@
+REACT_APP_APOLLO_SERVER="apolloServerAddress"
+
+REACT_APP_MAPBOX_ACCESS_TOKEN="yourAccessToken"
+https://docs.mapbox.com/help/how-mapbox-works/access-tokens/
+
+REACT_APP_RECAPTCHA_KEY="yourRecaptchaKey"
+https://developers.google.com/recaptcha/intro
+
+REACT_APP_INSTAGRAM_KEY="yourInstagramKey"
+https://docs.oceanwp.org/article/487-how-to-get-instagram-access-token
+SKIP_PREFLIGHT_CHECK=true

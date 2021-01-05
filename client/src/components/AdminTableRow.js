@@ -69,6 +69,7 @@ function Row(props) {
         setButtons([{name: 'verify', class: 'greenButton'}, {name: 'edit', class: 'yellowButton'}, {name: 'delete', class: 'redButton'}]);
         break;
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab, data])
 
   function handleClick(button) {
@@ -168,7 +169,7 @@ function Row(props) {
           ))}
         </TableCell>
       </TableRow>
-      
+
       {/* 2. expanded info */}
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
