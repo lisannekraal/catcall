@@ -24,6 +24,7 @@
     "apollo-server": "^2.19.0",
     "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
+    "faker": "^5.1.0",
     "graphql": "^15.4.0",
     "jsonwebtoken": "^8.5.1",
     "lodash.merge": "^4.6.2",
