@@ -16,7 +16,8 @@
   "scripts": {
     "test": "jest",
     "start": "nodemon index.js",
-    "initialSetup": "node createTestAdmin.js && nodemon index.js"
+    "initialSetup": "node createTestAdmin.js && nodemon index.js",
+    "populate": "node seeder.js && node createTestAdmin.js"
   },
   "author": "",
   "license": "ISC",
@@ -24,9 +25,11 @@
     "apollo-server": "^2.19.0",
     "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
+    "faker": "^5.1.0",
     "graphql": "^15.4.0",
     "jsonwebtoken": "^8.5.1",
     "lodash.merge": "^4.6.2",
+    "mongo-seeding": "^3.5.0",
     "mongoose": "^5.10.13"
   },
   "devDependencies": {
