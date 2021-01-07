@@ -33,9 +33,8 @@ const useRowStyles = makeStyles({
   },
 });
 
-function Row(props) {
+function Row({ tab, row, clickButtonUpdate }) {
   let history = useHistory();
-  const { tab, row, clickButtonUpdate } = props;
   const [open, setOpen] = useState(false);
   const [buttonstoShow, setButtons] = useState([]);
   const [ getCatcall, { loading, data } ] = useLazyQuery(GET_CATCALL);
@@ -75,7 +74,7 @@ function Row(props) {
   function handleClick(button) {
     if (button.name === 'verify') {
       clickButtonUpdate({ variables: {
-          id: row.id,
+          id: row._id,
           catcall: {
             properties: {
               verified: true,
@@ -85,14 +84,14 @@ function Row(props) {
         }
       });
     } else if (button.name === 'edit') {
-      getCatcall({variables: {id: row.id}});
+      getCatcall({variables: {id: row._id}});
     } else if (button.name === 'email') {
       alert('Unfortunately this feature does not work just yet ;)');
     } else if (button.name === 'chalk') {
-      getCatcall({variables: {id: row.id}});
+      getCatcall({variables: {id: row._id}});
     } else if (button.name === 'unstage') {
       clickButtonUpdate({ variables: {
-          id: row.id,
+          id: row._id,
           catcall: {
             properties: {
               listedForChalk: false
@@ -102,7 +101,7 @@ function Row(props) {
       })
     } else if (button.name === 'delete') {
       clickButtonUpdate({ variables: {
-          id: row.id,
+          id: row._id,
           catcall: {
             properties: {
               trash: true
@@ -112,7 +111,7 @@ function Row(props) {
       })
     } else if (button.name === 'undo') {
       clickButtonUpdate({ variables: {
-          id: row.id,
+          id: row._id,
           catcall: {
             properties: {
               trash: false
@@ -124,16 +123,14 @@ function Row(props) {
   }
 
   function handleStarClick() {
-    console.log(row);
     clickButtonUpdate({ variables: {
-      id: row.id,
+      id: row._id,
       catcall: {
         properties: {
-          starred: !row.starred
+          starred: !row.properties.starred
         }
       }
     }});
-    console.log(row);
   }
 
   if (loading) return <p>Loading ...</p>;
@@ -150,14 +147,14 @@ function Row(props) {
 
         {/*2: star*/}
         <TableCell>
-          {row.starred ?
+          {row.properties.starred ?
           <Star onClick={() => handleStarClick()} />  :
           <StarOutline onClick={() => handleStarClick()} />}
         </TableCell>
 
         {/*3: quote*/}
         <TableCell component="th" scope="row">
-          {row.catCallQuote}
+          {row.properties.quote}
         </TableCell>
 
         {/*4: actions*/}
@@ -185,28 +182,28 @@ function Row(props) {
                     <TableCell component="th" scope="row">
                       Date added
                     </TableCell>
-                    <TableCell >{row.dateAdded}</TableCell>
+                    <TableCell>{(new Date(Number(row.properties.dateAdded))).toDateString()}</TableCell>
                   </TableRow>
 
                   <TableRow key={uuidv4()}>
                     <TableCell component="th" scope="row">
                       Date catcall
                     </TableCell>
-                    <TableCell >{row.dateCatcall}</TableCell>
+                    <TableCell >{row.properties.dateCatcall ? (new Date(Number(row.properties.dateCatcall))).toDateString() : "no date"}</TableCell>
                   </TableRow>
 
                   <TableRow key={uuidv4()}>
                     <TableCell component="th" scope="row">
                       Location
                     </TableCell>
-                    <TableCell>{`${row.coordinates[0].toFixed(3)}.. ${row.coordinates[1].toFixed(3)}..`}</TableCell>
+                    <TableCell>{`${row.geometry.coordinates[0].toFixed(3)}.. ${row.geometry.coordinates[1].toFixed(3)}..`}</TableCell>
                   </TableRow>
 
                   <TableRow key={uuidv4()}>
                     <TableCell component="th" scope="row">
                       Context
                     </TableCell>
-                    <TableCell>{row.context}</TableCell>
+                    <TableCell>{row.properties.context}</TableCell>
                   </TableRow>
 
                   <TableRow key={uuidv4()}>
@@ -214,7 +211,7 @@ function Row(props) {
                       Chalk url
                     </TableCell>
                     <TableCell>
-                        <a href={row.url} target="_blank" rel="noreferrer">{row.url}</a>
+                        <a href={row.properties.url} target="_blank" rel="noreferrer">{row.properties.url}</a>
                       </TableCell>
                   </TableRow>
                 </TableBody>

@@ -6,33 +6,13 @@ import { v4 as uuidv4 } from 'uuid';
 import { ExpandMore, Warning } from '@material-ui/icons';
 import { useForm } from 'react-hook-form';
 
-// Function labels data in the table
-function processCatCallsData({ geometry, properties, _id, type }) {
-  return {
-    id: _id,
-    catCallQuote: properties.quote,
-    context: properties.context,
-    dateAdded: (new Date(Number(properties.dateAdded))).toDateString(),
-    dateCatcall: properties.dateCatcall ? (new Date(Number(properties.dateCatcall))).toDateString() : "no date",
-    geometryType: geometry.type,
-    type: type,
-    coordinates: geometry.coordinates,
-    verified: properties.verified,
-    chalked: properties.chalked,
-    listedForChalk: properties.listedForChalk,
-    trash: properties.trash,
-    url: properties.url,
-    starred: properties.starred
-  };
-}
-
 export default function AdminTable({ catcallData, updateCatcall, value, authorized, emptyTrash }) {
 
   const [showSettings, setShowSettings] = useState(false);
   const [showTrash, setShowTrash] = useState(false);
   const [emptyTableMessage, setEmptyTableMessage] = useState('No new catcalls to verify');
   const { handleSubmit } = useForm();
-  const [rows, setRows] = useState(catcallData.map(catcall => processCatCallsData(catcall)))
+  const [rows, setRows] = useState(catcallData);
 
   useEffect(() => {
     let switchedRows;
@@ -69,7 +49,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
         switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === false);
         break;
     }
-    switchedRows && setRows(switchedRows.map(catcall => processCatCallsData(catcall))); 
+    switchedRows && setRows(switchedRows); 
   }, [value, catcallData]);
 
   const clickButtonUpdate = ({ variables }) => {
