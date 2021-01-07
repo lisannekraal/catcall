@@ -1,11 +1,15 @@
 const { getObjectId } = require("mongo-seeding");
 const faker = require('faker/locale/en_GB');
-const numCatcalls = 10;
+const numCatcalls = 1000;
+
+function getRandomInRange(from, to, fixed) {
+  return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
+}
 
 let catcalls = [...Array(numCatcalls)].map(() => (
   {
     "geometry": {
-      "coordinates": [ Number(faker.address.longitude()), Number(faker.address.latitude())],
+      "coordinates": [ getRandomInRange(4.8, 5, 3), getRandomInRange(52.3, 52.4, 3)],
       "type": "Point",
     },
     "type": "Feature",
@@ -15,7 +19,7 @@ let catcalls = [...Array(numCatcalls)].map(() => (
       "dateCatcall": `${Date.parse(faker.date.past())}`,
       "dateAdded": `${Date.parse(faker.date.recent())}`,
       "url": "",
-      "verified": false,
+      "verified": true,
       "chalked": false,
       "listedForChalk": false,
       "starred": false,
