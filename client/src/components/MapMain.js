@@ -71,7 +71,8 @@ function MapMain () {
           source='catcalls'
           layout={{
             'icon-image': 'catcall-icon',
-            'icon-size': 0.06
+            'icon-size': 0.06,
+            'icon-allow-overlap': true
           }}
           onClick={e => {
             //setviewport functionality (does not give the satisfying effect of mapbox' fly-to behavior, but it was hard to implement that here)
