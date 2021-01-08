@@ -19,7 +19,8 @@ const catcallSchema = new mongoose.Schema({
       chalked: Boolean,
       listedForChalk: Boolean,
       starred: Boolean,
-      trash: Boolean
+      trash: Boolean,
+      categories: [String]
   }
 })
 

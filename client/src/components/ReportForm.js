@@ -39,7 +39,8 @@ function ReportForm() {
             "chalked": false,
             "listedForChalk": false,
             "starred": false,
-            "trash": false
+            "trash": false,
+            "categories": []
           }
         }
       }

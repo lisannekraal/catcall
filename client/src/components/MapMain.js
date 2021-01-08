@@ -96,7 +96,7 @@ function MapMain () {
 
 
       </MapGL>
-    {dialog && <DialogComp text={dialog} />}
+    {dialog && <DialogComp text={dialog} state={true} />}
     </div>
   );
 }

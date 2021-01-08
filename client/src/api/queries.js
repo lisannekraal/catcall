@@ -15,6 +15,7 @@ export const GET_MAP_CATCALLS = gql`
         dateCatcall
         url
         chalked
+        categories
       }
     }
   }
@@ -40,6 +41,7 @@ export const GET_CATCALLS = gql`
         listedForChalk
         starred
         trash
+        categories
       }
     }
   }
@@ -65,6 +67,7 @@ export const GET_CATCALL = gql`
         listedForChalk
         starred
         trash
+        categories
       }
     }
   }
@@ -89,6 +92,7 @@ export const CREATE_CATCALL = gql`
         listedForChalk
         starred
         trash
+        categories
       }
     }
   }
@@ -114,6 +118,7 @@ export const UPDATE_CATCALL = gql`
         listedForChalk
         starred
         trash
+        categories
       }
     }
   }

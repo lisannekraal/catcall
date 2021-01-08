@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText } from '@material-ui/core';
 
-export default function AlertDialog({ text }) {
-  const [open, setOpen] = useState(true);
+export default function AlertDialog({ text, state }) {
+  const [open, setOpen] = useState(state);
 
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleOpen = () => {
+    setOpen(true);
+  }
 
   return (
     <Dialog

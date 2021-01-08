@@ -4,7 +4,7 @@ import { useLazyQuery } from "@apollo/client";
 import { GET_CATCALL } from '../api/queries';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Table, TableBody, TableCell, TableRow, Box, Button, Collapse, IconButton, Typography, Tooltip } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableRow, Box, Button, Collapse, IconButton, Typography, Tooltip, Dialog, DialogActions, DialogContent, DialogContentText, FormGroup, FormControlLabel, Checkbox, DialogTitle } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Star, StarOutline } from '@material-ui/icons';
@@ -39,6 +39,19 @@ function Row({ tab, row, clickButtonUpdate }) {
   const [buttonstoShow, setButtons] = useState([]);
   const [ getCatcall, { loading, data } ] = useLazyQuery(GET_CATCALL);
   const classes = useRowStyles();
+  
+  //for modal to add categorization
+  const [openModal, setOpenModal] = useState(false);
+  const [hideTooltips, setHideTooltips] = useState(false);
+  const [state, setState] = useState({
+    sexual: false,
+    homophobia: false,
+    fatphobia: false,
+    racism: false,
+    young: false,
+    assault: false
+  });
+  const { sexual, homophobia, fatphobia, racism, young, assault } = state;
 
   useEffect(() => {
     //listen for a data change: when catcall queried, send to edit form, rendered for either url editing or text editing
@@ -49,7 +62,6 @@ function Row({ tab, row, clickButtonUpdate }) {
         state: { catcall: data.getCatcall }
       });
     }
-
     //listen for a tab change and re-set buttons
     switch (tab) {
       case 'unverified':
@@ -86,18 +98,37 @@ function Row({ tab, row, clickButtonUpdate }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab, data])
 
+  function verificationProcess() {
+    let categoriesClicked = [];
+    for (const key in state) {
+      if (state[key]) categoriesClicked.push(key);
+    } 
+    clickButtonUpdate({ variables: {
+      id: row._id,
+      catcall: {
+        properties: {
+          verified: true,
+          listedForChalk: true,
+          categories: categoriesClicked
+          }
+      }
+    }});
+    setHideTooltips(false);
+  }
+
+  const handleClose = () => {
+    setOpenModal(false);
+    setHideTooltips(false);
+  };
+
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
+
   function handleClick(button) {
     if (button.name === 'verify') {
-      clickButtonUpdate({ variables: {
-          id: row._id,
-          catcall: {
-            properties: {
-              verified: true,
-              listedForChalk: true
-            }
-          }
-        }
-      });
+      setOpenModal(true);
+      setHideTooltips(true);
     } else if (button.name === 'edit') {
       getCatcall({variables: {id: row._id}});
     } else if (button.name === 'email') {
@@ -186,7 +217,7 @@ function Row({ tab, row, clickButtonUpdate }) {
         {/*4: actions*/}
         <TableCell>
           {buttonstoShow.map((button) => (
-            <Tooltip title={button.tooltip} arrow>
+            <Tooltip title={hideTooltips ? "" : button.tooltip} arrow>
               <Button key={uuidv4()} variant="contained" color="inherit" size="small" onClick={() => handleClick(button)} className={classes[button.class]} >
                 {button.name}
               </Button>
@@ -249,9 +280,51 @@ function Row({ tab, row, clickButtonUpdate }) {
         </TableCell>
       </TableRow>
 
+      <Dialog open={openModal} onClose={handleClose} aria-labelledby="form-dialog-categories">
+        <DialogTitle id="form-dialog-categories">Do you wish to add categories for this catcall?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Categorization helps us analyze street harassment. No minimum or maximum number required.
+          </DialogContentText>
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox checked={sexual} onChange={handleChange} name="sexual" />}
+              label="Sexual harassment"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={homophobia} onChange={handleChange} name="homophobia" />}
+              label="Homophobia"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={fatphobia} onChange={handleChange} name="fatphobia" />}
+              label="Fatphobia"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={racism} onChange={handleChange} name="racism" />}
+              label="Racism"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={young} onChange={handleChange} name="young" />}
+              label="Young"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={assault} onChange={handleChange} name="assault" />}
+              label="Assault"
+            />
+          </FormGroup>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={verificationProcess} color="primary">
+            Continue
+          </Button>
+        </DialogActions>
+      </Dialog>
+
     </React.Fragment>
   );
 }
-
 
 export default Row;

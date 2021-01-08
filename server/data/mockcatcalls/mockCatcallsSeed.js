@@ -1,6 +1,6 @@
 const { getObjectId } = require("mongo-seeding");
 const faker = require('faker/locale/en_GB');
-const numCatcalls = 1000;
+const numCatcalls = 10;
 
 function getRandomInRange(from, to, fixed) {
   return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
@@ -23,7 +23,8 @@ let catcalls = [...Array(numCatcalls)].map(() => (
       "chalked": false,
       "listedForChalk": false,
       "starred": false,
-      "trash": false
+      "trash": false,
+      "categories": []
     }
   }
 ));

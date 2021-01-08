@@ -74,6 +74,7 @@ const typeDefs = gql`
     listedForChalk: Boolean!
     starred: Boolean!
     trash: Boolean!
+    categories: [String]
   }
 
   input PropertiesInput {
@@ -87,6 +88,7 @@ const typeDefs = gql`
     listedForChalk: Boolean!
     starred: Boolean!
     trash: Boolean!
+    categories: [String]
   }
 
   input PropertiesUpdateInput {
@@ -100,6 +102,7 @@ const typeDefs = gql`
     listedForChalk: Boolean
     starred: Boolean
     trash: Boolean
+    categories: [String]
   }
 
   type Moderator {

@@ -39,7 +39,7 @@ const catcallResolver = {
 
   Mutation: {
     async createCatcall(_, { catcall }) {
-      const { type, geometry, properties} = catcall;
+      const { type, geometry, properties } = catcall;
       const createdCatcall = await Catcall.create({ type, geometry, properties });
       return createdCatcall;
     },
