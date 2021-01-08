@@ -107,7 +107,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
             </AccordionSummary>
             <AccordionDetails>
               <form onSubmit={handleSubmit(onSubmit)}>
-                  <input className="submit-button"  type="submit" value="Permanently empty trash" />
+                  <input className="submit-button" type="submit" value="Permanently empty trash" />
               </form>
             </AccordionDetails>
           </Accordion>

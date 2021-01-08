@@ -4,7 +4,7 @@ import { useLazyQuery } from "@apollo/client";
 import { GET_CATCALL } from '../api/queries';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Table, TableBody, TableCell, TableRow, Box, Button, Collapse, IconButton, Typography } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableRow, Box, Button, Collapse, IconButton, Typography, Tooltip } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Star, StarOutline } from '@material-ui/icons';
@@ -53,16 +53,31 @@ function Row({ tab, row, clickButtonUpdate }) {
     //listen for a tab change and re-set buttons
     switch (tab) {
       case 'unverified':
-        setButtons([{name: 'verify', class: 'greenButton'}, {name: 'edit', class: 'yellowButton'}, {name: 'delete', class: 'redButton'}]);
+        setButtons([
+          {name: 'verify', class: 'greenButton', tooltip: 'Agree to add submitted catcall to our database and map'}, 
+          {name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content'}, 
+          {name: 'delete', class: 'redButton', tooltip: 'Move submussion to trash'}
+        ]);
         break;
       case 'chalk':
-        setButtons([{name: 'email', class: 'greenButton'}, {name: 'chalk', class: 'yellowButton'}, {name: 'unstage', class: 'redButton'}]);
+        setButtons([
+          //Deactivated email functionality:
+          // {name: 'email', class: 'greenButton', tooltip: ''},
+          {name: 'chalk', class: 'greenButton', tooltip: 'Add Insta photo to map and remove catcall from this list'}, 
+          {name: 'unstage', class: 'redButton', tooltip: 'Decide not to chalk this catcall for now'}
+        ]);
         break;
       case 'database':
-        setButtons([{name: 'edit', class: 'yellowButton'}, {name: 'delete', class: 'redButton'}]);
+        setButtons([
+          {name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content'}, 
+          {name: 'delete', class: 'redButton', tooltip: 'Remove catcall to trash'}
+        ]);
         break;
       case 'trash':
-        setButtons([{name: 'undo', class: 'greenButton'}, {name: 'edit', class: 'yellowButton'}]);
+        setButtons([
+          {name: 'undo', class: 'greenButton', tooltip: 'Move catcall back into database'}, 
+          {name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content'}
+        ]);
         break;
       default: //unverified
         setButtons([{name: 'verify', class: 'greenButton'}, {name: 'edit', class: 'yellowButton'}, {name: 'delete', class: 'redButton'}]);
@@ -141,15 +156,26 @@ function Row({ tab, row, clickButtonUpdate }) {
         {/*1: expand functionality */}
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            {open ? 
+            <KeyboardArrowUpIcon /> 
+            : 
+            <Tooltip title="More info" arrow>
+              <KeyboardArrowDownIcon />
+            </Tooltip>
+            }
           </IconButton>
         </TableCell>
 
         {/*2: star*/}
         <TableCell>
           {row.properties.starred ?
-          <Star onClick={() => handleStarClick()} />  :
-          <StarOutline onClick={() => handleStarClick()} />}
+          <Tooltip title="Remove star" arrow>
+            <Star onClick={() => handleStarClick()} />  
+          </Tooltip>
+          :
+          <Tooltip title="Add star" arrow>
+            <StarOutline onClick={() => handleStarClick()} />
+          </Tooltip>}
         </TableCell>
 
         {/*3: quote*/}
@@ -160,9 +186,11 @@ function Row({ tab, row, clickButtonUpdate }) {
         {/*4: actions*/}
         <TableCell>
           {buttonstoShow.map((button) => (
-            <Button key={uuidv4()} variant="contained" color="inherit" size="small" onClick={() => handleClick(button)} className={classes[button.class]} >
-              {button.name}
-            </Button>
+            <Tooltip title={button.tooltip} arrow>
+              <Button key={uuidv4()} variant="contained" color="inherit" size="small" onClick={() => handleClick(button)} className={classes[button.class]} >
+                {button.name}
+              </Button>
+            </Tooltip>
           ))}
         </TableCell>
       </TableRow>

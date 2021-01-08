@@ -60,7 +60,7 @@ function Landing() {
               pathname: '/catcalls',
               state: { dialog: 'This is an overview of all catcalls reported. Disclaimer: this application contains violent language and words of racism, sexual harassment and hate speach. Are you younger than 18 years old? Ask your guardian.' }
             }}>
-              <p>View Catcalls of Amsterdam</p>
+              <p>View catcalls on map</p>
             </Link>
             <Link to="/catcalls/new">
               <p>Report a new catcall</p>

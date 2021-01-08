@@ -1,7 +1,7 @@
 
 import { makeStyles } from '@material-ui/core/styles';
 import SideImage from './SideImage';
-import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import { Card, CardActions, CardContent, Button, Typography, Tooltip } from '@material-ui/core';
 import './MapPopup.css';
 
 const useStyles = makeStyles({
@@ -40,12 +40,13 @@ export default function MapPopup ({ catcall }) {
         <CardActions>
           { catcall.url ?
             <SideImage url={catcall.url} />
-
             : <></>
           }
-          <Button size="small" color="primary">
-            <i className="popup-icon fas fa-bullhorn"></i><span>5</span>
-          </Button>
+          <Tooltip title="Upvote" arrow>
+            <Button size="small" color="primary">
+              <i className="popup-icon fas fa-bullhorn"></i><span>5</span>
+            </Button>
+          </Tooltip>
         </CardActions>
       </Card>
 

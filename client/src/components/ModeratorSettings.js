@@ -4,7 +4,7 @@ import { GET_MODERATORS, CREATE_MODERATOR, REMOVE_MODERATOR } from '../api/queri
 import { useForm } from 'react-hook-form';
 import './ModeratorSettings.css';
 
-import { Hidden, Table, TableContainer, TableBody, TableCell, TableHead, TableRow, Paper, Accordion, AccordionSummary, AccordionDetails, Typography } from '@material-ui/core';
+import { Hidden, Table, TableContainer, TableBody, TableCell, TableHead, TableRow, Paper, Accordion, AccordionSummary, AccordionDetails, Typography, Tooltip } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Delete from '@material-ui/icons/Delete';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -85,7 +85,11 @@ export default function ModeratorSettings({authorized}) {
                   </Hidden>
                   <TableCell>{moderator.email}</TableCell>
                   <TableCell>{moderator.canAdd ? 'Full' : 'Partial'}</TableCell>
-                  <TableCell><Delete onClick={() => deleteMod(moderator)} /></TableCell>
+                  <TableCell>
+                    <Tooltip title="Permanently delete moderator" arrow>
+                      <Delete className="delete-mod-button" onClick={() => deleteMod(moderator)} />
+                    </Tooltip>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

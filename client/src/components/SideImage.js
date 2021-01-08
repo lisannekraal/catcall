@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Drawer, Button } from '@material-ui/core';
+import { Drawer, Button, Tooltip } from '@material-ui/core';
 import InstaTile from './InstaTile';
 
 function SideImage({ url }) {
@@ -27,9 +27,11 @@ function SideImage({ url }) {
 
   return (
     <React.Fragment>
-      <Button size="small" color="primary" onClick={toggleDrawer("left", true)}>
-        <i className="popup-icon fas fa-pen"></i>chalked back
-      </Button> 
+      <Tooltip title="Opens image to the side" arrow>
+        <Button size="small" color="primary" onClick={toggleDrawer("left", true)}>
+          <i className="popup-icon fas fa-pen"></i>chalked back
+        </Button> 
+      </Tooltip>
       <Drawer
         anchor="left"
         open={drawerState.left}

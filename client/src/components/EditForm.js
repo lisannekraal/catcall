@@ -56,7 +56,7 @@ function EditForm() {
 
         <form onSubmit={handleSubmit(onSubmit)}>
 
-          {/*if location is edit url, load 'chalk' functionality, otherwise generic edit catcall/context */}
+          {/*if location is edit url, load only 'chalk' functionality, otherwise generic edit catcall/context */}
 
           { location.search === '?edit=url' ? (
 
@@ -124,33 +124,22 @@ function EditForm() {
             <p>{(new Date(Number(dateAdded))).toDateString()}</p>
           </div>
 
-          { location.search === '?edit=url' ? (
-
-            <div className="form-segment">
-              <label htmlFor="context">URL of Instagram chalk image:</label>
-              <input
-                id="url"
-                name="url"
-                value={url}
-                ref={register({
-                  pattern: {
-                    value: /[^\x22]+/,
-                    message: "Do not use double quotes"
-                  }
-                })}
-                onChange={handleUrlInput}
-              ></input>
-              <p className="error-message">{errors.url && errors.url.message}</p>
-            </div>
-
-          ) : url && (
-
-            <div className="form-segment">
-              <label htmlFor="context">URL of Instagram chalk image:</label>
-              <p><a href={url} target="_blank" rel="noreferrer">{url}</a></p>
-            </div>
-
-          ) }
+          <div className="form-segment">
+            <label htmlFor="context">URL of Instagram image:</label>
+            <input
+              id="url"
+              name="url"
+              value={url}
+              ref={register({
+                pattern: {
+                  value: /[^\x22]+/,
+                  message: "Do not use double quotes"
+                }
+              })}
+              onChange={handleUrlInput}
+            ></input>
+            <p className="error-message">{errors.url && errors.url.message}</p>
+          </div>
 
           <button type="button" className="cancel-button" onClick={()=> history.push('/dashboard') }>Cancel</button>
 
