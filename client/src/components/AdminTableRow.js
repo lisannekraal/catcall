@@ -39,7 +39,7 @@ function Row({ tab, row, clickButtonUpdate }) {
   const [buttonstoShow, setButtons] = useState([]);
   const [ getCatcall, { loading, data } ] = useLazyQuery(GET_CATCALL);
   const classes = useRowStyles();
-  
+
   //for modal to add categorization
   const [openModal, setOpenModal] = useState(false);
   const [hideTooltips, setHideTooltips] = useState(false);
@@ -66,8 +66,8 @@ function Row({ tab, row, clickButtonUpdate }) {
     switch (tab) {
       case 'unverified':
         setButtons([
-          {name: 'verify', class: 'greenButton', tooltip: 'Agree to add submitted catcall to our database and map'}, 
-          {name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content'}, 
+          {name: 'verify', class: 'greenButton', tooltip: 'Agree to add submitted catcall to our database and map'},
+          {name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content'},
           {name: 'delete', class: 'redButton', tooltip: 'Move submussion to trash'}
         ]);
         break;
@@ -75,19 +75,19 @@ function Row({ tab, row, clickButtonUpdate }) {
         setButtons([
           //Deactivated email functionality:
           // {name: 'email', class: 'greenButton', tooltip: ''},
-          {name: 'chalk', class: 'greenButton', tooltip: 'Add Insta photo to map and remove catcall from this list'}, 
+          {name: 'chalk', class: 'greenButton', tooltip: 'Add Insta photo to map and remove catcall from this list'},
           {name: 'unstage', class: 'redButton', tooltip: 'Decide not to chalk this catcall for now'}
         ]);
         break;
       case 'database':
         setButtons([
-          {name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content'}, 
+          {name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content'},
           {name: 'delete', class: 'redButton', tooltip: 'Remove catcall to trash'}
         ]);
         break;
       case 'trash':
         setButtons([
-          {name: 'undo', class: 'greenButton', tooltip: 'Move catcall back into database'}, 
+          {name: 'undo', class: 'greenButton', tooltip: 'Move catcall back into database'},
           {name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content'}
         ]);
         break;
@@ -102,7 +102,7 @@ function Row({ tab, row, clickButtonUpdate }) {
     let categoriesClicked = [];
     for (const key in state) {
       if (state[key]) categoriesClicked.push(key);
-    } 
+    }
     clickButtonUpdate({ variables: {
       id: row._id,
       catcall: {
@@ -187,9 +187,9 @@ function Row({ tab, row, clickButtonUpdate }) {
         {/*1: expand functionality */}
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-            {open ? 
-            <KeyboardArrowUpIcon /> 
-            : 
+            {open ?
+            <KeyboardArrowUpIcon />
+            :
             <Tooltip title="More info" arrow>
               <KeyboardArrowDownIcon />
             </Tooltip>
@@ -201,7 +201,7 @@ function Row({ tab, row, clickButtonUpdate }) {
         <TableCell>
           {row.properties.starred ?
           <Tooltip title="Remove star" arrow>
-            <Star onClick={() => handleStarClick()} />  
+            <Star onClick={() => handleStarClick()} />
           </Tooltip>
           :
           <Tooltip title="Add star" arrow>
@@ -217,8 +217,8 @@ function Row({ tab, row, clickButtonUpdate }) {
         {/*4: actions*/}
         <TableCell>
           {buttonstoShow.map((button) => (
-            <Tooltip title={hideTooltips ? "" : button.tooltip} arrow>
-              <Button key={uuidv4()} variant="contained" color="inherit" size="small" onClick={() => handleClick(button)} className={classes[button.class]} >
+            <Tooltip key={uuidv4()} title={hideTooltips ? "" : button.tooltip} arrow>
+              <Button variant="contained" color="inherit" size="small" onClick={() => handleClick(button)} className={classes[button.class]} >
                 {button.name}
               </Button>
             </Tooltip>

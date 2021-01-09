@@ -9,6 +9,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Delete from '@material-ui/icons/Delete';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import { v4 as uuidv4 } from 'uuid';
+
 
 export default function ModeratorSettings({authorized}) {
 
@@ -79,7 +81,7 @@ export default function ModeratorSettings({authorized}) {
             </TableHead>
             <TableBody>
               {moderators.map((moderator) => (
-                <TableRow>
+                <TableRow key={uuidv4()}>
                   <Hidden xsDown>
                     <TableCell><AccountCircleIcon /></TableCell>
                   </Hidden>
@@ -95,7 +97,7 @@ export default function ModeratorSettings({authorized}) {
             </TableBody>
           </Table>
       </TableContainer>
-      { authorized && 
+      { authorized &&
         <>
           <h2 className="mod-settings-header">More</h2>
           <Accordion>
