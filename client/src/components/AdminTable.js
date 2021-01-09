@@ -1,11 +1,23 @@
 import { useState, useEffect } from 'react';
 import Row from './AdminTableRow';
 import ModeratorSettings from './ModeratorSettings';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Accordion, AccordionSummary, AccordionDetails, Typography } from '@material-ui/core';
-import { v4 as uuidv4 } from 'uuid';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TablePagination from '@material-ui/core/TablePagination';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+
 import { ExpandMore, Warning } from '@material-ui/icons';
 import { useForm } from 'react-hook-form';
-import TablePagination from '@material-ui/core/TablePagination';
+import { v4 as uuidv4 } from 'uuid';
+
 
 export default function AdminTable({ catcallData, updateCatcall, value, authorized, emptyTrash }) {
 
@@ -125,7 +137,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
     { showTrash && authorized ?
         <>
           <h2 className="mod-settings-header">More</h2>
-          <Accordion>
+          <Accordion TransitionProps={{ unmountOnExit: true }}>
             <AccordionSummary
               expandIcon={<ExpandMore />}
               aria-controls="panel2a-content"
