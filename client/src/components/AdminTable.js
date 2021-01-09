@@ -24,35 +24,41 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
         setShowSettings(false);
         setShowTrash(false);
         setEmptyTableMessage('No new catcalls to verify');
+        setPage(0);
         switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === false);
         break;
       case 'chalk':
         setShowSettings(false);
         setShowTrash(false);
         setEmptyTableMessage('No catcalls on the list to chalk');
+        setPage(0);
         switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === true && el.properties.chalked === false && el.properties.listedForChalk === true);
         break;
       case 'database':
         setShowSettings(false);
         setShowTrash(false);
         setEmptyTableMessage('Database is empty');
+        setPage(0);
         switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === true);
         break;
       case 'trash':
         setShowSettings(false);
         setShowTrash(true);
         setEmptyTableMessage('No catcalls currently in trash');
+        setPage(0);
         switchedRows = catcallData.filter(el => el.properties.trash === true);
         break;
       case 'settings':
         setShowSettings(true);
         setShowTrash(false);
+        setPage(0);
         break;
       default: //unverified
+        setPage(0);
         switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === false);
         break;
     }
-    switchedRows && setRows(switchedRows); 
+    switchedRows && setRows(switchedRows);
   }, [value, catcallData]);
 
   const clickButtonUpdate = ({ variables }) => {
@@ -82,7 +88,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
     {/* if settings tab is selected, only load that seperate component */}
     { showSettings ?
       <ModeratorSettings authorized={authorized} />
-    : 
+    :
       <>
         <TableContainer component={Paper}>
           {/* generic dashboard table for all other functionalities */}
@@ -116,7 +122,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
       </>
     }
     {/* if in trashbin and full athority, show this extra section to permanently delete */}
-    { showTrash && authorized ? 
+    { showTrash && authorized ?
         <>
           <h2 className="mod-settings-header">More</h2>
           <Accordion>
