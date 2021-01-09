@@ -36,7 +36,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
         setShowSettings(false);
         setShowTrash(false);
         setEmptyTableMessage('Database is empty');
-        switchedRows = catcallData.filter(el => el.properties.trash === false);
+        switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === true);
         break;
       case 'trash':
         setShowSettings(false);
@@ -97,7 +97,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+              {rows.slice().reverse().slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
                 <Row key={uuidv4()} tab={value} row={row} clickButtonUpdate={clickButtonUpdate} />
               ))}
             </TableBody>
