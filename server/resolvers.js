@@ -1,13 +1,13 @@
 const Catcall = require('./models/catcall.model');
 const Moderator = require('./models/moderator.model');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 const merge = require('lodash.merge');
 const { Error } = require('mongoose');
 
 const catcallResolver = {
   Query: {
-    async getCatcalls(_, __, context) {
+    async getCatcalls (_, __, context) {
       if (context.mod._id) {
         if (await Moderator.findOne({ _id: context.mod._id })) {
           const catcalls = await Catcall.find();
@@ -38,13 +38,13 @@ const catcallResolver = {
   },
 
   Mutation: {
-    async createCatcall(_, { catcall }) {
+    async createCatcall (_, { catcall }) {
       const { type, geometry, properties } = catcall;
       const createdCatcall = await Catcall.create({ type, geometry, properties });
       return createdCatcall;
     },
 
-    async updateCatcall(_, { id, catcall }, context) {
+    async updateCatcall (_, { id, catcall }, context) {
       if (context.mod._id) {
 
         if (await Moderator.findOne({ _id: context.mod._id })) {
@@ -54,7 +54,7 @@ const catcallResolver = {
           let newEntry = Object.assign(entry.properties,properties);
           entry.properties = newEntry;
           await entry.save();
-          return entry
+          return entry;
         }
       }
       let err = new Error;
@@ -62,7 +62,7 @@ const catcallResolver = {
       return err;
     },
 
-    async emptyTrash(_, __, context) {
+    async emptyTrash (_, __, context) {
 
       if (context.mod._id) {
         if (await Moderator.findOne({ _id: context.mod._id })) {
@@ -79,12 +79,12 @@ const catcallResolver = {
       return err;
     }
   }
-}
+};
 
 const moderatorResolver = {
   Query: {
-    
-    async getModerators(_, __, context) {
+
+    async getModerators (_, __, context) {
       if (context.mod._id && context.mod.canAdd) {
         if (await Moderator.findOne({ _id: context.mod._id })) {
           const moderators = await Moderator.find();
@@ -96,12 +96,12 @@ const moderatorResolver = {
       return err;
     },
 
-    async getModeratorById(_, { id }) {
+    async getModeratorById (_, { id }) {
       const mod = await Moderator.findOne({ _id: id });
       return mod;
     },
 
-    async validateModerator(_, { email, password }) {
+    async validateModerator (_, { email, password }) {
       const mod = await Moderator.findOne({ email: email });
       const validatedPass = await bcrypt.compare(password, mod.password);
       if (!validatedPass) throw new Error();
@@ -116,9 +116,9 @@ const moderatorResolver = {
   },
 
   Mutation: {
-    async createModerator(_, { moderator }, context) {
+    async createModerator (_, { moderator }, context) {
       if (context.mod._id) {
-        let mod = await Moderator.findOne({ _id: context.mod._id })
+        let mod = await Moderator.findOne({ _id: context.mod._id });
         if (mod && mod.canAdd === true) {
           const { email, password } = moderator;
           let hashPassword = await bcrypt.hash(password, 10);
@@ -131,9 +131,9 @@ const moderatorResolver = {
       return err;
     },
 
-    async updateModerator(_, { id, moderator }, context) {
+    async updateModerator (_, { id, moderator }, context) {
       if (context.mod._id) {
-        let mod = await Moderator.findOne({ _id: context.mod._id })
+        let mod = await Moderator.findOne({ _id: context.mod._id });
         if (mod && mod.canAdd === true) {
           const { email, password, canAdd } = moderator;
           const updatedModerator = await Moderator.findByIdAndUpdate(id, { email, password, canAdd });
@@ -145,11 +145,11 @@ const moderatorResolver = {
       return err;
     },
 
-    async removeModerator(_, { id }, context) {
+    async removeModerator (_, { id }, context) {
       if (context.mod._id) {
-        let mod = await Moderator.findOne({ _id: context.mod._id })
+        let mod = await Moderator.findOne({ _id: context.mod._id });
         if (mod && mod.canAdd === true) {
-          const mod = await Moderator.deleteOne({ _id: id });
+          await Moderator.deleteOne({ _id: id });
           return;
         }
       }
@@ -158,6 +158,6 @@ const moderatorResolver = {
       return err;
     }
   }
-}
+};
 
-module.exports = merge(catcallResolver, moderatorResolver)
+module.exports = merge(catcallResolver, moderatorResolver);

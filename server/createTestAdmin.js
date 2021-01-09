@@ -19,12 +19,12 @@ const modSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   }
-})
+});
 
 const Moderator = mongoose.model('Moderator', modSchema);
 
 (async () => {
   let hashPassword = await bcrypt.hash('test', 10);
-  const mod = await Moderator.create({ email: 'admin2', password: hashPassword, canAdd: true });
-  mongoose.connection.close()
+  await Moderator.create({ email: 'admin2', password: hashPassword, canAdd: true });
+  mongoose.connection.close();
 })();

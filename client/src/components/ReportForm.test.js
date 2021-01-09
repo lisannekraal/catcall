@@ -2,7 +2,7 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import ReportForm from './ReportForm';
 import { MockedProvider } from '@apollo/client/testing';
-import recaptcha from 'react-google-recaptcha/lib/recaptcha';
+//import recaptcha from 'react-google-recaptcha/lib/recaptcha';
 
 
 
