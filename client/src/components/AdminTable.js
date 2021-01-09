@@ -5,6 +5,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import { v4 as uuidv4 } from 'uuid';
 import { ExpandMore, Warning } from '@material-ui/icons';
 import { useForm } from 'react-hook-form';
+import TablePagination from '@material-ui/core/TablePagination';
 
 export default function AdminTable({ catcallData, updateCatcall, value, authorized, emptyTrash }) {
 
@@ -13,6 +14,8 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
   const [emptyTableMessage, setEmptyTableMessage] = useState('No new catcalls to verify');
   const { handleSubmit } = useForm();
   const [rows, setRows] = useState(catcallData);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   useEffect(() => {
     let switchedRows;
@@ -65,32 +68,52 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
     setRows([]);
   }
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
   return (
     <>
     {/* if settings tab is selected, only load that seperate component */}
     { showSettings ?
       <ModeratorSettings authorized={authorized} />
     : 
-      <TableContainer component={Paper}>
-        {/* generic dashboard table for all other functionalities */}
-        { rows.length > 0 ?
-        <Table aria-label="collapsible table">
-          <TableHead>
-            <TableRow>
-              <TableCell />
-              <TableCell />
-              <TableCell>Quote</TableCell>
-              <TableCell>Actions </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <Row key={uuidv4()} tab={value} row={row} clickButtonUpdate={clickButtonUpdate} />
-            ))}
-          </TableBody>
-        </Table> :
-        <div style={{textAlign: 'center', padding: '50px'}}>{emptyTableMessage}</div>}
-      </TableContainer>
+      <>
+        <TableContainer component={Paper}>
+          {/* generic dashboard table for all other functionalities */}
+          { rows.length > 0 ?
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell />
+                <TableCell>Quote</TableCell>
+                <TableCell>Actions </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                <Row key={uuidv4()} tab={value} row={row} clickButtonUpdate={clickButtonUpdate} />
+              ))}
+            </TableBody>
+          </Table> :
+          <div style={{textAlign: 'center', padding: '50px'}}>{emptyTableMessage}</div>}
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
+      </>
     }
     {/* if in trashbin and full athority, show this extra section to permanently delete */}
     { showTrash && authorized ? 
