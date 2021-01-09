@@ -68,7 +68,7 @@ function Dashboard({ mod }) {
   return (
     <>
       <div className="header-footer"></div>
-      <div class="dashboard-container">
+      <div className="dashboard-container">
         <Paper square className={classes.root}>
           <Tabs
             value={value}
@@ -84,14 +84,14 @@ function Dashboard({ mod }) {
             <Tab icon={<Storage />} label="Database" value='database' wrapped/>
             <Tab icon={<Delete />} label="Trash" value='trash' wrapped/>
             {authorization &&
-              <Tab icon={<Settings />} label="Mod Settings" value='settings' wrapped/>              
+              <Tab icon={<Settings />} label="Mod Settings" value='settings' wrapped/>
             }
           </Tabs>
         </Paper>
 
-          {data ? 
-          (<AdminTable catcallData={data.getCatcalls} value={value} updateCatcall={updateCatcall} authorized={authorization} emptyTrash={emptyTrash} />) 
-          : 
+          {data ?
+          (<AdminTable catcallData={data.getCatcalls} value={value} updateCatcall={updateCatcall} authorized={authorization} emptyTrash={emptyTrash} />)
+          :
           (<h2>Loading...</h2>)}
 
       </div>
