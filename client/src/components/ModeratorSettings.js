@@ -3,7 +3,6 @@ import { useQuery, useMutation } from '@apollo/client';
 import { GET_MODERATORS, CREATE_MODERATOR, REMOVE_MODERATOR } from '../api/queries';
 import { useForm } from 'react-hook-form';
 import './ModeratorSettings.css';
-
 import { Hidden, Table, TableContainer, TableBody, TableCell, TableHead, TableRow, Paper, Accordion, AccordionSummary, AccordionDetails, Typography, Tooltip } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Delete from '@material-ui/icons/Delete';
