@@ -259,7 +259,7 @@ function Row({ tab, row, clickButtonUpdate }) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
-                Info
+                <span className="catcall-font">Info</span>
               </Typography>
               <Table size="small" aria-label="info">
                 <TableBody>

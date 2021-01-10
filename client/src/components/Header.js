@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import SideDrawer from './SideDrawer';
 import './Header.css';
-import logo from '../assets/logowhite.png'
+import logo from '../assets/Logo2.png'
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';

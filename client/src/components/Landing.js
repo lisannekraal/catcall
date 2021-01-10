@@ -54,7 +54,7 @@ function Landing() {
       <div className="landing-cover">
 
         <div className="header">
-          <div className="header-title">Chalk back.</div>
+          <div className="header-title">Chalk back</div>
           <div className="header-buttons">
             <Link to={{
               pathname: '/catcalls',
@@ -66,9 +66,9 @@ function Landing() {
               <p>Report a new catcall</p>
             </Link>
           </div>
-          <div className="header-disclaimer">
+          <p className="header-disclaimer">
             This initiative is standing up against street harassment and does not replace reporting your issue to the police. Are you currently in danger or need help right away? <a className="help-link" href="/help">Click here</a>.
-          </div>
+          </p>
         </div>
 
       </div>
@@ -147,7 +147,8 @@ function City({ city }) {
       </div>
       <div>
         <div className="city-name"><i className="fas fa-map-marker-alt"></i> {city.name}</div>
-        <div className="city-description">{city.status}</div>
+        <p className="city-description">{city.status}</p>
+        {/* <div className="city-description">{city.status}</div> */}
       </div>
     </div >
   )
