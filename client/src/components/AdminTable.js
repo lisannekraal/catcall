@@ -92,8 +92,8 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
               <TableRow>
                 <TableCell />
                 <TableCell />
-                <TableCell>Quote</TableCell>
-                <TableCell>Actions </TableCell>
+                <TableCell><h3 className="catcall-font">Quote</h3></TableCell>
+                <TableCell><h3 className="catcall-font">Actions</h3></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

@@ -2,8 +2,30 @@
   box-sizing: border-box;
 }
 
-body {
+/* body {
   font-family: 'Roboto', sans-serif;
+}*/
+
+@font-face {
+  font-family: 'Arista Pro Alternate Bold';
+  /* font-weight: 900; */
+  src: url(./assets/Arista-Pro-Alternate-Bold.ttf) format('truetype');
+}
+
+body {
+  font-family: 'Arista Pro Alternate Bold', sans-serif;
+}
+
+.catcall-font {
+  font-family: 'Arista Pro Alternate Bold', sans-serif;
+}
+
+p {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.normal-font {
+  font-family: 'Montserrat', sans-serif;
 }
 
 button:hover {
@@ -15,7 +37,7 @@ button:hover {
   height: 65px;
 }
 
-/*for Dashboard component, perhaps seperate css later?*/
+/*for Dashboard component*/
 
 .dashboard-container {
   min-height: 85vh;

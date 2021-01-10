@@ -14,9 +14,10 @@
 .footer-div {
   max-width: 500px;
   margin: 20px;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .footer-title {
   font-weight: 600;
+  font-size: 16px;
 }

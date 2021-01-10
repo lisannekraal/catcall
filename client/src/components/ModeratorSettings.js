@@ -72,9 +72,9 @@ export default function ModeratorSettings({authorized}) {
                 <Hidden xsDown>
                   <TableCell></TableCell>
                 </Hidden>
-                <TableCell>Email adress</TableCell>
-                <TableCell>Authorization</TableCell>
-                <TableCell>Delete</TableCell>
+                <TableCell><h3 className="catcall-font">Email Address</h3></TableCell>
+                <TableCell><h3 className="catcall-font">Authorization</h3></TableCell>
+                <TableCell><h3 className="catcall-font">Delete</h3></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
