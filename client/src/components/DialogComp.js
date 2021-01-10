@@ -8,10 +8,6 @@ export default function AlertDialog({ text, state }) {
     setOpen(false);
   };
 
-  const handleOpen = () => {
-    setOpen(true);
-  }
-
   return (
     <Dialog
       open={open}

@@ -46,12 +46,15 @@ function Row({ tab, row, clickButtonUpdate }) {
   const [state, setState] = useState({
     sexual: false,
     homophobia: false,
+    transphobia: false,
     fatphobia: false,
     racism: false,
+    slutshaming: false,
+    hateSpeech: false,
     young: false,
     assault: false
   });
-  const { sexual, homophobia, fatphobia, racism, young, assault } = state;
+  const { sexual, homophobia, transphobia, fatphobia, racism, slutshaming, hateSpeech, young, assault } = state;
 
   useEffect(() => {
     //listen for a data change: when catcall queried, send to edit form, rendered for either url editing or text editing
@@ -296,12 +299,24 @@ function Row({ tab, row, clickButtonUpdate }) {
               label="Homophobia"
             />
             <FormControlLabel
+              control={<Checkbox checked={transphobia} onChange={handleChange} name="transphobia" />}
+              label="Transphobia"
+            />
+            <FormControlLabel
               control={<Checkbox checked={fatphobia} onChange={handleChange} name="fatphobia" />}
               label="Fatphobia"
             />
             <FormControlLabel
               control={<Checkbox checked={racism} onChange={handleChange} name="racism" />}
               label="Racism"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={slutshaming} onChange={handleChange} name="slutshaming" />}
+              label="Slutshaming"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={hateSpeech} onChange={handleChange} name="hateSpeech" />}
+              label="Hate speech"
             />
             <FormControlLabel
               control={<Checkbox checked={young} onChange={handleChange} name="young" />}
