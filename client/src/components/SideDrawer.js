@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Menu from '@material-ui/core/Menu';
+import { Menu } from '@material-ui/icons';
 import IconButton from '@material-ui/core/IconButton';
 import { HashLink as Link } from 'react-router-hash-link';
 import { useHistory } from 'react-router-dom';
