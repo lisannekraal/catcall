@@ -1,11 +1,23 @@
 import { useState, useEffect } from 'react';
 import Row from './AdminTableRow';
 import ModeratorSettings from './ModeratorSettings';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Accordion, AccordionSummary, AccordionDetails, Typography } from '@material-ui/core';
-import { v4 as uuidv4 } from 'uuid';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TablePagination from '@material-ui/core/TablePagination';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+
 import { ExpandMore, Warning } from '@material-ui/icons';
 import { useForm } from 'react-hook-form';
-import TablePagination from '@material-ui/core/TablePagination';
+import { v4 as uuidv4 } from 'uuid';
+
 
 export default function AdminTable({ catcallData, updateCatcall, value, authorized, emptyTrash }) {
 
@@ -24,35 +36,41 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
         setShowSettings(false);
         setShowTrash(false);
         setEmptyTableMessage('No new catcalls to verify');
+        setPage(0);
         switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === false);
         break;
       case 'chalk':
         setShowSettings(false);
         setShowTrash(false);
         setEmptyTableMessage('No catcalls on the list to chalk');
+        setPage(0);
         switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === true && el.properties.chalked === false && el.properties.listedForChalk === true);
         break;
       case 'database':
         setShowSettings(false);
         setShowTrash(false);
         setEmptyTableMessage('Database is empty');
+        setPage(0);
         switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === true);
         break;
       case 'trash':
         setShowSettings(false);
         setShowTrash(true);
         setEmptyTableMessage('No catcalls currently in trash');
+        setPage(0);
         switchedRows = catcallData.filter(el => el.properties.trash === true);
         break;
       case 'settings':
         setShowSettings(true);
         setShowTrash(false);
+        setPage(0);
         break;
       default: //unverified
+        setPage(0);
         switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === false);
         break;
     }
-    switchedRows && setRows(switchedRows); 
+    switchedRows && setRows(switchedRows);
   }, [value, catcallData]);
 
   const clickButtonUpdate = ({ variables }) => {
@@ -82,7 +100,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
     {/* if settings tab is selected, only load that seperate component */}
     { showSettings ?
       <ModeratorSettings authorized={authorized} />
-    : 
+    :
       <>
         <TableContainer component={Paper}>
           {/* generic dashboard table for all other functionalities */}
@@ -116,10 +134,10 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
       </>
     }
     {/* if in trashbin and full athority, show this extra section to permanently delete */}
-    { showTrash && authorized ? 
+    { showTrash && authorized ?
         <>
           <h2 className="mod-settings-header">More</h2>
-          <Accordion>
+          <Accordion TransitionProps={{ unmountOnExit: true }}>
             <AccordionSummary
               expandIcon={<ExpandMore />}
               aria-controls="panel2a-content"

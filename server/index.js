@@ -1,4 +1,4 @@
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { ApolloServer } = require('apollo-server');
 const typeDefs = require('./typeDefs');
@@ -7,15 +7,15 @@ const resolvers = require('./resolvers');
 const loggerPlugin = {
 
   // Fires whenever a GraphQL request is received from a client.
-  requestDidStart(requestContext) {
+  requestDidStart () { //to use put as argument -> requestContext
     // console.log('Request started! Query:\n');
     // console.log(requestContext.request)
     return {
-      didEncounterErrors(rc) {
-        console.log(rc.errors)
+      didEncounterErrors (rc) {
+        console.log(rc.errors);
       },
 
-    }
+    };
   },
 };
 

@@ -106,7 +106,7 @@ function Header({ token, removeCookie, setMod }) {
               <Link
                 to="/#about"
                 className="about-link" >
-                <Button color='inherit' startIcon={<Icon className='fas fa-info-circle' fontSize="small" style={{ marginRight: 7 }} />}>About</Button>
+                <Button key={uuidv4()} color='inherit' startIcon={<Icon className='fas fa-info-circle' fontSize="small" style={{ marginRight: 7 }} />}>About</Button>
               </Link>
 
               {navigations.map(({ title, classN, path }) => (

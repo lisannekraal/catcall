@@ -7,7 +7,7 @@ jest.mock('../models/moderator.model', () => ({Moderator: ()=>{}}));
 
 describe ('Server Resolvers Tests:', function () {
   
-  let context = {mod: {_id: '123'}}
+  let context = {mod: {_id: '123'}};
 
   beforeEach(()=>{
     Moderator.findOne = jest.fn().mockResolvedValue(true);
@@ -68,7 +68,7 @@ describe ('Server Resolvers Tests:', function () {
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(null, {id: 2, catcall: catcall}, context);
     expect(Catcall.findOne).toHaveBeenCalledTimes(1);
-    expect(Catcall.findOne).toHaveBeenCalledWith({"_id": 2});
+    expect(Catcall.findOne).toHaveBeenCalledWith({'_id': 2});
     expect(result).toEqual(catcall);
   });
 
