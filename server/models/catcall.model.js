@@ -10,18 +10,18 @@ const catcallSchema = new mongoose.Schema({
     coordinates: [Number]
   },
   properties: {
-      quote: String,
-      context: String,
-      dateCatcall: String,
-      dateAdded: String,
-      url: String,
-      verified: Boolean,
-      chalked: Boolean,
-      listedForChalk: Boolean,
-      starred: Boolean,
-      trash: Boolean,
-      categories: [String],
-      votes: Number
+    quote: String,
+    context: String,
+    dateCatcall: String,
+    dateAdded: String,
+    url: String,
+    verified: Boolean,
+    chalked: Boolean,
+    listedForChalk: Boolean,
+    starred: Boolean,
+    trash: Boolean,
+    categories: [String],
+    votes: Number
   }
 });
 
