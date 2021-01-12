@@ -5,22 +5,14 @@ import AdminTable from './AdminTable';
 import { Player } from '@lottiefiles/react-lottie-player';
 
 import { Paper, Tabs, Tab } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import VerifiedUser from '@material-ui/icons/VerifiedUser';
 import Gesture from '@material-ui/icons/Gesture';
 import Storage from '@material-ui/icons/Storage';
 import Delete from '@material-ui/icons/Delete';
 import Settings from '@material-ui/icons/Settings';
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
-});
-
 function Dashboard({ mod }) {
 
-  const classes = useStyles();
   const [ authorization, setAuthorization ] = useState(false);
 
   const [value, setValue] = React.useState('unverified'); //keeps track of selected tab
@@ -69,7 +61,7 @@ function Dashboard({ mod }) {
     <>
       <div className="header-footer"></div>
       <div className="dashboard-container">
-        <Paper square className={classes.root}>
+        <Paper square style={{flexGrow: 1}}>
           <Tabs
             value={value}
             onChange={handleChange}
