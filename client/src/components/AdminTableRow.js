@@ -4,7 +4,27 @@ import { useLazyQuery } from "@apollo/client";
 import { GET_CATCALL } from '../api/queries';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Table, TableBody, TableCell, TableRow, Box, Button, Collapse, IconButton, Typography, Tooltip, Dialog, DialogActions, DialogContent, DialogContentText, FormGroup, FormControlLabel, Checkbox, DialogTitle } from '@material-ui/core';
+import { Collapse } from '@material-ui/core';
+import Tooltip from '@material-ui/core/Tooltip';
+import Box from '@material-ui/core/Box';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography';
+
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+
+
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Star, StarOutline } from '@material-ui/icons';
@@ -37,9 +57,9 @@ function Row({ tab, row, clickButtonUpdate }) {
   let history = useHistory();
   const [open, setOpen] = useState(false);
   const [buttonstoShow, setButtons] = useState([]);
-  const [ getCatcall, { loading, data } ] = useLazyQuery(GET_CATCALL);
+  const [getCatcall, { loading, data }] = useLazyQuery(GET_CATCALL);
   const classes = useRowStyles();
-  
+
   //for modal to add categorization
   const [openModal, setOpenModal] = useState(false);
   const [hideTooltips, setHideTooltips] = useState(false);
@@ -69,53 +89,55 @@ function Row({ tab, row, clickButtonUpdate }) {
     switch (tab) {
       case 'unverified':
         setButtons([
-          {name: 'verify', class: 'greenButton', tooltip: 'Agree to add submitted catcall to our database and map'}, 
-          {name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content'}, 
-          {name: 'delete', class: 'redButton', tooltip: 'Move submussion to trash'}
+          { name: 'verify', class: 'greenButton', tooltip: 'Agree to add submitted catcall to our database and map' },
+          { name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content' },
+          { name: 'delete', class: 'redButton', tooltip: 'Move submussion to trash' }
         ]);
         break;
       case 'chalk':
         setButtons([
           //Deactivated email functionality:
           // {name: 'email', class: 'greenButton', tooltip: ''},
-          {name: 'chalk', class: 'greenButton', tooltip: 'Add Insta photo to map and remove catcall from this list'}, 
-          {name: 'unstage', class: 'redButton', tooltip: 'Decide not to chalk this catcall for now'}
+          { name: 'chalk', class: 'greenButton', tooltip: 'Add Insta photo to map and remove catcall from this list' },
+          { name: 'unstage', class: 'redButton', tooltip: 'Decide not to chalk this catcall for now' }
         ]);
         break;
       case 'database':
         setButtons([
-          {name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content'}, 
-          {name: 'delete', class: 'redButton', tooltip: 'Remove catcall to trash'}
+          { name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content' },
+          { name: 'delete', class: 'redButton', tooltip: 'Remove catcall to trash' }
         ]);
         break;
       case 'trash':
         setButtons([
-          {name: 'undo', class: 'greenButton', tooltip: 'Move catcall back into database'}, 
-          {name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content'}
+          { name: 'undo', class: 'greenButton', tooltip: 'Move catcall back into database' },
+          { name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content' }
         ]);
         break;
       default: //unverified
-        setButtons([{name: 'verify', class: 'greenButton'}, {name: 'edit', class: 'yellowButton'}, {name: 'delete', class: 'redButton'}]);
+        setButtons([{ name: 'verify', class: 'greenButton' }, { name: 'edit', class: 'yellowButton' }, { name: 'delete', class: 'redButton' }]);
         break;
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab, data])
 
   function verificationProcess() {
     let categoriesClicked = [];
     for (const key in state) {
       if (state[key]) categoriesClicked.push(key);
-    } 
-    clickButtonUpdate({ variables: {
-      id: row._id,
-      catcall: {
-        properties: {
-          verified: true,
-          listedForChalk: true,
-          categories: categoriesClicked
+    }
+    clickButtonUpdate({
+      variables: {
+        id: row._id,
+        catcall: {
+          properties: {
+            verified: true,
+            listedForChalk: true,
+            categories: categoriesClicked
           }
+        }
       }
-    }});
+    });
     setHideTooltips(false);
   }
 
@@ -133,13 +155,14 @@ function Row({ tab, row, clickButtonUpdate }) {
       setOpenModal(true);
       setHideTooltips(true);
     } else if (button.name === 'edit') {
-      getCatcall({variables: {id: row._id}});
+      getCatcall({ variables: { id: row._id } });
     } else if (button.name === 'email') {
       alert('Unfortunately this feature does not work just yet ;)');
     } else if (button.name === 'chalk') {
-      getCatcall({variables: {id: row._id}});
+      getCatcall({ variables: { id: row._id } });
     } else if (button.name === 'unstage') {
-      clickButtonUpdate({ variables: {
+      clickButtonUpdate({
+        variables: {
           id: row._id,
           catcall: {
             properties: {
@@ -149,7 +172,8 @@ function Row({ tab, row, clickButtonUpdate }) {
         }
       })
     } else if (button.name === 'delete') {
-      clickButtonUpdate({ variables: {
+      clickButtonUpdate({
+        variables: {
           id: row._id,
           catcall: {
             properties: {
@@ -159,7 +183,8 @@ function Row({ tab, row, clickButtonUpdate }) {
         }
       })
     } else if (button.name === 'undo') {
-      clickButtonUpdate({ variables: {
+      clickButtonUpdate({
+        variables: {
           id: row._id,
           catcall: {
             properties: {
@@ -172,14 +197,16 @@ function Row({ tab, row, clickButtonUpdate }) {
   }
 
   function handleStarClick() {
-    clickButtonUpdate({ variables: {
-      id: row._id,
-      catcall: {
-        properties: {
-          starred: !row.properties.starred
+    clickButtonUpdate({
+      variables: {
+        id: row._id,
+        catcall: {
+          properties: {
+            starred: !row.properties.starred
+          }
         }
       }
-    }});
+    });
   }
 
   if (loading) return <p>Loading ...</p>;
@@ -190,12 +217,12 @@ function Row({ tab, row, clickButtonUpdate }) {
         {/*1: expand functionality */}
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-            {open ? 
-            <KeyboardArrowUpIcon /> 
-            : 
-            <Tooltip title="More info" arrow>
-              <KeyboardArrowDownIcon />
-            </Tooltip>
+            {open ?
+              <KeyboardArrowUpIcon />
+              :
+              <Tooltip title="More info" arrow>
+                <KeyboardArrowDownIcon />
+              </Tooltip>
             }
           </IconButton>
         </TableCell>
@@ -203,13 +230,13 @@ function Row({ tab, row, clickButtonUpdate }) {
         {/*2: star*/}
         <TableCell>
           {row.properties.starred ?
-          <Tooltip title="Remove star" arrow>
-            <Star onClick={() => handleStarClick()} />  
-          </Tooltip>
-          :
-          <Tooltip title="Add star" arrow>
-            <StarOutline onClick={() => handleStarClick()} />
-          </Tooltip>}
+            <Tooltip title="Remove star" arrow>
+              <Star onClick={() => handleStarClick()} />
+            </Tooltip>
+            :
+            <Tooltip title="Add star" arrow>
+              <StarOutline onClick={() => handleStarClick()} />
+            </Tooltip>}
         </TableCell>
 
         {/*3: quote*/}
@@ -220,8 +247,8 @@ function Row({ tab, row, clickButtonUpdate }) {
         {/*4: actions*/}
         <TableCell>
           {buttonstoShow.map((button) => (
-            <Tooltip title={hideTooltips ? "" : button.tooltip} arrow>
-              <Button key={uuidv4()} variant="contained" color="inherit" size="small" onClick={() => handleClick(button)} className={classes[button.class]} >
+            <Tooltip key={uuidv4()} title={hideTooltips ? "" : button.tooltip} arrow>
+              <Button variant="contained" color="inherit" size="small" onClick={() => handleClick(button)} className={classes[button.class]} >
                 {button.name}
               </Button>
             </Tooltip>
@@ -273,8 +300,8 @@ function Row({ tab, row, clickButtonUpdate }) {
                       Chalk url
                     </TableCell>
                     <TableCell>
-                        <a href={row.properties.url} target="_blank" rel="noreferrer">{row.properties.url}</a>
-                      </TableCell>
+                      <a href={row.properties.url} target="_blank" rel="noreferrer">{row.properties.url}</a>
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

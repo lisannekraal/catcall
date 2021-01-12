@@ -3,11 +3,11 @@ const mongoose = require('./index');
 const catcallSchema = new mongoose.Schema({
   type: String,
   geometry: {
-      type: {
-          type: String,
-          enum: ['Point']
-      },
-      coordinates: [Number]
+    type: {
+      type: String,
+      enum: ['Point']
+    },
+    coordinates: [Number]
   },
   properties: {
       quote: String,
@@ -23,6 +23,6 @@ const catcallSchema = new mongoose.Schema({
       categories: [String],
       votes: Number
   }
-})
+});
 
 module.exports = mongoose.model('Mockcatcall', catcallSchema);
