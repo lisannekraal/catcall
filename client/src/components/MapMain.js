@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { GET_MAP_CATCALLS } from '../api/queries'
+import { GET_MAP_CATCALLS } from '../api/queries';
 import MapGL, { Source, Layer, Image, Popup, NavigationControl, GeolocateControl, ScaleControl, FullscreenControl } from '@urbica/react-map-gl';
 
 import DialogComp from './DialogComp';
@@ -16,6 +16,21 @@ function MapMain () {
   const { loading, error, data } = useQuery(GET_MAP_CATCALLS);
   const location = useLocation();
   const [ dialog ] = useState(location.state ? location.state.dialog : "");
+  const [ geojsonData, setGeojsonData ] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      let newDataObj = [];
+      data.getVerifiedCatcalls.forEach((feature) => {
+        let item = JSON.parse(JSON.stringify(feature));
+        item.properties.id = feature._id
+        newDataObj.push({
+          ...item
+        });
+      });
+      setGeojsonData(newDataObj);
+    }
+  }, [data])
 
   const [viewport, setViewport] = useState({
     latitude: 52.366249,
@@ -61,7 +76,7 @@ function MapMain () {
 
         <Source id='catcalls' type='geojson' data={{
                 type: 'FeatureCollection',
-                features: data.getVerifiedCatcalls
+                features: geojsonData
         }} />
 
         <Image id="catcall-icon" image={Icon} />
@@ -83,7 +98,7 @@ function MapMain () {
             //   zoom: 14
             // });
             setPopup(<Popup longitude={e.lngLat.lng} latitude={e.lngLat.lat} closeButton={true} closeOnClick={true} onClick={setPopup("")}>
-              <MapPopup catcall={e.features[0].properties} />
+              <MapPopup catcall={e.features[0]} />
             </Popup>)
           }}
         />
