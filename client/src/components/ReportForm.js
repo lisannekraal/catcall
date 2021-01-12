@@ -40,7 +40,8 @@ function ReportForm() {
             "listedForChalk": false,
             "starred": false,
             "trash": false,
-            "categories": []
+            "categories": [],
+            "votes": 0
           }
         }
       }

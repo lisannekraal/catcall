@@ -16,6 +16,7 @@ export const GET_MAP_CATCALLS = gql`
         url
         chalked
         categories
+        votes
       }
     }
   }
@@ -42,6 +43,7 @@ export const GET_CATCALLS = gql`
         starred
         trash
         categories
+        votes
       }
     }
   }
@@ -68,6 +70,7 @@ export const GET_CATCALL = gql`
         starred
         trash
         categories
+        votes
       }
     }
   }
@@ -93,6 +96,7 @@ export const CREATE_CATCALL = gql`
         starred
         trash
         categories
+        votes
       }
     }
   }
@@ -119,6 +123,7 @@ export const UPDATE_CATCALL = gql`
         starred
         trash
         categories
+        votes
       }
     }
   }
