@@ -20,7 +20,8 @@ const catcallSchema = new mongoose.Schema({
       listedForChalk: Boolean,
       starred: Boolean,
       trash: Boolean,
-      categories: [String]
+      categories: [String],
+      votes: Number
   }
 })
 

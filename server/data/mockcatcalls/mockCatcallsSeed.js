@@ -24,7 +24,8 @@ let catcalls = [...Array(numCatcalls)].map(() => (
       "listedForChalk": false,
       "starred": false,
       "trash": false,
-      "categories": []
+      "categories": [],
+      "votes": 2
     }
   }
 ));
