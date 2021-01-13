@@ -54,7 +54,7 @@ function Landing() {
       <div className="landing-cover">
 
         <div className="header">
-          <div className="header-title">Chalk back</div>
+          <div className="header-title catcall-font">Chalk back</div>
           <div className="header-buttons">
             <Link to={{
               pathname: '/catcalls',
@@ -87,7 +87,7 @@ function Landing() {
 
 
       <div className="landing-why" id="about">
-        <div className="why-title">Why</div>
+        <div className="why-title catcall-font">Why</div>
         <div className="why-content">
           <p>A catcall is basically everything sexist, insulting, queerphobic, racist or else shouted after and at you in the streets. This also includes wolf whistling, being followed, not accepting a “no” and encompasses a host of other behaviours.  It is a form of gender-based violence.</p>
           <p>Worldwide, youth-led movements - like Catcalls of Amsterdam - are committed to ending gender-based street harassment with public chalk art, digital media and education. We write stories of harassment word-for-word in the spots where they happened alongside the hashtag #stopstreetharassment using sidewalk chalk and then post on social media to spur dialogue and story sharing</p>
@@ -97,12 +97,12 @@ function Landing() {
 
       <div className="landing-community">
         <div className="community-content">
-          <div className="community-title">Get involved</div>
+          <div className="community-title catcall-font">Get involved</div>
           <div style={{ margin: '30px auto', width: '550px', height: '550px' }}>
             <iframe title="catcall photos" src="https://snapwidget.com/embed/900599" className="snapwidget-widget" allowtransparency="true" frameBorder="0" scrolling="no" style={{ border: 'none', overflow: 'scroll', height: '100%', width: '100%' }}></iframe>
           </div>
           <a href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow">
-            <button><p>Join the community on Instagram</p></button>
+            <button className="normal-font"><p>Join the community on Instagram</p></button>
           </a>
         </div>
       </div>
@@ -114,10 +114,10 @@ function Landing() {
           <p>In the meantime our team grew and is organised by four people: Ambrien, Margriet, Paula and Zessiah. Together with 150 other initiatives worldwide, we 'chalk back'. Our goal is to provide a place to share experiences on street harassment and use people's stories to create awereness around catcalling and denormalize it.</p>
           <p>With this application outside of Instagram, we show our catcalling database on the map and make it easier for any victim to report their experience. Check it out and contact us if you have any questions.</p>
           <a href="/help" rel="noreferrer nofollow">
-            <button><p>Go to help page and FAQ</p></button>
+            <button className="normal-font"><p>Go to help page and FAQ</p></button>
           </a>
         </div>
-        <div className="about-title">About Catcalls of Amsterdam</div>
+        <div className="about-title catcall-font">About Catcalls of Amsterdam</div>
       </div>
 
       <Footer />
@@ -146,7 +146,7 @@ function City({ city }) {
         </div>
       </div>
       <div>
-        <div className="city-name"><i className="fas fa-map-marker-alt"></i> {city.name}</div>
+        <div className="city-name catcall-font"><i className="fas fa-map-marker-alt"></i> {city.name}</div>
         <p className="city-description">{city.status}</p>
         {/* <div className="city-description">{city.status}</div> */}
       </div>

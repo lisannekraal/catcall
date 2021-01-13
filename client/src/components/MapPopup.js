@@ -45,8 +45,8 @@ export default function MapPopup ({ catcall }) {
     <div className="popup-content">
 
       <div className="popup-title">
-        <div>CATCALL</div>
-        <div className="popup-date">
+        <div className="normal-font">CATCALL</div>
+        <div className="popup-date normal-font">
           { (catcall.properties.dateCatcall && catcall.properties.dateCatcall !== "null") ?
           (new Date(Number(catcall.properties.dateCatcall))).toDateString() :
           "" }

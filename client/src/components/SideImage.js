@@ -29,7 +29,8 @@ function SideImage({ url }) {
     <React.Fragment>
       <Tooltip title="Opens image to the side" arrow>
         <Button size="small" color="primary" onClick={toggleDrawer("left", true)}>
-          <i className="popup-icon fas fa-pen"></i>chalked back
+          <i className="popup-icon fas fa-pen"></i>
+          <span style={{fontSize: '12px'}}>chalked back</span>
         </Button> 
       </Tooltip>
       <Drawer

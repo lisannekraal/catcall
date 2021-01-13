@@ -96,7 +96,7 @@ function Header({ token, removeCookie, setMod }) {
 
           <div className="navbar-brand" onClick={() => history.push("/")}>
             <img src={logo} alt="logo" className={classes.logo} />
-            <div> Catcalls of Amsterdam</div>
+            <div className="catcall-font"> Catcalls of Amsterdam</div>
           </div>
 
           <Hidden mdDown>
@@ -106,7 +106,7 @@ function Header({ token, removeCookie, setMod }) {
               <Link
                 to="/#about"
                 className="about-link" >
-                <Button key={uuidv4()} color='inherit' startIcon={<Icon className='fas fa-info-circle' fontSize="small" style={{ marginRight: 7 }} />}>About</Button>
+                <Button key={uuidv4()} color='inherit' startIcon={<Icon className='fas fa-info-circle' fontSize="small" style={{ marginRight: 7 }} />} >About</Button>
               </Link>
 
               {navigations.map(({ title, classN, path }) => (

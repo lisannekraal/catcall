@@ -2,26 +2,20 @@
   box-sizing: border-box;
 }
 
-/* body {
-  font-family: 'Roboto', sans-serif;
-}*/
-
 @font-face {
   font-family: 'Arista Pro Alternate Bold';
-  /* font-weight: 900; */
   src: url(./assets/Arista-Pro-Alternate-Bold.ttf) format('truetype');
 }
 
 body {
-  font-family: 'Arista Pro Alternate Bold', sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .catcall-font {
   font-family: 'Arista Pro Alternate Bold', sans-serif;
-}
-
-p {
-  font-family: 'Montserrat', sans-serif;
 }
 
 .normal-font {
@@ -29,6 +23,26 @@ p {
 }
 
 button:hover {
+  cursor: pointer;
+}
+
+.cancel-button {
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin: 5px;
+}
+
+.submit-button {
+  font-size: 16px;
+  background-color: rgb(245, 37, 89);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin: 5px;
+}
+
+.submit-button:hover {
   cursor: pointer;
 }
 

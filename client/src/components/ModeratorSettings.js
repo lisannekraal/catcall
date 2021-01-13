@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_MODERATORS, CREATE_MODERATOR, REMOVE_MODERATOR } from '../api/queries';
 import { useForm } from 'react-hook-form';
-import './ModeratorSettings.css';
 import { Hidden, Table, TableContainer, TableBody, TableCell, TableHead, TableRow, Paper, Accordion, AccordionSummary, AccordionDetails, Typography, Tooltip } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Delete from '@material-ui/icons/Delete';
@@ -73,9 +72,9 @@ export default function ModeratorSettings({authorized}) {
                 <Hidden xsDown>
                   <TableCell></TableCell>
                 </Hidden>
-                <TableCell><h3 className="catcall-font">Email Address</h3></TableCell>
-                <TableCell><h3 className="catcall-font">Authorization</h3></TableCell>
-                <TableCell><h3 className="catcall-font">Delete</h3></TableCell>
+                <TableCell><h4>Email Address</h4></TableCell>
+                <TableCell><h4>Authorization</h4></TableCell>
+                <TableCell><h4>Delete</h4></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -88,7 +87,7 @@ export default function ModeratorSettings({authorized}) {
                   <TableCell>{moderator.canAdd ? 'Full' : 'Partial'}</TableCell>
                   <TableCell>
                     <Tooltip title="Permanently delete moderator" arrow>
-                      <Delete className="delete-mod-button" onClick={() => deleteMod(moderator)} />
+                      <Delete style={{cursor: 'pointer'}} onClick={() => deleteMod(moderator)} />
                     </Tooltip>
                   </TableCell>
                 </TableRow>
@@ -98,7 +97,7 @@ export default function ModeratorSettings({authorized}) {
       </TableContainer>
       { authorized &&
         <>
-          <h2 className="mod-settings-header">More</h2>
+          <h3 style={{margin: '19px', paddingTop: '20px'}}>More</h3>
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -110,9 +109,9 @@ export default function ModeratorSettings({authorized}) {
             </AccordionSummary>
             <AccordionDetails>
               <form id="addModeratorForm" onSubmit={handleSubmit(onSubmit)}>
-                  <input name="email" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="Email address" onChange={handleEmailInput}></input>
-                  <input name="password" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="password" onChange={handlePasswordInput}></input>
-                  <input className="submit-button"  type="submit" value="Add" />
+                  <input name="email" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="Email address" onChange={handleEmailInput} className="normal-font"></input>
+                  <input name="password" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="password" onChange={handlePasswordInput} className="normal-font"></input>
+                  <input className="submit-button normal-font" type="submit" value="Add" />
               </form>
             </AccordionDetails>
           </Accordion>
