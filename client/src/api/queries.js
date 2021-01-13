@@ -193,6 +193,16 @@ export const GET_MODERATOR_BY_ID = gql`
   }
 `;
 
+export const GET_MODERATOR_BY_TOKEN = gql`
+  {
+    getModeratorByToken {
+      _id
+      email
+      canAdd
+    }
+  }
+`;
+
 export const CREATE_MODERATOR = gql`
   mutation createModerator($moderator: ModeratorInput!) {
     createModerator(moderator: $moderator) {

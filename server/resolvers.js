@@ -106,6 +106,16 @@ const moderatorResolver = {
       const mod = await Moderator.findOne({ _id: id });
       return mod;
     },
+    
+    async getModeratorByToken (_, __, context) {
+      if (context.mod._id) {
+        const mod = await Moderator.findOne({ _id: context.mod._id })
+        return mod;
+      }
+      let err = new Error;
+      err.message = 'You must be logged in as a moderator to see this content';
+      return err;
+    },
 
     async validateModerator (_, { email, password }) {
       const mod = await Moderator.findOne({ email: email });

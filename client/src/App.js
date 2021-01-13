@@ -74,7 +74,7 @@ function App() {
             <Login setCookie={setCookie} setMod={setMod}/>
           </Route>
           <Route exact path="/dashboard">
-            <Dashboard mod={mod} />
+            <Dashboard />
           </Route>
           <Route exact path="/catcalls/edit">
             <EditForm />

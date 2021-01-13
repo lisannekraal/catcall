@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { UPDATE_CATCALL, GET_CATCALLS, EMPTY_TRASH } from '../api/queries'
+import { UPDATE_CATCALL, GET_CATCALLS, EMPTY_TRASH, GET_MODERATOR_BY_TOKEN } from '../api/queries'
 import AdminTable from './AdminTable';
 import { Player } from '@lottiefiles/react-lottie-player';
-
 import { Paper, Tabs, Tab } from '@material-ui/core';
 import VerifiedUser from '@material-ui/icons/VerifiedUser';
 import Gesture from '@material-ui/icons/Gesture';
@@ -11,21 +10,15 @@ import Storage from '@material-ui/icons/Storage';
 import Delete from '@material-ui/icons/Delete';
 import Settings from '@material-ui/icons/Settings';
 
-function Dashboard({ mod }) {
+function Dashboard() {
 
-  const [ authorization, setAuthorization ] = useState(false);
-
-  const [value, setValue] = React.useState('unverified'); //keeps track of selected tab
-
+  const [value, setValue] = useState('unverified'); //keeps track of selected tab
+  const { loading: loadingMod, error: errorMod, data: dataMod } = useQuery(GET_MODERATOR_BY_TOKEN);
   let { loading, error, data } = useQuery(GET_CATCALLS);
   const [updateCatcall] = useMutation(UPDATE_CATCALL);
   const [ emptyTrash ] = useMutation(EMPTY_TRASH, {
     refetchQueries: [  {query: GET_CATCALLS} ]
   });
-
-  useEffect(() => {
-    setAuthorization(mod.canAdd);
-  }, [mod]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -75,14 +68,14 @@ function Dashboard({ mod }) {
             <Tab icon={<Gesture />} label="To Chalk" value='chalk' wrapped/>
             <Tab icon={<Storage />} label="Database" value='database' wrapped/>
             <Tab icon={<Delete />} label="Trash" value='trash' wrapped/>
-            {authorization &&
+            {dataMod.getModeratorByToken.canAdd &&
               <Tab icon={<Settings />} label="Mod Settings" value='settings' wrapped/>
             }
           </Tabs>
         </Paper>
 
           {data ?
-          (<AdminTable catcallData={data.getCatcalls} value={value} updateCatcall={updateCatcall} authorized={authorization} emptyTrash={emptyTrash} />)
+          (<AdminTable catcallData={data.getCatcalls} value={value} updateCatcall={updateCatcall} authorized={dataMod.getModeratorByToken.canAdd} emptyTrash={emptyTrash} />)
           :
           (<h2>Loading...</h2>)}
 

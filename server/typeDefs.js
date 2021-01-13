@@ -8,6 +8,7 @@ const typeDefs = gql`
     getVerifiedCatcalls:[Catcall]
     getModerators:[Moderator]
     getModeratorById(id:String):Moderator
+    getModeratorByToken:Moderator
     validateModerator(email:String, password:String):Moderator
   }
 
