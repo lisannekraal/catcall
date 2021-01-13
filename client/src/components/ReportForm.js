@@ -70,7 +70,7 @@ function ReportForm() {
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className="form-segment">
-            <label htmlFor="quote" className="normal-font">Catcall quote*:</label>
+            <label htmlFor="quote">Catcall quote*:</label>
             <input
               data-testid="catcall-quote"
               id="quote"
@@ -84,12 +84,12 @@ function ReportForm() {
                 }
               })}
             ></input>
-            <small id="quote-help" className="normal-font">Only Catcall quote (what has been catcalled)</small>
+            <small id="quote-help">Only Catcall quote (what has been catcalled)</small>
             <p className="error-message">{errors.quote && errors.quote.message}</p>
           </div>
 
           <div className="form-segment">
-            <label htmlFor="context" className="normal-font">Your story:</label>
+            <label htmlFor="context">Your story:</label>
             <input
               id="context"
               name="context"
@@ -101,13 +101,13 @@ function ReportForm() {
                 }
               })}
             ></input>
-            <small id="context-help" className="normal-font">Not required. Moderators can edit this part of your report if necessary. For more details, see <a style={{color: "black"}} href="/help#houserules" target="_blank">our house rules</a>.</small>
+            <small id="context-help">Not required. Moderators can edit this part of your report if necessary. For more information, see <a style={{color: "black"}} href="/help#houserules" target="_blank">our house rules</a>.</small>
             <p className="error-message">{errors.context && errors.context.message}</p>
 
           </div>
 
           <div className="form-segment">
-            <label htmlFor="context" className="normal-font">Date of Catcall:</label>
+            <label htmlFor="context">Date of Catcall:</label>
             <Flatpickr
               value={date}
               onChange={newDate => setDateCatcall(newDate)}
@@ -118,9 +118,9 @@ function ReportForm() {
           </div>
 
           <div className="form-segment">
-            <label htmlFor="context" className="location-title normal-font">Location*:</label>
+            <label htmlFor="context" className="location-title">Location*:</label>
             <MapForm setLocation={setLocation} />
-            <small id="context-help" className="normal-font">Click on the map to add the location of the catcall.</small>
+            <small id="context-help">Click on the map to add the location of the catcall.</small>
             {mapError!=='' ? <p className="error-message">{mapError}</p> : ''}
           </div>
 
@@ -138,7 +138,7 @@ function ReportForm() {
                   }
                 })}
               ></input>
-              <label htmlFor="check" className="normal-font">I understand that is catcall report is anonymous and account for it to be true and <a className="help-button" href="/help" target="_blank">in accordance with the house rules</a>*.</label>
+              <label htmlFor="check">I understand that is catcall report is anonymous and account for it to be true and <a className="help-button" href="/help" target="_blank">in accordance with the house rules</a>*.</label>
             </div>
             <p className="error-message">{errors.check && errors.check.message}</p>
           </div>
@@ -149,10 +149,10 @@ function ReportForm() {
           </div>
 
 
-          <button type="button" className="cancel-button" onClick={()=> history.push('/') }>Cancel</button>
+          <button type="button" className="cancel-button normal-font" onClick={()=> history.push('/') }>Cancel</button>
 
-          {/* diable recaptcha to run test correctly */}
-          <input className="submit-button"  type="submit" value="Submit new catcall" onClick={()=>{
+          {/* disable recaptcha to run test correctly */}
+          <input className="submit-button normal-font"  type="submit" value="Submit new catcall" onClick={()=>{
             if (lngLat.length === 0) setMapError('Required');
             if (!checkRecaptcha) setCaptchaError('Please indicate you\'re not a robot');
           }}/>

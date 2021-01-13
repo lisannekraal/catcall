@@ -148,7 +148,7 @@
 }
 
 .community-content {
-  padding: 20px;
+  padding: 60px;
   text-align: center;
   display: flex;
   align-items: center;
@@ -182,7 +182,7 @@ button p {
 }
 
 .landing-about {
-  padding: 20px;
+  padding: 60px;
   margin: 0 auto 50px auto;
   display: flex;
   flex-wrap: wrap-reverse;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useMutation } from '@apollo/client';
-import { UPDATE_CATCALL } from '../api/queries';
+import { UPVOTE_CATCALL } from '../api/queries';
 import SideImage from './SideImage';
 import { Tooltip } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
@@ -22,12 +22,12 @@ const useStyles = makeStyles({
 
 export default function MapPopup ({ catcall }) {
   const classes = useStyles();
-  const [updateCatcall] = useMutation(UPDATE_CATCALL);
+  const [upvoteCatcall] = useMutation(UPVOTE_CATCALL);
   const [ updated, setUpdated ] = useState(false);
   const [ displayVotes, setDisplayVotes ] = useState(catcall.properties.votes);
 
   const upvoteClick = () => {
-    updateCatcall({
+    upvoteCatcall({
       variables: {
         id: catcall.properties.id,
         catcall: {
@@ -45,8 +45,8 @@ export default function MapPopup ({ catcall }) {
     <div className="popup-content">
 
       <div className="popup-title">
-        <div>CATCALL</div>
-        <div className="popup-date">
+        <div className="normal-font">CATCALL</div>
+        <div className="popup-date normal-font">
           { (catcall.properties.dateCatcall && catcall.properties.dateCatcall !== "null") ?
           (new Date(Number(catcall.properties.dateCatcall))).toDateString() :
           "" }
@@ -67,7 +67,7 @@ export default function MapPopup ({ catcall }) {
             <SideImage url={catcall.properties.url} />
             : <></>
           }
-          <Tooltip title="Upvote" arrow>
+          <Tooltip title="Call out" arrow>
             <Button size="small" color="primary" onClick={() => upvoteClick()} disabled={updated}>
               <i className="popup-icon fas fa-bullhorn"></i>
               <span>{displayVotes}</span>

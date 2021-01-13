@@ -35,22 +35,3 @@
   color: black;
 }
 
-.cancel-button {
-  font-size: 18px;
-  padding: 10px 15px;
-  border-radius: 8px;
-  margin: 5px;
-}
-
-.submit-button {
-  font-size: 18px;
-  background-color: rgb(245, 37, 89);
-  color: white;
-  padding: 10px 15px;
-  border-radius: 8px;
-  margin: 5px;
-}
-
-.submit-button:hover {
-  cursor: pointer;
-}

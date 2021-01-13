@@ -60,7 +60,7 @@ function Login({ setCookie, setMod }) {
         </div>
 
         <div className="form-segment">
-          <input className="submit-button" type="submit" value="Log in" />
+          <input className="submit-button normal-font" type="submit" value="Log in" />
         </div>
 
       </form>

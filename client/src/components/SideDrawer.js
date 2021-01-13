@@ -52,20 +52,26 @@ function SideDrawer({ navLinks }) {
         <Link to="/#about" style={{textDecoration: 'none', color:'#000000DE'}} >
           <ListItem button key={uuidv4()}>
             <ListItemIcon className='fas fa-info-circle'/>
-            <ListItemText primary={<Typography variant="button">about</Typography>}/>
+            <ListItemText primary={
+              <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>About</Typography>
+            }/>
           </ListItem>
         </Link>
 
         {navLinks.map(({ title, path, classN }) => (
         <ListItem button onClick={path} key={uuidv4()}>
           <ListItemIcon className={classN}/>
-          <ListItemText primary={<Typography variant="button">{title}</Typography>}/>
+          <ListItemText primary={
+            <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>{title}</Typography>
+          }/>
         </ListItem>
         ))}
 
         <ListItem button key={uuidv4()} onClick={() => history.push("/catcalls/new")} style={{background: 'rgb(245, 37, 89)'}}>
           <ListItemIcon className="fas fa-cat"/>
-          <ListItemText  primary={<Typography variant="button">Report a new CatCall</Typography>}/>
+          <ListItemText  primary={
+            <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>Report a new CatCall</Typography>
+          }/>
         </ListItem>
 
       </List>

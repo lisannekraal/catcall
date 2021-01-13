@@ -4,6 +4,8 @@ import { ApolloProvider, createHttpLink, ApolloClient, InMemoryCache } from '@ap
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { useCookies } from 'react-cookie';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
 import MapMain from './components/MapMain';
 import Landing from './components/Landing';
@@ -15,6 +17,14 @@ import Help from './components/Help';
 import NotFound from './components/NotFound';
 import Header from './components/Header';
 
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      'Montserrat', 
+      'sans-serif'
+    ].join(','),
+  }
+});
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(['token']);
@@ -46,6 +56,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+        <ThemeProvider theme={theme}>
 
         <Header token={cookies.token} removeCookie={removeCookie} setMod={setMod} />
 
@@ -76,6 +87,8 @@ function App() {
           </Route>
           <Redirect to="/404"/>
         </Switch>
+
+        </ThemeProvider>
       </Router>
 
     </ApolloProvider>

@@ -57,7 +57,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
     let switchedRows = tabDictionary[value]();
     setPage(0);
     switchedRows && setRows(switchedRows);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, catcallData]);
 
   const clickButtonUpdate = ({ variables }) => {
@@ -97,8 +97,8 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
                   <TableRow>
                     <TableCell />
                     <TableCell />
-                    <TableCell><h3 className="catcall-font">Quote</h3></TableCell>
-                    <TableCell><h3 className="catcall-font">Actions</h3></TableCell>
+                    <TableCell><h4>Quote</h4></TableCell>
+                    <TableCell><h4>Actions</h4></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -123,7 +123,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
       {/* if in trashbin and full athority, show this extra section to permanently delete */}
       { tabSettings.showTrash && authorized ?
         <>
-          <h2 className="mod-settings-header">More</h2>
+          <h3 style={{ margin: '19px', paddingTop: '20px' }}>More</h3>
           <Accordion TransitionProps={{ unmountOnExit: true }}>
             <AccordionSummary
               expandIcon={<ExpandMore />}
@@ -135,7 +135,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
             </AccordionSummary>
             <AccordionDetails>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <input className="submit-button" type="submit" value="Permanently empty trash" />
+                <input className="submit-button normal-font" type="submit" value="Permanently empty trash" />
               </form>
             </AccordionDetails>
           </Accordion>

@@ -129,6 +129,33 @@ export const UPDATE_CATCALL = gql`
   }
 `;
 
+export const UPVOTE_CATCALL = gql`
+  mutation upvoteCatcall($id: String!, $catcall: CatcallUpdateInput!) {
+    upvoteCatcall(id: $id, catcall: $catcall) {
+        _id
+        type
+      geometry {
+        type
+        coordinates
+      }
+      properties {
+        quote
+        context
+        dateCatcall
+        dateAdded
+        url
+        verified
+        chalked
+        listedForChalk
+        starred
+        trash
+        categories
+        votes
+      }
+    }
+  }
+`;
+
 export const EMPTY_TRASH = gql`
   mutation emptyTrash {
     emptyTrash
