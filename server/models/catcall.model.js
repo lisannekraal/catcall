@@ -25,4 +25,4 @@ const catcallSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Mockcatcall', catcallSchema);
+module.exports = mongoose.model('Catcall', catcallSchema);
