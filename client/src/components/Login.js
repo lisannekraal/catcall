@@ -2,12 +2,10 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { VALIDATE_MODERATOR } from '../api/queries';
-
 import './Login.css';
-
 import { useForm } from 'react-hook-form';
 
-function Login({ setCookie, setMod }) {
+function Login({ setCookie }) {
   let history = useHistory();
   const { register, handleSubmit } = useForm();
   const [validateModerator, { loading, data, error }] = useLazyQuery(VALIDATE_MODERATOR);
@@ -27,7 +25,6 @@ function Login({ setCookie, setMod }) {
         data.validateModerator.token,
         { path: '/' }
       );
-      setMod(data.validateModerator);
       history.push('/dashboard');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

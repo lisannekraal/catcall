@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
 import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { useQuery } from '@apollo/client';
+import { GET_MODERATOR_BY_TOKEN } from '../api/queries';
 
 import SideDrawer from './SideDrawer';
 import './Header.css';
@@ -38,11 +40,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Header({ token, removeCookie, setMod }) {
+function Header({ removeCookie }) {
 
   let history = useHistory();
   const classes = useStyles();
   const [ navigations, setNavigations ] = useState([]);
+  const { loading, error, data } = useQuery(GET_MODERATOR_BY_TOKEN);
 
   let navLinksPermanent = [
     {
@@ -60,9 +63,7 @@ function Header({ token, removeCookie, setMod }) {
   ];
 
   useEffect(() => {
-    //depending on the mod token, show functionalities navbar
-
-    if (token && token !== 'null') {
+    if (data && data.getModeratorByToken) {
       setNavigations([...navLinksPermanent,
         {
           title: 'Dashboard',
@@ -74,7 +75,6 @@ function Header({ token, removeCookie, setMod }) {
         classN: 'fas fa-user',
         path: () => {
           removeCookie('token');
-          setMod(false);
           history.push('/');
         }
       }]);
@@ -86,7 +86,7 @@ function Header({ token, removeCookie, setMod }) {
       }]);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  }, [data]);
 
   return (
     <AppBar color='transparent' position="absolute" elevation={0} data-testid="navbar">

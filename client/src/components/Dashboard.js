@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { UPDATE_CATCALL, GET_CATCALLS, EMPTY_TRASH, GET_MODERATOR_BY_TOKEN } from '../api/queries'
+import { UPDATE_CATCALL, GET_CATCALLS, EMPTY_TRASH, GET_MODERATOR_BY_TOKEN } from '../api/queries';
 import AdminTable from './AdminTable';
 import { Player } from '@lottiefiles/react-lottie-player';
 import { Paper, Tabs, Tab } from '@material-ui/core';

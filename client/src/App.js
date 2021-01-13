@@ -1,5 +1,4 @@
 import './App.css';
-import React, { useState } from 'react';
 import { ApolloProvider, createHttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
@@ -28,7 +27,6 @@ const theme = createMuiTheme({
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(['token']);
-  const [mod, setMod] = useState(false);
 
   const httpLink = createHttpLink({
     uri: process.env.REACT_APP_APOLLO_SERVER,
@@ -58,7 +56,7 @@ function App() {
       <Router>
         <ThemeProvider theme={theme}>
 
-        <Header token={cookies.token} removeCookie={removeCookie} setMod={setMod} />
+        <Header removeCookie={removeCookie} />
 
         <Switch>
           <Route exact path="/">
@@ -71,7 +69,7 @@ function App() {
             <ReportForm />
           </Route>
           <Route exact path="/login">
-            <Login setCookie={setCookie} setMod={setMod}/>
+            <Login setCookie={setCookie}/>
           </Route>
           <Route exact path="/dashboard">
             <Dashboard />
