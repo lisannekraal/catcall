@@ -109,7 +109,7 @@ const moderatorResolver = {
     
     async getModeratorByToken (_, __, context) {
       if (context.mod._id) {
-        const mod = await Moderator.findOne({ _id: context.mod._id })
+        const mod = await Moderator.findOne({ _id: context.mod._id });
         return mod;
       }
       let err = new Error;
