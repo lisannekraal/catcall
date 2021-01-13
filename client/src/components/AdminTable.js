@@ -21,56 +21,43 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function AdminTable({ catcallData, updateCatcall, value, authorized, emptyTrash }) {
 
-  const [showSettings, setShowSettings] = useState(false);
-  const [showTrash, setShowTrash] = useState(false);
-  const [emptyTableMessage, setEmptyTableMessage] = useState('No new catcalls to verify');
+  const [tabSettings, setTabSettings] = useState({ showSettings: false, showTrash: false, emptyMessage: 'No new catcalls to verify', page: 0 })
+
   const { handleSubmit } = useForm();
   const [rows, setRows] = useState(catcallData);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  useEffect(() => {
-    let switchedRows;
-    switch (value) {
-      case 'unverified':
-        setShowSettings(false);
-        setShowTrash(false);
-        setEmptyTableMessage('No new catcalls to verify');
-        setPage(0);
-        switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === false);
-        break;
-      case 'chalk':
-        setShowSettings(false);
-        setShowTrash(false);
-        setEmptyTableMessage('No catcalls on the list to chalk');
-        setPage(0);
-        switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === true && el.properties.chalked === false && el.properties.listedForChalk === true);
-        break;
-      case 'database':
-        setShowSettings(false);
-        setShowTrash(false);
-        setEmptyTableMessage('Database is empty');
-        setPage(0);
-        switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === true);
-        break;
-      case 'trash':
-        setShowSettings(false);
-        setShowTrash(true);
-        setEmptyTableMessage('No catcalls currently in trash');
-        setPage(0);
-        switchedRows = catcallData.filter(el => el.properties.trash === true);
-        break;
-      case 'settings':
-        setShowSettings(true);
-        setShowTrash(false);
-        setPage(0);
-        break;
-      default: //unverified
-        setPage(0);
-        switchedRows = catcallData.filter(el => el.properties.trash === false && el.properties.verified === false);
-        break;
+  const tabDictionary = {
+    'unverified': () => {
+      setTabSettings({ ...tabSettings, showSettings: false, showTrash: false, emptyMessage: 'No new catcalls to verify' })
+      return catcallData.filter(
+        el => el.properties.trash === false && el.properties.verified === false);
+    },
+    'chalk': () => {
+      setTabSettings({ ...tabSettings, showSettings: false, showTrash: false, emptyMessage: 'No catcalls on the list to chalk' })
+      return catcallData.filter(
+        el => el.properties.trash === false && el.properties.verified === true && el.properties.chalked === false && el.properties.listedForChalk === true);
+    },
+    'database': () => {
+      setTabSettings({ ...tabSettings, showSettings: false, showTrash: false, emptyMessage: 'Database is empty' })
+      return catcallData.filter(
+        el => el.properties.trash === false && el.properties.verified === true);
+    },
+    'trash': () => {
+      setTabSettings({ ...tabSettings, showSettings: false, showTrash: true, emptyMessage: 'No catcalls currently in trash' })
+      return catcallData.filter(el => el.properties.trash === true);
+    },
+    'settings': () => {
+      setTabSettings({ ...tabSettings, showSettings: true, showTrash: false })
     }
+  }
+
+  useEffect(() => {
+    let switchedRows = tabDictionary[value]();
+    setPage(0);
     switchedRows && setRows(switchedRows);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, catcallData]);
 
   const clickButtonUpdate = ({ variables }) => {
@@ -97,58 +84,58 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
 
   return (
     <>
-    {/* if settings tab is selected, only load that seperate component */}
-    { showSettings ?
-      <ModeratorSettings authorized={authorized} />
-    :
-      <>
-        <TableContainer component={Paper}>
-          {/* generic dashboard table for all other functionalities */}
-          { rows.length > 0 ?
-          <Table aria-label="collapsible table">
-            <TableHead>
-              <TableRow>
-                <TableCell />
-                <TableCell />
-                <TableCell><h4>Quote</h4></TableCell>
-                <TableCell><h4>Actions</h4></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.slice().reverse().slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                <Row key={uuidv4()} tab={value} row={row} clickButtonUpdate={clickButtonUpdate} />
-              ))}
-            </TableBody>
-          </Table> :
-          <div style={{textAlign: 'center', padding: '50px'}}>{emptyTableMessage}</div>}
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-      </>
-    }
-    {/* if in trashbin and full athority, show this extra section to permanently delete */}
-    { showTrash && authorized ?
+      {/* if settings tab is selected, only load that seperate component */}
+      { tabSettings.showSettings ?
+        <ModeratorSettings authorized={authorized} />
+        :
         <>
-          <h3 style={{margin: '19px', paddingTop: '20px'}}>More</h3>
+          <TableContainer component={Paper}>
+            {/* generic dashboard table for all other functionalities */}
+            {rows.length > 0 ?
+              <Table aria-label="collapsible table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell />
+                    <TableCell />
+                    <TableCell><h4>Quote</h4></TableCell>
+                    <TableCell><h4>Actions</h4></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.slice().reverse().slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                    <Row key={uuidv4()} tab={value} row={row} clickButtonUpdate={clickButtonUpdate} />
+                  ))}
+                </TableBody>
+              </Table> :
+              <div style={{ textAlign: 'center', padding: '50px' }}>{tabSettings.emptyMessage}</div>}
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        </>
+      }
+      {/* if in trashbin and full athority, show this extra section to permanently delete */}
+      { tabSettings.showTrash && authorized ?
+        <>
+          <h3 style={{ margin: '19px', paddingTop: '20px' }}>More</h3>
           <Accordion TransitionProps={{ unmountOnExit: true }}>
             <AccordionSummary
               expandIcon={<ExpandMore />}
               aria-controls="panel2a-content"
               id="panel2a-header"
-              style={{color: 'rgb(245, 37, 89'}}
+              style={{ color: 'rgb(245, 37, 89' }}
             >
               <Typography><Warning /> Empty Trash</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <form onSubmit={handleSubmit(onSubmit)}>
-                  <input className="submit-button normal-font" type="submit" value="Permanently empty trash" />
+                <input className="submit-button normal-font" type="submit" value="Permanently empty trash" />
               </form>
             </AccordionDetails>
           </Accordion>
