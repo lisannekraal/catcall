@@ -46,9 +46,7 @@ const catcallResolver = {
 
     async updateCatcall (_, { id, catcall }, context) {
       if (context.mod._id) {
-
         if (await Moderator.findOne({ _id: context.mod._id })) {
-
           let entry = await Catcall.findOne({ _id: id });
           const {properties} = catcall;
           let newEntry = Object.assign(entry.properties,properties);
@@ -62,8 +60,16 @@ const catcallResolver = {
       return err;
     },
 
-    async emptyTrash (_, __, context) {
+    async upvoteCatcall (_, { id, catcall }) {
+      let entry = await Catcall.findOne({ _id: id });
+      const {properties} = catcall;
+      let newEntry = Object.assign(entry.properties,properties);
+      entry.properties = newEntry;
+      await entry.save();
+      return entry;
+    },
 
+    async emptyTrash (_, __, context) {
       if (context.mod._id) {
         if (await Moderator.findOne({ _id: context.mod._id })) {
           try {
