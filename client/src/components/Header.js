@@ -46,14 +46,14 @@ function Header({ token, removeCookie, setMod }) {
 
   let navLinksPermanent = [
     {
-      title: 'map',
+      title: 'Map',
       classN: 'fas fa-map-marked-alt',
       path: () => history.push({
         pathname: '/catcalls'
       })
     },
     {
-      title: 'community',
+      title: 'Community',
       classN: 'fab fa-instagram',
       path: () => window.open('https://www.instagram.com/catcallsofams/', '_blank')
     }
@@ -65,12 +65,12 @@ function Header({ token, removeCookie, setMod }) {
     if (token && token !== 'null') {
       setNavigations([...navLinksPermanent,
         {
-          title: 'dashboard',
+          title: 'Dashboard',
           classN: 'fas fa-cog',
           path: () => history.push('/dashboard')
         },
         {
-        title: 'logout',
+        title: 'Logout',
         classN: 'fas fa-user',
         path: () => {
           removeCookie('token');
@@ -80,7 +80,7 @@ function Header({ token, removeCookie, setMod }) {
       }]);
     } else {
       setNavigations([...navLinksPermanent, {
-          title: 'moderator',
+          title: 'Moderator',
           classN: 'fas fa-cog',
           path: () => history.push('/login')
       }]);
@@ -106,23 +106,21 @@ function Header({ token, removeCookie, setMod }) {
               <Link
                 to="/#about"
                 className="about-link" >
-                <Button key={uuidv4()} color='inherit' startIcon={<Icon className='fas fa-info-circle' fontSize="small" style={{ marginRight: 7 }} />} >About</Button>
+                <Button key={uuidv4()} color='inherit' style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} startIcon={
+                  <Icon className='fas fa-info-circle' fontSize="small" style={{ marginRight: 7 }} />
+                } >About</Button>
               </Link>
 
               {navigations.map(({ title, classN, path }) => (
-                <Button
-                  key={uuidv4()}
-                  onClick={path}
-                  color='inherit'
-                  startIcon={<Icon className={classN} fontSize="small" style={{ marginRight: 7 }} />}
-                >{title}
-                </Button>
+                <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={path} color='inherit' startIcon={
+                  <Icon className={classN} fontSize="small" style={{ marginRight: 7 }} />
+                }>{title}</Button>
               ))}
             </List>
           </Hidden>
 
           <Hidden mdDown>
-            <Button  key={uuidv4()} color="inherit" className={classes.navButton} onClick={() => history.push("/catcalls/new")}>Report a new CatCall</Button>
+            <Button style={{textTransform: 'none', fontSize: '16px'}} key={uuidv4()} color="inherit" className={classes.navButton} onClick={() => history.push("/catcalls/new")}>Report a new CatCall</Button>
           </Hidden>
 
         </Container>
