@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -10,6 +12,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import IconButton from '@material-ui/core/IconButton';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -20,7 +23,7 @@ import MenuList from '@material-ui/core/MenuList';
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    width: 300,
+    width: 275,
   },
 }));
 
@@ -36,12 +39,36 @@ const MenuProps = {
 };
 
 const categories = [
-  'Sexual harassment', 'Homophobia', 'Transphobia', 'Fatphobia', 'Racism', 'Fetishization', 'Slutshaming', 'HateSpeech', 'Young', 'Assault', 'Staring', 'Following'
+  'sexual', 'homophobia', 'transphobia', 'fatphobia', 'racism', 'fetishization', 'slutshaming', 'hateSpeech', 'young', 'assault', 'staring', 'following'
 ];
+
+const categoryLibrary = {
+  'sexual': 'Sexual Harassment',
+  'homophobia': 'Homophobia',
+  'transphobia': 'Transphobia',
+  'fatphobia': 'Fatphobia',
+  'racism': 'Racism',
+  'fetishization': 'Fetishization',
+  'slutshaming': 'Slutshaming',
+  'hateSpeech': 'Hate speech',
+  'young': 'Young',
+  'assault': 'Assault',
+  'staring': 'Staring',
+  'following': 'Following'
+}
+
+function convertToCategoryName(category) {
+  return categoryLibrary[category];
+  // return arr.forEach(el => {
+  //   return categoryLibrary[el];
+  // });
+}
 
 const chalkedOrNot = ['Show all catcalls', 'Show chalked catcalls', 'Show not yet chalked'];
 
-function MapFilter () {
+
+function MapFilter ({ setFilterOpen, filterChalked, filterCategories }) {
+
   const classes = useStyles();
   const [categoryName, setCategoryName] = useState([]);
   const [openChalk, setOpenChalk] = useState(false);
@@ -50,15 +77,15 @@ function MapFilter () {
 
   const handleCategoryChange = (event) => {
     setCategoryName(event.target.value);
-  };
-
-  const handleChalkClick = () => {
-    console.info(`You clicked ${chalkedOrNot[selectedIndexChalk]}`);
+    setSelectedIndexChalk(0);
+    filterCategories(event.target.value);
   };
 
   const handleChalkItemClick = (event, index) => {
     setSelectedIndexChalk(index);
     setOpenChalk(false);
+    setCategoryName([]);
+    filterChalked(index);
   };
 
   const handleToggleChalk = () => {
@@ -72,6 +99,12 @@ function MapFilter () {
     setOpenChalk(false);
   };
 
+  function handleExitFilter() {
+    filterChalked(0);
+    filterCategories([]);
+    setFilterOpen(false);
+  }
+
 
   return (
     <>
@@ -79,7 +112,7 @@ function MapFilter () {
 
         <ButtonGroup variant="contained" color="secondary" ref={anchorRef} aria-label="split button" style={{marginTop: '16px'}}>
 
-          <Button onClick={handleChalkClick} style={{ width: '235px'}}>{chalkedOrNot[selectedIndexChalk]}</Button>
+          <Button style={{ width: '235px'}}>{chalkedOrNot[selectedIndexChalk]}</Button>
 
           <Button
             color="secondary"
@@ -138,12 +171,17 @@ function MapFilter () {
             {categories.map((category) => (
               <MenuItem key={category} value={category}>
                 <Checkbox checked={categoryName.indexOf(category) > -1} />
-                <ListItemText primary={category} />
+                <ListItemText primary={convertToCategoryName(category)} />
               </MenuItem>
             ))}
           </Select>
         </FormControl>
+        
       </div>
+
+      <IconButton onClick={e => {handleExitFilter()}} style={{color: 'white', float: 'right', position: 'fixed', right: 2, top: 85}} >
+          <HighlightOffIcon />
+      </IconButton>
 
 
     </>

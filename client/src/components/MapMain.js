@@ -20,7 +20,7 @@ function MapMain () {
   const location = useLocation();
   const [ dialog ] = useState(location.state ? location.state.dialog : "");
   const [ geojsonData, setGeojsonData ] = useState([]);
-  // const [ filterOpen, setFilterOpen ] = useState(false);
+  const [ filterOpen, setFilterOpen ] = useState(false);
 
   useEffect(() => {
     if (data) {
@@ -41,6 +41,55 @@ function MapMain () {
     longitude: 4.908019,
     zoom: 12
   });
+
+  function filterChalked(index) {
+    const originalAdjustedArr = [];
+    data.getVerifiedCatcalls.forEach((feature) => {
+      let item = JSON.parse(JSON.stringify(feature));
+      item.properties.id = feature._id
+      originalAdjustedArr.push({
+        ...item
+      });
+    });
+    if (index === 0) {
+      //filter back to all catcalls
+      setGeojsonData(originalAdjustedArr);
+    } else if (index === 1) {
+      //filter to chalked catcalls
+      const newDataObj = originalAdjustedArr.filter(function(item) {
+        return item.properties.chalked === true;
+      });
+      setGeojsonData(newDataObj);
+    } else {
+      //filter to not chalked catcalls
+      const newDataObj = originalAdjustedArr.filter(function(item) {
+        return item.properties.chalked === false;
+      });
+      setGeojsonData(newDataObj);
+    }
+  }
+
+  function filterCategories(arr) {
+    const originalAdjustedArr = [];
+    data.getVerifiedCatcalls.forEach((feature) => {
+      let item = JSON.parse(JSON.stringify(feature));
+      item.properties.id = feature._id
+      originalAdjustedArr.push({
+        ...item
+      });
+    });
+    if (arr.length < 1) {
+      setGeojsonData(originalAdjustedArr);
+    } else {
+      const newDataObj = [];
+      originalAdjustedArr.forEach((item) => {
+        if (item.properties.categories.some(category => arr.includes(category))) {
+          newDataObj.push(item);
+        }
+      });
+      setGeojsonData(newDataObj);
+    }
+  }
 
   if (loading) return (
     <div data-testid="page-not-found" className="not-found-container">
@@ -71,7 +120,13 @@ function MapMain () {
 
       <div className="map-container" data-testid="map-main">
 
-        {/* {filterOpen ? <MapFilter /> : <></> } */}
+        {filterOpen && 
+          <MapFilter 
+            setFilterOpen={setFilterOpen} 
+            filterChalked={filterChalked} 
+            filterCategories={filterCategories} 
+          /> 
+        }
         <MapGL
           style={{ width: '100vw', height: '100%' }}
           mapStyle='mapbox://styles/mapbox/streets-v11'
@@ -110,13 +165,14 @@ function MapMain () {
           <FullscreenControl position='top-right' />
           <ScaleControl unit='metric' maxWidth="100" position='bottom-right' />
 
-          {/* <Fab variant="extended" style={{textTransform: 'none', marginTop: '15px', marginLeft: '15px', color: 'white', backgroundColor: 'rgb(245, 37, 89'}} onClick={setFilterOpen(true)}>
+          { !filterOpen && <Fab variant="extended" style={{textTransform: 'none', marginTop: '15px', marginLeft: '15px', color: 'white', backgroundColor: 'rgb(245, 37, 89'}} onClick={e => {setFilterOpen(true)}}>
             <FilterListIcon />
               Click here to open filter options
-          </Fab> */}
+          </Fab>}
 
         </MapGL>
-      {dialog && <DialogComp text={dialog} state={true} />}
+
+        {dialog && <DialogComp text={dialog} state={true} />}
       </div>
     </>
   );
