@@ -56,7 +56,7 @@ export default function MapPopup ({ catcall }) {
       <Card className={classes.root}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h3">
-            {catcall.properties.quote}
+            "{catcall.properties.quote}"
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {catcall.properties.context}

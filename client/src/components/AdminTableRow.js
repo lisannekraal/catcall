@@ -68,12 +68,15 @@ function Row({ tab, row, clickButtonUpdate }) {
     transphobia: false,
     fatphobia: false,
     racism: false,
+    fetishization: false,
     slutshaming: false,
     hateSpeech: false,
     young: false,
-    assault: false
+    assault: false,
+    staring: false,
+    following: false
   });
-  const { sexual, homophobia, transphobia, fatphobia, racism, slutshaming, hateSpeech, young, assault } = state;
+  const { sexual, homophobia, transphobia, fatphobia, racism, fetishization, slutshaming, hateSpeech, young, assault, staring, following } = state;
 
   useEffect(() => {
     //listen for a data change: when catcall queried, send to edit form, rendered for either url editing or text editing
@@ -240,7 +243,7 @@ function Row({ tab, row, clickButtonUpdate }) {
 
         {/*3: quote*/}
         <TableCell component="th" scope="row">
-          {row.properties.quote}
+          "{row.properties.quote}"
         </TableCell>
 
         {/*4: actions*/}
@@ -337,6 +340,10 @@ function Row({ tab, row, clickButtonUpdate }) {
               label="Racism"
             />
             <FormControlLabel
+              control={<Checkbox checked={fetishization} onChange={handleChange} name="fetishization" />}
+              label="Fetishization"
+            />
+            <FormControlLabel
               control={<Checkbox checked={slutshaming} onChange={handleChange} name="slutshaming" />}
               label="Slutshaming"
             />
@@ -351,6 +358,14 @@ function Row({ tab, row, clickButtonUpdate }) {
             <FormControlLabel
               control={<Checkbox checked={assault} onChange={handleChange} name="assault" />}
               label="Assault"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={staring} onChange={handleChange} name="staring" />}
+              label="Staring"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={following} onChange={handleChange} name="following" />}
+              label="Following"
             />
           </FormGroup>
         </DialogContent>

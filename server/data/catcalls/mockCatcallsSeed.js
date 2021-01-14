@@ -18,14 +18,14 @@ let catcalls = [...Array(numCatcalls)].map(() => (
       'context': faker.lorem.paragraph(),
       'dateCatcall': `${Date.parse(faker.date.past())}`,
       'dateAdded': `${Date.parse(faker.date.recent())}`,
-      'url': '',
-      'verified': false,
+      'url': 'https://www.instagram.com/p/CFPz8OEF_S3/',
+      'verified': true,
       'chalked': false,
       'listedForChalk': false,
       'starred': false,
       'trash': false,
       'categories': [],
-      'votes': 3
+      'votes': 0
     }
   }
 ));

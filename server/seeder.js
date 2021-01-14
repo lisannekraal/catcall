@@ -3,7 +3,7 @@ const path = require('path');
 const { Seeder } = require('mongo-seeding');
 
 const config = {
-  database: process.env.DB_URL,
+  database: process.env.DB_ATLAS_URL,
   dropDatabase: true,
 };
 
