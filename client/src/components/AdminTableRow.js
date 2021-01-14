@@ -50,6 +50,10 @@ const useRowStyles = makeStyles({
     margin: 2,
     width: 68,
   },
+  tableCell: {
+    paddingRight: 4,
+    paddingLeft: 5
+  }
 });
 
 function Row({ tab, row, clickButtonUpdate }) {
@@ -215,8 +219,10 @@ function Row({ tab, row, clickButtonUpdate }) {
   return (
     <React.Fragment>
 
+
       <TableRow className={classes.root} >
         {/*1: expand functionality */}
+
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ?
@@ -243,7 +249,7 @@ function Row({ tab, row, clickButtonUpdate }) {
 
         {/*3: quote*/}
         <TableCell component="th" scope="row">
-          "{row.properties.quote}"
+          "{row.properties.quote}" {(new Date(Number(row.properties.dateAdded))).toDateString().slice(4)}
         </TableCell>
 
         {/*4: actions*/}
@@ -270,10 +276,10 @@ function Row({ tab, row, clickButtonUpdate }) {
                 <TableBody>
 
                   <TableRow key={uuidv4()}>
-                    <TableCell component="th" scope="row">
+                    <TableCell component="th" scope="row" style={{ width: 125 }} >
                       Date added
                     </TableCell>
-                    <TableCell>{(new Date(Number(row.properties.dateAdded))).toDateString()}</TableCell>
+                    <TableCell >{(new Date(Number(row.properties.dateAdded))).toDateString()}</TableCell>
                   </TableRow>
 
                   <TableRow key={uuidv4()}>
@@ -302,7 +308,7 @@ function Row({ tab, row, clickButtonUpdate }) {
                       Chalk url
                     </TableCell>
                     <TableCell>
-                      <a href={row.properties.url} target="_blank" rel="noreferrer">{row.properties.url}</a>
+                      <a href={row.properties.url} target="_blank" rel="noreferrer">{`Image on Instagram`}</a>
                     </TableCell>
                   </TableRow>
                 </TableBody>
