@@ -4,11 +4,3 @@
   padding-top: 65px;
   background-color: rgba(29, 113, 183);
 }
-
-.map-info {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 40%;
-  padding-right: 6px;
-}
