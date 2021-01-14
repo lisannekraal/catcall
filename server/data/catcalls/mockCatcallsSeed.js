@@ -19,7 +19,7 @@ let catcalls = [...Array(numCatcalls)].map(() => (
       'dateCatcall': `${Date.parse(faker.date.past())}`,
       'dateAdded': `${Date.parse(faker.date.recent())}`,
       'url': '',
-      'verified': true,
+      'verified': false,
       'chalked': false,
       'listedForChalk': false,
       'starred': false,
