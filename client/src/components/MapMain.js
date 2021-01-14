@@ -6,10 +6,13 @@ import MapGL, { Source, Layer, Image, Popup, NavigationControl, GeolocateControl
 
 import DialogComp from './DialogComp';
 import MapPopup from './MapPopup';
+import MapFilter from './MapFilter';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './MapMain.css';
 import Icon from '../assets/bullhorn.png';
 import { Player } from '@lottiefiles/react-lottie-player';
+import Fab from '@material-ui/core/Fab';
+import FilterListIcon from '@material-ui/icons/FilterList';
 
 function MapMain () {
   const [ popup, setPopup ] = useState("");
@@ -17,6 +20,7 @@ function MapMain () {
   const location = useLocation();
   const [ dialog ] = useState(location.state ? location.state.dialog : "");
   const [ geojsonData, setGeojsonData ] = useState([]);
+  const [ filterOpen, setFilterOpen ] = useState(false);
 
   useEffect(() => {
     if (data) {
@@ -37,6 +41,55 @@ function MapMain () {
     longitude: 4.908019,
     zoom: 12
   });
+
+  function filterChalked(index) {
+    const originalAdjustedArr = [];
+    data.getVerifiedCatcalls.forEach((feature) => {
+      let item = JSON.parse(JSON.stringify(feature));
+      item.properties.id = feature._id
+      originalAdjustedArr.push({
+        ...item
+      });
+    });
+    if (index === 0) {
+      //filter back to all catcalls
+      setGeojsonData(originalAdjustedArr);
+    } else if (index === 1) {
+      //filter to chalked catcalls
+      const newDataObj = originalAdjustedArr.filter(function(item) {
+        return item.properties.chalked === true;
+      });
+      setGeojsonData(newDataObj);
+    } else {
+      //filter to not chalked catcalls
+      const newDataObj = originalAdjustedArr.filter(function(item) {
+        return item.properties.chalked === false;
+      });
+      setGeojsonData(newDataObj);
+    }
+  }
+
+  function filterCategories(arr) {
+    const originalAdjustedArr = [];
+    data.getVerifiedCatcalls.forEach((feature) => {
+      let item = JSON.parse(JSON.stringify(feature));
+      item.properties.id = feature._id
+      originalAdjustedArr.push({
+        ...item
+      });
+    });
+    if (arr.length < 1) {
+      setGeojsonData(originalAdjustedArr);
+    } else {
+      const newDataObj = [];
+      originalAdjustedArr.forEach((item) => {
+        if (item.properties.categories.some(category => arr.includes(category))) {
+          newDataObj.push(item);
+        }
+      });
+      setGeojsonData(newDataObj);
+    }
+  }
 
   if (loading) return (
     <div data-testid="page-not-found" className="not-found-container">
@@ -63,56 +116,65 @@ function MapMain () {
     </div>
   );
   return (
-    <div className="map-container" data-testid="map-main">
-      <MapGL
-        style={{ width: '100vw', height: '100%' }}
-        mapStyle='mapbox://styles/mapbox/streets-v11'
-        accessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-        latitude={viewport.latitude}
-        longitude={viewport.longitude}
-        zoom={viewport.zoom}
-        onViewportChange={setViewport}
-      >
+    <>
 
-        <Source id='catcalls' type='geojson' data={{
-                type: 'FeatureCollection',
-                features: geojsonData
-        }} />
+      <div className="map-container" data-testid="map-main">
 
-        <Image id="catcall-icon" image={Icon} />
-        <Layer
-          id='catcall-layer'
-          type='symbol'
-          source='catcalls'
-          layout={{
-            'icon-image': 'catcall-icon',
-            'icon-size': 0.06,
-            'icon-allow-overlap': true
-          }}
-          onClick={e => {
-            //setviewport functionality (does not give the satisfying effect of mapbox' fly-to behavior, but it was hard to implement that here)
+        {filterOpen && 
+          <MapFilter 
+            setFilterOpen={setFilterOpen} 
+            filterChalked={filterChalked} 
+            filterCategories={filterCategories} 
+          /> 
+        }
+        <MapGL
+          style={{ width: '100vw', height: '100%' }}
+          mapStyle='mapbox://styles/mapbox/streets-v11'
+          accessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+          latitude={viewport.latitude}
+          longitude={viewport.longitude}
+          zoom={viewport.zoom}
+          onViewportChange={setViewport}
+        >
 
-            // setViewport({
-            //   latitude: e.features[0].geometry.coordinates[1],
-            //   longitude: e.features[0].geometry.coordinates[0],
-            //   zoom: 14
-            // });
-            setPopup(<Popup longitude={e.lngLat.lng} latitude={e.lngLat.lat} closeButton={true} closeOnClick={true} onClick={setPopup("")}>
-              <MapPopup catcall={e.features[0]} />
-            </Popup>)
-          }}
-        />
+          <Source id='catcalls' type='geojson' data={{
+                  type: 'FeatureCollection',
+                  features: geojsonData
+          }} />
 
-        { popup && popup }
-        <NavigationControl showCompass showZoom position='top-right' />
-        <GeolocateControl position='top-right' />
-        <FullscreenControl position='top-right' />
-        <ScaleControl unit='metric' maxWidth="100" position='bottom-right' />
+          <Image id="catcall-icon" image={Icon} />
+          <Layer
+            id='catcall-layer'
+            type='symbol'
+            source='catcalls'
+            layout={{
+              'icon-image': 'catcall-icon',
+              'icon-size': 0.06,
+              'icon-allow-overlap': true
+            }}
+            onClick={e => {
+              setPopup(<Popup longitude={e.lngLat.lng} latitude={e.lngLat.lat} closeButton={true} closeOnClick={true} onClick={setPopup("")}>
+                <MapPopup catcall={e.features[0]} />
+              </Popup>);
+            }}
+          />
 
+          { popup && popup }
+          <NavigationControl showCompass showZoom position='top-right' />
+          <GeolocateControl position='top-right' />
+          <FullscreenControl position='top-right' />
+          <ScaleControl unit='metric' maxWidth="100" position='bottom-right' />
 
-      </MapGL>
-    {dialog && <DialogComp text={dialog} state={true} />}
-    </div>
+          { !filterOpen && <Fab variant="extended" style={{textTransform: 'none', marginTop: '15px', marginLeft: '15px', color: 'white', backgroundColor: 'rgb(245, 37, 89'}} onClick={e => {setFilterOpen(true)}}>
+            <FilterListIcon />
+              Click here to open filter options
+          </Fab>}
+
+        </MapGL>
+
+        {dialog && <DialogComp text={dialog} state={true} />}
+      </div>
+    </>
   );
 }
 export default MapMain;
