@@ -59,9 +59,6 @@ const categoryLibrary = {
 
 function convertToCategoryName(category) {
   return categoryLibrary[category];
-  // return arr.forEach(el => {
-  //   return categoryLibrary[el];
-  // });
 }
 
 const chalkedOrNot = ['Show all catcalls', 'Show chalked catcalls', 'Show not yet chalked'];

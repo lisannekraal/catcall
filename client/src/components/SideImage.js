@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Drawer, Button, Tooltip } from '@material-ui/core';
+import Fab from '@material-ui/core/Fab';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import InstaTile from './InstaTile';
 
 function SideImage({ url }) {
-
   const [drawerState, setDrawerState] = useState({ left: false })
+
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -21,12 +23,16 @@ function SideImage({ url }) {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
+      <Fab variant="extended" style={{textTransform: 'none', marginTop: '15px', marginLeft: '15px', marginBottom: '15px', color: 'white', backgroundColor: 'rgb(245, 37, 89'}} onClick={e => {setDrawerState({ left: false })}}>
+              <ArrowBackIosIcon />
+              Close and go back to map
+          </Fab>
       <InstaTile url={url} />
     </div>
   );
 
   return (
-    <React.Fragment>
+    <>
       <Tooltip title="Opens image to the side" arrow>
         <Button size="small" color="primary" onClick={toggleDrawer("left", true)}>
           <i className="popup-icon fas fa-pen"></i>
@@ -40,7 +46,7 @@ function SideImage({ url }) {
       >
         {sideDrawerList("left")}
       </Drawer>
-    </React.Fragment>
+    </>
   )
 }
 

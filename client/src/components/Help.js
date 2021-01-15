@@ -33,7 +33,7 @@ function Help() {
           <p>To ensure this, CatcallsofAms' moderators are allowed to cut/adjust the report. Do you have questions about this? Reach out with the organisors, for example through Instagram DM.</p>
         </div><br></br>
 
-        <div>
+        <div id="faq">
           <h1>FAQ</h1>
           <Accordion>
             <AccordionSummary

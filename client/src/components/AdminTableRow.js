@@ -56,6 +56,25 @@ const useRowStyles = makeStyles({
   }
 });
 
+const categoryLibrary = {
+  'sexual': 'Sexual Harassment',
+  'homophobia': 'Homophobia',
+  'transphobia': 'Transphobia',
+  'fatphobia': 'Fatphobia',
+  'racism': 'Racism',
+  'fetishization': 'Fetishization',
+  'slutshaming': 'Slutshaming',
+  'hateSpeech': 'Hate speech',
+  'young': 'Young',
+  'assault': 'Assault',
+  'staring': 'Staring',
+  'following': 'Following'
+}
+
+function convertToCategoryName(category) {
+  return categoryLibrary[category];
+}
+
 function Row({ tab, row, clickButtonUpdate }) {
   let history = useHistory();
   const [open, setOpen] = useState(false);
@@ -296,12 +315,29 @@ function Row({ tab, row, clickButtonUpdate }) {
                     <TableCell>{`${row.geometry.coordinates[0].toFixed(3)}.. ${row.geometry.coordinates[1].toFixed(3)}..`}</TableCell>
                   </TableRow>
 
-                  <TableRow key={uuidv4()}>
-                    <TableCell component="th" scope="row">
-                      Context
-                    </TableCell>
-                    <TableCell>{row.properties.context}</TableCell>
-                  </TableRow>
+                  { row.properties.context && 
+                    <TableRow key={uuidv4()}>
+                      <TableCell component="th" scope="row">
+                        Context
+                      </TableCell>
+                      <TableCell>{row.properties.context}</TableCell>
+                    </TableRow>
+                  }
+
+                  { row.properties.categories.length > 0 &&
+                    <TableRow key={uuidv4()}>
+                      <TableCell component="th" scope="row">
+                        Tags
+                      </TableCell>
+                      <TableCell>
+                        {row.properties.categories.map((category) => (
+                          <Button variant="outlined" size="small" color="secondary" style={{marginRight: '2px'}}>
+                            {convertToCategoryName(category)}
+                          </Button>
+                        ))}
+                      </TableCell>
+                    </TableRow>
+                  }
 
                   <TableRow key={uuidv4()}>
                     <TableCell component="th" scope="row">

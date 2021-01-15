@@ -67,6 +67,12 @@ function ReportForm() {
       <div className="report-form" data-testid="report-form">
         <h1>Report a catcall</h1>
 
+        <div style={{marginTop: '50px', marginBottom: '40px'}}>
+          <p>Submit your experience through this form. Important: <b>if you are in direct need of help</b>, check out <a style={{color: "black"}} href="/help" target="_blank">our resource section</a>.</p>
+
+          <p>Questions about reporting a catcall? Visit our <a style={{color: "black"}} href="/help#faq" target="_blank">FAQ</a> and <a style={{color: "black"}} href="/help#houserules" target="_blank">house rules</a>.</p>
+        </div>
+
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className="form-segment">
@@ -84,7 +90,7 @@ function ReportForm() {
                 }
               })}
             ></input>
-            <small id="quote-help">Only Catcall quote (what has been catcalled)</small>
+            <small id="quote-help">Only Catcall text (what exactly has been catcalled)</small>
             <p className="error-message">{errors.quote && errors.quote.message}</p>
           </div>
 
@@ -101,7 +107,7 @@ function ReportForm() {
                 }
               })}
             ></input>
-            <small id="context-help">Not required. Moderators can edit this part of your report if necessary. For more information, see <a style={{color: "black"}} href="/help#houserules" target="_blank">our house rules</a>.</small>
+            <small id="context-help">Additional information, not required. Moderators can edit this part of your report if necessary.</small>
             <p className="error-message">{errors.context && errors.context.message}</p>
 
           </div>
