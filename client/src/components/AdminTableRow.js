@@ -249,7 +249,7 @@ function Row({ tab, row, clickButtonUpdate }) {
 
         {/*3: quote*/}
         <TableCell component="th" scope="row">
-          "{row.properties.quote}" {(new Date(Number(row.properties.dateAdded))).toDateString().slice(4)}
+          "{row.properties.quote}"
         </TableCell>
 
         {/*4: actions*/}
