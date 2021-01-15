@@ -78,14 +78,16 @@ function convertToCategoryName(category) {
 function Row({ tab, row, clickButtonUpdate }) {
   let history = useHistory();
   const [open, setOpen] = useState(false);
-  const [buttonstoShow, setButtons] = useState([]);
-  const [getCatcall, { loading, data }] = useLazyQuery(GET_CATCALL);
+  const [ buttonstoShow, setButtons ] = useState([]);
+  const [ showQuote, setShowQuote ] = useState(row.properties.quote);
+  const [ limitedQuote, setLimitedQuote ] = useState(false);
+  const [ getCatcall, { loading, data } ] = useLazyQuery(GET_CATCALL);
   const classes = useRowStyles();
 
   //for modal to add categorization
-  const [openModal, setOpenModal] = useState(false);
-  const [hideTooltips, setHideTooltips] = useState(false);
-  const [state, setState] = useState({
+  const [ openModal, setOpenModal ] = useState(false);
+  const [ hideTooltips, setHideTooltips ] = useState(false);
+  const [ state, setState ] = useState({
     sexual: false,
     homophobia: false,
     transphobia: false,
@@ -102,6 +104,11 @@ function Row({ tab, row, clickButtonUpdate }) {
   const { sexual, homophobia, transphobia, fatphobia, racism, fetishization, slutshaming, hateSpeech, young, assault, staring, following } = state;
 
   useEffect(() => {
+    if (row.properties.quote.length > 70) {
+      console.log("its longer");
+      setLimitedQuote(true);
+      setShowQuote(row.properties.quote.substring(0, 65) + '...');
+    }
     //listen for a data change: when catcall queried, send to edit form, rendered for either url editing or text editing
     if (data) {
       history.push({
@@ -268,7 +275,7 @@ function Row({ tab, row, clickButtonUpdate }) {
 
         {/*3: quote*/}
         <TableCell component="th" scope="row">
-          "{row.properties.quote}"
+            "{showQuote}"
         </TableCell>
 
         {/*4: actions*/}
@@ -294,18 +301,27 @@ function Row({ tab, row, clickButtonUpdate }) {
               <Table size="small" aria-label="info">
                 <TableBody>
 
+                  { limitedQuote && 
+                  <TableRow key={uuidv4()}>
+                    <TableCell component="th" scope="row" style={{ width: 125 }} >
+                      Full quote
+                    </TableCell>
+                  <TableCell>"{row.properties.quote}"</TableCell>
+                  </TableRow>
+                  }
+
                   <TableRow key={uuidv4()}>
                     <TableCell component="th" scope="row" style={{ width: 125 }} >
                       Date added
                     </TableCell>
-                    <TableCell >{(new Date(Number(row.properties.dateAdded))).toDateString()}</TableCell>
+                    <TableCell>{(new Date(Number(row.properties.dateAdded))).toDateString()}</TableCell>
                   </TableRow>
 
                   <TableRow key={uuidv4()}>
                     <TableCell component="th" scope="row">
                       Date catcall
                     </TableCell>
-                    <TableCell >{row.properties.dateCatcall ? (new Date(Number(row.properties.dateCatcall))).toDateString() : "no date"}</TableCell>
+                    <TableCell>{row.properties.dateCatcall ? (new Date(Number(row.properties.dateCatcall))).toDateString() : "no date"}</TableCell>
                   </TableRow>
 
                   <TableRow key={uuidv4()}>
