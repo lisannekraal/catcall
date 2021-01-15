@@ -77,10 +77,11 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  //temporarily turn off functionality to choose nr rows per page
+  // const handleChangeRowsPerPage = (event) => {
+  //   setRowsPerPage(+event.target.value);
+  //   setPage(0);
+  // };
 
   return (
     <>
@@ -109,15 +110,17 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
               </Table> :
               <div style={{ textAlign: 'center', padding: '50px' }}>{tabSettings.emptyMessage}</div>}
           </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
+          <div style={{display: 'flex', justifyContent: 'center'}}>
+            <TablePagination
+              rowsPerPageOptions={[]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              // onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          </div>
         </>
       }
       {/* if in trashbin and full athority, show this extra section to permanently delete */}
