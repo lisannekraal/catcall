@@ -43,7 +43,7 @@
     }
   },
   "scripts": {
-    "start": "cd server && nodemon index.js",
+    "start": "cd server && node index.js",
     "heroku-postbuild": "cd client && yarn && yarn run build"
   },
   "lint-staged": {
