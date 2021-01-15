@@ -42,6 +42,10 @@
       "pre-commit": "lint-staged"
     }
   },
+  "scripts": {
+    "start": "cd server && nodemon index.js",
+    "heroku-postbuild": "cd client && yarn && yarn run build"
+  },
   "lint-staged": {
     "client/src/**/*.{js,jsx}": ["eslint . --fix"],
     "server/!(node_modules)/**/*.{js,ts,json}": ["eslint . --fix"]
