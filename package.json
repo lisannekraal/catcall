@@ -15,7 +15,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "cd server && node index.js",
+    "start": "cd server && yarn install && node index.js",
     "heroku-postbuild": "cd client && yarn && yarn run build",
     "sync": "git pull git@github.com:lisannekraal/catcall.git development",
     "lint:js": "eslint . --ext .js,.jsx",
