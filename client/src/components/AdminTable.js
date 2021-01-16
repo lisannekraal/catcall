@@ -26,7 +26,8 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
   const { handleSubmit } = useForm();
   const [rows, setRows] = useState(catcallData);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  // const [rowsPerPage, setRowsPerPage] = useState(10);
+  const rowsPerPage = 10;
 
   const tabDictionary = {
     'unverified': () => {

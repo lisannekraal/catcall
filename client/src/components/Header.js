@@ -45,7 +45,7 @@ function Header({ removeCookie }) {
   let history = useHistory();
   const classes = useStyles();
   const [ navigations, setNavigations ] = useState([]);
-  const { loading, error, data } = useQuery(GET_MODERATOR_BY_TOKEN);
+  const { data } = useQuery(GET_MODERATOR_BY_TOKEN);
 
   let navLinksPermanent = [
     {
