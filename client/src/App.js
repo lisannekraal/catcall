@@ -53,7 +53,7 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL} >
         <ThemeProvider theme={theme}>
 
         <Header removeCookie={removeCookie} />
