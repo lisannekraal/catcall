@@ -35,10 +35,10 @@ function Login({ setCookie }) {
       <div className="header-footer"></div>
       <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
         {loading ? <p>Loading...</p> : ''}
-        {error ? <p>Incorrect E-mail or Password</p> : ''}
+        {error ? <p>Incorrect Username or Password</p> : ''}
 
         <div className="form-segment">
-          <label htmlFor="email">E-mail:</label>
+          <label htmlFor="email">Username:</label>
           <input
             ref={register}
             id="email"

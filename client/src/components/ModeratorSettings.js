@@ -72,7 +72,7 @@ export default function ModeratorSettings({authorized}) {
                 <Hidden xsDown>
                   <TableCell></TableCell>
                 </Hidden>
-                <TableCell><h4>Email Address</h4></TableCell>
+                <TableCell><h4>Username</h4></TableCell>
                 <TableCell><h4>Authorization</h4></TableCell>
                 <TableCell><h4>Delete</h4></TableCell>
               </TableRow>
@@ -109,8 +109,8 @@ export default function ModeratorSettings({authorized}) {
             </AccordionSummary>
             <AccordionDetails>
               <form id="addModeratorForm" onSubmit={handleSubmit(onSubmit)}>
-                  <input name="email" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="Email address" onChange={handleEmailInput} className="normal-font"></input>
-                  <input name="password" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="password" onChange={handlePasswordInput} className="normal-font"></input>
+                  <input name="email" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="Choose username" onChange={handleEmailInput} className="normal-font"></input>
+                  <input name="password" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="Choose password" onChange={handlePasswordInput} className="normal-font"></input>
                   <input className="submit-button normal-font" type="submit" value="Add" />
               </form>
             </AccordionDetails>
