@@ -44,7 +44,6 @@ export default function MapPopup ({ catcall }) {
   const [upvoteCatcall] = useMutation(UPVOTE_CATCALL);
   const [ updated, setUpdated ] = useState(false);
   const [ displayVotes, setDisplayVotes ] = useState(catcall.properties.votes);
-  console.log(JSON.parse(catcall.properties.categories));
 
   const upvoteClick = () => {
     upvoteCatcall({
