@@ -20,11 +20,31 @@ const useStyles = makeStyles({
   },
 });
 
+const categoryLibrary = {
+  'sexual': 'Sexual Harassment',
+  'homophobia': 'Homophobia',
+  'transphobia': 'Transphobia',
+  'fatphobia': 'Fatphobia',
+  'racism': 'Racism',
+  'fetishization': 'Fetishization',
+  'slutshaming': 'Slutshaming',
+  'hateSpeech': 'Hate speech',
+  'young': 'Young',
+  'assault': 'Assault',
+  'staring': 'Staring',
+  'following': 'Following'
+}
+
+function convertToCategoryName(category) {
+  return categoryLibrary[category];
+}
+
 export default function MapPopup ({ catcall }) {
   const classes = useStyles();
   const [upvoteCatcall] = useMutation(UPVOTE_CATCALL);
   const [ updated, setUpdated ] = useState(false);
   const [ displayVotes, setDisplayVotes ] = useState(catcall.properties.votes);
+  console.log(JSON.parse(catcall.properties.categories));
 
   const upvoteClick = () => {
     upvoteCatcall({
@@ -61,6 +81,15 @@ export default function MapPopup ({ catcall }) {
           <Typography variant="body2" color="textSecondary" component="p">
             {catcall.properties.context}
           </Typography>
+          { JSON.parse(catcall.properties.categories).length > 0 &&
+            <div style={{marginTop: '6px'}}>
+              {JSON.parse(catcall.properties.categories).map((category) =>(
+                <Button variant="outlined" size="small" color="secondary" style={{marginRight: '2px'}}>
+                  {convertToCategoryName(category)}
+                </Button>
+              ))}
+            </div>
+          }
         </CardContent>
         <CardActions>
           { catcall.properties.url ?
