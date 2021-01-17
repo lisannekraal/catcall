@@ -355,14 +355,17 @@ function Row({ tab, row, clickButtonUpdate }) {
                     </TableRow>
                   }
 
-                  <TableRow key={uuidv4()}>
-                    <TableCell component="th" scope="row">
-                      Chalk url
-                    </TableCell>
-                    <TableCell>
-                      <a href={row.properties.url} target="_blank" rel="noreferrer">{`Image on Instagram`}</a>
-                    </TableCell>
-                  </TableRow>
+                  {
+                    row.properties.url &&
+                    <TableRow key={uuidv4()}>
+                      <TableCell component="th" scope="row">
+                        Chalk url
+                      </TableCell>
+                      <TableCell>
+                        <a href={row.properties.url} target="_blank" rel="noreferrer">{`Image on Instagram`}</a>
+                      </TableCell>
+                    </TableRow>
+                  }
                 </TableBody>
               </Table>
             </Box>
