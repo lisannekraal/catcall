@@ -13,7 +13,8 @@ import Settings from '@material-ui/icons/Settings';
 function Dashboard() {
 
   const [value, setValue] = useState('unverified'); //keeps track of selected tab
-  const { loading: loadingMod, error: errorMod, data: dataMod } = useQuery(GET_MODERATOR_BY_TOKEN);
+  const { data: dataMod } = useQuery(GET_MODERATOR_BY_TOKEN);
+  // const { loading: loadingMod, error: errorMod, data: dataMod } = useQuery(GET_MODERATOR_BY_TOKEN);
   let { loading, error, data } = useQuery(GET_CATCALLS);
   const [updateCatcall] = useMutation(UPDATE_CATCALL);
   const [ emptyTrash ] = useMutation(EMPTY_TRASH, {

@@ -11,11 +11,15 @@
     ]
   },
   "version": "1.0.0",
+  "engines": {
+    "node": "12.x"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon index.js",
+    "start": "cd server && yarn install && node index.js",
+    "heroku-postbuild": "cd client && yarn && yarn run build",
     "sync": "git pull git@github.com:lisannekraal/catcall.git development",
     "lint:js": "eslint . --ext .js,.jsx",
     "lint:js:fix": "yarn run lint:js -- --fix"
@@ -41,10 +45,6 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "scripts": {
-    "start": "cd server && nodemon index.js",
-    "heroku-postbuild": "cd client && yarn && yarn run build"
   },
   "lint-staged": {
     "client/src/**/*.{js,jsx}": ["eslint . --fix"],
