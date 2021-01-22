@@ -1,0 +1,38 @@
+.landing-cities {
+  display: flex;
+  justify-content: center;
+  margin: 50px auto;
+  max-width: 400px;
+}
+
+.carousel-content {
+  display: flex;
+}
+.carousel-overflow {
+  overflow: visible !important;
+}
+
+.city {
+  margin: 10px;
+  text-align: center;
+}
+
+.city-logo {
+  height: 80px;
+  width: 80px;
+  margin-left: 20px;
+}
+
+.city-logo img {
+  height: 100%;
+  width: 100%;
+}
+
+.city-name {
+  font-weight: 700;
+}
+
+.city-description {
+  font-style: italic;
+  margin-left: 5px;
+}
