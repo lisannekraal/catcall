@@ -53,7 +53,7 @@ function Landing() {
       <div className="landing-community">
         <div className="community-content">
           <div className="community-title catcall-font">Get involved</div>
-          <div style={{ margin: '30px auto', width: '550px', height: '550px' }}>
+          <div style={{ margin: '30px auto', maxWidth:'100%', width: '550px', height: '550px' }}>
             <iframe title="catcall photos" src="https://snapwidget.com/embed/900599" className="snapwidget-widget" allowtransparency="true" frameBorder="0" scrolling="no" style={{ border: 'none', overflow: 'scroll', height: '100%', width: '100%' }}></iframe>
           </div>
           <a href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow">
