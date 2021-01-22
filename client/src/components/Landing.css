@@ -191,9 +191,16 @@ button p {
   .landing-widget-container {
     height: 325px;
   }
+  .community-content,.landing-about {
+    padding: 30px;
+  }
 }
 
 @media screen and (max-width: 350px) {
+  .community-content,.landing-about {
+    padding: 30px;
+  }
+
   .about-title {
     font-size: 2.5rem;
   }
