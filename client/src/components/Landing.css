@@ -5,7 +5,7 @@
 
 .landing-cover {
   min-height: 450px;
-  background: url('../assets/sam-haddad-StgZKNLVeJg-unsplash-crop.jpg') center center fixed no-repeat;
+  background: url('https://res.cloudinary.com/serendatapy/image/upload/v1611397206/catcalls/sam-haddad-StgZKNLVeJg-unsplash-crop_figayu.jpg') center center fixed no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
