@@ -51,7 +51,6 @@ function LandingCarousel({ citiesDisplayed }) {
 
     for(let i = 0; i < cities.length; i++) {
       let city = cities[i];
-      console.log('Looping:', city)
 
       if(count < citiesPerRow){
         citiesList[row].push(city)
@@ -64,7 +63,6 @@ function LandingCarousel({ citiesDisplayed }) {
         count = 1;
       }
     }
-    console.log('Returning new List: ',citiesList)
     return citiesList;
   }
 
@@ -99,7 +97,6 @@ function LandingCarousel({ citiesDisplayed }) {
   }
 
   const citiesInRows = citiesToDisplay(citiesDisplayed);
-  console.log('Cities In Rows:',citiesInRows);
 
   return (
     <div>
