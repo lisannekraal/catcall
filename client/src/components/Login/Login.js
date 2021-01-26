@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
-import { VALIDATE_MODERATOR } from '../api/queries';
+import { VALIDATE_MODERATOR } from '../../api/queries';
 import './Login.css';
 import { useForm } from 'react-hook-form';
 

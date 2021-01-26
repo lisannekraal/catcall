@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useMutation } from '@apollo/client';
-import { UPVOTE_CATCALL } from '../api/queries';
+import { UPVOTE_CATCALL } from '../../api/queries';
 import SideImage from './SideImage';
 import { Tooltip } from '@material-ui/core';
 import Card from '@material-ui/core/Card';

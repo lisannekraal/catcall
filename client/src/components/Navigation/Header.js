@@ -3,11 +3,11 @@ import { HashLink as Link } from 'react-router-hash-link';
 import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { useQuery } from '@apollo/client';
-import { GET_MODERATOR_BY_TOKEN } from '../api/queries';
+import { GET_MODERATOR_BY_TOKEN } from '../../api/queries';
 
 import SideDrawer from './SideDrawer';
 import './Header.css';
-import logo from '../assets/Logo2.png'
+import logo from '../../assets/Logo2.png'
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';

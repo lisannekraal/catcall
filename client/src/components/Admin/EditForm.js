@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation } from "react-router-dom";
 import { useMutation } from '@apollo/client';
-import { UPDATE_CATCALL } from '../api/queries';
+import { UPDATE_CATCALL } from '../../api/queries';
 import { useForm } from 'react-hook-form';
-import './ReportForm.css';
+import '../ReportForm/ReportForm.css';
 
 
 function EditForm() {

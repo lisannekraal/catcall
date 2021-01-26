@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { GET_MAP_CATCALLS } from '../api/queries';
+import { GET_MAP_CATCALLS } from '../../api/queries';
 import MapGL, { Source, Layer, Image, Popup, NavigationControl, GeolocateControl, ScaleControl, FullscreenControl } from '@urbica/react-map-gl';
 
 import DialogComp from './DialogComp';
@@ -9,7 +9,7 @@ import MapPopup from './MapPopup';
 import MapFilter from './MapFilter';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './MapMain.css';
-import Icon from '../assets/bullhorn.png';
+import Icon from '../../assets/bullhorn.png';
 import { Player } from '@lottiefiles/react-lottie-player';
 import Fab from '@material-ui/core/Fab';
 import FilterListIcon from '@material-ui/icons/FilterList';
@@ -120,12 +120,12 @@ function MapMain () {
 
       <div className="map-container" data-testid="map-main">
 
-        {filterOpen && 
-          <MapFilter 
-            setFilterOpen={setFilterOpen} 
-            filterChalked={filterChalked} 
-            filterCategories={filterCategories} 
-          /> 
+        {filterOpen &&
+          <MapFilter
+            setFilterOpen={setFilterOpen}
+            filterChalked={filterChalked}
+            filterCategories={filterCategories}
+          />
         }
         <MapGL
           style={{ width: '100vw', height: '100%' }}
