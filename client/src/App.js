@@ -1,4 +1,4 @@
-import './App.css';
+//import './App.css';
 import { ApolloProvider, createHttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
@@ -6,20 +6,20 @@ import { useCookies } from 'react-cookie';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
-import MapMain from './components/MapMain';
-import Landing from './components/Landing';
-import ReportForm from './components/ReportForm';
-import Login from './components/Login'
-import Dashboard from './components/Dashboard';
-import EditForm from './components/EditForm';
-import Help from './components/Help';
-import NotFound from './components/NotFound';
-import Header from './components/Header';
+import MapMain from './components/Map/MapMain';
+import Landing from './components/Landing/Landing';
+import ReportForm from './components/ReportForm/ReportForm';
+import Login from './components/Login/Login'
+import Dashboard from './components/Admin/Dashboard';
+import EditForm from './components/Admin/EditForm';
+import Help from './components/Help/Help';
+import NotFound from './components/NotFound/NotFound';
+import Header from './components/Navigation/Header';
 
 const theme = createMuiTheme({
   typography: {
     fontFamily: [
-      'Montserrat', 
+      'Montserrat',
       'sans-serif'
     ].join(','),
   }

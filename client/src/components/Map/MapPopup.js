@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useMutation } from '@apollo/client';
-import { UPVOTE_CATCALL } from '../api/queries';
+import { UPVOTE_CATCALL } from '../../api/queries';
 import SideImage from './SideImage';
 import { Tooltip } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
@@ -9,7 +9,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import './MapPopup.css';
+//import './MapPopup.css';
 
 const useStyles = makeStyles({
   root: {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MapGL, { Source, Layer, Image, NavigationControl, GeolocateControl } from '@urbica/react-map-gl';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
-import Icon from '../assets/bullhorn.png';
+import Icon from '../../assets/bullhorn.png';
 
 function MapForm ({ setLocation }) {
   const [viewport, setViewport] = useState({
@@ -19,8 +19,8 @@ function MapForm ({ setLocation }) {
       type: "FeatureCollection",
       features: [{
         type: "Feature",
-        geometry: { 
-          type: "Point", 
+        geometry: {
+          type: "Point",
           coordinates: [e.lngLat.lng, e.lngLat.lat]
         }
       }]
@@ -47,7 +47,7 @@ function MapForm ({ setLocation }) {
     >
       <Image id="catcall-icon" image={Icon} />
       {source}
-      {layer}  
+      {layer}
       <NavigationControl showZoom position='top-right' />
       <GeolocateControl position='top-right' />
     </MapGL>
