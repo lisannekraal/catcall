@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 })
 
-function SideDrawer({ navLinks }) {
+function NavBarHamburger({ navLinks }) {
 
   let history = useHistory();
   const classes = useStyles();
@@ -97,4 +97,4 @@ function SideDrawer({ navLinks }) {
   )
 }
 
-export default SideDrawer
+export default NavBarHamburger

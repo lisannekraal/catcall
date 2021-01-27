@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useLazyQuery } from "@apollo/client";
-import { GET_CATCALL } from '../api/queries';
+import { GET_CATCALL } from '../../api/queries';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Collapse } from '@material-ui/core';
@@ -75,7 +75,7 @@ function convertToCategoryName(category) {
   return categoryLibrary[category];
 }
 
-function Row({ tab, row, clickButtonUpdate }) {
+function AdminTableRow({ tab, row, clickButtonUpdate }) {
   let history = useHistory();
   const [open, setOpen] = useState(false);
   const [ buttonstoShow, setButtons ] = useState([]);
@@ -301,7 +301,7 @@ function Row({ tab, row, clickButtonUpdate }) {
               <Table size="small" aria-label="info">
                 <TableBody>
 
-                  { limitedQuote && 
+                  { limitedQuote &&
                   <TableRow key={uuidv4()}>
                     <TableCell component="th" scope="row" style={{ width: 125 }} >
                       Full quote
@@ -331,7 +331,7 @@ function Row({ tab, row, clickButtonUpdate }) {
                     <TableCell>{`${row.geometry.coordinates[0].toFixed(3)}.. ${row.geometry.coordinates[1].toFixed(3)}..`}</TableCell>
                   </TableRow>
 
-                  { row.properties.context && 
+                  { row.properties.context &&
                     <TableRow key={uuidv4()}>
                       <TableCell component="th" scope="row">
                         Context
@@ -347,7 +347,7 @@ function Row({ tab, row, clickButtonUpdate }) {
                       </TableCell>
                       <TableCell>
                         {row.properties.categories.map((category) => (
-                          <Button variant="outlined" size="small" color="secondary" style={{marginRight: '2px'}}>
+                          <Button key={uuidv4()} variant="outlined" size="small" color="secondary" style={{marginRight: '2px'}}>
                             {convertToCategoryName(category)}
                           </Button>
                         ))}
@@ -444,4 +444,4 @@ function Row({ tab, row, clickButtonUpdate }) {
   );
 }
 
-export default Row;
+export default AdminTableRow;

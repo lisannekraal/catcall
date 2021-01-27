@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
-import MapForm from './MapForm';
+import MapForm from '../Map/MapForm';
 import Flatpickr from "react-flatpickr";
 import 'flatpickr/dist/themes/material_green.css';
-import './ReportForm.css';
-import { CREATE_CATCALL } from '../api/queries';
+import { CREATE_CATCALL } from '../../api/queries';
 import { useHistory } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 
@@ -21,7 +20,7 @@ function ReportForm() {
 
   const onSubmit = async (data) => {
     if (lngLat.length > 0 && checkRecaptcha) {
-      
+
       const queryVariable = {
         "catcall": {
           "type": "Feature",
