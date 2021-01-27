@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-//import './Landing.css';
 import Footer from './Footer';
 import LandingCarousel from "./LandingCarousel";
 import Hidden from '@material-ui/core/Hidden';

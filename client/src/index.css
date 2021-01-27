@@ -8,4 +8,4 @@
 @import './components/Map/MapPopup.css';
 @import './components/Navigation/Header.css';
 @import './components/NotFound/NotFound.css';
-@import './components/ReportForm/ReportForm.css';
+@import 'Form.css';

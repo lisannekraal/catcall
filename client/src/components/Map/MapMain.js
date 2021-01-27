@@ -8,7 +8,6 @@ import DialogComp from './DialogComp';
 import MapPopup from './MapPopup';
 import MapFilter from './MapFilter';
 import 'mapbox-gl/dist/mapbox-gl.css';
-//import './MapMain.css';
 import Icon from '../../assets/bullhorn.png';
 import { Player } from '@lottiefiles/react-lottie-player';
 import Fab from '@material-ui/core/Fab';
