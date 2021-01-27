@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-//import './Landing.css';
-import Footer from './Footer';
+import LandingFooter from './LandingFooter';
 import LandingCarousel from "./LandingCarousel";
 import Hidden from '@material-ui/core/Hidden';
 
@@ -75,7 +74,7 @@ function Landing() {
         <div className="about-title catcall-font">About Catcalls of Amsterdam</div>
       </div>
 
-      <Footer />
+      <LandingFooter />
     </div>
   );
 }

@@ -4,11 +4,10 @@ import { useQuery } from '@apollo/client';
 import { GET_MAP_CATCALLS } from '../../api/queries';
 import MapGL, { Source, Layer, Image, Popup, NavigationControl, GeolocateControl, ScaleControl, FullscreenControl } from '@urbica/react-map-gl';
 
-import DialogComp from './DialogComp';
+import MapDialogComp from './MapDialogComp';
 import MapPopup from './MapPopup';
 import MapFilter from './MapFilter';
 import 'mapbox-gl/dist/mapbox-gl.css';
-//import './MapMain.css';
 import Icon from '../../assets/bullhorn.png';
 import { Player } from '@lottiefiles/react-lottie-player';
 import Fab from '@material-ui/core/Fab';
@@ -172,7 +171,7 @@ function MapMain () {
 
         </MapGL>
 
-        {dialog && <DialogComp text={dialog} state={true} />}
+        {dialog && <MapDialogComp text={dialog} state={true} />}
       </div>
     </>
   );

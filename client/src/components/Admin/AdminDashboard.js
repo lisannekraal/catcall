@@ -10,7 +10,7 @@ import Storage from '@material-ui/icons/Storage';
 import Delete from '@material-ui/icons/Delete';
 import Settings from '@material-ui/icons/Settings';
 
-function Dashboard() {
+function AdminDashboard() {
 
   const [value, setValue] = useState('unverified'); //keeps track of selected tab
   const { data: dataMod } = useQuery(GET_MODERATOR_BY_TOKEN);
@@ -85,4 +85,4 @@ function Dashboard() {
     </>
   );
 }
-export default Dashboard;
+export default AdminDashboard;

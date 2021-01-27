@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Carousel from 'react-material-ui-carousel'
-//import './LandingCarousel.css';
 
 import LogoRot from '../../assets/catcallsofrot.png';
 import LogoUtr from '../../assets/catcallsofutr.png';

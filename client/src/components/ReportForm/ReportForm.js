@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import MapForm from '../Map/MapForm';
 import Flatpickr from "react-flatpickr";
 import 'flatpickr/dist/themes/material_green.css';
-//import './ReportForm.css';
 import { CREATE_CATCALL } from '../../api/queries';
 import { useHistory } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";

@@ -3,10 +3,8 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useMutation } from '@apollo/client';
 import { UPDATE_CATCALL } from '../../api/queries';
 import { useForm } from 'react-hook-form';
-import '../ReportForm/ReportForm.css';
 
-
-function EditForm() {
+function AdminEditForm() {
   let history = useHistory();
   const location = useLocation();
   const { register, handleSubmit, errors } = useForm();
@@ -152,4 +150,4 @@ function EditForm() {
   );
 }
 
-export default EditForm;
+export default AdminEditForm;
