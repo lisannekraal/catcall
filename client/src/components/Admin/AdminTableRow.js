@@ -347,7 +347,7 @@ function Row({ tab, row, clickButtonUpdate }) {
                       </TableCell>
                       <TableCell>
                         {row.properties.categories.map((category) => (
-                          <Button variant="outlined" size="small" color="secondary" style={{marginRight: '2px'}}>
+                          <Button key={uuidv4()} variant="outlined" size="small" color="secondary" style={{marginRight: '2px'}}>
                             {convertToCategoryName(category)}
                           </Button>
                         ))}
