@@ -2,7 +2,7 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import {render} from '@testing-library/react';
 import TestRenderer from 'react-test-renderer';
 import { BrowserRouter } from 'react-router-dom';
-import Header from './Header';
+import NavBar from './NavBar';
 
 describe('Header tests:', ()=>{
 
@@ -11,7 +11,7 @@ describe('Header tests:', ()=>{
     render( );
 
     const header = TestRenderer
-      .create(<BrowserRouter><MuiThemeProvider theme={theme}><Header modButton={{text: 'moderator', to: '/login'}} /></MuiThemeProvider></BrowserRouter>)
+      .create(<BrowserRouter><MuiThemeProvider theme={theme}><NavBar modButton={{text: 'moderator', to: '/login'}} /></MuiThemeProvider></BrowserRouter>)
       .toJSON();
     expect(header).toMatchSnapshot();
   });
@@ -21,7 +21,7 @@ describe('Header tests:', ()=>{
     render( );
 
     const header = TestRenderer
-      .create(<BrowserRouter><MuiThemeProvider theme={theme}><Header modButton={{text: 'moderator', to: '/login'}} /></MuiThemeProvider></BrowserRouter>)
+      .create(<BrowserRouter><MuiThemeProvider theme={theme}><NavBar modButton={{text: 'moderator', to: '/login'}} /></MuiThemeProvider></BrowserRouter>)
       .toJSON();
     expect(header).toMatchSnapshot();
   });

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useMutation } from '@apollo/client';
 import { UPVOTE_CATCALL } from '../../api/queries';
-import SideImage from './SideImage';
+import MapSideImage from './MapSideImage';
 import { Tooltip } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -91,7 +91,7 @@ export default function MapPopup ({ catcall }) {
         </CardContent>
         <CardActions>
           { catcall.properties.url ?
-            <SideImage url={catcall.properties.url} />
+            <MapSideImage url={catcall.properties.url} />
             : <></>
           }
           <Tooltip title="Call out" arrow>

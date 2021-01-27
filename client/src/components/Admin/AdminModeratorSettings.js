@@ -10,7 +10,7 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import { v4 as uuidv4 } from 'uuid';
 
 
-export default function ModeratorSettings({authorized}) {
+export default function AdminModeratorSettings({authorized}) {
 
   const [ moderators, setModerators ] = useState([]);
   let { loading, error, data } = useQuery(GET_MODERATORS);

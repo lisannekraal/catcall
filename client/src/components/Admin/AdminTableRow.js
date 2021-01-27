@@ -75,7 +75,7 @@ function convertToCategoryName(category) {
   return categoryLibrary[category];
 }
 
-function Row({ tab, row, clickButtonUpdate }) {
+function AdminTableRow({ tab, row, clickButtonUpdate }) {
   let history = useHistory();
   const [open, setOpen] = useState(false);
   const [ buttonstoShow, setButtons ] = useState([]);
@@ -444,4 +444,4 @@ function Row({ tab, row, clickButtonUpdate }) {
   );
 }
 
-export default Row;
+export default AdminTableRow;

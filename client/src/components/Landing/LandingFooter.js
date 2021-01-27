@@ -1,6 +1,6 @@
 import React from "react";
 
-function Footer() {
+function LandingFooter() {
   return (
     <div className="footer">
       <div className="footer-content">
@@ -32,4 +32,4 @@ function Footer() {
   )
 }
 
-export default Footer;
+export default LandingFooter;
