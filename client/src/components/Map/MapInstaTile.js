@@ -1,7 +1,7 @@
 import InstagramEmbed from 'react-instagram-embed';
 import { useState, useEffect } from 'react';
 
-export default function InstaTile ({ url }) {
+export default function MapInstaTile ({ url }) {
 
   const [ link, setLink ] = useState('https://www.instagram.com/p/CI1El4MlBA0/?utm_source=ig_embed&amp;utm_campaign=loading');
 

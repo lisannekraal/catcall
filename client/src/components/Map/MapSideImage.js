@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Drawer, Button, Tooltip } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import InstaTile from './InstaTile';
+import MapInstaTile from './MapInstaTile';
 
-function SideImage({ url }) {
+function MapSideImage({ url }) {
   const [drawerState, setDrawerState] = useState({ left: false })
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -27,7 +27,7 @@ function SideImage({ url }) {
               <ArrowBackIosIcon />
               Close and go back to map
           </Fab>
-      <InstaTile url={url} />
+      <MapInstaTile url={url} />
     </div>
   );
 
@@ -37,7 +37,7 @@ function SideImage({ url }) {
         <Button size="small" color="primary" onClick={toggleDrawer("left", true)}>
           <i className="popup-icon fas fa-pen"></i>
           <span style={{fontSize: '12px'}}>chalked back</span>
-        </Button> 
+        </Button>
       </Tooltip>
       <Drawer
         anchor="left"
@@ -50,4 +50,4 @@ function SideImage({ url }) {
   )
 }
 
-export default SideImage;
+export default MapSideImage;

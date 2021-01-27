@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import Row from './AdminTableRow';
-import ModeratorSettings from './ModeratorSettings';
+import AdminTableRow from './AdminTableRow';
+import AdminModeratorSettings from './AdminModeratorSettings';
+
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -88,7 +89,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
     <>
       {/* if settings tab is selected, only load that seperate component */}
       { tabSettings.showSettings ?
-        <ModeratorSettings authorized={authorized} />
+        <AdminModeratorSettings authorized={authorized} />
         :
         <>
           <TableContainer component={Paper}>
@@ -105,7 +106,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
                 </TableHead>
                 <TableBody>
                   {rows.slice().reverse().slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                    <Row key={uuidv4()} tab={value} row={row} clickButtonUpdate={clickButtonUpdate} />
+                    <AdminTableRow key={uuidv4()} tab={value} row={row} clickButtonUpdate={clickButtonUpdate} />
                   ))}
                 </TableBody>
               </Table> :

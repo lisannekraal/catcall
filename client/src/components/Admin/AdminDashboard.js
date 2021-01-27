@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { UPDATE_CATCALL, GET_CATCALLS, EMPTY_TRASH, GET_MODERATOR_BY_TOKEN } from '../api/queries';
+import { UPDATE_CATCALL, GET_CATCALLS, EMPTY_TRASH, GET_MODERATOR_BY_TOKEN } from '../../api/queries';
 import AdminTable from './AdminTable';
 import { Player } from '@lottiefiles/react-lottie-player';
 import { Paper, Tabs, Tab } from '@material-ui/core';
@@ -10,7 +10,7 @@ import Storage from '@material-ui/icons/Storage';
 import Delete from '@material-ui/icons/Delete';
 import Settings from '@material-ui/icons/Settings';
 
-function Dashboard() {
+function AdminDashboard() {
 
   const [value, setValue] = useState('unverified'); //keeps track of selected tab
   const { data: dataMod } = useQuery(GET_MODERATOR_BY_TOKEN);
@@ -85,4 +85,4 @@ function Dashboard() {
     </>
   );
 }
-export default Dashboard;
+export default AdminDashboard;

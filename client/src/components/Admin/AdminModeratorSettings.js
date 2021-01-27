@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_MODERATORS, CREATE_MODERATOR, REMOVE_MODERATOR } from '../api/queries';
+import { GET_MODERATORS, CREATE_MODERATOR, REMOVE_MODERATOR } from '../../api/queries';
 import { useForm } from 'react-hook-form';
 import { Hidden, Table, TableContainer, TableBody, TableCell, TableHead, TableRow, Paper, Accordion, AccordionSummary, AccordionDetails, Typography, Tooltip } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -10,7 +10,7 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import { v4 as uuidv4 } from 'uuid';
 
 
-export default function ModeratorSettings({authorized}) {
+export default function AdminModeratorSettings({authorized}) {
 
   const [ moderators, setModerators ] = useState([]);
   let { loading, error, data } = useQuery(GET_MODERATORS);
