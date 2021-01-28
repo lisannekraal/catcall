@@ -15,7 +15,7 @@ import Help from './components/Help/Help';
 import NotFound from './components/NotFound/NotFound';
 import NavBar from './components/Navigation/NavBar';
 
-const theme = createMuiTheme(  {
+const theme = createMuiTheme({
   typography: {
     fontFamily: [
       'Montserrat',
@@ -55,35 +55,35 @@ function App() {
       <Router>
         <ThemeProvider theme={theme}>
 
-        <NavBar removeCookie={removeCookie} />
+          <NavBar removeCookie={removeCookie} />
 
-        <Switch>
-          <Route exact path="/">
-            <Landing />
-          </Route>
-          <Route exact path="/catcalls">
-            <MapMain />
-          </Route>
-          <Route exact path="/catcalls/new">
-            <ReportForm />
-          </Route>
-          <Route exact path="/login">
-            <Login setCookie={setCookie}/>
-          </Route>
-          <Route exact path="/dashboard">
-            <AdminDashboard />
-          </Route>
-          <Route exact path="/catcalls/edit">
-            <AdminEditForm />
-          </Route>
-          <Route exact path="/help">
-            <Help />
-          </Route>
-          <Route path="/404">
-            <NotFound />
-          </Route>
-          <Redirect to="/404"/>
-        </Switch>
+          <Switch>
+            <Route exact path="/">
+              <Landing />
+            </Route>
+            <Route exact path="/catcalls">
+              <MapMain />
+            </Route>
+            <Route exact path="/catcalls/new">
+              <ReportForm />
+            </Route>
+            <Route exact path="/login">
+              <Login setCookie={setCookie} />
+            </Route>
+            <Route exact path="/dashboard">
+              <AdminDashboard />
+            </Route>
+            <Route exact path="/catcalls/edit">
+              <AdminEditForm />
+            </Route>
+            <Route exact path="/help">
+              <Help />
+            </Route>
+            <Route path="/404">
+              <NotFound />
+            </Route>
+            <Redirect to="/404" />
+          </Switch>
 
         </ThemeProvider>
       </Router>

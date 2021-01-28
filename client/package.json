@@ -36,13 +36,20 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "airbnb",
+      "plugin:jsx-a11y/recommended"
+    ],
+    "plugins": [
+    "jsx-a11y"
+  ]
   },
   "browserslist": {
     "production": [
@@ -62,8 +69,12 @@
     }
   },
   "lint-staged": {
-       "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-         "eslint . --fix"
-       ]
-     }
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "eslint . --fix", "git add"
+    ]
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1"
+  }
 }
