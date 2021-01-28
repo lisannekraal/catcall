@@ -43,13 +43,8 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest",
-      "airbnb",
-      "plugin:jsx-a11y/recommended"
-    ],
-    "plugins": [
-    "jsx-a11y"
-  ]
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [

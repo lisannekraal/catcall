@@ -28,6 +28,8 @@ const theme = createMuiTheme({
   },
 });
 
+console.log('hello');
+
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(['token']);
 
