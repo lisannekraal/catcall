@@ -1,8 +1,9 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Link } from 'react-router-dom';
 import LandingFooter from './LandingFooter';
 import LandingCarousel from "./LandingCarousel";
 import Hidden from '@material-ui/core/Hidden';
+const LandingInstagram = lazy(()=> import("./LandingInstagram"));
 
 function Landing() {
 
@@ -52,8 +53,10 @@ function Landing() {
       <div className="landing-community">
         <div className="community-content">
           <div className="community-title catcall-font">Get involved</div>
-          <div className="landing-widget-container" style={{ margin: '30px auto'}}>
-            <iframe title="catcall photos" src="https://snapwidget.com/embed/900599" className="snapwidget-widget" allowtransparency="true" frameBorder="0" scrolling="no" style={{ border: 'none', overflow: 'scroll', height: '100%', width: '100%' }}></iframe>
+          <div className="landing-widget-container" style={{ margin: '30px auto' }}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <LandingInstagram/>
+          </Suspense>
           </div>
           <a href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow">
             <button className="normal-font"><p>Join the community on Instagram</p></button>

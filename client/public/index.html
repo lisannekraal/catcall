@@ -8,15 +8,18 @@
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Catcalls of Amsterdam" />
   <!--mapbox style-->
-  <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+  <link rel="preload" href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript>
+    <link rel="stylesheet" href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css'>
+ </noscript>
 
   <!--CAPTCHA-->
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script defer src="https://www.google.com/recaptcha/api.js"></script>
 
   <!--Google fonts-->
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&display=swap" rel="stylesheet">
+  <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"> -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&display=swap" rel="stylesheet"> -->
 
 
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
