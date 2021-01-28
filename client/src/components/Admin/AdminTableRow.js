@@ -80,7 +80,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
       setLimitedQuote(true);
       setShowQuote(row.properties.quote.substring(0, 65) + '...');
     }
-    
+
     if (data) {
       history.push({
         pathname: '/catcalls/edit',
@@ -249,7 +249,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
         <TableCell>
           { buttonstoShow.map((button) => (
             <Tooltip key={uuidv4()} title={hideTooltips ? "" : button.tooltip} arrow>
-              <Button variant="contained" color="inherit" size="small" onClick={() => handleClick(button)} className={classes[button.class]} >
+              <Button key={uuidv4()} variant="contained" color="inherit" size="small" onClick={() => handleClick(button)} className={classes[button.class]} >
                 {button.name}
               </Button>
             </Tooltip>
@@ -348,7 +348,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
           <FormGroup>
             {Object.keys(categoryLibrary).map((category) => (
                 <FormControlLabel
-                  control={<Checkbox checked={statusCategory[category]} onChange={handleChange} name={category} />}
+                  key={uuidv4()} control={<Checkbox checked={statusCategory[category]} onChange={handleChange} name={category} />}
                   label={categoryLibrary[category]}
                 />
             ))}
