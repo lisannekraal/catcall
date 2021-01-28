@@ -1,4 +1,6 @@
-import React from "react";
+// import React from "react";
+import InstagramIcon from '@material-ui/icons/Instagram';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
 function LandingFooter() {
   return (
@@ -15,17 +17,16 @@ function LandingFooter() {
           {/* <div>Catcalls of Amsterdam</div> */}
           <p>Catcalls of Amsterdam</p>
 
-          <p>
-            <a style={{ textDecoration: 'none', color: 'white' }} href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow">
-              <i className="fab fa-instagram"></i> PM on Instagram
-            </a>
-          </p>
+          <a style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center' }} href="https://www.instagram.com/catcallsofams/" target="_blank" rel="noreferrer nofollow">
+            <InstagramIcon fontSize='small' />
+            <div>PM on Instagram</div>
+          </a>
 
-          <p>
-            <a style={{ textDecoration: 'none', color: 'white' }} href="mailto:catcallsofams@gmail.com">
-              <i className="far fa-envelope"></i> Send an email
-            </a>
-          </p>
+          <a style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center' }} href="mailto:catcallsofams@gmail.com">
+            <MailOutlineIcon fontSize='small' />
+            <div>Send us an email</div>
+          </a>
+
         </div>
       </div>
     </div>

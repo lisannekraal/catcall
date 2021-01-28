@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Drawer, Button, Tooltip } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import CreateIcon from '@material-ui/icons/Create';
 import MapInstaTile from './MapInstaTile';
 
 function MapSideImage({ url }) {
@@ -24,9 +25,9 @@ function MapSideImage({ url }) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <Fab variant="extended" style={{textTransform: 'none', marginTop: '15px', marginLeft: '15px', marginBottom: '15px', color: 'white', backgroundColor: 'rgb(245, 37, 89'}} onClick={e => {setDrawerState({ left: false })}}>
-              <ArrowBackIosIcon />
-              Close and go back to map
-          </Fab>
+        <ArrowBackIosIcon />
+        Close and go back to map
+      </Fab>
       <MapInstaTile url={url} />
     </div>
   );
@@ -35,7 +36,7 @@ function MapSideImage({ url }) {
     <>
       <Tooltip title="Opens image to the side" arrow>
         <Button size="small" color="primary" onClick={toggleDrawer("left", true)}>
-          <i className="popup-icon fas fa-pen"></i>
+          <CreateIcon style={{color: 'rgb(245, 37, 89)', fontSize: '18px', marginRight: '3px'}} />
           <span style={{fontSize: '12px'}}>chalked back</span>
         </Button>
       </Tooltip>

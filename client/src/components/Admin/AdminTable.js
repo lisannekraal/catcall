@@ -20,7 +20,7 @@ import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 
 
-export default function AdminTable({ catcallData, updateCatcall, value, authorized, emptyTrash }) {
+export default function AdminTable({ catcallData, updateCatcall, value, authorized, emptyTrash, categoryLibrary }) {
 
   const [tabSettings, setTabSettings] = useState({ showSettings: false, showTrash: false, emptyMessage: 'No new catcalls to verify', page: 0 })
 
@@ -94,7 +94,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
         <>
           <TableContainer component={Paper}>
             {/* generic dashboard table for all other functionalities */}
-            {rows.length > 0 ?
+            { rows.length > 0 ?
               <Table aria-label="collapsible table">
                 <TableHead>
                   <TableRow>
@@ -105,8 +105,14 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.slice().reverse().slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                    <AdminTableRow key={uuidv4()} tab={value} row={row} clickButtonUpdate={clickButtonUpdate} />
+                  { rows.slice().reverse().slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                    <AdminTableRow 
+                      key={uuidv4()} 
+                      tab={value} 
+                      row={row} 
+                      clickButtonUpdate={clickButtonUpdate} 
+                      categoryLibrary={categoryLibrary}
+                    />
                   ))}
                 </TableBody>
               </Table> :

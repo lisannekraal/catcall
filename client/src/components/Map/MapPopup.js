@@ -9,6 +9,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 
 const useStyles = makeStyles({
   root: {
@@ -19,26 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-const categoryLibrary = {
-  'sexual': 'Sexual Harassment',
-  'homophobia': 'Homophobia',
-  'transphobia': 'Transphobia',
-  'fatphobia': 'Fatphobia',
-  'racism': 'Racism',
-  'fetishization': 'Fetishization',
-  'slutshaming': 'Slutshaming',
-  'hateSpeech': 'Hate speech',
-  'young': 'Young',
-  'assault': 'Assault',
-  'staring': 'Staring',
-  'following': 'Following'
-}
-
-function convertToCategoryName(category) {
-  return categoryLibrary[category];
-}
-
-export default function MapPopup ({ catcall }) {
+export default function MapPopup ({ catcall, categoryLibrary }) {
   const classes = useStyles();
   const [upvoteCatcall] = useMutation(UPVOTE_CATCALL);
   const [ updated, setUpdated ] = useState(false);
@@ -73,17 +55,19 @@ export default function MapPopup ({ catcall }) {
 
       <Card className={classes.root}>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h3">
+          <Typography gutterBottom variant="subtitle1">
             "{catcall.properties.quote}"
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {catcall.properties.context}
-          </Typography>
+          <div style={{maxHeight: '100px', overflowY: 'auto'}}>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {catcall.properties.context}
+            </Typography>
+          </div>
           { JSON.parse(catcall.properties.categories).length > 0 &&
             <div style={{marginTop: '6px'}}>
               {JSON.parse(catcall.properties.categories).map((category) =>(
                 <Button variant="outlined" size="small" color="secondary" style={{marginRight: '2px'}}>
-                  {convertToCategoryName(category)}
+                  {categoryLibrary[category]}
                 </Button>
               ))}
             </div>
@@ -94,9 +78,9 @@ export default function MapPopup ({ catcall }) {
             <MapSideImage url={catcall.properties.url} />
             : <></>
           }
-          <Tooltip title="Call out" arrow>
+          <Tooltip title="Boooooo!" arrow>
             <Button size="small" color="primary" onClick={() => upvoteClick()} disabled={updated}>
-              <i className="popup-icon fas fa-bullhorn"></i>
+              <ThumbDownIcon style={{color: 'rgb(245, 37, 89)', fontSize: '17px', marginRight: '3px'}} />
               <span>{displayVotes}</span>
             </Button>
           </Tooltip>

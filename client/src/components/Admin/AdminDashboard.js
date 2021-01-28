@@ -10,7 +10,7 @@ import Storage from '@material-ui/icons/Storage';
 import Delete from '@material-ui/icons/Delete';
 import Settings from '@material-ui/icons/Settings';
 
-function AdminDashboard() {
+function AdminDashboard(props) {
 
   const [value, setValue] = useState('unverified'); //keeps track of selected tab
   const { data: dataMod } = useQuery(GET_MODERATOR_BY_TOKEN);
@@ -76,7 +76,13 @@ function AdminDashboard() {
         </Paper>
 
           {data ?
-          (<AdminTable catcallData={data.getCatcalls} value={value} updateCatcall={updateCatcall} authorized={dataMod.getModeratorByToken.canAdd} emptyTrash={emptyTrash} />)
+          (<AdminTable 
+            catcallData={data.getCatcalls} 
+            value={value} 
+            updateCatcall={updateCatcall} 
+            authorized={dataMod.getModeratorByToken.canAdd}
+            categoryLibrary={props.categoryLibrary} 
+            emptyTrash={emptyTrash} />)
           :
           (<h2>Loading...</h2>)}
 
