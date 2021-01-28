@@ -54,12 +54,14 @@ export default function MapPopup ({ catcall, categoryLibrary }) {
 
       <Card className={classes.root}>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h3">
+          <Typography gutterBottom variant="subtitle1">
             "{catcall.properties.quote}"
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {catcall.properties.context}
-          </Typography>
+          <div style={{maxHeight: '100px', overflowY: 'auto'}}>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {catcall.properties.context}
+            </Typography>
+          </div>
           { JSON.parse(catcall.properties.categories).length > 0 &&
             <div style={{marginTop: '6px'}}>
               {JSON.parse(catcall.properties.categories).map((category) =>(
@@ -75,7 +77,7 @@ export default function MapPopup ({ catcall, categoryLibrary }) {
             <MapSideImage url={catcall.properties.url} />
             : <></>
           }
-          <Tooltip title="Call out" arrow>
+          <Tooltip title="Boooooo!" arrow>
             <Button size="small" color="primary" onClick={() => upvoteClick()} disabled={updated}>
               <i className="popup-icon fas fa-bullhorn"></i>
               <span>{displayVotes}</span>

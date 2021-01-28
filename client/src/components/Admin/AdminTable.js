@@ -94,7 +94,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
         <>
           <TableContainer component={Paper}>
             {/* generic dashboard table for all other functionalities */}
-            {rows.length > 0 ?
+            { rows.length > 0 ?
               <Table aria-label="collapsible table">
                 <TableHead>
                   <TableRow>
@@ -105,7 +105,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.slice().reverse().slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                  { rows.slice().reverse().slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
                     <AdminTableRow 
                       key={uuidv4()} 
                       tab={value} 

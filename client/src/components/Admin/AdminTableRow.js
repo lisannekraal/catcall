@@ -69,15 +69,18 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
   //for modal to add categorization
   const [ openModal, setOpenModal ] = useState(false);
   const [ hideTooltips, setHideTooltips ] = useState(false);
-  const [ statusCategory, setStatusCategory ] = useState(Object.fromEntries(Object.keys(categoryLibrary).map(category => [category, false])));
+  const [ statusCategory, setStatusCategory ] = useState(
+    Object.fromEntries(
+      Object.keys(categoryLibrary).map(category => [category, false])
+    )
+  );
 
   useEffect(() => {
     if (row.properties.quote.length > 70) {
-      console.log("its longer");
       setLimitedQuote(true);
       setShowQuote(row.properties.quote.substring(0, 65) + '...');
     }
-    //listen for a data change: when catcall queried, send to edit form, rendered for either url editing or text editing
+    
     if (data) {
       history.push({
         pathname: '/catcalls/edit',
@@ -85,7 +88,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
         state: { catcall: data.getCatcall }
       });
     }
-    //listen for a tab change and re-set buttons
+
     switch (tab) {
       case 'unverified':
         setButtons([
@@ -96,8 +99,6 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
         break;
       case 'chalk':
         setButtons([
-          //Deactivated email functionality:
-          // {name: 'email', class: 'greenButton', tooltip: ''},
           { name: 'chalk', class: 'greenButton', tooltip: 'Add Insta photo to map and remove catcall from this list' },
           { name: 'unstage', class: 'redButton', tooltip: 'Decide not to chalk this catcall for now' }
         ]);
@@ -114,7 +115,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
           { name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content' }
         ]);
         break;
-      default: //unverified
+      default:
         setButtons([{ name: 'verify', class: 'greenButton' }, { name: 'edit', class: 'yellowButton' }, { name: 'delete', class: 'redButton' }]);
         break;
     }
@@ -156,8 +157,6 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
       setHideTooltips(true);
     } else if (button.name === 'edit') {
       getCatcall({ variables: { id: row._id } });
-    } else if (button.name === 'email') {
-      alert('Unfortunately this feature does not work just yet ;)');
     } else if (button.name === 'chalk') {
       getCatcall({ variables: { id: row._id } });
     } else if (button.name === 'unstage') {
@@ -219,7 +218,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
 
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-            {open ?
+            { open ?
               <KeyboardArrowUpIcon />
               :
               <Tooltip title="More info" arrow>
@@ -231,7 +230,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
 
         {/*2: star*/}
         <TableCell>
-          {row.properties.starred ?
+          { row.properties.starred ?
             <Tooltip title="Remove star" arrow>
               <Star onClick={() => handleStarClick()} />
             </Tooltip>
@@ -248,7 +247,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
 
         {/*4: actions*/}
         <TableCell>
-          {buttonstoShow.map((button) => (
+          { buttonstoShow.map((button) => (
             <Tooltip key={uuidv4()} title={hideTooltips ? "" : button.tooltip} arrow>
               <Button variant="contained" color="inherit" size="small" onClick={() => handleClick(button)} className={classes[button.class]} >
                 {button.name}
@@ -323,8 +322,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
                     </TableRow>
                   }
 
-                  {
-                    row.properties.url &&
+                  { row.properties.url &&
                     <TableRow key={uuidv4()}>
                       <TableCell component="th" scope="row">
                         Chalk url
@@ -348,23 +346,17 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
             Categorization helps us analyze street harassment. No minimum or maximum number required.
           </DialogContentText>
           <FormGroup>
-            {
-              Object.keys(categoryLibrary).map((category) => (
+            {Object.keys(categoryLibrary).map((category) => (
                 <FormControlLabel
                   control={<Checkbox checked={statusCategory[category]} onChange={handleChange} name={category} />}
                   label={categoryLibrary[category]}
                 />
-              ))
-            }
+            ))}
           </FormGroup>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={verificationProcess} color="primary">
-            Continue
-          </Button>
+          <Button onClick={handleClose} color="primary">Cancel</Button>
+          <Button onClick={verificationProcess} color="primary">Continue</Button>
         </DialogActions>
       </Dialog>
 
