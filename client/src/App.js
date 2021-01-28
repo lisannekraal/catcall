@@ -15,7 +15,7 @@ import Help from './components/Help/Help';
 import NotFound from './components/NotFound/NotFound';
 import NavBar from './components/Navigation/NavBar';
 
-const theme = createMuiTheme({
+const theme = createMuiTheme(  {
   typography: {
     fontFamily: [
       'Montserrat',
