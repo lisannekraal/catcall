@@ -1,23 +1,22 @@
-import {
-  ApolloProvider, createHttpLink, ApolloClient, InMemoryCache,
-} from '@apollo/client';
+import React, { lazy, Suspense } from "react";
+import { ApolloProvider, createHttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import {
-  BrowserRouter as Router, Switch, Route, Redirect,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
-import MapMain from './components/Map/MapMain';
 import Landing from './components/Landing/Landing';
-import ReportForm from './components/ReportForm/ReportForm';
-import Login from './components/Login/Login';
-import AdminDashboard from './components/Admin/AdminDashboard';
-import AdminEditForm from './components/Admin/AdminEditForm';
-import Help from './components/Help/Help';
-import NotFound from './components/NotFound/NotFound';
 import NavBar from './components/Navigation/NavBar';
+
+const MapMain = lazy(() => import("./components/Map/MapMain"));
+const AdminDashboard = lazy(() => import("./components/Admin/AdminDashboard"));
+const AdminEditForm = lazy(() => import("./components/Admin/AdminEditForm"));
+const ReportForm = lazy(() => import("./components/ReportForm/ReportForm"));
+const Login = lazy(() => import("./components/Login/Login"));
+const Help = lazy(() => import("./components/Help/Help"));
+const NotFound = lazy(() => import("./components/NotFound/NotFound"));
+
 
 const theme = createMuiTheme({
   typography: {
@@ -72,41 +71,43 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <ThemeProvider theme={theme}>
+      <Suspense fallback={<div></div>}>
+        <Router>
+          <ThemeProvider theme={theme}>
 
-          <NavBar removeCookie={removeCookie} />
+            <NavBar removeCookie={removeCookie} />
 
-        <Switch>
-          <Route exact path="/">
-            <Landing />
-          </Route>
-          <Route exact path="/catcalls">
-            <MapMain categoryLibrary={categoryLibrary} />
-          </Route>
-          <Route exact path="/catcalls/new">
-            <ReportForm />
-          </Route>
-          <Route exact path="/login">
-            <Login setCookie={setCookie}/>
-          </Route>
-          <Route exact path="/dashboard">
-            <AdminDashboard categoryLibrary={categoryLibrary} />
-          </Route>
-          <Route exact path="/catcalls/edit">
-            <AdminEditForm />
-          </Route>
-          <Route exact path="/help">
-            <Help />
-          </Route>
-          <Route path="/404">
-            <NotFound />
-          </Route>
-          <Redirect to="/404"/>
-        </Switch>
+            <Switch>
+              <Route exact path="/">
+                <Landing />
+              </Route>
+              <Route exact path="/catcalls">
+                <MapMain categoryLibrary={categoryLibrary} />
+              </Route>
+              <Route exact path="/catcalls/new">
+                <ReportForm />
+              </Route>
+              <Route exact path="/login">
+                <Login setCookie={setCookie} />
+              </Route>
+              <Route exact path="/dashboard">
+                <AdminDashboard categoryLibrary={categoryLibrary} />
+              </Route>
+              <Route exact path="/catcalls/edit">
+                <AdminEditForm />
+              </Route>
+              <Route exact path="/help">
+                <Help />
+              </Route>
+              <Route path="/404">
+                <NotFound />
+              </Route>
+              <Redirect to="/404" />
+            </Switch>
 
-        </ThemeProvider>
-      </Router>
+          </ThemeProvider>
+        </Router>
+      </Suspense>
 
     </ApolloProvider>
 
