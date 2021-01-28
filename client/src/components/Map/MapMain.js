@@ -119,13 +119,6 @@ function MapMain () {
 
       <div className="map-container" data-testid="map-main">
 
-        {filterOpen &&
-          <MapFilter
-            setFilterOpen={setFilterOpen}
-            filterChalked={filterChalked}
-            filterCategories={filterCategories}
-          />
-        }
         <MapGL
           style={{ width: '100vw', height: '100%' }}
           mapStyle='mapbox://styles/mapbox/streets-v11'
@@ -164,10 +157,20 @@ function MapMain () {
           <FullscreenControl position='top-right' />
           <ScaleControl unit='metric' maxWidth="100" position='bottom-right' />
 
-          { !filterOpen && <Fab variant="extended" style={{textTransform: 'none', marginTop: '15px', marginLeft: '15px', color: 'white', backgroundColor: 'rgb(245, 37, 89'}} onClick={e => {setFilterOpen(true)}}>
+          {/* floating action button if filter is closed */}
+          { !filterOpen && <Fab variant="extended" style={{textTransform: 'none', marginTop: '15px', marginLeft: '15px', color: 'white', backgroundColor: 'rgb(245, 37, 89)'}} onClick={e => {setFilterOpen(true)}}>
             <FilterListIcon />
-              Click here to open filter options
+              Open map filters
           </Fab>}
+
+          {/* open filter: paper, card? */}
+          {filterOpen &&
+            <MapFilter 
+              setFilterOpen={setFilterOpen}
+              filterChalked={filterChalked}
+              filterCategories={filterCategories}
+            />
+          }
 
         </MapGL>
 

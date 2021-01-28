@@ -19,23 +19,41 @@ import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuList from '@material-ui/core/MenuList';
+import Card from '@material-ui/core/Card';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    width: 275,
+    marginLeft: 20,
+    width: '88%',
   },
+  cardStyles: {
+    position: 'absolute',
+    marginTop: '15px',
+    marginLeft: '15px',
+    color: 'white',
+    backgroundColor: 'rgba(29, 113, 183)',
+    height: '170px',
+    width: '310px',
+    [theme.breakpoints.down('xs')]: {
+      width: '250px',
+      height: '190px'
+    },
+  }
 }));
 
-const ITEM_HEIGHT = 88;
-const ITEM_PADDING_TOP = 0;
 const MenuProps = {
   PaperProps: {
     style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+      width: 150,
+      maxHeight: 200,
     },
   },
+  anchorOrigin: {
+    vertical: "bottom",
+    horizontal: "left"
+  },
+  getContentAnchorEl: null
 };
 
 const categories = [
@@ -64,7 +82,7 @@ function convertToCategoryName(category) {
 const chalkedOrNot = ['Show all catcalls', 'Show chalked catcalls', 'Show not yet chalked'];
 
 
-function MapFilter ({ setFilterOpen, filterChalked, filterCategories }) {
+function MapFilter2 ({ setFilterOpen, filterChalked, filterCategories }) {
 
   const classes = useStyles();
   const [categoryName, setCategoryName] = useState([]);
@@ -104,28 +122,34 @@ function MapFilter ({ setFilterOpen, filterChalked, filterCategories }) {
 
 
   return (
-    <>
-      <div style={{textAlign: 'center'}}>
+    <Card
+      zIndex="modal" 
+      className={classes.cardStyles}
+    >
 
-        <ButtonGroup variant="contained" color="secondary" ref={anchorRef} aria-label="split button" style={{marginTop: '16px'}}>
+      <div style={{marginLeft: '15px', marginRight: '5px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+        <h1 className="catcall-font">Filter catcalls</h1>
+        <IconButton onClick={e => {handleExitFilter()}} style={{color: 'white'}} >
+          <HighlightOffIcon />
+        </IconButton>
+      </div>
+      
+      <ButtonGroup variant="contained" color="secondary" ref={anchorRef} aria-label="split button" style={{marginLeft: '16px', marginTop: '5px', width: '90%'}}>
+        <Button style={{ width: '100%'}}>{chalkedOrNot[selectedIndexChalk]}</Button>
+        <Button
+          color="secondary"
+          size="small"
+          aria-controls={openChalk ? 'split-button-menu' : undefined}
+          aria-expanded={openChalk ? 'true' : undefined}
+          aria-label="select merge strategy"
+          aria-haspopup="menu"
+          onClick={handleToggleChalk}
+        >
+          <ArrowDropDownIcon />
+        </Button>
+      </ButtonGroup>
 
-          <Button style={{ width: '235px'}}>{chalkedOrNot[selectedIndexChalk]}</Button>
-
-          <Button
-            color="secondary"
-            size="small"
-            aria-controls={openChalk ? 'split-button-menu' : undefined}
-            aria-expanded={openChalk ? 'true' : undefined}
-            aria-label="select merge strategy"
-            aria-haspopup="menu"
-            onClick={handleToggleChalk}
-          >
-            <ArrowDropDownIcon />
-          </Button>
-
-        </ButtonGroup>
-
-        <Popper open={openChalk} anchorEl={anchorRef.current} role={undefined} transition disablePortal style={{zIndex: 1}}>
+      <Popper open={openChalk} anchorEl={anchorRef.current} role={undefined} transition style={{zIndex: 99}}>
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
@@ -173,15 +197,8 @@ function MapFilter ({ setFilterOpen, filterChalked, filterCategories }) {
             ))}
           </Select>
         </FormControl>
-        
-      </div>
 
-      <IconButton onClick={e => {handleExitFilter()}} style={{color: 'white', float: 'right', position: 'fixed', right: 2, top: 85}} >
-          <HighlightOffIcon />
-      </IconButton>
-
-
-    </>
+    </Card>
   );
 }
-export default MapFilter;
+export default MapFilter2;
