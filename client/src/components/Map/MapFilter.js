@@ -56,33 +56,10 @@ const MenuProps = {
   getContentAnchorEl: null
 };
 
-const categories = [
-  'sexual', 'homophobia', 'transphobia', 'fatphobia', 'racism', 'fetishization', 'slutshaming', 'hateSpeech', 'young', 'assault', 'staring', 'following'
-];
-
-const categoryLibrary = {
-  'sexual': 'Sexual Harassment',
-  'homophobia': 'Homophobia',
-  'transphobia': 'Transphobia',
-  'fatphobia': 'Fatphobia',
-  'racism': 'Racism',
-  'fetishization': 'Fetishization',
-  'slutshaming': 'Slutshaming',
-  'hateSpeech': 'Hate speech',
-  'young': 'Young',
-  'assault': 'Assault',
-  'staring': 'Staring',
-  'following': 'Following'
-}
-
-function convertToCategoryName(category) {
-  return categoryLibrary[category];
-}
-
 const chalkedOrNot = ['Show all catcalls', 'Show chalked catcalls', 'Show not yet chalked'];
 
 
-function MapFilter2 ({ setFilterOpen, filterChalked, filterCategories }) {
+function MapFilter2 ({ setFilterOpen, categoryLibrary, filterChalked, filterCategories }) {
 
   const classes = useStyles();
   const [categoryName, setCategoryName] = useState([]);
@@ -186,13 +163,13 @@ function MapFilter2 ({ setFilterOpen, filterChalked, filterCategories }) {
             value={categoryName}
             onChange={handleCategoryChange}
             input={<Input />}
-            renderValue={(selected) => selected.join(', ')}
+            renderValue={(selected) => selected.map(category => categoryLibrary[category]).join(', ')}
             MenuProps={MenuProps}
           >
-            {categories.map((category) => (
+            {Object.keys(categoryLibrary).map((category) => (
               <MenuItem key={category} value={category}>
                 <Checkbox checked={categoryName.indexOf(category) > -1} />
-                <ListItemText primary={convertToCategoryName(category)} />
+                <ListItemText primary={categoryLibrary[category]} />
               </MenuItem>
             ))}
           </Select>

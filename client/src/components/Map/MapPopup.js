@@ -19,26 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-const categoryLibrary = {
-  'sexual': 'Sexual Harassment',
-  'homophobia': 'Homophobia',
-  'transphobia': 'Transphobia',
-  'fatphobia': 'Fatphobia',
-  'racism': 'Racism',
-  'fetishization': 'Fetishization',
-  'slutshaming': 'Slutshaming',
-  'hateSpeech': 'Hate speech',
-  'young': 'Young',
-  'assault': 'Assault',
-  'staring': 'Staring',
-  'following': 'Following'
-}
-
-function convertToCategoryName(category) {
-  return categoryLibrary[category];
-}
-
-export default function MapPopup ({ catcall }) {
+export default function MapPopup ({ catcall, categoryLibrary }) {
   const classes = useStyles();
   const [upvoteCatcall] = useMutation(UPVOTE_CATCALL);
   const [ updated, setUpdated ] = useState(false);
@@ -83,7 +64,7 @@ export default function MapPopup ({ catcall }) {
             <div style={{marginTop: '6px'}}>
               {JSON.parse(catcall.properties.categories).map((category) =>(
                 <Button variant="outlined" size="small" color="secondary" style={{marginRight: '2px'}}>
-                  {convertToCategoryName(category)}
+                  {categoryLibrary[category]}
                 </Button>
               ))}
             </div>

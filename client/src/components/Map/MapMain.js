@@ -13,7 +13,7 @@ import { Player } from '@lottiefiles/react-lottie-player';
 import Fab from '@material-ui/core/Fab';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-function MapMain () {
+function MapMain ({ categoryLibrary }) {
   const [ popup, setPopup ] = useState("");
   const { loading, error, data } = useQuery(GET_MAP_CATCALLS);
   const location = useLocation();
@@ -145,9 +145,17 @@ function MapMain () {
               'icon-allow-overlap': true
             }}
             onClick={e => {
-              setPopup(<Popup longitude={e.lngLat.lng} latitude={e.lngLat.lat} closeButton={true} closeOnClick={true} onClick={setPopup("")}>
-                <MapPopup catcall={e.features[0]} />
-              </Popup>);
+              setPopup(
+                <Popup 
+                  longitude={e.lngLat.lng} 
+                  latitude={e.lngLat.lat} 
+                  closeButton={true} closeOnClick={true} 
+                  onClick={setPopup("")}>
+                    <MapPopup 
+                      catcall={e.features[0]} 
+                      categoryLibrary={categoryLibrary} />
+                </Popup>
+              );
             }}
           />
 
@@ -167,6 +175,7 @@ function MapMain () {
           {filterOpen &&
             <MapFilter 
               setFilterOpen={setFilterOpen}
+              categoryLibrary={categoryLibrary}
               filterChalked={filterChalked}
               filterCategories={filterCategories}
             />
