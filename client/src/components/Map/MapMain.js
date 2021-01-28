@@ -121,7 +121,7 @@ function MapMain ({ categoryLibrary }) {
 
         <MapGL
           style={{ width: '100vw', height: '100%' }}
-          mapStyle='mapbox://styles/mapbox/streets-v11'
+          mapStyle='mapbox://styles/mapbox/streets-v11?optimize=true'
           accessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
           latitude={viewport.latitude}
           longitude={viewport.longitude}
@@ -146,13 +146,13 @@ function MapMain ({ categoryLibrary }) {
             }}
             onClick={e => {
               setPopup(
-                <Popup 
-                  longitude={e.lngLat.lng} 
-                  latitude={e.lngLat.lat} 
-                  closeButton={true} closeOnClick={true} 
+                <Popup
+                  longitude={e.lngLat.lng}
+                  latitude={e.lngLat.lat}
+                  closeButton={true} closeOnClick={true}
                   onClick={setPopup("")}>
-                    <MapPopup 
-                      catcall={e.features[0]} 
+                    <MapPopup
+                      catcall={e.features[0]}
                       categoryLibrary={categoryLibrary} />
                 </Popup>
               );
@@ -173,7 +173,7 @@ function MapMain ({ categoryLibrary }) {
 
           {/* open filter: paper, card? */}
           {filterOpen &&
-            <MapFilter 
+            <MapFilter
               setFilterOpen={setFilterOpen}
               categoryLibrary={categoryLibrary}
               filterChalked={filterChalked}
