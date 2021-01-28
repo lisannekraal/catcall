@@ -86,9 +86,13 @@ export default function AdminModeratorSettings({authorized}) {
                   <TableCell>{moderator.email}</TableCell>
                   <TableCell>{moderator.canAdd ? 'Full' : 'Partial'}</TableCell>
                   <TableCell>
-                    <Tooltip title="Permanently delete moderator" arrow>
-                      <Delete style={{cursor: 'pointer'}} onClick={() => deleteMod(moderator)} />
-                    </Tooltip>
+                    { !moderator.canAdd ? 
+                      <Tooltip title="Permanently delete moderator" arrow>
+                        <Delete style={{cursor: 'pointer'}} onClick={() => deleteMod(moderator)} />
+                      </Tooltip> 
+                      :
+                      <Delete color="disabled" />
+                    }
                   </TableCell>
                 </TableRow>
               ))}
