@@ -1,2 +1,0 @@
-DB_URL="yourMongoAccessString"
-JWT_SECRET_KEY= yourSecretKey

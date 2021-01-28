@@ -18,8 +18,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "cd server && yarn install && node index.js",
-    "heroku-postbuild": "cd client && yarn && yarn run build",
+    "start": "cd client && yarn start",
     "sync": "git pull git@github.com:lisannekraal/catcall.git development",
     "lint:js": "eslint . --ext .js,.jsx",
     "lint:js:fix": "yarn run lint:js -- --fix"
@@ -30,13 +29,8 @@
     "babel-eslint": "^10.1.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.17.0",
-    "eslint-config-react-app": "^6.0.0",
-    "eslint-plugin-flowtype": "^5.2.0",
-    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-json": "^2.1.2",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.22.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^4.3.7",
     "lint-staged": "^10.5.3"
   },
@@ -45,10 +39,5 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "lint-staged": {
-    "client/src/**/*.{js,jsx}": ["eslint . --fix"],
-    "server/!(node_modules)/**/*.{js,ts,json}": ["eslint . --fix"]
   }
-
 }
