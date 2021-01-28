@@ -9,6 +9,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 
 const useStyles = makeStyles({
   root: {
@@ -79,7 +80,7 @@ export default function MapPopup ({ catcall, categoryLibrary }) {
           }
           <Tooltip title="Boooooo!" arrow>
             <Button size="small" color="primary" onClick={() => upvoteClick()} disabled={updated}>
-              <i className="popup-icon fas fa-bullhorn"></i>
+              <ThumbDownIcon style={{color: 'rgb(245, 37, 89)', fontSize: '17px', marginRight: '3px'}} />
               <span>{displayVotes}</span>
             </Button>
           </Tooltip>

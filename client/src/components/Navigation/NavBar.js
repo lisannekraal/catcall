@@ -12,7 +12,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { List, Container, Hidden } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
+import InfoIcon from '@material-ui/icons/Info';
+import MapIcon from '@material-ui/icons/Map';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import SettingsIcon from '@material-ui/icons/Settings';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,49 +47,14 @@ function NavBar({ removeCookie }) {
 
   let history = useHistory();
   const classes = useStyles();
-  const [ navigations, setNavigations ] = useState([]);
+  const [ loggedIn, setLoggedIn ] = useState(false);
   const { data } = useQuery(GET_MODERATOR_BY_TOKEN);
-
-  let navLinksPermanent = [
-    {
-      title: 'Map',
-      classN: 'fas fa-map-marked-alt',
-      path: () => history.push({
-        pathname: '/catcalls'
-      })
-    },
-    {
-      title: 'Community',
-      classN: 'fab fa-instagram',
-      path: () => window.open('https://www.instagram.com/catcallsofams/', '_blank')
-    }
-  ];
 
   useEffect(() => {
     if (data && data.getModeratorByToken) {
-      setNavigations([...navLinksPermanent,
-        {
-          title: 'Dashboard',
-          classN: 'fas fa-cog',
-          path: () => history.push('/dashboard')
-        },
-        {
-        title: 'Logout',
-        classN: 'fas fa-user',
-        path: () => {
-          removeCookie('token');
-          history.push('/');
-        }
-      }]);
-    } else {
-      setNavigations([...navLinksPermanent, {
-          title: 'Moderator',
-          classN: 'fas fa-cog',
-          path: () => history.push('/login')
-      }]);
+      setLoggedIn(true);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [data])
 
   return (
     <AppBar color='transparent' position="absolute" elevation={0} data-testid="navbar">
@@ -101,22 +70,43 @@ function NavBar({ removeCookie }) {
           <Hidden mdDown>
             <List component="nav" className={classes.navDisplayLinks}>
 
-              {/* 'About' nav component is seperate from loop as we use hash link package */}
               <Link
                 to="/#about"
                 className="about-link" >
-                <Button key={uuidv4()} color='inherit' style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} startIcon={
-                  <Icon className='fas fa-info-circle' fontSize="small" style={{ marginRight: 7 }} />
-                } >About</Button>
+                <Button key={uuidv4()} color='inherit' style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} startIcon={<InfoIcon />} >
+                  About
+                </Button>
               </Link>
+              <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => history.push({pathname: '/catcalls'})} color='inherit' startIcon={<MapIcon />}>
+                  Map
+              </Button>
+              <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => window.open('https://www.instagram.com/catcallsofams/', '_blank')} color='inherit' startIcon={<InstagramIcon />}>
+                  Community
+              </Button>
 
-              {navigations.map(({ title, classN, path }) => (
-                <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={path} color='inherit' startIcon={
-                  <Icon className={classN} fontSize="small" style={{ marginRight: 7 }} />
-                }>{title}</Button>
-              ))}
+              { loggedIn ?
+                <>
+                  <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => history.push('/dashboard')} color='inherit' startIcon={<SettingsIcon />}>
+                    Dashboard
+                  </Button>
+
+                  <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => {
+                    removeCookie('token');
+                    setLoggedIn(false);
+                    history.push('/');
+                  }} color='inherit' startIcon={<AccountCircleIcon />}>
+                    Logout
+                  </Button>
+                </>
+              :
+                <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => history.push('/login')} color='inherit' startIcon={<SettingsIcon />}>
+                  Moderator
+                </Button>
+              }
+              
             </List>
           </Hidden>
+              
 
           <Hidden mdDown>
             <Button style={{textTransform: 'none', fontSize: '16px'}} key={uuidv4()} color="inherit" className={classes.navButton} onClick={() => history.push("/catcalls/new")}>Report a new CatCall</Button>
@@ -124,9 +114,8 @@ function NavBar({ removeCookie }) {
 
         </Container>
 
-        {/* Side drawer component for smaller screens */}
         <Hidden lgUp>
-          <NavBarHamburger navLinks={navigations} />
+          <NavBarHamburger loggedIn={loggedIn} setLoggedIn={setLoggedIn} removeCookie={removeCookie} />
         </Hidden>
 
       </Toolbar>

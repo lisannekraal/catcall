@@ -7,6 +7,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Menu } from '@material-ui/icons';
 import IconButton from '@material-ui/core/IconButton';
+import InfoIcon from '@material-ui/icons/Info';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import MapIcon from '@material-ui/icons/Map';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import SettingsIcon from '@material-ui/icons/Settings';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { HashLink as Link } from 'react-router-hash-link';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,7 +29,7 @@ const useStyles = makeStyles({
   },
 })
 
-function NavBarHamburger({ navLinks }) {
+function NavBarHamburger({ loggedIn, setLoggedIn, removeCookie }) {
 
   let history = useHistory();
   const classes = useStyles();
@@ -48,27 +54,74 @@ function NavBarHamburger({ navLinks }) {
     >
       <List component="nav">
 
-        {/* Again 'about' section in seperate component because of hash link */}
         <Link to="/#about" style={{textDecoration: 'none', color:'#000000DE'}} >
           <ListItem button key={uuidv4()}>
-            <ListItemIcon className='fas fa-info-circle'/>
+            <ListItemIcon>
+              <InfoIcon />
+            </ListItemIcon>
             <ListItemText primary={
               <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>About</Typography>
             }/>
           </ListItem>
         </Link>
 
-        {navLinks.map(({ title, path, classN }) => (
-        <ListItem button onClick={path} key={uuidv4()}>
-          <ListItemIcon className={classN}/>
-          <ListItemText primary={
-            <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>{title}</Typography>
+        <ListItem button key={uuidv4()} onClick={() => history.push({pathname: '/catcalls'})} >
+          <ListItemIcon>
+            <MapIcon />
+          </ListItemIcon>
+          <ListItemText  primary={
+            <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>Map</Typography>
           }/>
         </ListItem>
-        ))}
+
+        <ListItem button key={uuidv4()} onClick={() => window.open('https://www.instagram.com/catcallsofams/', '_blank')} >
+          <ListItemIcon>
+            <InstagramIcon />
+          </ListItemIcon>
+          <ListItemText  primary={
+            <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>Community</Typography>
+          }/>
+        </ListItem>
+
+        { loggedIn ?
+          <>
+            <ListItem button key={uuidv4()} onClick={() => history.push('/dashboard')} >
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+              <ListItemText  primary={
+                <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>Dashboard</Typography>
+              }/>
+            </ListItem>
+
+            <ListItem button key={uuidv4()} onClick={() => {
+              removeCookie('token');
+              setLoggedIn(false);
+              history.push('/');
+            }} >
+              <ListItemIcon>
+                <AccountCircleIcon />
+              </ListItemIcon>
+              <ListItemText  primary={
+                <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>Logout</Typography>
+              }/>
+            </ListItem>
+          </>
+        :
+        <ListItem button key={uuidv4()} onClick={() => history.push('/login')} >
+          <ListItemIcon>
+            <SettingsIcon />
+          </ListItemIcon>
+          <ListItemText  primary={
+            <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>Moderator</Typography>
+          }/>
+        </ListItem>
+        }
 
         <ListItem button key={uuidv4()} onClick={() => history.push("/catcalls/new")} style={{background: 'rgb(245, 37, 89)'}}>
-          <ListItemIcon className="fas fa-cat"/>
+          <ListItemIcon>
+            <AddCircleOutlineIcon />
+          </ListItemIcon>
           <ListItemText  primary={
             <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>Report a new CatCall</Typography>
           }/>
