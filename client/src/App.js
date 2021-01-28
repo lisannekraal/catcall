@@ -28,7 +28,21 @@ const theme = createMuiTheme({
   },
 });
 
-console.log('hello');
+const categoryLibrary = {
+  'sexual': 'Sexual Harassment',
+  'homophobia': 'Homophobia',
+  'transphobia': 'Transphobia',
+  'fatphobia': 'Fatphobia',
+  'racism': 'Racism',
+  'fetishization': 'Fetishization',
+  'slutshaming': 'Slutshaming',
+  'hateSpeech': 'Hate speech',
+  'young': 'Young',
+  'assault': 'Assault',
+  'staring': 'Staring',
+  'following': 'Following',
+  'other': 'Other',
+}
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(['token']);
@@ -63,33 +77,33 @@ function App() {
 
           <NavBar removeCookie={removeCookie} />
 
-          <Switch>
-            <Route exact path="/">
-              <Landing />
-            </Route>
-            <Route exact path="/catcalls">
-              <MapMain />
-            </Route>
-            <Route exact path="/catcalls/new">
-              <ReportForm />
-            </Route>
-            <Route exact path="/login">
-              <Login setCookie={setCookie} />
-            </Route>
-            <Route exact path="/dashboard">
-              <AdminDashboard />
-            </Route>
-            <Route exact path="/catcalls/edit">
-              <AdminEditForm />
-            </Route>
-            <Route exact path="/help">
-              <Help />
-            </Route>
-            <Route path="/404">
-              <NotFound />
-            </Route>
-            <Redirect to="/404" />
-          </Switch>
+        <Switch>
+          <Route exact path="/">
+            <Landing />
+          </Route>
+          <Route exact path="/catcalls">
+            <MapMain categoryLibrary={categoryLibrary} />
+          </Route>
+          <Route exact path="/catcalls/new">
+            <ReportForm />
+          </Route>
+          <Route exact path="/login">
+            <Login setCookie={setCookie}/>
+          </Route>
+          <Route exact path="/dashboard">
+            <AdminDashboard categoryLibrary={categoryLibrary} />
+          </Route>
+          <Route exact path="/catcalls/edit">
+            <AdminEditForm />
+          </Route>
+          <Route exact path="/help">
+            <Help />
+          </Route>
+          <Route path="/404">
+            <NotFound />
+          </Route>
+          <Redirect to="/404"/>
+        </Switch>
 
         </ThemeProvider>
       </Router>

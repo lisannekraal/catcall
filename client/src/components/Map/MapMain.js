@@ -13,7 +13,7 @@ import { Player } from '@lottiefiles/react-lottie-player';
 import Fab from '@material-ui/core/Fab';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-function MapMain () {
+function MapMain ({ categoryLibrary }) {
   const [ popup, setPopup ] = useState("");
   const { loading, error, data } = useQuery(GET_MAP_CATCALLS);
   const location = useLocation();
@@ -119,13 +119,6 @@ function MapMain () {
 
       <div className="map-container" data-testid="map-main">
 
-        {filterOpen &&
-          <MapFilter
-            setFilterOpen={setFilterOpen}
-            filterChalked={filterChalked}
-            filterCategories={filterCategories}
-          />
-        }
         <MapGL
           style={{ width: '100vw', height: '100%' }}
           mapStyle='mapbox://styles/mapbox/streets-v11'
@@ -152,9 +145,17 @@ function MapMain () {
               'icon-allow-overlap': true
             }}
             onClick={e => {
-              setPopup(<Popup longitude={e.lngLat.lng} latitude={e.lngLat.lat} closeButton={true} closeOnClick={true} onClick={setPopup("")}>
-                <MapPopup catcall={e.features[0]} />
-              </Popup>);
+              setPopup(
+                <Popup 
+                  longitude={e.lngLat.lng} 
+                  latitude={e.lngLat.lat} 
+                  closeButton={true} closeOnClick={true} 
+                  onClick={setPopup("")}>
+                    <MapPopup 
+                      catcall={e.features[0]} 
+                      categoryLibrary={categoryLibrary} />
+                </Popup>
+              );
             }}
           />
 
@@ -164,10 +165,21 @@ function MapMain () {
           <FullscreenControl position='top-right' />
           <ScaleControl unit='metric' maxWidth="100" position='bottom-right' />
 
-          { !filterOpen && <Fab variant="extended" style={{textTransform: 'none', marginTop: '15px', marginLeft: '15px', color: 'white', backgroundColor: 'rgb(245, 37, 89'}} onClick={e => {setFilterOpen(true)}}>
+          {/* floating action button if filter is closed */}
+          { !filterOpen && <Fab variant="extended" style={{textTransform: 'none', marginTop: '15px', marginLeft: '15px', color: 'white', backgroundColor: 'rgb(245, 37, 89)'}} onClick={e => {setFilterOpen(true)}}>
             <FilterListIcon />
-              Click here to open filter options
+              Open map filters
           </Fab>}
+
+          {/* open filter: paper, card? */}
+          {filterOpen &&
+            <MapFilter 
+              setFilterOpen={setFilterOpen}
+              categoryLibrary={categoryLibrary}
+              filterChalked={filterChalked}
+              filterCategories={filterCategories}
+            />
+          }
 
         </MapGL>
 

@@ -56,26 +56,8 @@ const useRowStyles = makeStyles({
   }
 });
 
-const categoryLibrary = {
-  'sexual': 'Sexual Harassment',
-  'homophobia': 'Homophobia',
-  'transphobia': 'Transphobia',
-  'fatphobia': 'Fatphobia',
-  'racism': 'Racism',
-  'fetishization': 'Fetishization',
-  'slutshaming': 'Slutshaming',
-  'hateSpeech': 'Hate speech',
-  'young': 'Young',
-  'assault': 'Assault',
-  'staring': 'Staring',
-  'following': 'Following'
-}
+function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
 
-function convertToCategoryName(category) {
-  return categoryLibrary[category];
-}
-
-function AdminTableRow({ tab, row, clickButtonUpdate }) {
   let history = useHistory();
   const [open, setOpen] = useState(false);
   const [ buttonstoShow, setButtons ] = useState([]);
@@ -87,29 +69,18 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
   //for modal to add categorization
   const [ openModal, setOpenModal ] = useState(false);
   const [ hideTooltips, setHideTooltips ] = useState(false);
-  const [ state, setState ] = useState({
-    sexual: false,
-    homophobia: false,
-    transphobia: false,
-    fatphobia: false,
-    racism: false,
-    fetishization: false,
-    slutshaming: false,
-    hateSpeech: false,
-    young: false,
-    assault: false,
-    staring: false,
-    following: false
-  });
-  const { sexual, homophobia, transphobia, fatphobia, racism, fetishization, slutshaming, hateSpeech, young, assault, staring, following } = state;
+  const [ statusCategory, setStatusCategory ] = useState(
+    Object.fromEntries(
+      Object.keys(categoryLibrary).map(category => [category, false])
+    )
+  );
 
   useEffect(() => {
     if (row.properties.quote.length > 70) {
-      console.log("its longer");
       setLimitedQuote(true);
       setShowQuote(row.properties.quote.substring(0, 65) + '...');
     }
-    //listen for a data change: when catcall queried, send to edit form, rendered for either url editing or text editing
+    
     if (data) {
       history.push({
         pathname: '/catcalls/edit',
@@ -117,7 +88,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
         state: { catcall: data.getCatcall }
       });
     }
-    //listen for a tab change and re-set buttons
+
     switch (tab) {
       case 'unverified':
         setButtons([
@@ -128,8 +99,6 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
         break;
       case 'chalk':
         setButtons([
-          //Deactivated email functionality:
-          // {name: 'email', class: 'greenButton', tooltip: ''},
           { name: 'chalk', class: 'greenButton', tooltip: 'Add Insta photo to map and remove catcall from this list' },
           { name: 'unstage', class: 'redButton', tooltip: 'Decide not to chalk this catcall for now' }
         ]);
@@ -146,7 +115,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
           { name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content' }
         ]);
         break;
-      default: //unverified
+      default:
         setButtons([{ name: 'verify', class: 'greenButton' }, { name: 'edit', class: 'yellowButton' }, { name: 'delete', class: 'redButton' }]);
         break;
     }
@@ -155,8 +124,8 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
 
   function verificationProcess() {
     let categoriesClicked = [];
-    for (const key in state) {
-      if (state[key]) categoriesClicked.push(key);
+    for (const key in statusCategory) {
+      if (statusCategory[key]) categoriesClicked.push(key);
     }
     clickButtonUpdate({
       variables: {
@@ -179,7 +148,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
   };
 
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    setStatusCategory({ ...statusCategory, [event.target.name]: event.target.checked });
   };
 
   function handleClick(button) {
@@ -188,8 +157,6 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
       setHideTooltips(true);
     } else if (button.name === 'edit') {
       getCatcall({ variables: { id: row._id } });
-    } else if (button.name === 'email') {
-      alert('Unfortunately this feature does not work just yet ;)');
     } else if (button.name === 'chalk') {
       getCatcall({ variables: { id: row._id } });
     } else if (button.name === 'unstage') {
@@ -251,7 +218,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
 
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-            {open ?
+            { open ?
               <KeyboardArrowUpIcon />
               :
               <Tooltip title="More info" arrow>
@@ -263,7 +230,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
 
         {/*2: star*/}
         <TableCell>
-          {row.properties.starred ?
+          { row.properties.starred ?
             <Tooltip title="Remove star" arrow>
               <Star onClick={() => handleStarClick()} />
             </Tooltip>
@@ -280,7 +247,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
 
         {/*4: actions*/}
         <TableCell>
-          {buttonstoShow.map((button) => (
+          { buttonstoShow.map((button) => (
             <Tooltip key={uuidv4()} title={hideTooltips ? "" : button.tooltip} arrow>
               <Button variant="contained" color="inherit" size="small" onClick={() => handleClick(button)} className={classes[button.class]} >
                 {button.name}
@@ -348,15 +315,14 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
                       <TableCell>
                         {row.properties.categories.map((category) => (
                           <Button key={uuidv4()} variant="outlined" size="small" color="secondary" style={{marginRight: '2px'}}>
-                            {convertToCategoryName(category)}
+                            {categoryLibrary[category]}
                           </Button>
                         ))}
                       </TableCell>
                     </TableRow>
                   }
 
-                  {
-                    row.properties.url &&
+                  { row.properties.url &&
                     <TableRow key={uuidv4()}>
                       <TableCell component="th" scope="row">
                         Chalk url
@@ -380,63 +346,17 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
             Categorization helps us analyze street harassment. No minimum or maximum number required.
           </DialogContentText>
           <FormGroup>
-            <FormControlLabel
-              control={<Checkbox checked={sexual} onChange={handleChange} name="sexual" />}
-              label="Sexual harassment"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={homophobia} onChange={handleChange} name="homophobia" />}
-              label="Homophobia"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={transphobia} onChange={handleChange} name="transphobia" />}
-              label="Transphobia"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={fatphobia} onChange={handleChange} name="fatphobia" />}
-              label="Fatphobia"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={racism} onChange={handleChange} name="racism" />}
-              label="Racism"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={fetishization} onChange={handleChange} name="fetishization" />}
-              label="Fetishization"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={slutshaming} onChange={handleChange} name="slutshaming" />}
-              label="Slutshaming"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={hateSpeech} onChange={handleChange} name="hateSpeech" />}
-              label="Hate speech"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={young} onChange={handleChange} name="young" />}
-              label="Young"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={assault} onChange={handleChange} name="assault" />}
-              label="Assault"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={staring} onChange={handleChange} name="staring" />}
-              label="Staring"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={following} onChange={handleChange} name="following" />}
-              label="Following"
-            />
+            {Object.keys(categoryLibrary).map((category) => (
+                <FormControlLabel
+                  control={<Checkbox checked={statusCategory[category]} onChange={handleChange} name={category} />}
+                  label={categoryLibrary[category]}
+                />
+            ))}
           </FormGroup>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={verificationProcess} color="primary">
-            Continue
-          </Button>
+          <Button onClick={handleClose} color="primary">Cancel</Button>
+          <Button onClick={verificationProcess} color="primary">Continue</Button>
         </DialogActions>
       </Dialog>
 

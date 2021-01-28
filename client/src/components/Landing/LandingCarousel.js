@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Carousel from 'react-material-ui-carousel'
-
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LogoRot from '../../assets/catcallsofrot.png';
 import LogoUtr from '../../assets/catcallsofutr.png';
 import LogoNyc from '../../assets/catcallsofnyc.png';
@@ -12,7 +12,7 @@ function LandingCarousel({ citiesDisplayed }) {
 
   const cities = [
       {
-        name: 'ROTTERDAM',
+        name: 'R\'DAM',
         logo: LogoRot,
         status: 'coming soon'
       },
@@ -87,9 +87,11 @@ function LandingCarousel({ citiesDisplayed }) {
           </div>
         </div>
         <div>
-          <div className="city-name catcall-font"><i className="fas fa-map-marker-alt"></i> {city.name}</div>
+          <div className="city-name catcall-font">
+            <LocationOnIcon fontSize="small" />
+            {city.name}
+          </div>
           <p className="city-description">{city.status}</p>
-          {/* <div className="city-description">{city.status}</div> */}
         </div>
       </div >
     )
