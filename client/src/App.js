@@ -24,6 +24,22 @@ const theme = createMuiTheme({
   }
 });
 
+const categoryLibrary = {
+  'sexual': 'Sexual Harassment',
+  'homophobia': 'Homophobia',
+  'transphobia': 'Transphobia',
+  'fatphobia': 'Fatphobia',
+  'racism': 'Racism',
+  'fetishization': 'Fetishization',
+  'slutshaming': 'Slutshaming',
+  'hateSpeech': 'Hate speech',
+  'young': 'Young',
+  'assault': 'Assault',
+  'staring': 'Staring',
+  'following': 'Following',
+  'other': 'Other',
+}
+
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(['token']);
 
@@ -62,7 +78,7 @@ function App() {
             <Landing />
           </Route>
           <Route exact path="/catcalls">
-            <MapMain />
+            <MapMain categoryLibrary={categoryLibrary} />
           </Route>
           <Route exact path="/catcalls/new">
             <ReportForm />
@@ -71,7 +87,7 @@ function App() {
             <Login setCookie={setCookie}/>
           </Route>
           <Route exact path="/dashboard">
-            <AdminDashboard />
+            <AdminDashboard categoryLibrary={categoryLibrary} />
           </Route>
           <Route exact path="/catcalls/edit">
             <AdminEditForm />

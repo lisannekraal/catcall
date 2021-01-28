@@ -56,26 +56,8 @@ const useRowStyles = makeStyles({
   }
 });
 
-const categoryLibrary = {
-  'sexual': 'Sexual Harassment',
-  'homophobia': 'Homophobia',
-  'transphobia': 'Transphobia',
-  'fatphobia': 'Fatphobia',
-  'racism': 'Racism',
-  'fetishization': 'Fetishization',
-  'slutshaming': 'Slutshaming',
-  'hateSpeech': 'Hate speech',
-  'young': 'Young',
-  'assault': 'Assault',
-  'staring': 'Staring',
-  'following': 'Following'
-}
+function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
 
-function convertToCategoryName(category) {
-  return categoryLibrary[category];
-}
-
-function AdminTableRow({ tab, row, clickButtonUpdate }) {
   let history = useHistory();
   const [open, setOpen] = useState(false);
   const [ buttonstoShow, setButtons ] = useState([]);
@@ -87,21 +69,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
   //for modal to add categorization
   const [ openModal, setOpenModal ] = useState(false);
   const [ hideTooltips, setHideTooltips ] = useState(false);
-  const [ state, setState ] = useState({
-    sexual: false,
-    homophobia: false,
-    transphobia: false,
-    fatphobia: false,
-    racism: false,
-    fetishization: false,
-    slutshaming: false,
-    hateSpeech: false,
-    young: false,
-    assault: false,
-    staring: false,
-    following: false
-  });
-  const { sexual, homophobia, transphobia, fatphobia, racism, fetishization, slutshaming, hateSpeech, young, assault, staring, following } = state;
+  const [ statusCategory, setStatusCategory ] = useState(Object.fromEntries(Object.keys(categoryLibrary).map(category => [category, false])));
 
   useEffect(() => {
     if (row.properties.quote.length > 70) {
@@ -155,8 +123,8 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
 
   function verificationProcess() {
     let categoriesClicked = [];
-    for (const key in state) {
-      if (state[key]) categoriesClicked.push(key);
+    for (const key in statusCategory) {
+      if (statusCategory[key]) categoriesClicked.push(key);
     }
     clickButtonUpdate({
       variables: {
@@ -179,7 +147,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
   };
 
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    setStatusCategory({ ...statusCategory, [event.target.name]: event.target.checked });
   };
 
   function handleClick(button) {
@@ -348,7 +316,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
                       <TableCell>
                         {row.properties.categories.map((category) => (
                           <Button key={uuidv4()} variant="outlined" size="small" color="secondary" style={{marginRight: '2px'}}>
-                            {convertToCategoryName(category)}
+                            {categoryLibrary[category]}
                           </Button>
                         ))}
                       </TableCell>
@@ -380,54 +348,14 @@ function AdminTableRow({ tab, row, clickButtonUpdate }) {
             Categorization helps us analyze street harassment. No minimum or maximum number required.
           </DialogContentText>
           <FormGroup>
-            <FormControlLabel
-              control={<Checkbox checked={sexual} onChange={handleChange} name="sexual" />}
-              label="Sexual harassment"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={homophobia} onChange={handleChange} name="homophobia" />}
-              label="Homophobia"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={transphobia} onChange={handleChange} name="transphobia" />}
-              label="Transphobia"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={fatphobia} onChange={handleChange} name="fatphobia" />}
-              label="Fatphobia"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={racism} onChange={handleChange} name="racism" />}
-              label="Racism"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={fetishization} onChange={handleChange} name="fetishization" />}
-              label="Fetishization"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={slutshaming} onChange={handleChange} name="slutshaming" />}
-              label="Slutshaming"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={hateSpeech} onChange={handleChange} name="hateSpeech" />}
-              label="Hate speech"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={young} onChange={handleChange} name="young" />}
-              label="Young"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={assault} onChange={handleChange} name="assault" />}
-              label="Assault"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={staring} onChange={handleChange} name="staring" />}
-              label="Staring"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={following} onChange={handleChange} name="following" />}
-              label="Following"
-            />
+            {
+              Object.keys(categoryLibrary).map((category) => (
+                <FormControlLabel
+                  control={<Checkbox checked={statusCategory[category]} onChange={handleChange} name={category} />}
+                  label={categoryLibrary[category]}
+                />
+              ))
+            }
           </FormGroup>
         </DialogContent>
         <DialogActions>
