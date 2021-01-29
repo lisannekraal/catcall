@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory, useLocation } from "react-router-dom";
 import { useMutation } from '@apollo/client';
 import { UPDATE_CATCALL } from '../../api/queries';
 import { useForm } from 'react-hook-form';
 
 function AdminEditForm() {
+
   let history = useHistory();
   const location = useLocation();
+  const { t } = useTranslation(['admin']);
   const { register, handleSubmit, errors } = useForm();
   const [updateCatcall] = useMutation(UPDATE_CATCALL);
 
@@ -50,22 +53,20 @@ function AdminEditForm() {
     <>
       <div className="header-footer"></div>
       <div className="report-form" data-testid="report-form">
-        <h1>Edit Catcall</h1>
+        <h1>{t('edit.title', 'default')}</h1>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-
-          {/*if location is edit url, load only 'chalk' functionality, otherwise generic edit catcall/context */}
 
           { location.search === '?edit=url' ? (
 
             <>
               <div className="form-segment">
-                <label htmlFor="context">Catcall quote:</label>
+                <label htmlFor="context">{t('edit.quote', 'default')}</label>
                 <p>{quote}</p>
               </div>
               <div className="form-segment">
-                <label htmlFor="context">The story:</label>
-                <p>{context ? context : "no description provided"}</p>
+                <label htmlFor="context">{t('edit.context', 'default')}</label>
+                <p>{context ? context : t('edit.context-empty', 'default')}</p>
               </div>
             </>
 
@@ -73,7 +74,7 @@ function AdminEditForm() {
 
             <>
               <div className="form-segment">
-                <label htmlFor="quote">Catcall quote*:</label>
+                <label htmlFor="quote">{t('edit.quote', 'default')}</label>
                 <input
                   data-testid="catcall-quote"
                   id="quote"
@@ -92,7 +93,7 @@ function AdminEditForm() {
               </div>
 
               <div className="form-segment">
-                <label htmlFor="context">The story:</label>
+                <label htmlFor="context">{t('edit.context', 'default')}</label>
                 <input
                   id="context"
                   name="context"
@@ -113,17 +114,17 @@ function AdminEditForm() {
           ) }
 
           <div className="form-segment">
-            <label htmlFor="context">Date of Catcall:</label>
+            <label htmlFor="context">{t('edit.date-catcall', 'default')}</label>
             <p>{ dateCatcall ? (new Date(Number(dateCatcall))).toDateString() : "no date"}</p>
           </div>
 
           <div className="form-segment">
-            <label htmlFor="context">Date of submission:</label>
+            <label htmlFor="context">{t('edit.date-report', 'default')}</label>
             <p>{(new Date(Number(dateAdded))).toDateString()}</p>
           </div>
 
           <div className="form-segment">
-            <label htmlFor="context">URL of Instagram image:</label>
+            <label htmlFor="context">{t('edit.url', 'default')}</label>
             <input
               id="url"
               name="url"
@@ -139,9 +140,9 @@ function AdminEditForm() {
             <p className="error-message">{errors.url && errors.url.message}</p>
           </div>
 
-          <button type="button" className="cancel-button" onClick={()=> history.push('/dashboard') }>Cancel</button>
+          <button type="button" className="cancel-button" onClick={()=> history.push('/dashboard') }>{t('edit.cancel', 'default')}</button>
 
-          <input className="submit-button"  type="submit" value="Submit update" />
+          <input className="submit-button"  type="submit" value={t('edit.submit', 'default')} />
 
         </form>
       </div>

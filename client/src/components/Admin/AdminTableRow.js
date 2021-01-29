@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useLazyQuery } from "@apollo/client";
+import { useTranslation } from 'react-i18next';
 import { GET_CATCALL } from '../../api/queries';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -59,6 +60,7 @@ const useRowStyles = makeStyles({
 function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
 
   let history = useHistory();
+  const { t } = useTranslation(['admin']);
   const [open, setOpen] = useState(false);
   const [ buttonstoShow, setButtons ] = useState([]);
   const [ showQuote, setShowQuote ] = useState(row.properties.quote);
@@ -92,31 +94,31 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
     switch (tab) {
       case 'unverified':
         setButtons([
-          { name: 'verify', class: 'greenButton', tooltip: 'Agree to add submitted catcall to our database and map' },
-          { name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content' },
-          { name: 'delete', class: 'redButton', tooltip: 'Move submussion to trash' }
+          { name: t('table.actions.verify.green', 'default'), class: 'greenButton', tooltip: t('table.actions.verify.green-text', 'default') },
+          { name: t('table.actions.verify.yellow', 'default'), class: 'yellowButton', tooltip: t('table.actions.verify.yellow-text', 'default') },
+          { name: t('table.actions.verify.red', 'default'), class: 'redButton', tooltip: t('table.actions.verify.red-text', 'default') }
         ]);
         break;
       case 'chalk':
         setButtons([
-          { name: 'chalk', class: 'greenButton', tooltip: 'Add Insta photo to map and remove catcall from this list' },
-          { name: 'unstage', class: 'redButton', tooltip: 'Decide not to chalk this catcall for now' }
+          { name: t('table.actions.chalk.green', 'default'), class: 'greenButton', tooltip: t('table.actions.chalk.green-text', 'default') },
+          { name: t('table.actions.chalk.red', 'default'), class: 'redButton', tooltip: t('table.actions.chalk.red-text', 'default') }
         ]);
         break;
       case 'database':
         setButtons([
-          { name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content' },
-          { name: 'delete', class: 'redButton', tooltip: 'Remove catcall to trash' }
+          { name: t('table.actions.database.yellow', 'default'), class: 'yellowButton', tooltip: t('table.actions.database.yellow-text', 'default') },
+          { name: t('table.actions.database.red', 'default'), class: 'redButton', tooltip: t('table.actions.database.red-text', 'default') }
         ]);
         break;
       case 'trash':
         setButtons([
-          { name: 'undo', class: 'greenButton', tooltip: 'Move catcall back into database' },
-          { name: 'edit', class: 'yellowButton', tooltip: 'Edit catcall content' }
+          { name: t('table.actions.trash.green', 'default'), class: 'greenButton', tooltip: t('table.actions.trash.green-text', 'default') },
+          { name: t('table.actions.trash.yellow', 'default'), class: 'yellowButton', tooltip: t('table.actions.trash.yellow-text', 'default') }
         ]);
         break;
       default:
-        setButtons([{ name: 'verify', class: 'greenButton' }, { name: 'edit', class: 'yellowButton' }, { name: 'delete', class: 'redButton' }]);
+        setButtons([{ name: t('table.actions.verify.green', 'default'), class: 'greenButton' }, { name: t('table.actions.verify.yellow', 'default'), class: 'yellowButton' }, { name: t('table.actions.verify.red', 'default'), class: 'redButton' }]);
         break;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

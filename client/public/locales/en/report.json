@@ -1,0 +1,34 @@
+{
+  "title": "Report a catcall",
+  "info": {
+    "p1": "Submit your experience through this form. Important:",
+    "p2-bold": "if you are in direct need of help",
+    "p3": "check out",
+    "p4-link": "our resource section",
+    "p5": "Questions about reporting a catcall? Visit our FAQ and house rules",
+    "p5-link": "here"
+  },
+  "quote": {
+    "title": "Catcall quote*:",
+    "help": "Only Catcall text (what exactly has been catcalled)"
+  },
+  "context": {
+    "title": "Your story:",
+    "help": "Additional information, not required. Moderators can edit this part of your report if necessary."
+  },
+  "date": {
+    "title": "Date of Catcall"
+  },
+  "location": {
+    "title": "Location*:",
+    "help": "Click on the map to add the location of the catcall."
+  },
+  "checkbox": {
+    "text": "I account for this catcall report to be true and in accordance with the house rules.*"
+  },
+  "button": {
+    "submit": "Submit new catcall",
+    "cancel": "Cancel"
+  },
+  "dialog": "Your catcall has been reported. Thanks! You won't see it on the map yet. When a moderator has reviewed your submission it will be added to the map automatically."
+}
