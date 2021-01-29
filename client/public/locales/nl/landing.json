@@ -1,0 +1,38 @@
+{
+  "title": "Chalk back",
+  "button": {
+    "view": "Bekijk de kaart",
+    "report": "Meld een nieuwe catcall",
+    "social": "Join op Instagram",
+    "faq": "Zie FAQ en meer"
+  },
+  "subtitle": "Deze organisatie zet zich in tegen straatintimidatie en vervangt geen melding bij de politie. Ben je momenteel in gevaar of heb je direct hulp nodig?",
+  "disclaimer": "Dit is een overzicht van de gemelde catcalls. Disclaimer: deze bevatten gewelddadig taalgebruik, racisme, seksuele intimidatie en hatelijk taalgebruik. Ben je jonger dan 16? Overleg met je voogd.",
+  "subtitle-cta": "Klik hier",                           
+  "cities": {
+    "status-soon": "Binnenkort"
+  },
+  "why": {
+    "title": "Waarom",                         
+    "p1": "Een 'catcall' is wat je wordt nageroepen op straat, meestal beledigend, bedreigend, seksistisch, queerfobisch of racistisch. Dit omvat ook nagesist worden, geen 'nee' accepteren, gevolgd worden en allerlei ander gedrag. Het is ook een vorm van geweld gericht op gender.",
+    "p2": "Wereldwijd pakken jongeren - zoals Catcalls of Amsterdam - straatintimidatie aan. Dit doen we door middel van stoepkrijten in het openbaar, digitale media en educatie. De verhalen van intimidatie worden woord voor woord gekrijt op de plekken waar dit gebeurde met de hashtag #stopstreetharassment en vervolgens gepost op social media om het delen van verhalen en de dialoog te stimuleren.",
+    "p3": "Waarom doen we dit? Enerzijds om de openbare ruimte terug te 'claimen' voor het slachtoffer en hun een stem te geven. Anderzijds om voorbijgangers te laten zien dat catcalling overal gebeurt en een bewustwording hierover te starten. Catcalling wordt nog veen gezien als 'normaal' en dit willen we samen met jou veranderen."
+  },
+  "social": {
+    "title": "Doe mee"
+  },
+  "about": {
+    "title": "Over Catcalls of Amsterdam",
+    "p1": "Catcalls of Amsterdam is opgericht in december 2017, nadat Ambrien in aanraking kwam met het account Catcalls of New York op Instagram. Ze sprak met oprichter Sophie Sandberg en besloot zich aan te sluiten bij de wereldwijde beweging en in Amsterdam te gaan krijten.",
+    "p2": "Ondertussen is het team gegroeid en wordt Catcalls of Amsterdam door vier vrijwilligers geleid: Ambrien, Margriet, Paula en Zessiah. Samen met 150 vergelijkbare organisaties in andere steden 'krijten we terug'. Ons doel is een plek te bieden om ervaringen te delen over straatintimidatie en de verhalen te gebruiken voor bewustwording en denormalisering.",
+    "p3": "Buiten ons platform op Instagram gebruiken we deze applicatie om onze catcall database op de kaart te zetten én het makkelijker te maken om een melding te doen. Probeer het uit en neem contact op als je vragen hebt."
+  },
+  "footer": {
+    "title": "Over deze applicatie",
+    "content": "Dit is een project voor Catcalls of Amsterdam door Lisanne Kraal. Geïnspireerd door deze jonge activisten, nam Lisanne contact op met de organisatie om hun enorme database in kaart te brengen op een interactieve manier. Dit is de eerste versie van een project in wording. Heb je feedback of wil je bijdragen? Neem contact met ons op.",
+    "contact-title": "Contact",
+    "contact-name": "Catcalls of Amsterdam",
+    "contact-insta": "PM op Instagram",
+    "contact-email": "Stuur ons een mail"
+  }
+}

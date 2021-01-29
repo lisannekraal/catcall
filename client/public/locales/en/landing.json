@@ -1,0 +1,38 @@
+{
+  "title": "Chalk back",
+  "button": {
+    "view": "View catcalls on map",
+    "report": "Report a new catcall",
+    "social": "Join the community on Instagram",
+    "faq": "Check out FAQ"
+  },
+  "subtitle": "This initiative is standing up against street harassment and does not replace reporting your issue to the police. Are you currently in danger or need help right away?",
+  "disclaimer": "This is an overview of all catcalls reported. Disclaimer: this application contains violent language and words of racism, sexual harassment and hate speach. Are you younger than 16 years old? Ask your guardian.",
+  "subtitle-cta": "Click here",                           
+  "cities": {
+    "status-soon": "coming soon"
+  },
+  "why": {
+    "title": "Why",
+    "p1": "A catcall is basically everything sexist, insulting, queerphobic, racist or else shouted after and at you in the streets. This also includes wolf whistling, being followed, not accepting a “no” and encompasses a host of other behaviours. It is a form of gender-based violence.",
+    "p2": "Worldwide, youth-led movements - like Catcalls of Amsterdam - are committed to ending gender-based street harassment with public chalk art, digital media and education. We write stories of harassment word-for-word in the spots where they happened alongside the hashtag #stopstreetharassment using sidewalk chalk and then post on social media to spur dialogue and story sharing.",
+    "p3": "Why do we do this? On the one hand, we want to claim back the space of the harassment for the victim and give them a voice. On the other hand we want to show those passing our chalk art that catcalling happens everywhere and engage them in a discussion about it. Catcalling is still too normal in our society and we want to change that, together with you."
+  },
+  "social": {
+    "title": "Get involved"
+  },
+  "about": {
+    "title": "About Catcalls of Amsterdam",
+    "p1": "Catcalls of Amsterdam is founded in December 2017, after Ambrien found the account Catcalls of New York on Instagram. After talking with Sophie Sandberg, its founder, she decided to join the movement and start chalking in Amsterdam.",
+    "p2": "In the meantime our team grew and is organised by four people: Ambrien, Margriet, Paula and Zessiah. Together with 150 other initiatives worldwide, we 'chalk back'. Our goal is to provide a place to share experiences on street harassment and use people's stories to create awereness around catcalling and denormalize it.",
+    "p3": "With this application outside of Instagram, we show our catcalling database on the map and make it easier for any victim to report their experience. Check it out and contact us if you have any questions."
+  },
+  "footer": {
+    "title": "About this map application",
+    "content": "This is a project for Catcalls of Amsterdam by Lisanne Kraal. Inspired by the young activists, she contacted the organization to help them mapping their enormous database in an interactive way. This is a first version of a project under construction. Any feedback or want to contribute? Contact us.",
+    "contact-title": "Contact",
+    "contact-name": "Catcalls of Amsterdam",
+    "contact-insta": "PM on Instagram",
+    "contact-email": "Send us an email"
+  }
+}

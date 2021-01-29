@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Carousel from 'react-material-ui-carousel'
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LogoRot from '../../assets/catcallsofrot.png';
@@ -10,43 +10,45 @@ import { v4 as uuidv4 } from 'uuid';
 
 function LandingCarousel({ citiesDisplayed }) {
 
+  const { t } = useTranslation(['landing']);
+
   const cities = [
       {
         name: 'R\'DAM',
         logo: LogoRot,
-        status: 'coming soon'
+        status: t('cities.status-soon', 'default')
       },
       {
         name: 'UTRECHT',
         logo: LogoUtr,
-        status: 'coming soon'
+        status: t('cities.status-soon', 'default')
       },
       {
         name: 'NEW YORK',
         logo: LogoNyc,
-        status: 'coming soon'
+        status: t('cities.status-soon', 'default')
       },
       {
         name: 'ANTWERP',
         logo: LogoNyc,
-        status: 'coming soon'
+        status: t('cities.status-soon', 'default')
       },
       {
         name: 'BERLIN',
         logo: LogoNyc,
-        status: 'coming soon'
+        status: t('cities.status-soon', 'default')
       },
       {
         name: 'GRONINGEN',
         logo: LogoGrunn,
-        status: 'coming soon'
+        status: t('cities.status-soon', 'default')
       }
   ];
 
   function citiesToDisplay(citiesPerRow) {
     let count = 0;
     let row = 0;
-    let citiesList = [[]]
+    let citiesList = [[]];
 
     for(let i = 0; i < cities.length; i++) {
       let city = cities[i];

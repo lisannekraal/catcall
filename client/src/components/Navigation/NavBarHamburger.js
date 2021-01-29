@@ -13,10 +13,12 @@ import MapIcon from '@material-ui/icons/Map';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import SettingsIcon from '@material-ui/icons/Settings';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import LanguageIcon from '@material-ui/icons/Language';
 import { HashLink as Link } from 'react-router-hash-link';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { v4 as uuidv4 } from 'uuid';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles({
   list: {
@@ -27,10 +29,11 @@ const useStyles = makeStyles({
     textTransform: `uppercase`,
     color: `black`,
   },
-})
+});
 
 function NavBarHamburger({ loggedIn, setLoggedIn, removeCookie }) {
 
+  const { t, i18n } = useTranslation(['navigation']);
   let history = useHistory();
   const classes = useStyles();
 
@@ -44,6 +47,16 @@ function NavBarHamburger({ loggedIn, setLoggedIn, removeCookie }) {
     }
     setDrawerState({ [anchor]: open })
   }
+
+  const changeLanguage = code => {
+    const getCurrentLng = () => i18n.language || window.localStorage.i18nextLng || '';
+
+    if (getCurrentLng() === 'nl') {
+      i18n.changeLanguage('en');
+    } else {
+      i18n.changeLanguage('nl');
+    }
+  };
 
   const sideDrawerList = anchor => (
     <div
@@ -60,7 +73,7 @@ function NavBarHamburger({ loggedIn, setLoggedIn, removeCookie }) {
               <InfoIcon />
             </ListItemIcon>
             <ListItemText primary={
-              <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>About</Typography>
+              <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>{t('navbar.about', 'default')}</Typography>
             }/>
           </ListItem>
         </Link>
@@ -70,7 +83,7 @@ function NavBarHamburger({ loggedIn, setLoggedIn, removeCookie }) {
             <MapIcon />
           </ListItemIcon>
           <ListItemText  primary={
-            <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>Map</Typography>
+            <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>{t('navbar.map', 'default')}</Typography>
           }/>
         </ListItem>
 
@@ -79,7 +92,7 @@ function NavBarHamburger({ loggedIn, setLoggedIn, removeCookie }) {
             <InstagramIcon />
           </ListItemIcon>
           <ListItemText  primary={
-            <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>Community</Typography>
+            <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>{t('navbar.community', 'default')}</Typography>
           }/>
         </ListItem>
 
@@ -90,7 +103,7 @@ function NavBarHamburger({ loggedIn, setLoggedIn, removeCookie }) {
                 <SettingsIcon />
               </ListItemIcon>
               <ListItemText  primary={
-                <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>Dashboard</Typography>
+                <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>{t('navbar.dashboard', 'default')}</Typography>
               }/>
             </ListItem>
 
@@ -103,7 +116,7 @@ function NavBarHamburger({ loggedIn, setLoggedIn, removeCookie }) {
                 <AccountCircleIcon />
               </ListItemIcon>
               <ListItemText  primary={
-                <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>Logout</Typography>
+                <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>{t('navbar.logout', 'default')}</Typography>
               }/>
             </ListItem>
           </>
@@ -113,17 +126,26 @@ function NavBarHamburger({ loggedIn, setLoggedIn, removeCookie }) {
             <SettingsIcon />
           </ListItemIcon>
           <ListItemText  primary={
-            <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>Moderator</Typography>
+            <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>{t('navbar.moderator', 'default')}</Typography>
           }/>
         </ListItem>
         }
+
+        <ListItem button key={uuidv4()} onClick={() => changeLanguage()}>
+          <ListItemIcon>
+            <LanguageIcon />
+          </ListItemIcon>
+          <ListItemText  primary={
+            <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>{t('navbar.lang', 'default')}</Typography>
+          }/>
+        </ListItem>
 
         <ListItem button key={uuidv4()} onClick={() => history.push("/catcalls/new")} style={{background: 'rgb(245, 37, 89)'}}>
           <ListItemIcon>
             <AddCircleOutlineIcon />
           </ListItemIcon>
           <ListItemText  primary={
-            <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>Report a new CatCall</Typography>
+            <Typography variant="button" style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}}>{t('navbar.report-button', 'default')}</Typography>
           }/>
         </ListItem>
 

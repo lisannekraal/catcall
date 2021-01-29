@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { useQuery } from '@apollo/client';
 import { GET_MODERATOR_BY_TOKEN } from '../../api/queries';
+import { useTranslation } from 'react-i18next';
 
 import NavBarHamburger from './NavBarHamburger';
 import logo from '../../assets/Logo2.png'
@@ -17,6 +18,7 @@ import MapIcon from '@material-ui/icons/Map';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import SettingsIcon from '@material-ui/icons/Settings';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import LanguageIcon from '@material-ui/icons/Language';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
@@ -45,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 function NavBar({ removeCookie }) {
 
+  const { t, i18n } = useTranslation(['navigation']);
   let history = useHistory();
   const classes = useStyles();
   const [ loggedIn, setLoggedIn ] = useState(false);
@@ -56,6 +59,16 @@ function NavBar({ removeCookie }) {
     }
   }, [data])
 
+  const changeLanguage = code => {
+    const getCurrentLng = () => i18n.language || window.localStorage.i18nextLng || '';
+
+    if (getCurrentLng() === 'nl') {
+      i18n.changeLanguage('en');
+    } else {
+      i18n.changeLanguage('nl');
+    }
+  };
+
   return (
     <AppBar color='transparent' position="absolute" elevation={0} data-testid="navbar">
       <Toolbar style={{ color: 'white' }}>
@@ -64,7 +77,7 @@ function NavBar({ removeCookie }) {
 
           <div className="navbar-brand" onClick={() => history.push("/")}>
             <img src={logo} alt="logo" className={classes.logo} />
-            <div className="catcall-font"> Catcalls of Amsterdam</div>
+            <div className="catcall-font"> {t('title', 'default')}</div>
           </div>
 
           <Hidden mdDown>
@@ -74,20 +87,20 @@ function NavBar({ removeCookie }) {
                 to="/#about"
                 className="about-link" >
                 <Button key={uuidv4()} color='inherit' style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} startIcon={<InfoIcon />} >
-                  About
+                  {t('navbar.about', 'default')}
                 </Button>
               </Link>
               <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => history.push({pathname: '/catcalls'})} color='inherit' startIcon={<MapIcon />}>
-                  Map
+                {t('navbar.map', 'default')}
               </Button>
               <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => window.open('https://www.instagram.com/catcallsofams/', '_blank')} color='inherit' startIcon={<InstagramIcon />}>
-                  Community
+                {t('navbar.community', 'default')}
               </Button>
 
               { loggedIn ?
                 <>
                   <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => history.push('/dashboard')} color='inherit' startIcon={<SettingsIcon />}>
-                    Dashboard
+                    {t('navbar.dashboard', 'default')}
                   </Button>
 
                   <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => {
@@ -95,21 +108,25 @@ function NavBar({ removeCookie }) {
                     setLoggedIn(false);
                     history.push('/');
                   }} color='inherit' startIcon={<AccountCircleIcon />}>
-                    Logout
+                    {t('navbar.logout', 'default')}
                   </Button>
                 </>
               :
                 <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => history.push('/login')} color='inherit' startIcon={<SettingsIcon />}>
-                  Moderator
+                  {t('navbar.moderator', 'default')}
                 </Button>
               }
+
+              <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => changeLanguage()} color='inherit' startIcon={<LanguageIcon />}>
+                {t('navbar.lang', 'default')}
+              </Button>
               
             </List>
           </Hidden>
               
 
           <Hidden mdDown>
-            <Button style={{textTransform: 'none', fontSize: '16px'}} key={uuidv4()} color="inherit" className={classes.navButton} onClick={() => history.push("/catcalls/new")}>Report a new CatCall</Button>
+            <Button style={{textTransform: 'none', fontSize: '16px'}} key={uuidv4()} color="inherit" className={classes.navButton} onClick={() => history.push("/catcalls/new")}>{t('navbar.report-button', 'default')}</Button>
           </Hidden>
 
         </Container>

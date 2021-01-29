@@ -1,0 +1,13 @@
+{
+  "title": "Catcalls of Amsterdam",
+  "navbar": {
+    "about": "About",
+    "map": "Map",
+    "community": "Community",
+    "dashboard": "Dashboard",
+    "moderator": "Moderator",
+    "logout": "Logout",
+    "lang": "NL",
+    "report-button": "Report a new Catcall"
+  }
+}

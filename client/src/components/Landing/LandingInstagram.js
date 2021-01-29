@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function LandingInstagram() {
   return (
@@ -6,4 +6,4 @@ function LandingInstagram() {
   )
 }
 
-export default LandingInstagram
+export default LandingInstagram;
