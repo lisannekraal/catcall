@@ -1,0 +1,33 @@
+{
+  "help": {
+    "title": "Need help?",
+    "p": "This application collects stories of street harassment and creates awareness by 'chalking back'. It is not possible for us to help those in urgent need. If in any way you feel like you are in danger or would like to reach out for help, do not hesitate to use the following resources:",
+    "li-police": "Emergency phone number Dutch police:",
+    "li-police2": "Non-emergency number Dutch Police:",
+    "li-lhbti": "Non-emergency number for reporting LHBTI+ harassment:",
+    "li-lhbti2": "and for more info",
+    "li-lhbti-link": "click here",
+    "li-tolk": "Contacting police in case you need an interpreter (sign language):",
+    "li-tolk-link": "'tolkcontact-app'",
+    "li-police-behavior": "National phone number 'alarming behaviour' (police):"
+  },
+  "house-rules": {
+    "title": "House rules and privacy",
+    "p1": "Information submitted as catcalls is used in confidentiality. A catcall can be reported completely anonymous. No personal details are asked or saved in this process.",
+    "p2": "This also accounts for the perperators. You are allowed to share anything about this catcall, as long as it does not contain any recognizable, personal characteristics of the person who did this. Submissions holding details of racism, homophobia or any kind of hate speach are not tolerated.",
+    "p3": "To ensure this, CatcallsofAms' moderators are allowed to cut/adjust the report. Do you have questions about this? Reach out with the organisors, for example through Instagram DM."
+  },
+  "faq": {
+    "title": "FAQ",
+    "Q1": "Can someone find out I did the report?",
+    "A1": "No, no one can find out you reported the catcall by navigating through the map or hacking our database. The report is completely anonymous and no personal details from your device are saved.",
+    "Q2": "I would like to report a catcall, but I am not sure if what happened it enough to be called street harassment. How do I know if its a catcall?",
+    "A2": "If what you are experiencing is uncomfortable or crossing personal boundaries, you are welcome to report your story. Your experience is your experience, no one can judge that. A lot of victims of catcalling actually will not even notice because this phenomenon has become so 'normal' in society. We fight this by 'chalking back'. So it's totally okay to report your catcall and use the story section to explain your situation.",
+    "Q3": "Does this also exist for my city? Can I submit a report for my own town?",
+    "A3": "Local chalk back initiatives exist all over the world, in more than 150 cities. Search on Instagram with your city name or check the complete list on Chalkback.org. If you use this form to submit your catcall story outside of Amsterdamn, it will be send to moderators of other cities (if there are any) and not displayed on Amsterdam's map.",
+    "Q4": "How can I contribute to fighting street harassment?",
+    "A4-1": "Spread the word: share this application, tell people about this initiative,share the posts on instagram, like and comment.",
+    "A4-2": "Become a local 'Catcalls of...' for your own town/city. Check Chalkback.org for more information.",
+    "A4-3": "Get in touch with CatcallsofAms or your local initiatives and volunteer on a regular basis to chalk newly reported catcalls."
+  }
+}

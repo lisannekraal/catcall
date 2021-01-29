@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useMutation } from '@apollo/client';
@@ -21,6 +22,8 @@ const useStyles = makeStyles({
 });
 
 export default function MapPopup ({ catcall, categoryLibrary }) {
+
+  const { t } = useTranslation(['map']);
   const classes = useStyles();
   const [upvoteCatcall] = useMutation(UPVOTE_CATCALL);
   const [ updated, setUpdated ] = useState(false);
@@ -75,10 +78,14 @@ export default function MapPopup ({ catcall, categoryLibrary }) {
         </CardContent>
         <CardActions>
           { catcall.properties.url ?
-            <MapSideImage url={catcall.properties.url} />
+            <MapSideImage 
+              url={catcall.properties.url} 
+              text={t('popup.chalk-text', 'default')} 
+              help={t('popup.chalk-help', 'default')} 
+              button={t('popup.chalk-button', 'default')} />
             : <></>
           }
-          <Tooltip title="Boooooo!" arrow>
+          <Tooltip title={t('popup.upvote-help', 'default')} arrow>
             <Button size="small" color="primary" onClick={() => upvoteClick()} disabled={updated}>
               <ThumbDownIcon style={{color: 'rgb(245, 37, 89)', fontSize: '17px', marginRight: '3px'}} />
               <span>{displayVotes}</span>

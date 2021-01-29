@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
@@ -14,6 +15,8 @@ import Fab from '@material-ui/core/Fab';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
 function MapMain ({ categoryLibrary }) {
+
+  const { t } = useTranslation(['map']);
   const [ popup, setPopup ] = useState("");
   const { loading, error, data } = useQuery(GET_MAP_CATCALLS);
   const location = useLocation();
@@ -51,16 +54,13 @@ function MapMain ({ categoryLibrary }) {
       });
     });
     if (index === 0) {
-      //filter back to all catcalls
       setGeojsonData(originalAdjustedArr);
     } else if (index === 1) {
-      //filter to chalked catcalls
       const newDataObj = originalAdjustedArr.filter(function(item) {
         return item.properties.chalked === true;
       });
       setGeojsonData(newDataObj);
     } else {
-      //filter to not chalked catcalls
       const newDataObj = originalAdjustedArr.filter(function(item) {
         return item.properties.chalked === false;
       });
@@ -165,13 +165,11 @@ function MapMain ({ categoryLibrary }) {
           <FullscreenControl position='top-right' />
           <ScaleControl unit='metric' maxWidth="100" position='bottom-right' />
 
-          {/* floating action button if filter is closed */}
           { !filterOpen && <Fab variant="extended" style={{textTransform: 'none', marginTop: '15px', marginLeft: '15px', color: 'white', backgroundColor: 'rgb(245, 37, 89)'}} onClick={e => {setFilterOpen(true)}}>
             <FilterListIcon />
-              Open map filters
+              {t('filter.button', 'default')}
           </Fab>}
 
-          {/* open filter: paper, card? */}
           {filterOpen &&
             <MapFilter
               setFilterOpen={setFilterOpen}

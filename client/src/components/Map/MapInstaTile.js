@@ -28,7 +28,6 @@ export default function MapInstaTile ({ url }) {
         onAfterRender={() => {}}
         onFailure={() => {}}
       />
-      {/* width: '99.375%', width: '-webkit-calc(100% - 2px)', width: 'calc(100% - 2px)' */}
       <blockquote className="instagram-media" data-instgrm-permalink={link} data-instgrm-version="13" style={{ background: '#FFF', border: 0, borderRadius: '3px', boxShadow: '0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)', margin: '1px', maxWidth: '135px', minWidth: '0px', padding: 0, width: '-webkit-calc(100% - 2px)'}}>
         <div style={{ padding: '1px'}}>
             <a href={link} style={{ background: '#FFFFFF', lineHeight: 0, padding: '0 0', textAlign: 'center', textDecoration: 'none', width: '100%'}} target="_blank" rel="noreferrer">

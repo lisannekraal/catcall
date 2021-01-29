@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -6,7 +7,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 
 export default function MapDialogComp({ text, state }) {
+
   const [open, setOpen] = useState(state);
+  const { t } = useTranslation(['map']);
 
   const handleClose = () => {
     setOpen(false);
@@ -26,7 +29,7 @@ export default function MapDialogComp({ text, state }) {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary" autoFocus>
-          Okay
+          {t('dialog-button', 'default')}
         </Button>
       </DialogActions>
     </Dialog>

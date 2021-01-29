@@ -8,6 +8,9 @@ i18n
   .use(initReactI18next) // connect with React
   .init({
     debug: true,
+    react: {
+      useSuspense: false,
+    },
  
     lng: 'nl',
     fallbackLng: 'nl',

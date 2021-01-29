@@ -1,0 +1,33 @@
+{
+  "help": {
+    "title": "Hulp nodig?",
+    "p": "Deze app verzamelt verhalen over straatintimidatie en 'krijt terug'. Het is voor ons niet mogelijk om jou te helpen als je met spoed hulp nodig hebt. Als je je op de een of andere manier in gevaar voelt of hulp nodig hebt, kan je gebruik maken van onderstaande hulplijnen.",
+    "li-police": "Noodnummer politie:",
+    "li-police2": "Politie zonder spoed:",
+    "li-lhbti": "Meldpunt 'Roze in Blauw' inzake LHBTI+ intimidatie: ",
+    "li-lhbti2": "en voor meer info",
+    "li-lhbti-link": "klik hier",
+    "li-tolk": "Contact met de politie voor het geval je een tolk nodig hebt: ",
+    "li-tolk-link": "'tolkcontact-app'",
+    "li-police-behavior": "Nationaal nummer voor zorgwekkend gedrag:"
+  },
+  "house-rules": {
+    "title": "Huisregels en privacy",
+    "p1": "De informatie die je geeft bij het melden van een catcall is vertrouwelijk. Je kunt deze melding compleet anoniem doen. We slaan geen persoonlijke gegevens op.",
+    "p2": "Dit geldt ook voor de daders. Let er op dat je tijdens het delen van je verhaal geen herkenbare, persoonlijke kenmerken van de dader vrijgeeft. Ook racistische, homofobische of hatelijke catcall meldingen worden niet getolereerd.",
+    "p3": "Om dit te garanderen kunnen onze moderators jouw catcall melding inkorten of aanpassen. Heb je hier vragen over? Neem contact met ons op."
+  },
+  "faq": {
+    "title": "FAQ",
+    "Q1": "Kan er iemand achter komen dat ik de melding heb gedaan?",
+    "A1": "Nee, niemand kan er achter komen door middel van het bekijken van de kaart of het hacken van onze database. De melding is compleet anoniem en er worden geen persoonlijke gegevens opgeslagen.",
+    "Q2": "Ik wil graag een melding doen, maar ik weet niet zeker of mijn catcall wel 'erg genoeg' is. Hoe weet ik of een catcall een catcall is?",
+    "A2": "Als wat je ervaren hebt oncomfortabel is of je persoonlijke grenzen overschrijdt ben je welkom de melding te doen. Jouw ervaring is jouw ervaring en een ander kan daar geen oordeel over vellen. Veel slachtoffers van catcalling delen hun verhaal niet omdat het zo genormaliseerd is in onze maatschappij. We bevechten dit door 'terug te krijten'. Kortom, het is helemaal okay om jouw catcall te melden en gebruik het 'verhaal' gedeelte om de situatie uit te leggen.",
+    "Q3": "Bestaat dit ook voor mijn stad? Kan ik een melding doen voor mijn eigen dorp of stad?",
+    "A3": "Lokale 'chalk back' initiatieven bestaan overal ter wereld, in meer dan 150 steden. Zoek op Instagram met de naam van jouw stad of check the complete lijst op Chalkback.org. Als je via deze app een melding doet van een catcall buiten Amsterdam, zal het gedeeld worden met moderators uit jouw stad (als die er zijn) en niet worden laten zien op deze kaart.",
+    "Q4": "Hoe kan ik bijdragen om straatintimidatie te bestrijden?",
+    "A4-1": "Spread the word: deel deze applicatie, vertel anderen over dit initiatief en deel/like/comment de krijt posts op Instagram.",
+    "A4-2": "Wordt een lokale 'Catcalls of...' voor jouw eigen stad/dorp. Check Chalkback.org voor meer informatie.",
+    "A4-3": " Neem contact op met ons of een organisator in jouw eigen stad om op een regelmatige basis te vrijwilligen door mee te doen met krijten."
+  }
+}

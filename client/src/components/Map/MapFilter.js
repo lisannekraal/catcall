@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useTranslation } from 'react-i18next';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 import Input from '@material-ui/core/Input';
@@ -56,9 +57,6 @@ const MenuProps = {
   getContentAnchorEl: null
 };
 
-const chalkedOrNot = ['Show all catcalls', 'Show chalked catcalls', 'Show not yet chalked'];
-
-
 function MapFilter2 ({ setFilterOpen, categoryLibrary, filterChalked, filterCategories }) {
 
   const classes = useStyles();
@@ -66,6 +64,9 @@ function MapFilter2 ({ setFilterOpen, categoryLibrary, filterChalked, filterCate
   const [openChalk, setOpenChalk] = useState(false);
   const anchorRef = useRef(null);
   const [selectedIndexChalk, setSelectedIndexChalk] = useState(0);
+  const { t } = useTranslation(['map']);
+
+  const chalkedOrNot = [t('filter.chalked-all', 'default'), t('filter.chalked-yes', 'default'), t('filter.chalked-no', 'default')];
 
   const handleCategoryChange = (event) => {
     setCategoryName(event.target.value);
@@ -105,7 +106,7 @@ function MapFilter2 ({ setFilterOpen, categoryLibrary, filterChalked, filterCate
     >
 
       <div style={{marginLeft: '15px', marginRight: '5px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
-        <h1 className="catcall-font">Filter catcalls</h1>
+        <h1 className="catcall-font">{t('filter.title', 'default')}</h1>
         <IconButton onClick={e => {handleExitFilter()}} style={{color: 'white'}} >
           <HighlightOffIcon />
         </IconButton>
@@ -154,7 +155,7 @@ function MapFilter2 ({ setFilterOpen, categoryLibrary, filterChalked, filterCate
         </Popper>
 
         <FormControl className={classes.formControl}>
-          <InputLabel id="category-checkbox-label" style={{color: 'white'}}>Filter by tag</InputLabel>
+          <InputLabel id="category-checkbox-label" style={{color: 'white'}}>{t('filter.tag', 'default')}</InputLabel>
           <Select
             style={{color: 'white'}}
             labelId="category-checkbox-label"
