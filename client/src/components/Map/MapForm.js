@@ -79,7 +79,7 @@ function GeocodeControl ({ position, accessToken }) {
     return () => {
       map?.removeControl(control)
     }
-  }, [map, position]);
+  }, [map, position, accessToken]);
 
   return null
 }
