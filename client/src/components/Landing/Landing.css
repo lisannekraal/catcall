@@ -14,6 +14,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 50px;
 }
 
 @media screen and (min-height: 650px) {
@@ -91,7 +92,7 @@
 }
 
 .why-title {
-  font-size: 7rem;
+  font-size: 5rem;
   color: rgb(29, 113, 183);
 }
 

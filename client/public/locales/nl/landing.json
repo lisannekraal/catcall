@@ -2,7 +2,7 @@
   "title": "Chalk back",
   "button": {
     "view": "Bekijk de kaart",
-    "report": "Meld een nieuwe catcall",
+    "report": "Doe een melding",
     "social": "Join op Instagram",
     "faq": "Zie FAQ en meer"
   },
@@ -10,7 +10,7 @@
   "disclaimer": "Dit is een overzicht van de gemelde catcalls. Disclaimer: deze bevatten gewelddadig taalgebruik, racisme, seksuele intimidatie en hatelijk taalgebruik. Ben je jonger dan 16? Overleg met je voogd.",
   "subtitle-cta": "Klik hier",                           
   "cities": {
-    "status-soon": "Binnenkort"
+    "status-soon": "binnenkort"
   },
   "why": {
     "title": "Waarom",                         
