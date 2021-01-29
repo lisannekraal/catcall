@@ -1,0 +1,70 @@
+{
+  "label": {
+    "verify": "Verify pending",
+    "chalk": "To Chalk",
+    "database": "Database",
+    "trash": "Trash",
+    "settings": "Mod settings"
+  },
+  "edit": {
+    "title": "Edit catcall",
+    "quote": "Catcall quote*:",
+    "context": "The story:",
+    "context-empty": "No description provided",
+    "date-catcall": "Date of catcall:",
+    "date-report": "Date of submission:",
+    "url": "URL of Instagram image",
+    "cancel": "Cancel",
+    "submit": "Submit update"
+  },
+  "mod-settings": {
+    "authorization": "Authorization",
+    "delete": "Delete",
+    "delete-help": "Permanently delete moderator",
+    "subtitle": "More",
+    "new": "Add new moderator",
+    "username": "Choose username",
+    "password": "Choose password",
+    "submit": "Add"
+  },
+  "table": {
+    "empty": {
+      "verify": "No new catcalls to verify",
+      "chalk": "No catcalls on the list to chalk",
+      "database": "Database is empty",
+      "trash": "No catcalls currently in trash"
+    },
+    "empty-trash": {
+      "title": "Empty trash",
+      "button": "Permanently empty trash"
+    },
+    "actions": {
+      "verify": {
+        "green": "verify",
+        "green-text": "Agree to add submitted catcall to our database and map",
+        "yellow": "edit",
+        "yellow-text": "Edit catcall content",
+        "red": "delete",
+        "red-text": "Move submission to trash"
+      },
+      "chalk": {
+        "green": "chalk",
+        "green-text": "Add Insta photo to this catcall",
+        "red": "unstage",
+        "red-text": "Decide not to chalk this catcall for now"
+      },
+      "database": {
+        "yellow": "edit",
+        "yellow-text": "Edit catcall content",
+        "red": "delete",
+        "red-text": "Move catcall to trash"
+      },
+      "trash": {
+        "green": "undo",
+        "green-text": "Move catcall back into database",
+        "yellow": "edit",
+        "yellow-text": "Edit catcall content"
+      }
+    }
+  }
+}

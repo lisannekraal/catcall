@@ -1,0 +1,70 @@
+{
+  "label": {
+    "verify": "Te verifiëren",
+    "chalk": "Om te krijten",
+    "database": "Database",
+    "trash": "Prullenbak",
+    "settings": "Instellingen"
+  },
+  "edit": {
+    "title": "Edit catcall",
+    "quote": "Catcall quote*:",
+    "context": "Het verhaal:",
+    "context-empty": "Geen extra verhaal bij deze melding",
+    "date-catcall": "Datum catcall:",
+    "date-report": "Datum melding:",
+    "url": "URL van Instagram foto",
+    "cancel": "Annuleer",
+    "submit": "Verzend update"
+  },
+  "mod-settings": {
+    "authorization": "Authorisatie",
+    "delete": "Delete",
+    "delete-help": "Delete moderator (permanent)",
+    "subtitle": "Meer",
+    "new": "Nieuwe moderator",
+    "username": "Kies username",
+    "password": "Kies wachtwoord",
+    "submit": "Voeg toe"
+  },
+  "table": {
+    "empty": {
+      "verify": "Geen nieuwe catcalls om te verifiëren",
+      "chalk": "Geen catcall op de lijst om te krijten",
+      "database": "De database is momenteel leeg",
+      "trash": "De prullenbak is leeg"
+    },
+    "empty-trash": {
+      "title": "Leeg de prullenbak",
+      "button": "Verwijder definitief alle catcalls"
+    },
+    "actions": {
+      "verify": {
+        "green": "check",
+        "green-text": "Akkoord voor deze catcall om toegevoegd te worden aan onze database",
+        "yellow": "edit",
+        "yellow-text": "Edit catcall content",
+        "red": "delete",
+        "red-text": "Gooi deze catcall in de prullenbak"
+      },
+      "chalk": {
+        "green": "krijt",
+        "green-text": "Voeg insta foto toe aan deze catcall",
+        "red": "later",
+        "red-text": "Catcall wordt nu nog niet gekrijt"
+      },
+      "database": {
+        "yellow": "edit",
+        "yellow-text": "Pas de inhoud aan",
+        "red": "delete",
+        "red-text": "Gooi deze catcall in de prullenbak"
+      },
+      "trash": {
+        "green": "undo",
+        "green-text": "Zet catcall terug in de database",
+        "yellow": "edit",
+        "yellow-text": "Pas de inhoud aan"
+      }
+    }
+  }
+}

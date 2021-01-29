@@ -1,0 +1,17 @@
+{
+  "dialog-button": "Oké",
+  "filter": {
+    "button": "Open kaart filters",
+    "title": "Filter catcalls",
+    "chalked-all": "Alle catcalls",
+    "chalked-yes": "Gekrijte catcalls",
+    "chalked-no": "Nog niet gekrijt",
+    "tag": "Filter op categorie"
+  },
+  "popup": {
+    "chalk-text": "Chalked back",
+    "chalk-help": "Opent krijt foto links",
+    "chalk-button": "Sluit en terug naar kaart",
+    "upvote-help": "Vind ik niet leuk"
+  }
+}

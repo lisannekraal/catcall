@@ -1,8 +1,8 @@
 {
   "title": "Chalk back",
   "button": {
-    "view": "View catcalls on map",
-    "report": "Report a new catcall",
+    "view": "Catcall map",
+    "report": "Report a catcall",
     "social": "Join the community on Instagram",
     "faq": "Check out FAQ"
   },

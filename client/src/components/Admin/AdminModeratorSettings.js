@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 import { GET_MODERATORS, CREATE_MODERATOR, REMOVE_MODERATOR } from '../../api/queries';
 import { useForm } from 'react-hook-form';
 
@@ -27,6 +28,7 @@ import { v4 as uuidv4 } from 'uuid';
 export default function AdminModeratorSettings({authorized}) {
 
   const [ moderators, setModerators ] = useState([]);
+  const { t } = useTranslation(['admin']);
   let { loading, error, data } = useQuery(GET_MODERATORS);
   const [ createModerator ] = useMutation(CREATE_MODERATOR, {
     refetchQueries: [  {query: GET_MODERATORS} ]
@@ -86,8 +88,8 @@ export default function AdminModeratorSettings({authorized}) {
                   <TableCell></TableCell>
                 </Hidden>
                 <TableCell><h4>Username</h4></TableCell>
-                <TableCell><h4>Authorization</h4></TableCell>
-                <TableCell><h4>Delete</h4></TableCell>
+                  <TableCell><h4>{t('mod-settings.authorization', 'default')}</h4></TableCell>
+                <TableCell><h4>{t('mod-settings.delete', 'default')}</h4></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -100,7 +102,7 @@ export default function AdminModeratorSettings({authorized}) {
                   <TableCell>{moderator.canAdd ? 'Full' : 'Partial'}</TableCell>
                   <TableCell>
                     { !moderator.canAdd ? 
-                      <Tooltip title="Permanently delete moderator" arrow>
+                      <Tooltip title={t('mod-settings.delete-help', 'default')} arrow>
                         <Delete style={{cursor: 'pointer'}} onClick={() => deleteMod(moderator)} />
                       </Tooltip> 
                       :
@@ -114,7 +116,7 @@ export default function AdminModeratorSettings({authorized}) {
       </TableContainer>
       { authorized &&
         <>
-          <h3 style={{margin: '19px', paddingTop: '20px'}}>More</h3>
+          <h3 style={{margin: '19px', paddingTop: '20px'}}>{t('mod-settings.subtitle', 'default')}</h3>
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -122,13 +124,13 @@ export default function AdminModeratorSettings({authorized}) {
               id="panel2a-header"
               style={{color: 'rgb(245, 37, 89'}}
             >
-              <Typography><GroupAddIcon /> Add new moderator</Typography>
+              <Typography><GroupAddIcon /> {t('mod-settings.new', 'default')}</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <form id="addModeratorForm" onSubmit={handleSubmit(onSubmit)}>
-                  <input name="email" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="Choose username" onChange={handleEmailInput} className="normal-font"></input>
-                  <input name="password" style={{padding: '10px 15px', marginRight: '10px'}} placeholder="Choose password" onChange={handlePasswordInput} className="normal-font"></input>
-                  <input className="submit-button normal-font" type="submit" value="Add" />
+                  <input name="email" style={{padding: '10px 15px', marginRight: '10px'}} placeholder={t('mod-settings.username', 'default')} onChange={handleEmailInput} className="normal-font"></input>
+                  <input name="password" style={{padding: '10px 15px', marginRight: '10px'}} placeholder={t('mod-settings.password', 'default')} onChange={handlePasswordInput} className="normal-font"></input>
+                  <input className="submit-button normal-font" type="submit" value={t('mod-settings.submit', 'default')} />
               </form>
             </AccordionDetails>
           </Accordion>

@@ -1,10 +1,12 @@
 import React, { lazy, Suspense } from "react";
+import { useTranslation } from 'react-i18next';
 import { ApolloProvider, createHttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+
 
 import Landing from './components/Landing/Landing';
 import NavBar from './components/Navigation/NavBar';
@@ -27,24 +29,25 @@ const theme = createMuiTheme({
   },
 });
 
-const categoryLibrary = {
-  'sexual': 'Sexual Harassment',
-  'homophobia': 'Homophobia',
-  'transphobia': 'Transphobia',
-  'fatphobia': 'Fatphobia',
-  'racism': 'Racism',
-  'fetishization': 'Fetishization',
-  'slutshaming': 'Slutshaming',
-  'hateSpeech': 'Hate speech',
-  'young': 'Young',
-  'assault': 'Assault',
-  'staring': 'Staring',
-  'following': 'Following',
-  'other': 'Other',
-}
-
 function App() {
+  const { t } = useTranslation(['categories']);
   const [cookies, setCookie, removeCookie] = useCookies(['token']);
+
+  const categoryLibrary = {
+    'sexual': t('sexual', 'default'),
+    'homophobia': t('homophobia', 'default'),
+    'transphobia': t('transphobia', 'default'),
+    'fatphobia': t('fatphobia', 'default'),
+    'racism': t('racism', 'default'),
+    'fetishization': t('fetishization', 'default'),
+    'slutshaming': t('slutshaming', 'default'),
+    'hateSpeech': t('hateSpeech', 'default'),
+    'young': t('young', 'default'),
+    'assault': t('assault', 'default'),
+    'staring': t('staring', 'default'),
+    'following': t('following', 'default'),
+    'other': t('other', 'default')
+  }
 
   const httpLink = createHttpLink({
     uri: process.env.REACT_APP_APOLLO_SERVER,

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import MapForm from '../Map/MapForm';
 import Flatpickr from "react-flatpickr";
 import 'flatpickr/dist/themes/material_green.css';
@@ -9,7 +10,9 @@ import { useHistory } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 
 function ReportForm() {
+
   let history = useHistory();
+  const { t } = useTranslation(['report']);
   const { register, handleSubmit, errors } = useForm();
   const [date, setDate] = useState("");
   const [mapError, setMapError] = useState("");
@@ -47,7 +50,7 @@ function ReportForm() {
       await createCatcall({ variables: queryVariable });
       history.push({
         pathname: '/catcalls',
-        state: { dialog: 'Your catcall has been reported. Thanks for that. You won\'t see it on the map yet. When a moderator has reviewed your submission it will be added to the map automatically.'}
+        state: { dialog: t('dialog', 'default') }
       });
     }
   }
@@ -64,18 +67,18 @@ function ReportForm() {
     <>
       <div className="header-footer"></div>
       <div className="report-form" data-testid="report-form">
-        <h1>Report a catcall</h1>
+        <h1>{t('title', 'default')}</h1>
 
         <div style={{marginTop: '50px', marginBottom: '40px'}}>
-          <p>Submit your experience through this form. Important: <b>if you are in direct need of help</b>, check out <a style={{color: "black"}} href="/help" target="_blank">our resource section</a>.</p>
+          <p>{t('info.p1', 'default')} <b>{t('info.p2-bold', 'default')}</b>, {t('info.p3', 'default')} <a style={{color: "black"}} href="/help" target="_blank">{t('info.p4-link', 'default')}</a>.</p>
 
-          <p>Questions about reporting a catcall? Visit our <a style={{color: "black"}} href="/help#faq" target="_blank">FAQ</a> and <a style={{color: "black"}} href="/help#houserules" target="_blank">house rules</a>.</p>
+          <p>{t('info.p5', 'default')} <a style={{color: "black"}} href="/help#houserules" target="_blank">{t('info.p5-link', 'default')}</a>.</p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className="form-segment">
-            <label htmlFor="quote">Catcall quote*:</label>
+            <label htmlFor="quote">{t('quote.title', 'default')}</label>
             <input
               data-testid="catcall-quote"
               id="quote"
@@ -89,12 +92,12 @@ function ReportForm() {
                 }
               })}
             ></input>
-            <small id="quote-help">Only Catcall text (what exactly has been catcalled)</small>
+            <small id="quote-help">{t('quote.help', 'default')}</small>
             <p className="error-message">{errors.quote && errors.quote.message}</p>
           </div>
 
           <div className="form-segment">
-            <label htmlFor="context">Your story:</label>
+            <label htmlFor="context">{t('context.title', 'default')}</label>
             <input
               id="context"
               name="context"
@@ -106,13 +109,13 @@ function ReportForm() {
                 }
               })}
             ></input>
-            <small id="context-help">Additional information, not required. Moderators can edit this part of your report if necessary.</small>
+            <small id="context-help">{t('context.help', 'default')}</small>
             <p className="error-message">{errors.context && errors.context.message}</p>
 
           </div>
 
           <div className="form-segment">
-            <label htmlFor="context">Date of Catcall:</label>
+            <label htmlFor="context">{t('date.title', 'default')}</label>
             <Flatpickr
               value={date}
               onChange={newDate => setDateCatcall(newDate)}
@@ -123,9 +126,9 @@ function ReportForm() {
           </div>
 
           <div className="form-segment">
-            <label htmlFor="context" className="location-title">Location*:</label>
+            <label htmlFor="context" className="location-title">{t('location.title', 'default')}</label>
             <MapForm setLocation={setLocation} />
-            <small id="context-help">Click on the map to add the location of the catcall.</small>
+            <small id="context-help">{t('location.help', 'default')}</small>
             {mapError!=='' ? <p className="error-message">{mapError}</p> : ''}
           </div>
 
@@ -143,7 +146,7 @@ function ReportForm() {
                   }
                 })}
               ></input>
-              <label htmlFor="check">I understand that is catcall report is anonymous and account for it to be true and <a className="help-button" href="/help" target="_blank">in accordance with the house rules</a>*.</label>
+              <label htmlFor="check">{t('checkbox.text', 'default')}</label>
             </div>
             <p className="error-message">{errors.check && errors.check.message}</p>
           </div>
@@ -154,10 +157,10 @@ function ReportForm() {
           </div>
 
 
-          <button type="button" className="cancel-button normal-font" onClick={()=> history.push('/') }>Cancel</button>
+          <button type="button" className="cancel-button normal-font" onClick={()=> history.push('/') }>{t('button.cancel', 'default')}</button>
 
           {/* disable recaptcha to run test correctly */}
-          <input className="submit-button normal-font"  type="submit" value="Submit new catcall" onClick={()=>{
+          <input className="submit-button normal-font"  type="submit" value={t('button.submit', 'default')} onClick={()=>{
             if (lngLat.length === 0) setMapError('Required');
             if (!checkRecaptcha) setCaptchaError('Please indicate you\'re not a robot');
           }}/>

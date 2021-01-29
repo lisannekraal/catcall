@@ -1,0 +1,17 @@
+{
+  "dialog-button": "Okay",
+  "filter": {
+    "button": "Open map filters",
+    "title": "Filter catcalls",
+    "chalked-all": "Show all catcalls",
+    "chalked-yes": "Show chalked catcalls",
+    "chalked-no": "Show not yet chalked",
+    "tag": "Filter by category"
+  },
+  "popup": {
+    "chalk-text": "Chalked back",
+    "chalk-help": "Opens image on the side",
+    "chalk-button": "Close and go back to map",
+    "upvote-help": "Boooooo!"
+  }
+}

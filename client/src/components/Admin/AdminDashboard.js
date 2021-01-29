@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 import { UPDATE_CATCALL, GET_CATCALLS, EMPTY_TRASH, GET_MODERATOR_BY_TOKEN } from '../../api/queries';
 import AdminTable from './AdminTable';
 import { Player } from '@lottiefiles/react-lottie-player';
@@ -12,9 +13,9 @@ import Settings from '@material-ui/icons/Settings';
 
 function AdminDashboard(props) {
 
-  const [value, setValue] = useState('unverified'); //keeps track of selected tab
+  const [value, setValue] = useState('unverified');
+  const { t } = useTranslation(['admin']);
   const { data: dataMod } = useQuery(GET_MODERATOR_BY_TOKEN);
-  // const { loading: loadingMod, error: errorMod, data: dataMod } = useQuery(GET_MODERATOR_BY_TOKEN);
   let { loading, error, data } = useQuery(GET_CATCALLS);
   const [updateCatcall] = useMutation(UPDATE_CATCALL);
   const [ emptyTrash ] = useMutation(EMPTY_TRASH, {
@@ -65,12 +66,12 @@ function AdminDashboard(props) {
             textColor="secondary"
             aria-label="admin navigation"
           >
-            <Tab icon={<VerifiedUser />} label="Verify Pending" value='unverified' wrapped />
-            <Tab icon={<Gesture />} label="To Chalk" value='chalk' wrapped/>
-            <Tab icon={<Storage />} label="Database" value='database' wrapped/>
-            <Tab icon={<Delete />} label="Trash" value='trash' wrapped/>
+            <Tab icon={<VerifiedUser />} label={t('label.verify', 'default')} value='unverified' wrapped />
+            <Tab icon={<Gesture />} label={t('label.chalk', 'default')}  value='chalk' wrapped/>
+            <Tab icon={<Storage />} label={t('label.database', 'default')}  value='database' wrapped/>
+            <Tab icon={<Delete />} label={t('label.trash', 'default')}  value='trash' wrapped/>
             {dataMod.getModeratorByToken.canAdd &&
-              <Tab icon={<Settings />} label="Mod Settings" value='settings' wrapped/>
+              <Tab icon={<Settings />} label={t('label.settings', 'default')}  value='settings' wrapped/>
             }
           </Tabs>
         </Paper>

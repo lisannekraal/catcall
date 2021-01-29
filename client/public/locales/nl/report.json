@@ -1,0 +1,34 @@
+{
+  "title": "Meld een catcall",
+  "info": {
+    "p1": "Doe een melding van jouw ervaring in dit formulier. Belangrijk:",
+    "p2-bold": "als je directe hulp nodig hebt",
+    "p3": "check",
+    "p4-link": "onze lijst met hulplijnen",
+    "p5": "Vragen over het melden van een catcall? Check onze FAQ en huisregels",
+    "p5-link": "hier"
+  },
+  "quote": {
+    "title": "Catcall quote*:",
+    "help": "Alleen de catcall text (wat is geroepen naar je?)"
+  },
+  "context": {
+    "title": "Jouw verhaal",
+    "help": "Extra informatie, niet verplicht. Moderators kunnen dit deel van jouw melding aanpassen mocht het nodig zijn."
+  },
+  "date": {
+    "title": "Datum van catcall"
+  },
+  "location": {
+    "title": "Locatie*:",
+    "help": "Klik op de kaart om een locatie toe te voegen."
+  },
+  "checkbox": {
+    "text": "Ik verklaar dat deze melding naar waarheid is ingevuld en in overeenstemming met de huisregels.*"
+  },
+  "button": {
+    "submit": "Verzend melding",
+    "cancel": "Annuleer"
+  },
+  "dialog": "Jouw melding is gedaan. Bedankt! Je zult hem niet meteen op de kaart zien. Wanneer een moderator jouw melding heeft gecheckt zal deze automatisch aan de kaart worden toegevoegd."
+}

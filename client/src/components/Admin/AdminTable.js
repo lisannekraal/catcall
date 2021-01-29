@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import AdminTableRow from './AdminTableRow';
 import AdminModeratorSettings from './AdminModeratorSettings';
+import { useTranslation } from 'react-i18next';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -22,6 +23,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function AdminTable({ catcallData, updateCatcall, value, authorized, emptyTrash, categoryLibrary }) {
 
+  const { t } = useTranslation(['admin']);
   const [tabSettings, setTabSettings] = useState({ showSettings: false, showTrash: false, emptyMessage: 'No new catcalls to verify', page: 0 })
 
   const { handleSubmit } = useForm();
@@ -32,22 +34,22 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
 
   const tabDictionary = {
     'unverified': () => {
-      setTabSettings({ ...tabSettings, showSettings: false, showTrash: false, emptyMessage: 'No new catcalls to verify' })
+      setTabSettings({ ...tabSettings, showSettings: false, showTrash: false, emptyMessage: t('table.empty.verify', 'default') })
       return catcallData.filter(
         el => el.properties.trash === false && el.properties.verified === false);
     },
     'chalk': () => {
-      setTabSettings({ ...tabSettings, showSettings: false, showTrash: false, emptyMessage: 'No catcalls on the list to chalk' })
+      setTabSettings({ ...tabSettings, showSettings: false, showTrash: false, emptyMessage: t('table.empty.chalk', 'default') })
       return catcallData.filter(
         el => el.properties.trash === false && el.properties.verified === true && el.properties.chalked === false && el.properties.listedForChalk === true);
     },
     'database': () => {
-      setTabSettings({ ...tabSettings, showSettings: false, showTrash: false, emptyMessage: 'Database is empty' })
+      setTabSettings({ ...tabSettings, showSettings: false, showTrash: false, emptyMessage: t('table.empty.database', 'default') })
       return catcallData.filter(
         el => el.properties.trash === false && el.properties.verified === true);
     },
     'trash': () => {
-      setTabSettings({ ...tabSettings, showSettings: false, showTrash: true, emptyMessage: 'No catcalls currently in trash' })
+      setTabSettings({ ...tabSettings, showSettings: false, showTrash: true, emptyMessage: t('table.empty.trash', 'default') })
       return catcallData.filter(el => el.properties.trash === true);
     },
     'settings': () => {
@@ -87,18 +89,16 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
 
   return (
     <>
-      {/* if settings tab is selected, only load that seperate component */}
       { tabSettings.showSettings ?
         <AdminModeratorSettings authorized={authorized} />
         :
         <>
           <TableContainer component={Paper}>
-            {/* generic dashboard table for all other functionalities */}
             { rows.length > 0 ?
               <Table aria-label="collapsible table">
                 <TableHead>
                   <TableRow>
-                    <TableCell />
+                    <TableCell style={{width: '40px'}} />
                     <TableCell />
                     <TableCell><h4>Quote</h4></TableCell>
                     <TableCell><h4>Actions</h4></TableCell>
@@ -131,10 +131,10 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
           </div>
         </>
       }
-      {/* if in trashbin and full athority, show this extra section to permanently delete */}
+
       { tabSettings.showTrash && authorized ?
         <>
-          <h3 style={{ margin: '19px', paddingTop: '20px' }}>More</h3>
+          <h3 style={{ margin: '19px', paddingTop: '20px' }}>{t('mod-settings.subtitle', 'default')}</h3>
           <Accordion TransitionProps={{ unmountOnExit: true }}>
             <AccordionSummary
               expandIcon={<ExpandMore />}
@@ -142,11 +142,11 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
               id="panel2a-header"
               style={{ color: 'rgb(245, 37, 89' }}
             >
-              <Typography><Warning /> Empty Trash</Typography>
+              <Typography><Warning /> {t('table.empty-trash.title', 'default')}</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <input className="submit-button normal-font" type="submit" value="Permanently empty trash" />
+                <input className="submit-button normal-font" type="submit" value={t('table.empty-trash.button', 'default')} />
               </form>
             </AccordionDetails>
           </Accordion>
