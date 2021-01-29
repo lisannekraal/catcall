@@ -98,7 +98,7 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
               <Table aria-label="collapsible table">
                 <TableHead>
                   <TableRow>
-                    <TableCell />
+                    <TableCell style={{width: '40px'}} />
                     <TableCell />
                     <TableCell><h4>Quote</h4></TableCell>
                     <TableCell><h4>Actions</h4></TableCell>

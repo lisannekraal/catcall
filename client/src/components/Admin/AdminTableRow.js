@@ -78,9 +78,12 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
   );
 
   useEffect(() => {
-    if (row.properties.quote.length > 70) {
+    if (row.properties.quote.length > 70 || row.properties.quote.split(' ')[0].length > 9) {
       setLimitedQuote(true);
-      setShowQuote(row.properties.quote.substring(0, 65) + '...');
+      let partial;
+      if (row.properties.quote.length > 70) partial = row.properties.quote.substring(0, 65);
+      if (row.properties.quote.split(' ')[0].length > 7) partial = row.properties.quote.slice(0, 7);
+      setShowQuote(partial + '...');
     }
 
     if (data) {
@@ -218,7 +221,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
       <TableRow className={classes.root} >
         {/*1: expand functionality */}
 
-        <TableCell>
+        <TableCell style={{padding: '5px'}}>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             { open ?
               <KeyboardArrowUpIcon />
