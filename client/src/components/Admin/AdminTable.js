@@ -71,6 +71,12 @@ function reducer(state, action) {
         ...state,
         rows: [],
       }
+    case 'updateData':
+      console.log('Updating data', action);
+      return {
+        ...state,
+        catcallData: action.payload.data,
+      }
     default:
       console.log('Running default dispatch');
       return {
@@ -104,6 +110,11 @@ export default function AdminTable({ catcallData, updateCatcall, authorized, emp
   console.log('Render Admin TABLE: ', tableState);
 
   const rowsPerPage = 10;
+
+  useEffect(() => {
+    console.log('UPDATING data');
+    dispatch({ type: 'updateData', payload: { data: catcallData } })
+  }, [catcallData]);
 
   // const tabDictionary = {
   //   'unverified': () => {
@@ -156,7 +167,7 @@ export default function AdminTable({ catcallData, updateCatcall, authorized, emp
 
   const onSubmit = async (data) => {
     await emptyTrash();
-    dispatch({ type: 'empty'})
+    dispatch({ type: 'empty' })
   }
 
   const handleChangePage = (event, newPage) => {
