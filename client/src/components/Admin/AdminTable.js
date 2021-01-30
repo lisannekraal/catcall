@@ -63,7 +63,7 @@ function reducer(state, action) {
     case 'updateCat':
       return {
         ...state,
-        rows: state.rows.filter(row => row._id !== action.payload.id),
+        rows: state.rows.filter(row => row._id !== action.payload.variables.id),
       }
     case 'empty':
       console.log('Empty dispatch', action);
@@ -151,7 +151,7 @@ export default function AdminTable({ catcallData, updateCatcall, authorized, emp
 
   const clickButtonUpdate = ({ variables }) => {
     updateCatcall({ variables });
-    dispatch({ type: 'updateCat', payload: { id: variables.id } })
+    dispatch({ type: 'updateCat', payload: { variables: variables } })
   }
 
   const onSubmit = async (data) => {
