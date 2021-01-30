@@ -91,6 +91,8 @@ function reducer(state, action) {
 
 export default function AdminTable({ catcallData, updateCatcall, authorized, emptyTrash, categoryLibrary }) {
 
+  console.log('Render Admin TABLE: ', tableState);
+
   const newData = catcallData.slice().reverse();
 
   const [tableState, dispatch] = useReducer(reducer, {
@@ -100,13 +102,12 @@ export default function AdminTable({ catcallData, updateCatcall, authorized, emp
     value: 'unverified'
   })
 
-
   const { handleSubmit } = useForm();
   const [page, setPage] = useState(0);
   const { t } = useTranslation(['admin']);
   // const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  console.log('Render Admin TABLE: ', tableState);
+
 
   const rowsPerPage = 10;
 
