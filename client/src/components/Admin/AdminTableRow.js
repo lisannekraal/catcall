@@ -59,19 +59,21 @@ const useRowStyles = makeStyles({
 
 function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
 
+  console.log('Render Admin Row');
+
   let history = useHistory();
   const { t } = useTranslation(['admin']);
   const [open, setOpen] = useState(false);
-  const [ buttonstoShow, setButtons ] = useState([]);
-  const [ showQuote, setShowQuote ] = useState(row.properties.quote);
-  const [ limitedQuote, setLimitedQuote ] = useState(false);
-  const [ getCatcall, { loading, data } ] = useLazyQuery(GET_CATCALL);
+  const [buttonstoShow, setButtons] = useState([]);
+  const [showQuote, setShowQuote] = useState(row.properties.quote);
+  const [limitedQuote, setLimitedQuote] = useState(false);
+  const [getCatcall, { loading, data }] = useLazyQuery(GET_CATCALL);
   const classes = useRowStyles();
 
   //for modal to add categorization
-  const [ openModal, setOpenModal ] = useState(false);
-  const [ hideTooltips, setHideTooltips ] = useState(false);
-  const [ statusCategory, setStatusCategory ] = useState(
+  const [openModal, setOpenModal] = useState(false);
+  const [hideTooltips, setHideTooltips] = useState(false);
+  const [statusCategory, setStatusCategory] = useState(
     Object.fromEntries(
       Object.keys(categoryLibrary).map(category => [category, false])
     )
@@ -221,9 +223,9 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
       <TableRow className={classes.root} >
         {/*1: expand functionality */}
 
-        <TableCell style={{padding: '5px'}}>
+        <TableCell style={{ padding: '5px' }}>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-            { open ?
+            {open ?
               <KeyboardArrowUpIcon />
               :
               <Tooltip title="More info" arrow>
@@ -235,7 +237,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
 
         {/*2: star*/}
         <TableCell>
-          { row.properties.starred ?
+          {row.properties.starred ?
             <Tooltip title="Remove star" arrow>
               <Star onClick={() => handleStarClick()} />
             </Tooltip>
@@ -247,12 +249,12 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
 
         {/*3: quote*/}
         <TableCell component="th" scope="row">
-            "{showQuote}"
+          "{showQuote}"
         </TableCell>
 
         {/*4: actions*/}
         <TableCell>
-          { buttonstoShow.map((button) => (
+          {buttonstoShow.map((button) => (
             <Tooltip key={uuidv4()} title={hideTooltips ? "" : button.tooltip} arrow>
               <Button key={uuidv4()} variant="contained" color="inherit" size="small" onClick={() => handleClick(button)} className={classes[button.class]} >
                 {button.name}
@@ -273,13 +275,13 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
               <Table size="small" aria-label="info">
                 <TableBody>
 
-                  { limitedQuote &&
-                  <TableRow key={uuidv4()}>
-                    <TableCell component="th" scope="row" style={{ width: 125 }} >
-                      Full quote
+                  {limitedQuote &&
+                    <TableRow key={uuidv4()}>
+                      <TableCell component="th" scope="row" style={{ width: 125 }} >
+                        Full quote
                     </TableCell>
-                  <TableCell>"{row.properties.quote}"</TableCell>
-                  </TableRow>
+                      <TableCell>"{row.properties.quote}"</TableCell>
+                    </TableRow>
                   }
 
                   <TableRow key={uuidv4()}>
@@ -303,7 +305,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
                     <TableCell>{`${row.geometry.coordinates[0].toFixed(3)}.. ${row.geometry.coordinates[1].toFixed(3)}..`}</TableCell>
                   </TableRow>
 
-                  { row.properties.context &&
+                  {row.properties.context &&
                     <TableRow key={uuidv4()}>
                       <TableCell component="th" scope="row">
                         Context
@@ -312,14 +314,14 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
                     </TableRow>
                   }
 
-                  { row.properties.categories.length > 0 &&
+                  {row.properties.categories.length > 0 &&
                     <TableRow key={uuidv4()}>
                       <TableCell component="th" scope="row">
                         Tags
                       </TableCell>
                       <TableCell>
                         {row.properties.categories.map((category) => (
-                          <Button key={uuidv4()} variant="outlined" size="small" color="secondary" style={{marginRight: '2px'}}>
+                          <Button key={uuidv4()} variant="outlined" size="small" color="secondary" style={{ marginRight: '2px' }}>
                             {categoryLibrary[category]}
                           </Button>
                         ))}
@@ -327,7 +329,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
                     </TableRow>
                   }
 
-                  { row.properties.url &&
+                  {row.properties.url &&
                     <TableRow key={uuidv4()}>
                       <TableCell component="th" scope="row">
                         Chalk url
@@ -352,10 +354,10 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
           </DialogContentText>
           <FormGroup>
             {Object.keys(categoryLibrary).map((category) => (
-                <FormControlLabel
-                  key={uuidv4()} control={<Checkbox checked={statusCategory[category]} onChange={handleChange} name={category} />}
-                  label={categoryLibrary[category]}
-                />
+              <FormControlLabel
+                key={uuidv4()} control={<Checkbox checked={statusCategory[category]} onChange={handleChange} name={category} />}
+                label={categoryLibrary[category]}
+              />
             ))}
           </FormGroup>
         </DialogContent>
