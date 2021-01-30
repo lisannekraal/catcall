@@ -371,4 +371,4 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
   );
 }
 
-export default AdminTableRow;
+export default React.memo(AdminTableRow);

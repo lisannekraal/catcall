@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect, useReducer, useCallback } from 'react';
 import AdminTableRow from './AdminTableRow';
 import AdminModeratorSettings from './AdminModeratorSettings';
 import { useTranslation } from 'react-i18next';
@@ -91,18 +91,17 @@ function reducer(state, action) {
 
 export default function AdminTable({ catcallData, updateCatcall, authorized, emptyTrash, categoryLibrary }) {
 
+  const newData = catcallData.slice().reverse();
+
   const [tableState, dispatch] = useReducer(reducer, {
     tabSettings: { showSettings: false, showTrash: false, emptyMessage: 'No new catcalls to verify' },
-    catcallData: catcallData,
-    rows: catcallData.filter(el => el.properties.trash === false && el.properties.verified === false),
+    catcallData: newData,
+    rows: newData.filter(el => el.properties.trash === false && el.properties.verified === false),
     value: 'unverified'
   })
 
-  //const [value, setValue] = useState('unverified');
-  //const [tabSettings, setTabSettings] = useState({ showSettings: false, showTrash: false, emptyMessage: 'No new catcalls to verify', page: 0 })
 
   const { handleSubmit } = useForm();
-  //const [rows, setRows] = useState(catcallData);
   const [page, setPage] = useState(0);
   const { t } = useTranslation(['admin']);
   // const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -113,57 +112,19 @@ export default function AdminTable({ catcallData, updateCatcall, authorized, emp
 
   useEffect(() => {
     console.log('UPDATING data');
-    dispatch({ type: 'updateData', payload: { data: catcallData } })
+    dispatch({ type: 'updateData', payload: { data: catcallData.slice().reverse() } })
   }, [catcallData]);
 
-  // const tabDictionary = {
-  //   'unverified': () => {
-  //     setTabSettings({ ...tabSettings, showSettings: false, showTrash: false, emptyMessage: t('table.empty.verify', 'default') })
-  //     return catcallData.filter(
-  //       el => el.properties.trash === false && el.properties.verified === false);
-  //   },
-  //   'chalk': () => {
-  //     setTabSettings({ ...tabSettings, showSettings: false, showTrash: false, emptyMessage: t('table.empty.chalk', 'default') })
-  //     return catcallData.filter(
-  //       el => el.properties.trash === false && el.properties.verified === true && el.properties.chalked === false && el.properties.listedForChalk === true);
-  //   },
-  //   'database': () => {
-  //     setTabSettings({ ...tabSettings, showSettings: false, showTrash: false, emptyMessage: t('table.empty.database', 'default') })
-  //     return catcallData.filter(
-  //       el => el.properties.trash === false && el.properties.verified === true);
-  //   },
-  //   'trash': () => {
-  //     setTabSettings({ ...tabSettings, showSettings: false, showTrash: true, emptyMessage: t('table.empty.trash', 'default') })
-  //     return catcallData.filter(el => el.properties.trash === true);
-  //   },
-  //   'settings': () => {
-  //     setTabSettings({ ...tabSettings, showSettings: true, showTrash: false })
-  //   }
-  // }
-
   // const handleTabChange = (event, newValue) => {
-  //   setValue(newValue);
+  //   dispatch({ type: newValue });
   // };
 
-  const handleTabChange = (event, newValue) => {
-    console.log('dispatching with value', newValue)
-    dispatch({ type: newValue });
-  };
-
-  // useEffect(() => {
-  //   console.log('Running Use Effect!', value)
-  //   let switchedRows = tabDictionary[value]();
-  //   setPage(0);
-  //   switchedRows && setRows(switchedRows);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [value, catcallData]);
-
-
-
-  const clickButtonUpdate = ({ variables }) => {
+  const clickButtonUpdate = useCallback(({ variables }) => {
     updateCatcall({ variables });
     dispatch({ type: 'updateCat', payload: { variables: variables } })
-  }
+  }, [updateCatcall]);
+
+
 
   const onSubmit = async (data) => {
     await emptyTrash();
@@ -171,7 +132,7 @@ export default function AdminTable({ catcallData, updateCatcall, authorized, emp
   }
 
   const handleChangePage = (event, newPage) => {
-    // setPage(newPage);
+    setPage(newPage);
   };
 
   //temporarily turn off functionality to choose nr rows per page
@@ -182,7 +143,7 @@ export default function AdminTable({ catcallData, updateCatcall, authorized, emp
 
   return (
     <>
-      <AdminTabs value={tableState.value} handleTabChange={handleTabChange} authorized={authorized} />
+      <AdminTabs value={tableState.value} dispatch={dispatch} authorized={authorized} />
       { tableState.tabSettings.showSettings ?
         <AdminModeratorSettings authorized={authorized} />
         :
@@ -199,7 +160,7 @@ export default function AdminTable({ catcallData, updateCatcall, authorized, emp
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {tableState.rows.slice().reverse().slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                  {tableState.rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
                     <AdminTableRow
                       key={uuidv4()}
                       tab={tableState.value}

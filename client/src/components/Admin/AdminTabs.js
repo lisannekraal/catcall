@@ -8,9 +8,13 @@ import Settings from '@material-ui/icons/Settings';
 import { useTranslation } from 'react-i18next';
 
 
-function AdminTabs({ value, handleTabChange, authorized }) {
+function AdminTabs({ value, dispatch, authorized }) {
   console.log('Render TABS')
   const { t } = useTranslation(['admin']);
+
+  const handleTabChange = (event, newValue) => {
+    dispatch({ type: newValue });
+  };
 
   return (
     <Paper square style={{ flexGrow: 1 }}>
@@ -35,4 +39,4 @@ function AdminTabs({ value, handleTabChange, authorized }) {
   )
 }
 
-export default AdminTabs
+export default React.memo(AdminTabs)
