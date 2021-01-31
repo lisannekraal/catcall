@@ -23,7 +23,6 @@ import { v4 as uuidv4 } from 'uuid';
 import AdminTabs from './AdminTabs';
 
 function reducer(state, action) {
-  console.log('REDUCER', action)
   switch (action.type) {
     case 'verify':
       return {
@@ -66,20 +65,17 @@ function reducer(state, action) {
         rows: state.rows.filter(row => row._id !== action.payload.variables.id),
       }
     case 'empty':
-      console.log('Empty dispatch', action);
       return {
         ...state,
         rows: [],
         value: 'trash'
       }
     case 'updateData':
-      console.log('Updating data', action);
       return {
         ...state,
         catcallData: action.payload.data,
       }
     default:
-      console.log('Running default dispatch');
       return {
         ...state,
         tabSettings: { ...state.setTabSettings, showSettings: false, showTrash: false, emptyMessage: 'table is empty' },
@@ -103,7 +99,6 @@ export default function AdminTable({ catcallData, updateCatcall, authorized, emp
     value: 'verify'
   })
 
-  console.log('Render Admin TABLE: ', tableState);
 
   const { handleSubmit } = useForm();
   const [page, setPage] = useState(0);
@@ -117,7 +112,6 @@ export default function AdminTable({ catcallData, updateCatcall, authorized, emp
   const rowsPerPage = 10;
 
   useEffect(() => {
-    console.log('UPDATING data');
     dispatch({ type: 'updateData', payload: { data: catcallData.slice().reverse(), emptyMessage: emptyMessage() } })
   }, [catcallData]);
 

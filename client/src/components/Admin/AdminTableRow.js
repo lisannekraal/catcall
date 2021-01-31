@@ -59,8 +59,6 @@ const useRowStyles = makeStyles({
 
 function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
 
-  console.log('Render Admin Row');
-
   let history = useHistory();
   const { t } = useTranslation(['admin']);
   const [open, setOpen] = useState(false);

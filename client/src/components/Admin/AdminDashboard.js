@@ -14,8 +14,6 @@ function AdminDashboard({ categoryLibrary }) {
     refetchQueries: [{ query: GET_CATCALLS }]
   });
 
-  console.log('Render Admin Dash');
-
   if (error) return (
     <AdminNotAuthorized />
   );

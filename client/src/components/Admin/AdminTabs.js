@@ -9,7 +9,6 @@ import { useTranslation } from 'react-i18next';
 
 
 function AdminTabs({ value, dispatch, authorized }) {
-  console.log('Render TABS')
   const { t } = useTranslation(['admin']);
 
   const handleTabChange = (event, newValue) => {
