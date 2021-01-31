@@ -116,10 +116,6 @@ export default function AdminTable({ catcallData, updateCatcall, authorized, emp
     dispatch({ type: 'updateData', payload: { data: catcallData.slice().reverse() } })
   }, [catcallData]);
 
-  // const handleTabChange = (event, newValue) => {
-  //   dispatch({ type: newValue });
-  // };
-
   const clickButtonUpdate = useCallback(({ variables }) => {
     updateCatcall({ variables });
     dispatch({ type: 'updateCat', payload: { variables: variables } })
