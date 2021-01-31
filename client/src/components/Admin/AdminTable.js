@@ -25,12 +25,12 @@ import AdminTabs from './AdminTabs';
 function reducer(state, action) {
   console.log('REDUCER', action)
   switch (action.type) {
-    case 'unverified':
+    case 'verify':
       return {
         ...state,
         tabSettings: { showSettings: false, showTrash: false, emptyMessage: 'table is empty' },
         rows: state.catcallData.filter(el => el.properties.trash === false && el.properties.verified === false),
-        value: 'unverified'
+        value: 'verify',
       }
     case 'chalk':
       return {
@@ -70,6 +70,7 @@ function reducer(state, action) {
       return {
         ...state,
         rows: [],
+        value: 'trash'
       }
     case 'updateData':
       console.log('Updating data', action);
@@ -83,7 +84,7 @@ function reducer(state, action) {
         ...state,
         tabSettings: { ...state.setTabSettings, showSettings: false, showTrash: false, emptyMessage: 'table is empty' },
         rows: state.catcallData.filter(el => el.properties.trash === false && el.properties.verified === false),
-        value: 'unverified'
+        value: 'verify'
       }
   }
 }
@@ -91,7 +92,7 @@ function reducer(state, action) {
 
 export default function AdminTable({ catcallData, updateCatcall, authorized, emptyTrash, categoryLibrary }) {
 
-  console.log('Render Admin TABLE: ', tableState);
+
 
   const newData = catcallData.slice().reverse();
 
@@ -99,21 +100,25 @@ export default function AdminTable({ catcallData, updateCatcall, authorized, emp
     tabSettings: { showSettings: false, showTrash: false, emptyMessage: 'No new catcalls to verify' },
     catcallData: newData,
     rows: newData.filter(el => el.properties.trash === false && el.properties.verified === false),
-    value: 'unverified'
+    value: 'verify'
   })
+
+  console.log('Render Admin TABLE: ', tableState);
 
   const { handleSubmit } = useForm();
   const [page, setPage] = useState(0);
   const { t } = useTranslation(['admin']);
   // const [rowsPerPage, setRowsPerPage] = useState(10);
 
-
+  function emptyMessage(value) {
+    return t(`table.empty.${value}`, 'default');
+  }
 
   const rowsPerPage = 10;
 
   useEffect(() => {
     console.log('UPDATING data');
-    dispatch({ type: 'updateData', payload: { data: catcallData.slice().reverse() } })
+    dispatch({ type: 'updateData', payload: { data: catcallData.slice().reverse(), emptyMessage: emptyMessage() } })
   }, [catcallData]);
 
   const clickButtonUpdate = useCallback(({ variables }) => {
@@ -168,7 +173,7 @@ export default function AdminTable({ catcallData, updateCatcall, authorized, emp
                   ))}
                 </TableBody>
               </Table> :
-              <div style={{ textAlign: 'center', padding: '50px' }}>{tableState.tabSettings.emptyMessage}</div>}
+              <div style={{ textAlign: 'center', padding: '50px' }}>{emptyMessage(tableState.value)}</div>}
           </TableContainer>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <TablePagination

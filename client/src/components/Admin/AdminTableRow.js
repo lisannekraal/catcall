@@ -97,7 +97,7 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
     }
 
     switch (tab) {
-      case 'unverified':
+      case 'verify':
         setButtons([
           { name: t('table.actions.verify.green', 'default'), class: 'greenButton', tooltip: t('table.actions.verify.green-text', 'default') },
           { name: t('table.actions.verify.yellow', 'default'), class: 'yellowButton', tooltip: t('table.actions.verify.yellow-text', 'default') },
@@ -159,14 +159,14 @@ function AdminTableRow({ tab, row, clickButtonUpdate, categoryLibrary }) {
   };
 
   function handleClick(button) {
-    if (button.name === 'verify') {
+    if (button.name === 'verify' || button.name === 'check') {
       setOpenModal(true);
       setHideTooltips(true);
     } else if (button.name === 'edit') {
       getCatcall({ variables: { id: row._id } });
-    } else if (button.name === 'chalk') {
+    } else if (button.name === 'chalk' || button.name === 'krijt') {
       getCatcall({ variables: { id: row._id } });
-    } else if (button.name === 'unstage') {
+    } else if (button.name === 'unstage' || button.name === 'later') {
       clickButtonUpdate({
         variables: {
           id: row._id,

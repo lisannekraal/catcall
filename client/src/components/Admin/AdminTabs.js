@@ -27,7 +27,7 @@ function AdminTabs({ value, dispatch, authorized }) {
         textColor="secondary"
         aria-label="admin navigation"
       >
-        <Tab icon={<VerifiedUser />} label={t('label.verify', 'default')} value='unverified' wrapped />
+        <Tab icon={<VerifiedUser />} label={t('label.verify', 'default')} value='verify' wrapped />
         <Tab icon={<Gesture />} label={t('label.chalk', 'default')} value='chalk' wrapped />
         <Tab icon={<Storage />} label={t('label.database', 'default')} value='database' wrapped />
         <Tab icon={<Delete />} label={t('label.trash', 'default')} value='trash' wrapped />
