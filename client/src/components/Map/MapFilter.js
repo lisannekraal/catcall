@@ -101,7 +101,7 @@ function MapFilter2 ({ setFilterOpen, categoryLibrary, filterChalked, filterCate
 
   return (
     <Card
-      zIndex="modal" 
+      zIndex="modal"
       className={classes.cardStyles}
     >
 
@@ -111,7 +111,7 @@ function MapFilter2 ({ setFilterOpen, categoryLibrary, filterChalked, filterCate
           <HighlightOffIcon />
         </IconButton>
       </div>
-      
+
       <ButtonGroup variant="contained" color="secondary" ref={anchorRef} aria-label="split button" style={{marginLeft: '16px', marginTop: '5px', width: '90%'}}>
         <Button style={{ width: '100%'}}>{chalkedOrNot[selectedIndexChalk]}</Button>
         <Button
