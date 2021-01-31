@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer, useCallback } from 'react';
 import AdminTableRow from './AdminTableRow';
 import AdminModeratorSettings from './AdminModeratorSettings';
 import { useTranslation } from 'react-i18next';
@@ -20,61 +20,111 @@ import { ExpandMore, Warning } from '@material-ui/icons';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 
+import AdminTabs from './AdminTabs';
 
-export default function AdminTable({ catcallData, updateCatcall, value, authorized, emptyTrash, categoryLibrary }) {
+function reducer(state, action) {
+  switch (action.type) {
+    case 'verify':
+      return {
+        ...state,
+        tabSettings: { showSettings: false, showTrash: false, emptyMessage: 'table is empty' },
+        rows: state.catcallData.filter(el => el.properties.trash === false && el.properties.verified === false),
+        value: 'verify',
+      }
+    case 'chalk':
+      return {
+        ...state,
+        tabSettings: { ...state.setTabSettings, showSettings: false, showTrash: false, emptyMessage: 'table is empty' },
+        rows: state.catcallData.filter(
+          el => el.properties.trash === false && el.properties.verified === true && el.properties.chalked === false && el.properties.listedForChalk === true),
+        value: 'chalk'
+      }
+    case 'database':
+      return {
+        ...state,
+        tabSettings: { ...state.setTabSettings, showSettings: false, showTrash: false, emptyMessage: 'table is empty' },
+        rows: state.catcallData.filter(el => el.properties.trash === false && el.properties.verified === true),
+        value: 'database'
+      }
+    case 'trash':
+      return {
+        ...state,
+        tabSettings: { ...state.setTabSettings, showSettings: false, showTrash: true, emptyMessage: 'table is empty' },
+        rows: state.catcallData.filter(el => el.properties.trash === true),
+        value: 'trash'
+      }
+    case 'settings':
+      return {
+        ...state,
+        tabSettings: { ...state.setTabSettings, showSettings: true, showTrash: false },
+        value: 'settings'
+      }
+    case 'updateCat':
+      return {
+        ...state,
+        rows: state.rows.filter(row => row._id !== action.payload.variables.id),
+      }
+    case 'empty':
+      return {
+        ...state,
+        rows: [],
+        value: 'trash'
+      }
+    case 'updateData':
+      return {
+        ...state,
+        catcallData: action.payload.data,
+      }
+    default:
+      return {
+        ...state,
+        tabSettings: { ...state.setTabSettings, showSettings: false, showTrash: false, emptyMessage: 'table is empty' },
+        rows: state.catcallData.filter(el => el.properties.trash === false && el.properties.verified === false),
+        value: 'verify'
+      }
+  }
+}
 
-  const { t } = useTranslation(['admin']);
-  const [tabSettings, setTabSettings] = useState({ showSettings: false, showTrash: false, emptyMessage: 'No new catcalls to verify', page: 0 })
+
+export default function AdminTable({ catcallData, updateCatcall, authorized, emptyTrash, categoryLibrary }) {
+
+
+
+  const newData = catcallData.slice().reverse();
+
+  const [tableState, dispatch] = useReducer(reducer, {
+    tabSettings: { showSettings: false, showTrash: false, emptyMessage: 'No new catcalls to verify' },
+    catcallData: newData,
+    rows: newData.filter(el => el.properties.trash === false && el.properties.verified === false),
+    value: 'verify'
+  })
+
 
   const { handleSubmit } = useForm();
-  const [rows, setRows] = useState(catcallData);
   const [page, setPage] = useState(0);
+  const { t } = useTranslation(['admin']);
   // const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  function emptyMessage(value) {
+    return t(`table.empty.${value}`, 'default');
+  }
+
   const rowsPerPage = 10;
 
-  const tabDictionary = {
-    'unverified': () => {
-      setTabSettings({ ...tabSettings, showSettings: false, showTrash: false, emptyMessage: t('table.empty.verify', 'default') })
-      return catcallData.filter(
-        el => el.properties.trash === false && el.properties.verified === false);
-    },
-    'chalk': () => {
-      setTabSettings({ ...tabSettings, showSettings: false, showTrash: false, emptyMessage: t('table.empty.chalk', 'default') })
-      return catcallData.filter(
-        el => el.properties.trash === false && el.properties.verified === true && el.properties.chalked === false && el.properties.listedForChalk === true);
-    },
-    'database': () => {
-      setTabSettings({ ...tabSettings, showSettings: false, showTrash: false, emptyMessage: t('table.empty.database', 'default') })
-      return catcallData.filter(
-        el => el.properties.trash === false && el.properties.verified === true);
-    },
-    'trash': () => {
-      setTabSettings({ ...tabSettings, showSettings: false, showTrash: true, emptyMessage: t('table.empty.trash', 'default') })
-      return catcallData.filter(el => el.properties.trash === true);
-    },
-    'settings': () => {
-      setTabSettings({ ...tabSettings, showSettings: true, showTrash: false })
-    }
-  }
-
   useEffect(() => {
-    let switchedRows = tabDictionary[value]();
-    setPage(0);
-    switchedRows && setRows(switchedRows);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value, catcallData]);
+    dispatch({ type: 'updateData', payload: { data: catcallData.slice().reverse(), emptyMessage: emptyMessage() } })
+  }, [catcallData]);
 
-  const clickButtonUpdate = ({ variables }) => {
+  const clickButtonUpdate = useCallback(({ variables }) => {
     updateCatcall({ variables });
-    let newRows = rows.filter(row => {
-      return row.id !== variables.id
-    })
-    setRows(newRows);
-  }
+    dispatch({ type: 'updateCat', payload: { variables: variables } })
+  }, [updateCatcall]);
+
+
 
   const onSubmit = async (data) => {
     await emptyTrash();
-    setRows([]);
+    dispatch({ type: 'empty' })
   }
 
   const handleChangePage = (event, newPage) => {
@@ -89,50 +139,51 @@ export default function AdminTable({ catcallData, updateCatcall, value, authoriz
 
   return (
     <>
-      { tabSettings.showSettings ?
+      <AdminTabs value={tableState.value} dispatch={dispatch} authorized={authorized} />
+      { tableState.tabSettings.showSettings ?
         <AdminModeratorSettings authorized={authorized} />
         :
         <>
           <TableContainer component={Paper}>
-            { rows.length > 0 ?
+            {tableState.rows.length > 0 ?
               <Table aria-label="collapsible table">
                 <TableHead>
                   <TableRow>
-                    <TableCell style={{width: '40px'}} />
+                    <TableCell style={{ width: '40px' }} />
                     <TableCell />
                     <TableCell><h4>Quote</h4></TableCell>
                     <TableCell><h4>Actions</h4></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  { rows.slice().reverse().slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                    <AdminTableRow 
-                      key={uuidv4()} 
-                      tab={value} 
-                      row={row} 
-                      clickButtonUpdate={clickButtonUpdate} 
+                  {tableState.rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                    <AdminTableRow
+                      key={uuidv4()}
+                      tab={tableState.value}
+                      row={row}
+                      clickButtonUpdate={clickButtonUpdate}
                       categoryLibrary={categoryLibrary}
                     />
                   ))}
                 </TableBody>
               </Table> :
-              <div style={{ textAlign: 'center', padding: '50px' }}>{tabSettings.emptyMessage}</div>}
+              <div style={{ textAlign: 'center', padding: '50px' }}>{emptyMessage(tableState.value)}</div>}
           </TableContainer>
-          <div style={{display: 'flex', justifyContent: 'center'}}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             <TablePagination
               rowsPerPageOptions={[]}
               component="div"
-              count={rows.length}
+              count={tableState.rows.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onChangePage={handleChangePage}
-              // onChangeRowsPerPage={handleChangeRowsPerPage}
+            // onChangeRowsPerPage={handleChangeRowsPerPage}
             />
           </div>
         </>
       }
 
-      { tabSettings.showTrash && authorized ?
+      { tableState.tabSettings.showTrash && authorized ?
         <>
           <h3 style={{ margin: '19px', paddingTop: '20px' }}>{t('mod-settings.subtitle', 'default')}</h3>
           <Accordion TransitionProps={{ unmountOnExit: true }}>
