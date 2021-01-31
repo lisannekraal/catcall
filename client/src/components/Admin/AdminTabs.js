@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Paper, Tabs, Tab } from '@material-ui/core';
 import VerifiedUser from '@material-ui/icons/VerifiedUser';
 import Gesture from '@material-ui/icons/Gesture';

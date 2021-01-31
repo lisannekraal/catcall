@@ -112,7 +112,7 @@ export default function AdminTable({ catcallData, updateCatcall, authorized, emp
   const rowsPerPage = 10;
 
   useEffect(() => {
-    dispatch({ type: 'updateData', payload: { data: catcallData.slice().reverse(), emptyMessage: emptyMessage() } })
+    dispatch({ type: 'updateData', payload: { data: catcallData.slice().reverse() } })
   }, [catcallData]);
 
   const clickButtonUpdate = useCallback(({ variables }) => {
