@@ -77,11 +77,11 @@ function GeocodeControl ({ position, accessToken }) {
     )
 
     return () => {
-      map?.removeControl(control)
+      map ? map.removeControl(control) : <div></div>
     }
   }, [map, position, accessToken]);
 
-  return null
+  return <div></div>
 }
 
 
