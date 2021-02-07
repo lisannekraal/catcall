@@ -50,7 +50,7 @@ function NavBar({ removeCookie }) {
   const { t, i18n } = useTranslation(['navigation']);
   let history = useHistory();
   const classes = useStyles();
-  const [ loggedIn, setLoggedIn ] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const { data } = useQuery(GET_MODERATOR_BY_TOKEN);
 
   useEffect(() => {
@@ -80,30 +80,34 @@ function NavBar({ removeCookie }) {
             <div className="catcall-font"> {t('title', 'default')}</div>
           </div>
 
+          <Button key={uuidv4()} style={{ textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px' }} onClick={() => changeLanguage()} color='inherit' startIcon={<LanguageIcon />}>
+            {t('navbar.lang', 'default')}
+          </Button>
+
           <Hidden mdDown>
             <List component="nav" className={classes.navDisplayLinks}>
 
               <Link
                 to="/#about"
                 className="about-link" >
-                <Button key={uuidv4()} color='inherit' style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} startIcon={<InfoIcon />} >
+                <Button key={uuidv4()} color='inherit' style={{ textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px' }} startIcon={<InfoIcon />} >
                   {t('navbar.about', 'default')}
                 </Button>
               </Link>
-              <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => history.push({pathname: '/catcalls'})} color='inherit' startIcon={<MapIcon />}>
+              <Button key={uuidv4()} style={{ textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px' }} onClick={() => history.push({ pathname: '/catcalls' })} color='inherit' startIcon={<MapIcon />}>
                 {t('navbar.map', 'default')}
               </Button>
-              <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => window.open('https://www.instagram.com/catcallsofams/', '_blank')} color='inherit' startIcon={<InstagramIcon />}>
+              <Button key={uuidv4()} style={{ textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px' }} onClick={() => window.open('https://www.instagram.com/catcallsofams/', '_blank')} color='inherit' startIcon={<InstagramIcon />}>
                 {t('navbar.community', 'default')}
               </Button>
 
-              { loggedIn ?
+              {loggedIn ?
                 <>
-                  <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => history.push('/dashboard')} color='inherit' startIcon={<SettingsIcon />}>
+                  <Button key={uuidv4()} style={{ textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px' }} onClick={() => history.push('/dashboard')} color='inherit' startIcon={<SettingsIcon />}>
                     {t('navbar.dashboard', 'default')}
                   </Button>
 
-                  <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => {
+                  <Button key={uuidv4()} style={{ textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px' }} onClick={() => {
                     removeCookie('token');
                     setLoggedIn(false);
                     history.push('/');
@@ -111,22 +115,20 @@ function NavBar({ removeCookie }) {
                     {t('navbar.logout', 'default')}
                   </Button>
                 </>
-              :
-                <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => history.push('/login')} color='inherit' startIcon={<SettingsIcon />}>
+                :
+                <Button key={uuidv4()} style={{ textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px' }} onClick={() => history.push('/login')} color='inherit' startIcon={<SettingsIcon />}>
                   {t('navbar.moderator', 'default')}
                 </Button>
               }
 
-              <Button key={uuidv4()} style={{textTransform: 'none', fontFamily: 'Arista Pro Alternate Bold', fontSize: '20px'}} onClick={() => changeLanguage()} color='inherit' startIcon={<LanguageIcon />}>
-                {t('navbar.lang', 'default')}
-              </Button>
-              
+
+
             </List>
           </Hidden>
-              
+
 
           <Hidden mdDown>
-            <Button style={{textTransform: 'none', fontSize: '16px'}} key={uuidv4()} color="inherit" className={classes.navButton} onClick={() => history.push("/catcalls/new")}>{t('navbar.report-button', 'default')}</Button>
+            <Button style={{ textTransform: 'none', fontSize: '16px' }} key={uuidv4()} color="inherit" className={classes.navButton} onClick={() => history.push("/catcalls/new")}>{t('navbar.report-button', 'default')}</Button>
           </Hidden>
 
         </Container>
