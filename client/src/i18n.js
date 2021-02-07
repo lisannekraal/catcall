@@ -8,7 +8,7 @@ i18n
   .use(Backend)
   .use(initReactI18next) // connect with React
   .init({
-    debug: true,
+    debug: false,
     lng: 'nl',
     fallbackLng: 'nl',
     whitelist: ['en', 'nl'],
