@@ -1,9 +1,5 @@
-//import React, { useState, useEffect, useContext } from "react";
 import React, { useState} from "react";
-//import MapGL, { Source, Layer, Image, NavigationControl, GeolocateControl, MapContext } from '@urbica/react-map-gl';
 import MapGL, { Source, Layer, Image, NavigationControl, GeolocateControl} from '@urbica/react-map-gl';
-//import MapboxGeocoder from 'mapbox-gl-geocoder';
-//import mapboxgl from 'mapbox-gl';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Icon from '../../assets/bullhorn.png';
@@ -54,47 +50,10 @@ function MapForm ({ setLocation }) {
       {layer}
       <NavigationControl showZoom position='top-right' />
       <GeolocateControl position='top-right' />
-      {/* <GeocodeControl position='bottom-right' accessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN} /> */}
     </MapGL>
     :
     <p>Map to report a catcall could not load.</p>
   );
 }
-
-/**
- * ADDRESS SEARCH Functionality temporarily disabled
- * including imports
- * awaiting bug fix
- */
-
- /*
-function GeocodeControl ({ position, accessToken }) {
-
-  mapboxgl.Map = useContext(MapContext);
-  const map = mapboxgl.Map;
-
-  useEffect(() => {
-    const control = new MapboxGeocoder({
-      accessToken,
-      placeholder: "Zoek",
-      language: 'nl',
-      mapboxgl
-    })
-
-    map?.addControl(
-      control,
-      position
-    )
-
-    return () => {
-      map ? map.removeControl(control) : <div></div>
-    }
-  }, [map, position, accessToken]);
-
-  return <div></div>
-}
-*/
-
-
 
 export default MapForm;
