@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './i18n';
 import './index.css';
@@ -9,7 +9,9 @@ import { CookiesProvider } from 'react-cookie';
 ReactDOM.render(
   <React.StrictMode>
     <CookiesProvider>
-      <App />
+      <Suspense fallback={<div>Loading... </div>}>
+        <App />
+      </Suspense>
     </CookiesProvider>
   </React.StrictMode>,
   document.getElementById('root')
